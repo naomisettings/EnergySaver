@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "331771697686",
+    "project_id": "energy-saver-a2dd7",
+    "storage_bucket": "energy-saver-a2dd7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:331771697686:android:aa6e9ace352a7d3def3337",
+        "android_client_info": {
+          "package_name": "cat.copernic.johan.energysaver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "331771697686-ievc6i49pjtcj6rs3m54ma6cm57n703k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6Ox3F4O5cc1EeVDlx_6rK-zOW9Ba6-3Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "331771697686-ievc6i49pjtcj6rs3m54ma6cm57n703k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
