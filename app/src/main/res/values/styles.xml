@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ColorsBasicsAplicacio">
+        <item name="android:fontFamily">@font/asap_bold</item>
+        <item name="android:textColor">@color/TitolColor</item>
+        <item name="android:textSize">@dimen/TitolSize</item>
+    </style>
+</resources>

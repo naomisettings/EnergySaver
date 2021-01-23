@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="TitolSize">30sp</dimen>
+    <dimen name="TitolPantallaSize">24sp</dimen>
+    <dimen name="CampsSize">18sp</dimen>
+    <dimen name="btnTextSize">18sp</dimen>
+</resources>

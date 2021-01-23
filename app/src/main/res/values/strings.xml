@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">EnergySaver</string>
+    <string name="identifica_t">Identifica\'t</string>
+    <string name="correu">Adreça electrònica</string>
+    <string name="correu_el_ctronic">correu elèctronic</string>
+    <string name="contrasenya">Contrasenya</string>
+    <string name="btnvalidar">Validar</string>
+    <string name="registre">Registre</string>
+    <string name="Editcontrasenya">contrasenya</string>
+    <string name="titol">Titol</string>
+    <string name="TxtCognoms">Cognoms</string>
+    <string name="TxtNickname">Nickname</string>
+    <string name="TxtAdreca">Adreça</string>
+    <string name="txtPoblacio">Poblacio</string>
+    <string name="txtContrasenya">Contrasenya</string>
+    <string name="editTextNickname">nickname</string>
+    <string name="txtRegistre">Registre</string>
+    <string name="btnConfirmar">Confirmar</string>
+    <string name="btnNom">Nom</string>
+    <string name="editTextNom">nom</string>
+    <string name="edtiTextCognoms">cognoms</string>
+    <string name="editTextPoblacio">població</string>
+    <string name="editTextTelefon">telèfon</string>
+    <string name="editTextContrasenya">contrasenya</string>
+    <string name="editTextCorreu">correu</string>
+    <string name="editTextAdreca">adreça</string>
+    <string name="telefon">Telefon</string>
+    <string name="imViewcorreu">Correu</string>
+    <string name="imViewTitol">Titol</string>
 </resources>

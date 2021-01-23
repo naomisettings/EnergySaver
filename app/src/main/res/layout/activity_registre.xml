@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/txtRegistre"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Registre">
+
+    <EditText
+        android:id="@+id/editTextAdreca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="30dp"
+        android:ems="10"
+        android:hint="@string/editTextAdreca"
+        android:inputType="textPersonName"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNickName"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/editTextNickName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="30dp"
+        android:ems="10"
+        android:hint="@string/editTextNickname"
+        android:inputType="textPersonName"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress"
+        android:autofillHints="" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="229dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="30dp"
+        android:contentDescription="@string/imViewTitol"
+        android:scrollbarSize="60dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/energy2" />
+
+    <TextView
+        android:id="@+id/txtRegistre2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:fontFamily="@font/asap_bold"
+        android:text="@string/txtRegistre"
+        android:textColor="@color/TitolColor"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.469"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <Button
+        android:id="@+id/btnConfirmar"
+        android:layout_width="153dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/BtnColor"
+        android:gravity="center"
+        android:text="@string/btnConfirmar"
+        android:textAlignment="center"
+        android:textColor="@color/textBtnColor"
+        android:textSize="@dimen/btnTextSize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtNom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:fontFamily="@font/asap_bold"
+        android:text="@string/btnNom"
+        android:textColor="@color/TitolColor"
+        android:textSize="@dimen/CampsSize"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editTextNom"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtCognoms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:fontFamily="@font/asap_bold"
+        android:text="@string/TxtCognoms"
+        android:textColor="@color/TitolColor"
+        android:textSize="@dimen/CampsSize"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editTextCognoms"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtNickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:fontFamily="@font/asap_bold"
+        android:text="@string/TxtNickname"
+        android:textColor="@color/TitolColor"
+        android:textSize="@dimen/CampsSize"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editTextNickName"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtAdreca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:fontFamily="@font/asap_bold"
+        android:text="@string/TxtAdreca"
+        android:textColor="@color/TitolColor"
+        android:textSize="@dimen/CampsSize"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editTextAdreca"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtPoblacio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:fontFamily="@font/asap_bold"
+        android:text="@string/txtPoblacio"
+        android:textColor="@color/TitolColor"
+        android:textSize="@dimen/CampsSize"
+        app:layout_constraintBaseline_toBaselineOf="@+id/edtiTextPoblacio"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtContrasenyaRegistre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:fontFamily="@font/asap_bold"
+        android:text="@string/txtContrasenya"
+        android:textColor="@color/TitolColor"
+        android:textSize="@dimen/CampsSize"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editTextContrasenyaRegistre"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewCorreu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="26dp"
+        android:contentDescription="@string/imViewcorreu"
+        android:src="@drawable/email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtCognoms"
+        app:srcCompat="@drawable/email2" />
+
+    <ImageView
+        android:id="@+id/imageViewTelefon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="26dp"
+        android:contentDescription="@string/telefon"
+        android:fadeScrollbars="false"
+        android:src="@drawable/call"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPoblacio"
+        app:srcCompat="@drawable/call2" />
+
+    <EditText
+        android:id="@+id/editTextNom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="30dp"
+        android:ems="10"
+        android:hint="@string/editTextNom"
+        android:inputType="textPersonName"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtRegistre2"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/editTextCognoms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="30dp"
+        android:ems="10"
+        android:hint="@string/edtiTextCognoms"
+        android:inputType="textPersonName"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNom"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/edtiTextPoblacio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="30dp"
+        android:ems="10"
+        android:hint="@string/editTextPoblacio"
+        android:inputType="textPersonName"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextAdreca"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/editTextTelefon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="30dp"
+        android:ems="10"
+        android:hint="@string/editTextTelefon"
+        android:inputType="phone"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtiTextPoblacio"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/editTextContrasenyaRegistre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="30dp"
+        android:ems="10"
+        android:hint="@string/editTextContrasenya"
+        android:inputType="textPassword"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTelefon"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/editTextTextEmailAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="30dp"
+        android:ems="10"
+        android:hint="@string/editTextCorreu"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCognoms"
+        android:autofillHints="" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
