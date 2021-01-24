@@ -49,7 +49,7 @@
         app:srcCompat="@drawable/energy2" />
 
     <TextView
-        android:id="@+id/txtRegistre2"
+        android:id="@+id/txtIdentificacio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
@@ -63,7 +63,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <Button
-        android:id="@+id/btnConfirmar"
+        android:id="@+id/btnAccedir"
         android:layout_width="153dp"
         android:layout_height="43dp"
         android:layout_marginBottom="16dp"
@@ -185,7 +185,7 @@
         android:inputType="textPersonName"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRegistre2"
+        app:layout_constraintTop_toBottomOf="@+id/txtIdentificacio"
         android:autofillHints="" />
 
     <EditText
