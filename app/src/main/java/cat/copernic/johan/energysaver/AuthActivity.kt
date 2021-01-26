@@ -63,12 +63,12 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
       //  showProgressBar()
 
         auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this){
-            task ->
+            task -> //faltaria donar pistes de l'error a l'else
             if(task.isSuccessful){
                 //si accedeix correctament
                 val user = auth.currentUser
                 updateUI(user)
-            }else{
+            }else {
                 //si falla la validacio
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("Error")
