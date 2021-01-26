@@ -1,5 +1,6 @@
 package cat.copernic.johan.energysaver
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -10,21 +11,26 @@ import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import androidx.databinding.DataBindingUtil
 import cat.copernic.johan.energysaver.databinding.ActivityAuthBinding
+import com.google.android.gms.common.api.ApiException
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
 
+private const val TAG = "GoogleActivity"
+private const val RC_SIGN_IN = 9001
 
 class AuthActivity : AppCompatActivity(), View.OnClickListener {
-
-
-
 
     //declarem una instància de FirebaseAuth
     private lateinit var auth: FirebaseAuth
 
     private lateinit var binding: ActivityAuthBinding
+    private lateinit var googleSignInClient: GoogleSignInClient
 
 
 
@@ -38,7 +44,15 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
         binding.btnAccedir.setOnClickListener(this)
         binding.btnRegistre.setOnClickListener (this)
         binding.btnSortir.setOnClickListener (this)
+        binding.btnGoogle.setOnClickListener (this)
 
+        //Configurem el google sign in
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build()
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
 
        //inicialitzem la variable auth
         auth = Firebase.auth
@@ -49,13 +63,53 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
         super.onStart()
         //  Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
+        updateUI(currentUser)
         if(currentUser!=null){
             //reload()
             return
         }
-
     }
-    //metode que rep per parameter el mail i la contrasenya per crear l'usuari
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        // Resultat que retorna de L'Intent de GoogleSignInApi.getSignInIntent(...)
+        if (requestCode == RC_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                // L'access amb google ha sigut un exit
+                val account = task.getResult(ApiException::class.java)!!
+                Log.d(TAG, "firebaseAuthWithGoogle:" + account.id)
+                firebaseAuthWithGoogle(account.idToken!!)
+            } catch (e: ApiException) {
+                // L'acces amb google ha fallat
+                Log.w(TAG, "Google sign in failed", e)
+                updateUI(null)
+            }
+        }
+    }
+
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Si l'usuari es logejat correctament, mostra un log amb les dades de l'usuari
+                    Log.d(TAG, "signInWithCredential:success")
+                    val user = auth.currentUser
+                    updateUI(user)
+                } else {
+                    // Si falla, mostra Log de l'error
+                    Log.w(TAG, "signInWithCredential:failure", task.exception)
+                    // [START_EXCLUDE]
+                    val view = binding.root
+                    // [END_EXCLUDE]
+                    Snackbar.make(view, "Authentication Failed.", Snackbar.LENGTH_SHORT).show()
+                    updateUI(null)
+                }
+            }
+    }
+    //metode que rep per parametre el mail i la contrasenya per crear l'usuari
     private fun createAccount(email: String, password: String){
         if(!validateFormat()){
             return
@@ -90,8 +144,6 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
             return
         }
 
-       // showProgressBar()
-
         //validacio amb mail i contrasenya
         auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this){
             task ->
@@ -115,6 +167,11 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
         }
 
     }
+    //Inicia sessió amb google
+    private fun signInWithGoogle() {
+        val signInIntent = googleSignInClient.signInIntent
+        startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
     //metode per tanca sessió
     private fun signOUt(){
         auth.signOut()
@@ -127,7 +184,11 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
         val dialog: AlertDialog = builder.create()
         dialog.show()
         updateUI(null)
+        googleSignInClient.signOut().addOnCompleteListener(this) {
+            updateUI(null)
+        }
     }
+
     //falta verificar funcionament correcte
     private fun updateUI(user: FirebaseUser?){
         if(user != null){
@@ -200,7 +261,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.btnAccedir -> signIn(binding.editTextCorreu.text.toString(), binding.editTextContrasenya.text.toString())
             R.id.btnSortir -> signOUt()
-
+            R.id.btnGoogle -> signInWithGoogle()
         }
 
     }
