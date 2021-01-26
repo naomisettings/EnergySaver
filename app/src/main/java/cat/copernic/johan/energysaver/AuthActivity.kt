@@ -61,12 +61,12 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
     //funcio que verifica que l'usuari ja accedit
     public override fun onStart() {
         super.onStart()
-        //  Check if user is signed in (non-null) and update UI accordingly.
+        //  comprovem si l'usuari esta loginat
         val currentUser = auth.currentUser
-        updateUI(currentUser)
+
         if(currentUser!=null){
-            //reload()
-            return
+            reload()
+
         }
     }
 
@@ -84,7 +84,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
             } catch (e: ApiException) {
                 // L'acces amb google ha fallat
                 Log.w(TAG, "Google sign in failed", e)
-                updateUI(null)
+
             }
         }
     }
@@ -97,7 +97,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
                     // Si l'usuari es logejat correctament, mostra un log amb les dades de l'usuari
                     Log.d(TAG, "signInWithCredential:success")
                     val user = auth.currentUser
-                    updateUI(user)
+
                 } else {
                     // Si falla, mostra Log de l'error
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
@@ -105,7 +105,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
                     val view = binding.root
                     // [END_EXCLUDE]
                     Snackbar.make(view, "Authentication Failed.", Snackbar.LENGTH_SHORT).show()
-                    updateUI(null)
+
                 }
             }
     }
@@ -114,24 +114,29 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
         if(!validateFormat()){
             return
         }
-      //  showProgressBar()
+
 
         auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this){
-            task -> //faltaria donar pistes de l'error a l'else
+            task ->
             if(task.isSuccessful){
                 //si accedeix correctament
                 val user = auth.currentUser
-                updateUI(user)
-            }else {
-                //si falla la validacio
                 val builder = AlertDialog.Builder(this)
-                builder.setTitle("Error")
-                builder.setMessage("No s'ha pogut crear l'usuari")
+                builder.setTitle("Success")
+                builder.setMessage("Usuari creat correctament")
                 builder.setPositiveButton("Acceptar", null)
                 val dialog: AlertDialog = builder.create()
                 dialog.show()
 
-                updateUI(null)
+            }else {
+                //si falla la validacio
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Error")
+                builder.setMessage("Usuari incorrecte o ja existeix")
+                builder.setPositiveButton("Acceptar", null)
+                val dialog: AlertDialog = builder.create()
+                dialog.show()
+
 
             }
         }
@@ -150,18 +155,23 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
             if (task.isSuccessful){
                 //acces correcte, actalitzacio de la informacio de l'usuari
                 val user = auth.currentUser
-                updateUI(user)
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Success")
+                builder.setMessage("S'ha loginat correctament")
+                builder.setPositiveButton("Acceptar", null)
+                val dialog: AlertDialog = builder.create()
+                dialog.show()
+
 
             }else{
                 //si falla l'acces
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("Error")
-                builder.setMessage("Error amb l'autentificació ")
+                builder.setMessage("Error amb l'autentificació, usuario o contrasenya no vàlids ")
                 builder.setPositiveButton("Acceptar", null)
                 val dialog: AlertDialog = builder.create()
                 dialog.show()
 
-                updateUI(null)
 
             }
         }
@@ -183,42 +193,21 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
         builder.setPositiveButton("Acceptar", null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
-        updateUI(null)
+
         googleSignInClient.signOut().addOnCompleteListener(this) {
-            updateUI(null)
-        }
-    }
-
-    //falta verificar funcionament correcte
-    private fun updateUI(user: FirebaseUser?){
-        if(user != null){
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("Acció correcte")
-            builder.setMessage("S'ha creat l'usuari correctament")
-            builder.setPositiveButton("Acceptar", null)
-            val dialog: AlertDialog = builder.create()
-            dialog.show()
-            //..
-
-        }else{
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("Error")
-            builder.setMessage("L'usuari no existeix, primer l'has de registrar ")
-            builder.setPositiveButton("Acceptar", null)
-            val dialog: AlertDialog = builder.create()
-            dialog.show()
 
         }
     }
+
     //funcio per recarregar l'usuari
-  /*  private fun reload() {
+    private fun reload() {
         auth.currentUser!!.reload().addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                updateUI(auth.currentUser)
+
                 Snackbar.make(findViewById(R.id.ConstraintLayout), "Recarrega correcte", Snackbar.LENGTH_SHORT).show()
             }
         }
-    }*/
+    }
     //metode que valida que els camps no estiguin buits
     private fun validateFormat(): Boolean{
         var valid = true
@@ -251,7 +240,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
         }
         return valid
     }
-    //
+
 
     override fun onClick(v: View?) {
         when(v?.id){

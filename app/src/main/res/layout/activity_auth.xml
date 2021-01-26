@@ -133,27 +133,29 @@
             android:id="@+id/btnSortir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="70dp"
             android:fontFamily="@font/asap_bold"
             android:text="@string/btnSortir"
             android:textSize="@dimen/btnTextSize"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnRegistre" />
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/btnGoogle"
+            app:layout_constraintTop_toBottomOf="@+id/btnRegistre"
+            app:layout_constraintVertical_bias="0.0" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btnGoogle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="56dp"
-            android:fontFamily="@font/asap_bold"
-            android:text="@string/btnGoogle"
-            android:textSize="@dimen/btnTextSize"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.176"
+            android:layout_marginStart="68dp"
+            android:contentDescription="@string/boto_google"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnRegistre" />
+            app:layout_constraintTop_toBottomOf="@+id/btnAccedir"
+            app:layout_constraintVertical_bias="0.402"
+            app:srcCompat="@drawable/common_google_signin_btn_text_dark_normal" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
