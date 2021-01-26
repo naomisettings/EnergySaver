@@ -36,7 +36,10 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        setTheme(R.style.Theme_EnergySaver)
         super.onCreate(savedInstanceState)
+
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
