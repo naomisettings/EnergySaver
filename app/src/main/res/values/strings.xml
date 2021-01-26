@@ -30,4 +30,5 @@
     <string name="txtIdentificaci">Identificació</string>
     <string name="btnAccedir">Accedir</string>
     <string name="btnSortir">Sortir</string>
+    <string name="btnGoogle">G</string>
 </resources>

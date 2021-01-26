@@ -40,7 +40,6 @@ android {
 
 dependencies {
 
-
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
@@ -57,4 +56,5 @@ dependencies {
     // Declarem la dependència de la biblioteca d'autenticació de Firebase
     // Quan utilitzem BoM, no especifiquem versions a les dependències de la biblioteca de Firebase
     implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
 }
