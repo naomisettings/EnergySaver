@@ -51,7 +51,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     // Import de BoM per a Firebase
-    implementation platform('com.google.firebase:firebase-bom:26.2.0')
+    implementation platform('com.google.firebase:firebase-bom:26.3.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
     // Declarem la dependència de la biblioteca d'autenticació de Firebase
     // Quan utilitzem BoM, no especifiquem versions a les dependències de la biblioteca de Firebase
