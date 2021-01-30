@@ -17,7 +17,7 @@
             android:layout_marginStart="80dp"
             android:layout_marginTop="55dp"
             android:background="@drawable/rodo"
-            android:drawableBottom="@drawable/raig"
+            android:drawableBottom="@drawable/google"
             android:fontFamily="@font/asap_bold"
             android:gravity="center"
             android:textSize="@dimen/btnTextSize"
