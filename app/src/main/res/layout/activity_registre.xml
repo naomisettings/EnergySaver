@@ -36,7 +36,7 @@
         android:autofillHints="" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/imageViewtitolRegistre"
         android:layout_width="229dp"
         android:layout_height="64dp"
         android:layout_marginTop="30dp"
@@ -60,7 +60,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.469"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewtitolRegistre" />
 
     <Button
         android:id="@+id/btnAccedir"

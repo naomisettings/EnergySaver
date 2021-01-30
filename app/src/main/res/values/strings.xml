@@ -32,4 +32,10 @@
     <string name="btnSortir">Sortir</string>
     <string name="btnGoogle2">G</string>
     <string name="boto_google">boto google</string>
+    <string name="ModificarDades">Modificar dades usuari</string>
+    <string name="SeleccionaEnergies">Selecciona Energies</string>
+    <string name="BaixaUsuari">Baixa Usuari</string>
+    <string name="TancaSessio">Tanca Sessió</string>
+    <string name="Baixa">Baixa</string>
+
 </resources>
