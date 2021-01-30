@@ -170,7 +170,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
                 //si falla l'acces
                 val builder = AlertDialog.Builder(this)
                 builder.setTitle("Error")
-                builder.setMessage("Error amb l'autentificació, usuario o contrasenya no vàlids ")
+                builder.setMessage("Error amb l'autentificació, usuari o contrasenya no vàlids ")
                 builder.setPositiveButton("Acceptar", null)
                 val dialog: AlertDialog = builder.create()
                 dialog.show()
