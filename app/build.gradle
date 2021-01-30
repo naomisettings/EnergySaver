@@ -58,4 +58,8 @@ dependencies {
     // Quan utilitzem BoM, no especifiquem versions a les dependències de la biblioteca de Firebase
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
+
+    //dependencies per a la Navegacio fragment-ktx i navigation-ui-ktx
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 }
