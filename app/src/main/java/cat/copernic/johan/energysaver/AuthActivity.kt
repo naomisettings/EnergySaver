@@ -28,7 +28,6 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
 
     //declarem una instància de FirebaseAuth
     private lateinit var auth: FirebaseAuth
-
     private lateinit var binding: ActivityAuthBinding
     private lateinit var googleSignInClient: GoogleSignInClient
 
