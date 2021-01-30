@@ -22,7 +22,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 
 private const val TAG = "GoogleActivity"
-private const val RC_SIGN_IN = 9001
+private const val RC_SIGN_IN = 100
 
 class AuthActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -49,13 +49,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
         binding.btnSortir.setOnClickListener (this)
         binding.btnGoogle.setOnClickListener (this)
 
-        //Configurem el google sign in
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build()
 
-        googleSignInClient = GoogleSignIn.getClient(this, gso)
 
        //inicialitzem la variable auth
         auth = Firebase.auth
@@ -83,10 +77,21 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
                 // L'access amb google ha sigut un exit
                 val account = task.getResult(ApiException::class.java)!!
                 Log.d(TAG, "firebaseAuthWithGoogle:" + account.id)
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Success")
+                builder.setMessage("S'ha connectat a google correctament")
+                builder.setPositiveButton("Acceptar", null)
+                val dialog: AlertDialog = builder.create()
+                dialog.show()
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
                 // L'acces amb google ha fallat
-                Log.w(TAG, "Google sign in failed", e)
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Error")
+                builder.setMessage("L'acces amb google ha fallat")
+                builder.setPositiveButton("Acceptar", null)
+                val dialog: AlertDialog = builder.create()
+                dialog.show()
 
             }
         }
@@ -182,6 +187,14 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
     }
     //Inicia sessió amb google
     private fun signInWithGoogle() {
+        //Configurem el google sign in
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build()
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
+
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
