@@ -33,8 +33,6 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var googleSignInClient: GoogleSignInClient
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         setTheme(R.style.Theme_EnergySaver)
