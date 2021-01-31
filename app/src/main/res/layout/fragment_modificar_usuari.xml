@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="cat.copernic.johan.energysaver.ModificarUsuari">
+    tools:context="cat.copernic.johan.energysaver.modifica.ModificarUsuari">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/modificarFragment"

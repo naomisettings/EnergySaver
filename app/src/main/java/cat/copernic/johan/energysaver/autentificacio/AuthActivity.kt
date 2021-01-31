@@ -1,30 +1,40 @@
-package cat.copernic.johan.energysaver
+package cat.copernic.johan.energysaver.autentificacio
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
-import android.widget.Button
+import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.GravityCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
+import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.ActivityAuthBinding
 import com.google.android.gms.common.api.ApiException
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import androidx.appcompat.widget.Toolbar
 
 private const val TAG = "GoogleActivity"
 private const val RC_SIGN_IN = 100
 
-class AuthActivity : AppCompatActivity(), View.OnClickListener {
+class AuthActivity : AppCompatActivity(), View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+
+    //navigation drawer
+    lateinit var toolbar: Toolbar
+    lateinit var drawerLayout: DrawerLayout
+    lateinit var navView: NavigationView
 
     //declarem una instància de FirebaseAuth
     private lateinit var auth: FirebaseAuth
@@ -34,11 +44,23 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        setTheme(R.style.Theme_EnergySaver)
+       setTheme(R.style.Theme_EnergySaver)
         super.onCreate(savedInstanceState)
 
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //navigation drawer
+        toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
+        drawerLayout = findViewById(R.id.drawer_layout)
+        navView = findViewById(R.id.nav_view)
+
+        val toogle = ActionBarDrawerToggle(this, drawerLayout, toolbar,0,0)
+        drawerLayout.addDrawerListener(toogle)
+        toogle.syncState()
+        navView.setNavigationItemSelectedListener (this)
 
         //capturem els botons
         binding.btnAccedir.setOnClickListener(this)
@@ -51,6 +73,29 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
        //inicialitzem la variable auth
         auth = Firebase.auth
     }
+
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.Modificar ->{
+                Toast.makeText(this,"Modificar clicked",Toast.LENGTH_SHORT).show()
+            }
+            R.id.Baixa ->{
+                Toast.makeText(this,"Baixa clicked",Toast.LENGTH_SHORT).show()
+            }
+            R.id.Suport ->{
+                Toast.makeText(this,"Suport clicked",Toast.LENGTH_SHORT).show()
+            }
+            R.id.Sortir ->{
+                Toast.makeText(this,"Sing Out clicked",Toast.LENGTH_SHORT).show()
+
+            }
+        }
+        drawerLayout.closeDrawer(GravityCompat.START)
+        return true
+    }
+
+
 
     //funcio que verifica que l'usuari ja accedit
     public override fun onStart() {
