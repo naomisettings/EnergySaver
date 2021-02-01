@@ -5,4 +5,8 @@
     <color name="TitolColor">#0844A4</color>
     <color name="BtnColor">#0844A4</color>
     <color name="textBtnColor">#FFFFFF</color>
+    <color name="aiguaColor">#1762DA</color>
+    <color name="llumColor">#FFAE3A</color>
+    <color name="gasColor">#44C349</color>
+    <color name="gasoilColor">#5A5A5A</color>
 </resources>

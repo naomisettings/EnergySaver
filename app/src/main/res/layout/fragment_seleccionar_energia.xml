@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/txvSeleccionarEnergia"
+            android:layout_width="414dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="104dp"
+            android:background="@color/BtnColor"
+            android:fontFamily="@font/asap_bold"
+            android:gravity="center|left"
+            android:paddingStart="@dimen/paddingTextStart"
+            android:paddingEnd="0dp"
+            android:text="@string/txtSeleccionarEnergia"
+            android:textColor="@color/textBtnColor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txvPeriode"
+            android:layout_width="414dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="288dp"
+            android:background="@color/BtnColor"
+            android:fontFamily="@font/asap_bold"
+            android:gravity="center|left"
+            android:paddingStart="@dimen/paddingTextStart"
+            android:paddingEnd="0dp"
+            android:text="@string/txtPeriode"
+            android:textColor="@color/textBtnColor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/chbxAigua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/textAigua"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txvSeleccionarEnergia" />
+
+        <CheckBox
+            android:id="@+id/chbxLlum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="3dp"
+            android:text="@string/textLlum"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chbxAigua" />
+
+        <CheckBox
+            android:id="@+id/chbxGas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="115dp"
+            android:text="@string/textGas"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txvSeleccionarEnergia" />
+
+        <CheckBox
+            android:id="@+id/chbxGasoil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="100dp"
+            android:text="@string/textGasoil"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chbxGas" />
+
+        <Spinner
+            android:id="@+id/spnAigua"
+            android:layout_width="182dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="80dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txvPeriode" />
+
+        <Spinner
+            android:id="@+id/spnLlum"
+            android:layout_width="182dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="80dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spnAigua" />
+
+        <Spinner
+            android:id="@+id/spnGas"
+            android:layout_width="182dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="80dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spnLlum" />
+
+        <Spinner
+            android:id="@+id/spnGasoil"
+            android:layout_width="182dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="80dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spnGas" />
+
+        <TextView
+            android:id="@+id/txvAigua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/asap_bold"
+            android:text="@string/textAigua"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/spnAigua"
+            app:layout_constraintTop_toBottomOf="@+id/txvPeriode" />
+
+        <TextView
+            android:id="@+id/txvLlum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/asap_bold"
+            android:text="@string/textLlum"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/spnAigua"
+            app:layout_constraintTop_toBottomOf="@+id/txvAigua" />
+
+        <TextView
+            android:id="@+id/txvGas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/asap_bold"
+            android:text="@string/textGas"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/spnGas"
+            app:layout_constraintTop_toBottomOf="@+id/txvLlum" />
+
+        <TextView
+            android:id="@+id/txvGasoil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/asap_bold"
+            android:text="@string/textGasoil"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/spnGasoil"
+            app:layout_constraintTop_toBottomOf="@+id/txvGas" />
+
+        <Button
+            android:id="@+id/btnConfirmar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="140dp"
+            android:layout_marginEnd="140dp"
+            android:layout_marginBottom="80dp"
+            android:text="@string/btnConfirmar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
