@@ -51,6 +51,9 @@
     <string name="account_settings">Account Settings</string>
     <string name="modificar_dades">Modificar Dades</string>
     <string name="raig">Raig</string>
+    <string name="MenuEnergies">Energies</string>
+    <string name="MenuInformes">Informes</string>
+    <string name="MenuConfiguraciUsuari">Configuració usuari</string>
 
 
 </resources>

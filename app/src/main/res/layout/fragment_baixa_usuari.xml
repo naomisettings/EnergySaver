@@ -13,7 +13,7 @@
             android:id="@+id/btnConfirmarBaixa"
             android:layout_width="153dp"
             android:layout_height="43dp"
-            android:layout_marginBottom="184dp"
+            android:layout_marginBottom="144dp"
             android:background="@color/BtnColor"
             android:gravity="center"
             android:text="@string/btnConfirmar"
