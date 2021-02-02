@@ -4,4 +4,5 @@
     <dimen name="TitolPantallaSize">24sp</dimen>
     <dimen name="CampsSize">18sp</dimen>
     <dimen name="btnTextSize">18sp</dimen>
+    <dimen name="paddingTextStart">30px</dimen>
 </resources>

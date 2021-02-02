@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+
+   >
+
+<group>
+    <item
+        android:id="@+id/Suport"
+        android:title="@string/Suport"
+        android:icon="@drawable/ic_suport"/>
+</group>
+
+    <item
+        android:title="@string/account_settings"
+        >
+        <menu>
+            <item
+                android:id="@+id/Modificar"
+                android:title="@string/modificar_dades"
+                android:icon="@drawable/ic_modificar"/>
+
+            <item
+                android:id="@+id/Baixa"
+                android:title="@string/BaixaUsuari"
+                android:icon="@drawable/ic_baixa"/>
+            <item
+                android:id="@+id/Sortir"
+                android:title="@string/Sortir"
+                android:icon="@drawable/ic_sortir"/>
+
+        </menu>
+    </item>
+</menu>

@@ -34,4 +34,24 @@
     <string name="boto_google">boto google</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="txtViewTiquetsSuport">TIQUETS DE SUPORT</string>
+    <string name="txtSeleccionarEnergia">Selecciona Energia</string>
+    <string name="txtPeriode">Període</string>
+    <string name="textAigua">Aigua</string>
+    <string name="textLlum">Llum</string>
+    <string name="textGas">Gas</string>
+    <string name="textGasoil">Gasoil</string>
+    <string name="graficPlaceholder">Gráfic</string>
+    <string name="SeleccionaEnergies">Selecciona Energies</string>
+    <string name="BaixaUsuari">Baixa Usuari</string>
+    <string name="TancaSessio">Tanca Sessió</string>
+    <string name="Sortir">Sortir</string>
+    <string name="Baixa">Baixa</string>
+    <string name="ModificarDades">Modificar</string>
+    <string name="energy_saver">Energy Saver</string>
+    <string name="Suport">Suport</string>
+    <string name="account_settings">Account Settings</string>
+    <string name="modificar_dades">Modificar Dades</string>
+    <string name="raig">Raig</string>
+
+
 </resources>

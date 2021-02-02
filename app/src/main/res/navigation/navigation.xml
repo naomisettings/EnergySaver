@@ -1,5 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/menuPrincipalFragment">
 
+    <fragment
+        android:id="@+id/menuPrincipalFragment"
+        android:name="cat.copernic.johan.energysaver.principal.MenuPrincipalFragment"
+        android:label="MenuPrincipalFragment"
+        tools:layout="@layout/fragment_menu_principal">
+        <action
+            android:id="@+id/action_menuPrincipalFragment_to_informesFragment"
+            app:destination="@id/informesFragment" />
+        <action
+            android:id="@+id/action_menuPrincipalFragment_to_modificarUsuari"
+            app:destination="@id/modificarUsuari" />
+    </fragment>
+    <fragment
+        android:id="@+id/informesFragment"
+        android:name="cat.copernic.johan.energysaver.informes.InformesFragment"
+        android:label="InformesFragment"
+        tools:layout="@layout/fragment_informes"/>
+    <fragment
+        android:id="@+id/seleccionarEnergiaFragment"
+        android:name="cat.copernic.johan.energysaver.seleccio.SeleccionarEnergiaFragment"
+        android:label="SeleccionarEnergiaFragment"
+        tools:layout="@layout/fragment_seleccionar_energia"/>
+    <fragment
+        android:id="@+id/modificarUsuari"
+        android:name="cat.copernic.johan.energysaver.modifica.ModificarUsuari"
+        android:label="fragment_modificar_usuari"
+        tools:layout="@layout/fragment_modificar_usuari" >
+        <action
+            android:id="@+id/action_modificarUsuari_to_seleccionarEnergiaFragment"
+            app:destination="@id/seleccionarEnergiaFragment" />
+        <action
+            android:id="@+id/action_modificarUsuari_to_baixaUsuari"
+            app:destination="@id/baixaUsuari" />
+        <action
+            android:id="@+id/action_modificarUsuari_to_authActivity"
+            app:destination="@id/authActivity" />
+        <action
+            android:id="@+id/action_modificarUsuari_to_menuPrincipalFragment"
+            app:destination="@id/menuPrincipalFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/baixaUsuari"
+        android:name="cat.copernic.johan.energysaver.baixa.BaixaUsuari"
+        android:label="fragment_baixa_usuari"
+        tools:layout="@layout/fragment_baixa_usuari" >
+        <action
+            android:id="@+id/action_baixaUsuari_to_authActivity"
+            app:destination="@id/authActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/registre"
+        android:name="cat.copernic.johan.energysaver.registre.Registre"
+        android:label="activity_registre"
+        tools:layout="@layout/activity_registre" />
+    <activity
+        android:id="@+id/authActivity"
+        android:name="cat.copernic.johan.energysaver.autentificacio.AuthActivity"
+        android:label="AuthActivity"
+        tools:layout="@layout/activity_auth"/>
 </navigation>
