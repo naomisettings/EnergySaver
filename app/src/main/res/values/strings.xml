@@ -32,4 +32,6 @@
     <string name="btnSortir">Sortir</string>
     <string name="btnGoogle2">G</string>
     <string name="boto_google">boto google</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="txtViewTiquetsSuport">TIQUETS DE SUPORT</string>
 </resources>
