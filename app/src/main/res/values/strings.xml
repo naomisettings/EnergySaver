@@ -52,6 +52,16 @@
     <string name="account_settings">Account Settings</string>
     <string name="modificar_dades">Modificar Dades</string>
     <string name="raig">Raig</string>
+    <string name="newTiquet">Nou</string>
+    <string name="bttnBorrarTiquet">Borrar</string>
+    <string name="txtViewObrirTiquet">OBRIR TIQUET</string>
+    <string name="txtViewTemaTiquet">Tema</string>
+    <string name="editTxtTemaTiquet">Introdueix el Tema...</string>
+    <string name="txtViewDescripcioTiquet">Descripció</string>
+    <string name="txtViewCapturaTiquet">Adjuntar Captura</string>
+    <string name="editTxtDescripcioTiquet">Introdueix la Descripció...</string>
+    <string name="descrpitionImageBttnCaptura">Imatge per adujntar captura</string>
+    <string name="bttnConfirmarTiquet">Confirmar</string>
 
 
 </resources>

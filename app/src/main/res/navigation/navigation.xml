@@ -44,6 +44,9 @@
         <action
             android:id="@+id/action_modificarUsuari_to_menuPrincipalFragment"
             app:destination="@id/menuPrincipalFragment" />
+        <action
+            android:id="@+id/action_modificarUsuari_to_veureFragment2"
+            app:destination="@id/veureFragment" />
     </fragment>
     <fragment
         android:id="@+id/baixaUsuari"
@@ -64,4 +67,18 @@
         android:name="cat.copernic.johan.energysaver.autentificacio.AuthActivity"
         android:label="AuthActivity"
         tools:layout="@layout/activity_auth"/>
+    <fragment
+        android:id="@+id/veureFragment"
+        android:name="cat.copernic.johan.energysaver.veuretiquet.VeureTiquetFragment"
+        android:label="veureFragment"
+        tools:layout="@layout/fragment_veure">
+        <action
+            android:id="@+id/action_veureFragment_to_obrirFragment"
+            app:destination="@id/obrirFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/obrirFragment"
+        android:name="cat.copernic.johan.energysaver.obrirtiquet.ObrirTiquetFragment"
+        android:label="ObrirFragment"
+        tools:layout="@layout/fragment_obrir"/>
 </navigation>
