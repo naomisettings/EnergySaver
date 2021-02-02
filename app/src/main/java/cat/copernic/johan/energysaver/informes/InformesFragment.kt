@@ -1,4 +1,4 @@
-package cat.copernic.johan.energysaver
+package cat.copernic.johan.energysaver.informes
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentInformesBinding
 
 class InformesFragment : Fragment() {

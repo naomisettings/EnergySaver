@@ -25,6 +25,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.GoogleAuthProvider
 import androidx.appcompat.widget.Toolbar
+import cat.copernic.johan.energysaver.MainActivity
 
 private const val TAG = "GoogleActivity"
 private const val RC_SIGN_IN = 100
@@ -211,8 +212,8 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener, NavigationView.O
                 builder.setPositiveButton("Acceptar", null)
                 val dialog: AlertDialog = builder.create()
                 dialog.show()
-
-
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
             }else{
                 //si falla l'acces
                 val builder = AlertDialog.Builder(this)
@@ -225,7 +226,6 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener, NavigationView.O
 
             }
         }
-
     }
     //Inicia sessió amb google
     private fun signInWithGoogle() {
