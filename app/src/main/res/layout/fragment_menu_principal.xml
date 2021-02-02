@@ -21,5 +21,33 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/energy2" />
+
+        <ImageButton
+            android:id="@+id/imgbModificar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="65dp"
+            android:backgroundTint="@color/BtnColor"
+            android:scaleX="3"
+            android:scaleY="3"
+            app:layout_constraintEnd_toStartOf="@+id/imageButton3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgvTitolMenu"
+            app:srcCompat="@android:drawable/ic_menu_preferences" />
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="136dp"
+            android:layout_marginTop="50dp"
+            android:backgroundTint="@color/BtnColor"
+            android:scaleX="3"
+            android:scaleY="3"
+            app:layout_constraintStart_toEndOf="@+id/imgbModificar"
+            app:layout_constraintTop_toBottomOf="@+id/imgvTitolMenu"
+            app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

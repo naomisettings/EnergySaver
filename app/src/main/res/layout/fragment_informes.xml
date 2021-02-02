@@ -60,49 +60,49 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginBottom="250dp"
+        android:layout_marginTop="50dp"
         android:text="@string/textAigua"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/txvPercentLlum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="220dp"
-        android:text="@string/textLlum"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
         android:id="@+id/txvPercenGas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginBottom="188dp"
+        android:layout_marginTop="20dp"
         android:text="@string/textGas"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txvPercentLlum" />
 
     <TextView
         android:id="@+id/txvPercentGasoil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginBottom="156dp"
+        android:layout_marginTop="20dp"
         android:text="@string/textGasoil"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txvPercenGas" />
+
+    <TextView
+        android:id="@+id/txvPercentLlum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/textLlum"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txvPercentAigua" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="319dp"
         android:layout_height="218dp"
         android:layout_marginStart="40dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginTop="19dp"
         android:background="@color/BtnColor"
-        app:layout_constraintBottom_toTopOf="@+id/txvPercentAigua"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAigua" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
