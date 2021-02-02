@@ -11,9 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EnergySaver"
         tools:ignore="AllowBackup">
-
+        <activity android:name=".MainActivity"></activity>
         <activity android:name=".Registre" />
-        <activity android:name=".AuthActivity"
+        <activity
+            android:name=".AuthActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
