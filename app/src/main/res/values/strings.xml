@@ -65,6 +65,15 @@
     <string name="MenuEnergies">Energies</string>
     <string name="MenuInformes">Informes</string>
     <string name="MenuConfiguraciUsuari">Configuració usuari</string>
+    <string name="logoESmedalles">Logo Energy Saver</string>
+    <string name="medalla1">Medalla Estalviador</string>
+    <string name="txtViewMedEstalviador">Estalviador</string>
+    <string name="imgBttnMedGranEstalviador">Gran Estalviador</string>
+    <string name="txtViewGranEstalviador">GranEstalviador</string>
+    <string name="imgBttnMigAny">Medalla de mig any estalviant</string>
+    <string name="imgBttnUnAny">Medalla de un any estalviant</string>
+    <string name="txtViewMigAny">Mig Any Estalviant</string>
+    <string name="txtViewAny">Un Any Estalviant</string>
 
 
 </resources>
