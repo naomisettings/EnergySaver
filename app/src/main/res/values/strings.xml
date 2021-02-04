@@ -62,6 +62,9 @@
     <string name="editTxtDescripcioTiquet">Introdueix la Descripció...</string>
     <string name="descrpitionImageBttnCaptura">Imatge per adujntar captura</string>
     <string name="bttnConfirmarTiquet">Confirmar</string>
+    <string name="MenuEnergies">Energies</string>
+    <string name="MenuInformes">Informes</string>
+    <string name="MenuConfiguraciUsuari">Configuració usuari</string>
 
 
 </resources>

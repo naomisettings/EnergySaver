@@ -5,14 +5,25 @@
 
 <group>
     <item
+        android:id="@+id/Energies"
+        android:title="@string/MenuEnergies"
+        android:icon="@drawable/ic_energies"
+        />
+    <item
+        android:id="@+id/Informes"
+        android:title="@string/MenuInformes"
+        android:icon="@drawable/ic_informes"/>
+    <item
         android:id="@+id/Suport"
         android:title="@string/Suport"
         android:icon="@drawable/ic_suport"/>
+
 </group>
 
     <item
-        android:title="@string/account_settings"
+        android:title="@string/MenuConfiguraciUsuari"
         >
+
         <menu>
             <item
                 android:id="@+id/Modificar"
