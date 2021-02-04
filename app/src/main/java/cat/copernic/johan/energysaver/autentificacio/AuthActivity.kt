@@ -30,12 +30,9 @@ import cat.copernic.johan.energysaver.MainActivity
 private const val TAG = "GoogleActivity"
 private const val RC_SIGN_IN = 100
 
-class AuthActivity : AppCompatActivity(), View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+class AuthActivity : AppCompatActivity(), View.OnClickListener {
 
-    //navigation drawer
-    lateinit var toolbar: Toolbar
-    lateinit var drawerLayout: DrawerLayout
-    lateinit var navView: NavigationView
+
 
     //declarem una instància de FirebaseAuth
     private lateinit var auth: FirebaseAuth
@@ -51,17 +48,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener, NavigationView.O
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //navigation drawer
-        toolbar = findViewById(R.id.toolbar)
-     //   setSupportActionBar(toolbar)
 
-        drawerLayout = findViewById(R.id.drawer_layout)
-        navView = findViewById(R.id.nav_view)
-
-        val toogle = ActionBarDrawerToggle(this, drawerLayout, toolbar,0,0)
-        drawerLayout.addDrawerListener(toogle)
-        toogle.syncState()
-        navView.setNavigationItemSelectedListener (this)
 
         //capturem els botons
         binding.btnAccedir.setOnClickListener(this)
@@ -76,25 +63,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener, NavigationView.O
     }
 
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.Modificar ->{
-                Toast.makeText(this,"Modificar clicked",Toast.LENGTH_SHORT).show()
-            }
-            R.id.Baixa ->{
-                Toast.makeText(this,"Baixa clicked",Toast.LENGTH_SHORT).show()
-            }
-            R.id.Suport ->{
-                Toast.makeText(this,"Suport clicked",Toast.LENGTH_SHORT).show()
-            }
-            R.id.Sortir ->{
-                Toast.makeText(this,"Sing Out clicked",Toast.LENGTH_SHORT).show()
 
-            }
-        }
-        drawerLayout.closeDrawer(GravityCompat.START)
-        return true
-    }
 
 
 

@@ -8,6 +8,7 @@
         android:id="@+id/Energies"
         android:title="@string/MenuEnergies"
         android:icon="@drawable/ic_energies"
+
         />
     <item
         android:id="@+id/Informes"
