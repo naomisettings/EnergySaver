@@ -13,6 +13,8 @@ class ObrirTiquetFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val binding : FragmentObrirBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_obrir, container, false)
+
+
         return binding.root
     }
 }
