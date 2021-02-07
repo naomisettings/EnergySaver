@@ -26,6 +26,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.GoogleAuthProvider
 import androidx.appcompat.widget.Toolbar
 import cat.copernic.johan.energysaver.MainActivity
+import cat.copernic.johan.energysaver.registre.Registre
 
 private const val TAG = "GoogleActivity"
 private const val RC_SIGN_IN = 100
@@ -303,8 +304,8 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener, NavigationView.O
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.btnRegistre -> {
-                createAccount(binding.editTextCorreu.text.toString(), binding.editTextContrasenya.text.toString())
-
+                val intent = Intent(this, Registre::class.java)
+                startActivity(intent)
             }
             R.id.btnAccedir -> signIn(binding.editTextCorreu.text.toString(), binding.editTextContrasenya.text.toString())
             R.id.btnSortir -> signOUt()
