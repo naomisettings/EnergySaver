@@ -17,6 +17,8 @@ class SeleccionarEnergiaFragment : Fragment() {
         val binding = DataBindingUtil.inflate<FragmentSeleccionarEnergiaBinding>(inflater,
             R.layout.fragment_seleccionar_energia,
             container, false)
+        binding.btnConfirmar.setOnClickListener { view:View ->
+            view.findNavController().navigate(R.id.action_seleccionarEnergiaFragment_to_menuPrincipalFragment)
         return binding.root
     }
 }
