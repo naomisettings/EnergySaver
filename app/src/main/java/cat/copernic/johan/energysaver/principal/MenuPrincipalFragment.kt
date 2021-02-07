@@ -22,6 +22,9 @@ class MenuPrincipalFragment : Fragment() {
         binding.imgbGoInformes.setOnClickListener { view:View ->
             view.findNavController().navigate(R.id.action_menuPrincipalFragment_to_informesFragment)
         }
+        binding.imgbMedalles.setOnClickListener { view:View ->
+            view.findNavController().navigate(R.id.action_menuPrincipalFragment_to_medallesFragment)
+        }
         return binding.root
     }
 }

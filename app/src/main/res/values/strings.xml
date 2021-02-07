@@ -79,6 +79,7 @@
     <string name="multiLineTxtViewMedalla2">Has guanyat la medalla Gran Estalviador!! Enhorabona!!</string>
     <string name="multiLineTxtViewMedalla3">Has guanyat la medalla Mig Any Estalviant!! Enhorabona!!</string>
     <string name="multiLineTxtViewMedalla4">Has guanyat la medalla Un Any Estalviant!! Enhorabona!!</string>
+    <string name="defaultcd">default</string>
 
 
 </resources>
