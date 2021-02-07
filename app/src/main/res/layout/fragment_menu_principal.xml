@@ -32,13 +32,13 @@
             android:backgroundTint="@color/BtnColor"
             android:scaleX="3"
             android:scaleY="3"
-            app:layout_constraintEnd_toStartOf="@+id/imageButton3"
+            app:layout_constraintEnd_toStartOf="@+id/imgbGoInformes"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imgvTitolMenu"
             app:srcCompat="@android:drawable/ic_menu_preferences" />
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/imgbGoInformes"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="136dp"

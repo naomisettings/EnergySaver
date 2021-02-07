@@ -26,16 +26,14 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.GoogleAuthProvider
 import androidx.appcompat.widget.Toolbar
 import cat.copernic.johan.energysaver.MainActivity
+import cat.copernic.johan.energysaver.registre.Registre
 
 private const val TAG = "GoogleActivity"
 private const val RC_SIGN_IN = 100
 
-class AuthActivity : AppCompatActivity(), View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+class AuthActivity : AppCompatActivity(), View.OnClickListener {
 
-    //navigation drawer
-    lateinit var toolbar: Toolbar
-    lateinit var drawerLayout: DrawerLayout
-    lateinit var navView: NavigationView
+
 
     //declarem una instància de FirebaseAuth
     private lateinit var auth: FirebaseAuth
@@ -45,23 +43,13 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener, NavigationView.O
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-       setTheme(R.style.Theme_EnergySaver)
+        setTheme(R.style.Theme_EnergySaver)
         super.onCreate(savedInstanceState)
 
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //navigation drawer
-        toolbar = findViewById(R.id.toolbar)
-     //   setSupportActionBar(toolbar)
 
-        drawerLayout = findViewById(R.id.drawer_layout)
-        navView = findViewById(R.id.nav_view)
-
-        val toogle = ActionBarDrawerToggle(this, drawerLayout, toolbar,0,0)
-        drawerLayout.addDrawerListener(toogle)
-        toogle.syncState()
-        navView.setNavigationItemSelectedListener (this)
 
         //capturem els botons
         binding.btnAccedir.setOnClickListener(this)
@@ -71,30 +59,12 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener, NavigationView.O
 
 
 
-       //inicialitzem la variable auth
+        //inicialitzem la variable auth
         auth = Firebase.auth
     }
 
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.Modificar ->{
-                Toast.makeText(this,"Modificar clicked",Toast.LENGTH_SHORT).show()
-            }
-            R.id.Baixa ->{
-                Toast.makeText(this,"Baixa clicked",Toast.LENGTH_SHORT).show()
-            }
-            R.id.Suport ->{
-                Toast.makeText(this,"Suport clicked",Toast.LENGTH_SHORT).show()
-            }
-            R.id.Sortir ->{
-                Toast.makeText(this,"Sing Out clicked",Toast.LENGTH_SHORT).show()
 
-            }
-        }
-        drawerLayout.closeDrawer(GravityCompat.START)
-        return true
-    }
 
 
 
@@ -168,7 +138,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener, NavigationView.O
 
 
         auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this){
-            task ->
+                task ->
             if(task.isSuccessful){
                 //si accedeix correctament
                 val user = auth.currentUser
@@ -202,7 +172,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener, NavigationView.O
 
         //validacio amb mail i contrasenya
         auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this){
-            task ->
+                task ->
             if (task.isSuccessful){
                 //acces correcte, actalitzacio de la informacio de l'usuari
                 val user = auth.currentUser
@@ -231,9 +201,9 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener, NavigationView.O
     private fun signInWithGoogle() {
         //Configurem el google sign in
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build()
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
@@ -293,7 +263,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener, NavigationView.O
 
             valid = false
 
-                }else{
+        }else{
             binding.editTextContrasenya.error = null
         }
         return valid
@@ -303,8 +273,8 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener, NavigationView.O
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.btnRegistre -> {
-                createAccount(binding.editTextCorreu.text.toString(), binding.editTextContrasenya.text.toString())
-
+                val intent = Intent(this, Registre::class.java)
+                startActivity(intent)
             }
             R.id.btnAccedir -> signIn(binding.editTextCorreu.text.toString(), binding.editTextContrasenya.text.toString())
             R.id.btnSortir -> signOUt()
@@ -315,6 +285,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener, NavigationView.O
 
 
 }
+
 
 
 

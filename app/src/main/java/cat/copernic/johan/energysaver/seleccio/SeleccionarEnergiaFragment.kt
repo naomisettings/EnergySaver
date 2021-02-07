@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentSeleccionarEnergiaBinding
 
@@ -16,6 +17,10 @@ class SeleccionarEnergiaFragment : Fragment() {
         val binding = DataBindingUtil.inflate<FragmentSeleccionarEnergiaBinding>(inflater,
             R.layout.fragment_seleccionar_energia,
             container, false)
+        binding.btnConfirmar.setOnClickListener { view: View ->
+            view.findNavController()
+                .navigate(R.id.action_seleccionarEnergiaFragment_to_menuPrincipalFragment)
+        }
         return binding.root
     }
 }

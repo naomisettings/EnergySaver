@@ -26,7 +26,11 @@
         android:id="@+id/seleccionarEnergiaFragment"
         android:name="cat.copernic.johan.energysaver.seleccio.SeleccionarEnergiaFragment"
         android:label="SeleccionarEnergiaFragment"
-        tools:layout="@layout/fragment_seleccionar_energia"/>
+        tools:layout="@layout/fragment_seleccionar_energia">
+        <action
+            android:id="@+id/action_seleccionarEnergiaFragment_to_menuPrincipalFragment"
+            app:destination="@id/menuPrincipalFragment" />
+    </fragment>
     <fragment
         android:id="@+id/modificarUsuari"
         android:name="cat.copernic.johan.energysaver.modifica.ModificarUsuari"

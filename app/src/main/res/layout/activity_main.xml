@@ -3,17 +3,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <FrameLayout
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:openDrawer="start">
 
-        <fragment
-            android:id="@+id/myNavHostFragment"
-            android:name="androidx.navigation.fragment.NavHostFragment"
+
+        <include
+            layout="@layout/content_main"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:navGraph="@navigation/navigation"
-            app:defaultNavHost="true" />
+            android:layout_height="match_parent" />
 
-    </FrameLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/nav_header"
+            app:menu="@menu/menu" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <fragment
+                android:id="@+id/myNavHostFragment"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:navGraph="@navigation/navigation"
+                app:defaultNavHost="true" />
+
+        </FrameLayout>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
 </layout>
