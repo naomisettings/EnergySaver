@@ -50,9 +50,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
 
         binding.btnAccedir.setOnClickListener { R.id.menuPrincipalFragment }
-        binding.btnRegistre.setOnClickListener {
-        val intent = Intent(this, Registre::class.java)
-        startActivity(intent)}
+       binding.btnRegistre.setOnClickListener {        }
         binding.btnSortir.setOnClickListener {  }
 
         //capturem els botons
@@ -153,6 +151,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
                 val dialog: AlertDialog = builder.create()
                 dialog.show()
 
+
             }else {
                 //si falla la validacio
                 val builder = AlertDialog.Builder(this)
@@ -163,7 +162,9 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
                 dialog.show()
 
 
+
             }
+
         }
 
     }
@@ -277,7 +278,8 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.btnRegistre -> {
-                createAccount(binding.editTextCorreu.text.toString(), binding.editTextContrasenya.text.toString())
+
+               createAccount(binding.editTextCorreu.text.toString(), binding.editTextContrasenya.text.toString())
 
             }
             R.id.btnAccedir -> signIn(binding.editTextCorreu.text.toString(), binding.editTextContrasenya.text.toString())
