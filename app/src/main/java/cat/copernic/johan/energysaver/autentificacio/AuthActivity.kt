@@ -26,6 +26,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.GoogleAuthProvider
 import androidx.appcompat.widget.Toolbar
 import cat.copernic.johan.energysaver.MainActivity
+import cat.copernic.johan.energysaver.registre.Registre
 
 private const val TAG = "GoogleActivity"
 private const val RC_SIGN_IN = 100
@@ -49,7 +50,9 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
 
         binding.btnAccedir.setOnClickListener { R.id.menuPrincipalFragment }
-        binding.btnRegistre.setOnClickListener {}
+        binding.btnRegistre.setOnClickListener {
+        val intent = Intent(this, Registre::class.java)
+        startActivity(intent)}
         binding.btnSortir.setOnClickListener {  }
 
         //capturem els botons

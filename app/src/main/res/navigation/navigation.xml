@@ -36,9 +36,6 @@
             android:id="@+id/action_modificarUsuari_to_seleccionarEnergiaFragment"
             app:destination="@id/seleccionarEnergiaFragment" />
         <action
-            android:id="@+id/action_modificarUsuari_to_baixaUsuari"
-            app:destination="@id/baixaUsuari" />
-        <action
             android:id="@+id/action_modificarUsuari_to_authActivity"
             app:destination="@id/authActivity" />
         <action
@@ -47,15 +44,6 @@
         <action
             android:id="@+id/action_modificarUsuari_to_veureFragment2"
             app:destination="@id/veureFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/baixaUsuari"
-        android:name="cat.copernic.johan.energysaver.baixa.BaixaUsuari"
-        android:label="fragment_baixa_usuari"
-        tools:layout="@layout/fragment_baixa_usuari" >
-        <action
-            android:id="@+id/action_baixaUsuari_to_authActivity"
-            app:destination="@id/authActivity" />
     </fragment>
     <activity
         android:id="@+id/registre"
