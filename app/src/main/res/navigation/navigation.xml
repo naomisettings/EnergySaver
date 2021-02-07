@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_menuPrincipalFragment_to_modificarUsuari"
             app:destination="@id/modificarUsuari" />
+        <action
+            android:id="@+id/action_menuPrincipalFragment_to_medallesFragment"
+            app:destination="@id/medallesFragment" />
     </fragment>
     <fragment
         android:id="@+id/informesFragment"
@@ -85,4 +88,42 @@
         android:name="cat.copernic.johan.energysaver.obrirtiquet.ObrirTiquetFragment"
         android:label="ObrirFragment"
         tools:layout="@layout/fragment_obrir"/>
+    <fragment
+        android:id="@+id/medallesFragment"
+        android:name="cat.copernic.johan.energysaver.medalles.MedallesFragment"
+        android:label="MedallesFragment"
+        tools:layout="@layout/fragment_medalles">
+        <action
+            android:id="@+id/action_medallesFragment_to_medalla1Fragment"
+            app:destination="@id/medalla1Fragment" />
+        <action
+            android:id="@+id/action_medallesFragment_to_medalla2Fragment"
+            app:destination="@id/medalla2Fragment" />
+        <action
+            android:id="@+id/action_medallesFragment_to_medalla3Fragment"
+            app:destination="@id/medalla3Fragment" />
+        <action
+            android:id="@+id/action_medallesFragment_to_medalla4Fragment"
+            app:destination="@id/medalla4Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/medalla1Fragment"
+        android:name="cat.copernic.johan.energysaver.medalles.Medalla1Fragment"
+        android:label="Medalla1Fragment"
+        tools:layout="@layout/fragment_medalla1"/>
+    <fragment
+        android:id="@+id/medalla2Fragment"
+        android:name="cat.copernic.johan.energysaver.medalles.Medalla2Fragment"
+        android:label="Medalla2Fragment"
+        tools:layout="@layout/fragment_medalla2"/>
+    <fragment
+        android:id="@+id/medalla3Fragment"
+        android:name="cat.copernic.johan.energysaver.medalles.Medalla3Fragment"
+        android:label="Medalla3Fragment"
+        tools:layout="@layout/fragment_medalla3"/>
+    <fragment
+        android:id="@+id/medalla4Fragment"
+        android:name="cat.copernic.johan.energysaver.medalles.Medalla4Fragment"
+        android:label="Medalla4Fragment"
+        tools:layout="@layout/fragment_medalla4"/>
 </navigation>
