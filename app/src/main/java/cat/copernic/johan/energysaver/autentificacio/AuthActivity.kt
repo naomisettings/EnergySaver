@@ -48,7 +48,9 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        binding.btnAccedir.setOnClickListener { R.id.menuPrincipalFragment }
+        binding.btnRegistre.setOnClickListener {}
+        binding.btnSortir.setOnClickListener {  }
 
         //capturem els botons
         binding.btnAccedir.setOnClickListener(this)
