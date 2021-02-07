@@ -74,6 +74,11 @@
     <string name="imgBttnUnAny">Medalla de un any estalviant</string>
     <string name="txtViewMigAny">Mig Any Estalviant</string>
     <string name="txtViewAny">Un Any Estalviant</string>
+    <string name="medallaEstalviadorGran">Medalla guanyada (Estalviador)</string>
+    <string name="multiLineTxtViewMedalla1">Has guanyat la medalla Estalviador!! Enhorabona!!</string>
+    <string name="multiLineTxtViewMedalla2">Has guanyat la medalla Gran Estalviador!! Enhorabona!!</string>
+    <string name="multiLineTxtViewMedalla3">Has guanyat la medalla Mig Any Estalviant!! Enhorabona!!</string>
+    <string name="multiLineTxtViewMedalla4">Has guanyat la medalla Un Any Estalviant!! Enhorabona!!</string>
 
 
 </resources>
