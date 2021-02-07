@@ -13,13 +13,16 @@ import cat.copernic.johan.energysaver.databinding.FragmentMedallesBinding
 class MedallesFragment : Fragment() {
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding = DataBindingUtil.inflate<FragmentMedallesBinding>(inflater,
+        val binding = DataBindingUtil.inflate<FragmentMedallesBinding>(
+            inflater,
             R.layout.fragment_medalles,
-            container, false)
+            container, false
+        )
 
         binding.imgBttnMedalla1.setOnClickListener { view: View ->
             view.findNavController()

@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import cat.copernic.johan.energysaver.R
-import cat.copernic.johan.energysaver.databinding.FragmentObrirBinding
-
+import cat.copernic.johan.energysaver.databinding.FragmentMedalla3Binding
 
 class Medalla3Fragment : Fragment() {
 
@@ -18,7 +17,7 @@ class Medalla3Fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding: FragmentObrirBinding =
+        val binding: FragmentMedalla3Binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_medalla3, container, false)
 
         return binding.root
