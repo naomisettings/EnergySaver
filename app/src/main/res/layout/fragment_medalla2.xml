@@ -38,7 +38,7 @@
                 android:contentDescription="@string/logoESmedalles"
                 android:src="@drawable/medallaoriginal" />
 
-            <MultiAutoCompleteTextView
+            <TextView
                 android:id="@+id/multiAutoCompleteTextView"
                 style="@style/ColorsBasicsAplicacio"
                 android:layout_width="308dp"
