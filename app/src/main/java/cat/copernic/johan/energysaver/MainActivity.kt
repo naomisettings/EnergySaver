@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         //navigation drawer
         toolbar = findViewById(R.id.toolbar)
-         //  setSupportActionBar(toolbar)
+      // setSupportActionBar(toolbar)
 
         drawerLayout = findViewById(R.id.drawer_layout)
         navView = findViewById(R.id.nav_view)
@@ -45,10 +45,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.Energies -> {
+
                 Toast.makeText(this,"Energies clicked", Toast.LENGTH_SHORT).show()
 
             }
             R.id.Informes -> {
+
                 Toast.makeText(this,"Informes clicked", Toast.LENGTH_SHORT).show()
             }
             R.id.Modificar ->{

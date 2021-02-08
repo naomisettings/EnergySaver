@@ -10,6 +10,11 @@
         android:icon="@drawable/ic_energies"
         />
     <item
+        android:id="@+id/Medalles"
+        android:title="@string/Menu_medalles"
+        android:icon="@drawable/ic_medalles"/>
+
+    <item
         android:id="@+id/Informes"
         android:title="@string/MenuInformes"
         android:icon="@drawable/ic_informes"/>

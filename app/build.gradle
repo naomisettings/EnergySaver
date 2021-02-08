@@ -45,6 +45,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     //dependencia pel navigation drawer
     implementation 'com.google.android.material:material:1.2.1'
+    def nav_version_ktx = "2.1.0-alpha06"
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'com.google.firebase:firebase-auth:20.0.2'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
