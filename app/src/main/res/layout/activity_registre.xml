@@ -139,14 +139,16 @@
         android:text="@string/txtPoblacio"
         android:textColor="@color/TitolColor"
         android:textSize="@dimen/CampsSize"
-        app:layout_constraintBaseline_toBaselineOf="@+id/edtiTextPoblacio"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/editTextPoblacio"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="34dp"
+        tools:layout_editor_absoluteY="468dp" />
 
     <TextView
         android:id="@+id/txtContrasenyaRegistre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="12dp"
         android:fontFamily="@font/asap_bold"
         android:text="@string/txtContrasenya"
         android:textColor="@color/TitolColor"
@@ -208,7 +210,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextNom" />
 
     <EditText
-        android:id="@+id/edtiTextPoblacio"
+        android:id="@+id/editTextPoblacio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
@@ -235,7 +237,7 @@
         android:textColor="@color/black"
         android:textSize="@dimen/CampsSize"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtiTextPoblacio" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPoblacio" />
 
     <EditText
         android:id="@+id/editTextContrasenyaRegistre"

@@ -44,22 +44,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.Energies -> {
+            R.id.seleccionarEnergiaFragment -> {
 
                 Toast.makeText(this,"Energies clicked", Toast.LENGTH_SHORT).show()
 
             }
-            R.id.Informes -> {
+            R.id.informesFragment -> {
 
                 Toast.makeText(this,"Informes clicked", Toast.LENGTH_SHORT).show()
             }
-            R.id.Modificar ->{
+            R.id.modificarFragment ->{
                 Toast.makeText(this,"Modificar clicked", Toast.LENGTH_SHORT).show()
             }
             R.id.Baixa ->{
                 Toast.makeText(this,"Baixa clicked", Toast.LENGTH_SHORT).show()
             }
-            R.id.Suport ->{
+            R.id.obrirFragment ->{
                 Toast.makeText(this,"Suport clicked", Toast.LENGTH_SHORT).show()
             }
             R.id.Sortir ->{
