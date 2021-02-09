@@ -9,9 +9,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentSeleccionarEnergiaBinding
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 
 class SeleccionarEnergiaFragment : Fragment() {
+    private val db = FirebaseFirestore.getInstance()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = DataBindingUtil.inflate<FragmentSeleccionarEnergiaBinding>(inflater,
