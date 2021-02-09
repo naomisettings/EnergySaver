@@ -1,20 +1,34 @@
 package cat.copernic.johan.energysaver.modifica
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.R
+import cat.copernic.johan.energysaver.autentificacio.AuthActivity
 import cat.copernic.johan.energysaver.databinding.FragmentModificarUsuariBinding
-
-
-
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.ktx.oAuthCredential
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 
 
 class ModificarUsuari : Fragment() {
+    val db = FirebaseFirestore.getInstance()
+
+    var nom: String = ""
+    var cognoms: String =""
+    var mail: String = ""
+    var nickname : String =""
+    var adreca: String = ""
+    var poblacio: String =""
+    var telefon: String = ""
+    var contrasenya: String = ""
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
@@ -34,8 +48,22 @@ class ModificarUsuari : Fragment() {
             view:View ->
             view.findNavController().navigate(R.id.action_modificarUsuari_to_authActivity)
         }
-        return binding.root
+        binding.btnBaixaModificar.setOnClickListener {
+            view:View->
+            view.findNavController().navigate(R.id.action_modificarUsuari_to_authActivity)
+        }
+        //funcio per recuperar les dades a modificar del usuari identificat
+        fun dadesModificar(view:View){
+            //val currentUser = Firebase.auth()
+
+
+        }
+
+
+                return binding.root
     }
 
 
 }
+
+
