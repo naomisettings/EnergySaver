@@ -13,9 +13,7 @@
             android:id="@+id/btnTancarModificar"
             android:layout_width="153dp"
             android:layout_height="68dp"
-            android:layout_marginTop="10dp"
             android:layout_marginEnd="30dp"
-            android:layout_marginBottom="16dp"
             android:background="@color/BtnColor"
             android:gravity="center"
             android:text="@string/TancaSessio"
@@ -46,8 +44,6 @@
             android:layout_width="153dp"
             android:layout_height="74dp"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="16dp"
             android:background="@color/BtnColor"
             android:gravity="center"
             android:text="@string/SeleccionaEnergies"
@@ -55,8 +51,11 @@
             android:textColor="@color/textBtnColor"
             android:textSize="@dimen/btnTextSize"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnTancarModificar"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnConfirmarModificar" />
+            app:layout_constraintTop_toBottomOf="@+id/btnConfirmarModificar"
+            app:layout_constraintVertical_bias="0.44" />
 
         <Button
             android:id="@+id/btnConfirmarModificar"
