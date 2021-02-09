@@ -97,6 +97,8 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
                 val dialog: AlertDialog = builder.create()
                 dialog.show()
                 firebaseAuthWithGoogle(account.idToken!!)
+                val intent = Intent(this, Registre::class.java)
+                startActivity(intent)
             } catch (e: ApiException) {
                 // L'acces amb google ha fallat
                 val builder = AlertDialog.Builder(this)
@@ -118,7 +120,6 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
                     // Si l'usuari es logejat correctament, mostra un log amb les dades de l'usuari
                     Log.d(TAG, "signInWithCredential:success")
                     val user = auth.currentUser
-
                 } else {
                     // Si falla, mostra Log de l'error
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
