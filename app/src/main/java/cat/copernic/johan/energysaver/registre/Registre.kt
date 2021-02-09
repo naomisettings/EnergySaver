@@ -7,17 +7,26 @@ import androidx.databinding.DataBindingUtil
 import cat.copernic.johan.energysaver.MainActivity
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.ActivityRegistreBinding
+import com.google.firebase.ktx.Firebase
 
-private lateinit var binding: ActivityRegistreBinding
+
+
+
 
 class Registre : AppCompatActivity() {
+    private lateinit var binding: ActivityRegistreBinding
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registre)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_registre)
 
-        binding.btnConfirmarRegistre.setOnClickListener { val intent = Intent(this, MainActivity::class.java)
+        binding.btnConfirmarRegistre.setOnClickListener {
+            //db.collection
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent) }
     }
 
