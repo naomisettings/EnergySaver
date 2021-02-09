@@ -97,7 +97,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
                 val dialog: AlertDialog = builder.create()
                 dialog.show()
                 firebaseAuthWithGoogle(account.idToken!!)
-                val intent = Intent(this, Registre::class.java)
+                val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             } catch (e: ApiException) {
                 // L'acces amb google ha fallat
