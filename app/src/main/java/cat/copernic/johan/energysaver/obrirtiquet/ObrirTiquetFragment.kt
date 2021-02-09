@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentObrirBinding
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -44,6 +45,24 @@ class ObrirTiquetFragment : Fragment() {
             Snackbar.make(view, R.string.campsBuitsToastObrirTiquet, Snackbar.LENGTH_LONG).show()
         } else {
 
+            val user = Firebase.auth.currentUser
+            Log.i("usuari", user.toString())
+
+            val usuaris = db.collection("usuaris")
+            val query = usuaris.whereEqualTo("nickname", user?.uid).get()
+                .addOnSuccessListener { documents ->
+                    for (document in documents) {
+                        Log.d(TAG, "${document.id} => ${document.data}")
+                    }
+
+                }
+                .addOnFailureListener { exception ->
+                    Log.w(TAG, "Error getting documents: ", exception)
+                }
+
+           // val nickname = query.result.toString()
+
+
             val tiquet = hashMapOf(
                 "usuari" to "prova",
                 "titol" to titol,
@@ -54,7 +73,7 @@ class ObrirTiquetFragment : Fragment() {
                 editTextTemaTiquet.text.clear()
                 editTxtDescripcioTiquet.text.clear()
             }
-            db.collection("titol")
+            db.collection("tiquet")
                 .add(tiquet)
                 .addOnSuccessListener { documentReference ->
                     Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
