@@ -81,6 +81,8 @@
     <string name="multiLineTxtViewMedalla4">Has guanyat la medalla Un Any Estalviant!! Enhorabona!!</string>
     <string name="defaultcd">default</string>
     <string name="Menu_medalles">Medalles</string>
+    <string name="campsBuitsToastObrirTiquet">Els camps de text han d estar emplenats</string>
+
 
 
 </resources>

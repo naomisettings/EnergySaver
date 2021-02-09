@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_menuPrincipalFragment_to_medallesFragment"
             app:destination="@id/medallesFragment" />
+        <action
+            android:id="@+id/action_menuPrincipalFragment_to_veureFragment"
+            app:destination="@id/veureFragment" />
     </fragment>
     <fragment
         android:id="@+id/informesFragment"
@@ -51,9 +54,6 @@
         <action
             android:id="@+id/action_modificarUsuari_to_menuPrincipalFragment"
             app:destination="@id/menuPrincipalFragment" />
-        <action
-            android:id="@+id/action_modificarUsuari_to_veureFragment2"
-            app:destination="@id/veureFragment" />
     </fragment>
     <fragment
         android:id="@+id/baixaUsuari"
