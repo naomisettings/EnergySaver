@@ -1,14 +1,12 @@
 package cat.copernic.johan.energysaver.obrirtiquet
 
 import android.content.ContentValues.TAG
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentObrirBinding
@@ -43,12 +41,27 @@ class ObrirTiquetFragment : Fragment() {
         }
 
         if (titol.isEmpty() || descripcio.isEmpty()) {
-            Log.w("ObrirTiquetFragment", "Entra fun rebre dades")
             Snackbar.make(view, R.string.campsBuitsToastObrirTiquet, Snackbar.LENGTH_LONG).show()
         } else {
-            print("firestore")
 
+            val tiquet = hashMapOf(
+                "usuari" to "prova",
+                "titol" to titol,
+                "descripcio" to descripcio
+            )
+
+            binding.apply {
+                editTextTemaTiquet.text.clear()
+                editTxtDescripcioTiquet.text.clear()
+            }
+            db.collection("titol")
+                .add(tiquet)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+                }
+                .addOnFailureListener { e ->
+                    Log.w(TAG, "Error adding document", e)
+                }
         }
-
     }
 }
