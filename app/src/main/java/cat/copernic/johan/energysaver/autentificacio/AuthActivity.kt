@@ -132,7 +132,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
             }
     }
     //metode que rep per parametre el mail i la contrasenya per crear l'usuari
-    private fun createAccount(email: String, password: String){
+    /*private fun createAccount(email: String, password: String){
         if(!validateFormat()){
             return
         }
@@ -163,7 +163,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
 
-    }
+    }*/
     //metode d'acces
     private fun signIn(email: String,password: String){
         Log.d("EmailPassword", "Acces amb el:$email")

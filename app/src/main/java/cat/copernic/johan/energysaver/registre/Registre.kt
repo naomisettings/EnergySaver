@@ -3,21 +3,22 @@ package cat.copernic.johan.energysaver.registre
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import cat.copernic.johan.energysaver.MainActivity
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.ActivityRegistreBinding
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 
-
-
-
-
 class Registre : AppCompatActivity() {
+    private lateinit var auth: FirebaseAuth
     private lateinit var binding: ActivityRegistreBinding
 
     val db = FirebaseFirestore.getInstance()
@@ -38,12 +39,36 @@ class Registre : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registre)
 
+        //inicialitzem la variable auth
+        auth = Firebase.auth
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_registre)
 
         binding.btnConfirmarRegistre.setOnClickListener {
-            recollirUsuari(it)
+
+
+            //guardar usuari al autentification
+            createAccount(binding.editTextTextEmailAddress.text.toString(),
+                binding.editTextContrasenyaRegistre.text.toString(), it)
+
+            //recollirUsuari(it)
+
+            //netejem els camps
+            binding.apply {
+                editTextNom.text.clear()
+                editTextCognoms.text.clear()
+                editTextTextEmailAddress.text.clear()
+                editTextNickName.text.clear()
+                editTextAdreca.text.clear()
+                editTextPoblacio.text.clear()
+                editTextTelefon.text.clear()
+                editTextContrasenyaRegistre.text.clear()
+
+            }
+
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent) }
+
     }
     //funcio per recollir les dades del formulari de registre
     fun recollirUsuari(view:View){
@@ -63,7 +88,7 @@ class Registre : AppCompatActivity() {
             Snackbar.make(view, "Has d'omplir tots els camps", Snackbar.LENGTH_LONG).show()
 
         }else{ //guardem a un hashMap
-            val usuari = hashMapOf(
+             val usuari = hashMapOf(
                 "nom" to nom,
                 "cognoms" to cognoms,
                 "mail" to mail,
@@ -75,7 +100,7 @@ class Registre : AppCompatActivity() {
 
             )
             //netejem els camps
-            binding.apply {
+         /*   binding.apply {
                 editTextNom.text.clear()
                 editTextCognoms.text.clear()
                 editTextTextEmailAddress.text.clear()
@@ -85,7 +110,7 @@ class Registre : AppCompatActivity() {
                 editTextTelefon.text.clear()
                 editTextContrasenyaRegistre.text.clear()
 
-            }
+            }*/
             //guardem el hashMap a un colleccio dek Firebase
             db.collection("usuaris").add(usuari).addOnSuccessListener { documentReference ->
                 Snackbar.make(view, "Registre creat correctament", Snackbar.LENGTH_LONG).show()
@@ -95,6 +120,78 @@ class Registre : AppCompatActivity() {
             }
 
         }
+    }
+
+    private fun createAccount(email: String, password: String, view: View){
+        if(!validateFormat()){
+            return
+        }
+
+
+        auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this){
+                task ->
+            if(task.isSuccessful){
+                //si accedeix correctament
+                val user = auth.currentUser
+                recollirUsuari(view)
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Success")
+                builder.setMessage("Usuari creat correctament")
+                builder.setPositiveButton("Acceptar", null)
+                val dialog: AlertDialog = builder.create()
+                dialog.show()
+
+            }else {
+                //si falla la validacio
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Error")
+                builder.setMessage("Usuari incorrecte o ja existeix")
+                builder.setPositiveButton("Acceptar", null)
+                val dialog: AlertDialog = builder.create()
+                dialog.show()
+
+
+            }
+
+        }
+
+
+
+
+
+    }
+
+    //metode que valida que els camps no estiguin buits
+    private fun validateFormat(): Boolean{
+        var valid = true
+        val email: String = binding.editTextTextEmailAddress  .text.toString()
+        if(TextUtils.isEmpty(email)){
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Error")
+            builder.setMessage("Has de posar un correu electrònic vàlid")
+            builder.setPositiveButton("Acceptar", null)
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
+
+            valid = false
+        }else{
+            binding.editTextTextEmailAddress.error = null
+        }
+        val password: String = binding.editTextContrasenyaRegistre.text.toString()
+        if (TextUtils.isEmpty(password)){
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Error")
+            builder.setMessage("Has de posar una contrasenya vàlida")
+            builder.setPositiveButton("Acceptar", null)
+            val dialog: AlertDialog = builder.create()
+            dialog.show()
+
+            valid = false
+
+        }else{
+            binding.editTextContrasenyaRegistre.error = null
+        }
+        return valid
     }
 
 
