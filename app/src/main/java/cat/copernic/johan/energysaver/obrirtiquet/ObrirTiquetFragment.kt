@@ -51,10 +51,10 @@ class ObrirTiquetFragment : Fragment() {
         } else {
 
             val user = Firebase.auth.currentUser
-            Log.e("usuari", "prova${user.toString()}")
+            val mail = user?.email.toString()
 
             val usuaris = db.collection("usuaris")
-            val query = usuaris.whereEqualTo("nickname", user?.uid).get()
+            val query = usuaris.whereEqualTo("mail", mail).get()
                 .addOnSuccessListener { documents ->
                     for (document in documents) {
                         Log.d(TAG, "${document.id} => ${document.data}")
@@ -65,7 +65,7 @@ class ObrirTiquetFragment : Fragment() {
                     Log.w(TAG, "Error getting documents: ", exception)
                 }
 
-           // val nickname = query.result.toString()
+
 
             val data = Calendar.getInstance().time
             val formatterdt = SimpleDateFormat("yyyy.MM.dd")
@@ -73,10 +73,9 @@ class ObrirTiquetFragment : Fragment() {
             val formatedDate = formatterdt.format(data)
             val formatedHour = formatterhr.format(data)
 
-            Log.e("dadesusuari", query.toString())
-
             val tiquet = hashMapOf(
-                "usuari" to "ooooo",
+                "mail" to mail,
+                "nickname" to " ",
                 "data" to formatedDate,
                 "hora" to formatedHour,
                 "titol" to titol,
@@ -87,14 +86,10 @@ class ObrirTiquetFragment : Fragment() {
                 editTextTemaTiquet.text.clear()
                 editTxtDescripcioTiquet.text.clear()
             }
-            db.collection("tiquet")
-                .add(tiquet)
-                .addOnSuccessListener { documentReference ->
-                    Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-                }
-                .addOnFailureListener { e ->
-                    Log.w(TAG, "Error adding document", e)
-                }
+
+            }
+
+
         }
     }
 }
