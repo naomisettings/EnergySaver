@@ -51,7 +51,7 @@ class ObrirTiquetFragment : Fragment() {
         } else {
 
             val user = Firebase.auth.currentUser
-            Log.i("usuari", user.toString())
+            Log.e("usuari", "prova${user.toString()}")
 
             val usuaris = db.collection("usuaris")
             val query = usuaris.whereEqualTo("nickname", user?.uid).get()
@@ -73,8 +73,10 @@ class ObrirTiquetFragment : Fragment() {
             val formatedDate = formatterdt.format(data)
             val formatedHour = formatterhr.format(data)
 
+            Log.e("dadesusuari", query.toString())
+
             val tiquet = hashMapOf(
-                "usuari" to "prova",
+                "usuari" to "ooooo",
                 "data" to formatedDate,
                 "hora" to formatedHour,
                 "titol" to titol,
