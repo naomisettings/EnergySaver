@@ -21,6 +21,7 @@ class Registre : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var binding: ActivityRegistreBinding
 
+    //instancia a firebase
     val db = FirebaseFirestore.getInstance()
 
     var nom: String =""
@@ -50,21 +51,6 @@ class Registre : AppCompatActivity() {
             //guardar usuari al autentification
             createAccount(binding.editTextTextEmailAddress.text.toString(),
                 binding.editTextContrasenyaRegistre.text.toString(), it)
-
-            //recollirUsuari(it)
-
-            //netejem els camps
-         /*   binding.apply {
-                editTextNom.text.clear()
-                editTextCognoms.text.clear()
-                editTextTextEmailAddress.text.clear()
-                editTextNickName.text.clear()
-                editTextAdreca.text.clear()
-                editTextPoblacio.text.clear()
-                editTextTelefon.text.clear()
-                editTextContrasenyaRegistre.text.clear()
-
-            }*/
 
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent) }
@@ -99,18 +85,7 @@ class Registre : AppCompatActivity() {
                 "contrasenya" to contrasenya
 
             )
-            //netejem els camps
-         /*   binding.apply {
-                editTextNom.text.clear()
-                editTextCognoms.text.clear()
-                editTextTextEmailAddress.text.clear()
-                editTextNickName.text.clear()
-                editTextAdreca.text.clear()
-                editTextPoblacio.text.clear()
-                editTextTelefon.text.clear()
-                editTextContrasenyaRegistre.text.clear()
 
-            }*/
             //guardem el hashMap a un colleccio dek Firebase
             db.collection("usuaris").add(usuari).addOnSuccessListener { documentReference ->
                 Snackbar.make(view, "Registre creat correctament", Snackbar.LENGTH_LONG).show()
@@ -134,21 +109,12 @@ class Registre : AppCompatActivity() {
                 //si accedeix correctament
                 val user = auth.currentUser
                 recollirUsuari(view)
-                val builder = AlertDialog.Builder(this)
-                builder.setTitle("Success")
-                builder.setMessage("Usuari creat correctament")
-                builder.setPositiveButton("Acceptar", null)
-                val dialog: AlertDialog = builder.create()
-                dialog.show()
+                Snackbar.make(view, "Registre creat correctament", Snackbar.LENGTH_LONG).show()
 
             }else {
                 //si falla la validacio
-                val builder = AlertDialog.Builder(this)
-                builder.setTitle("Error")
-                builder.setMessage("Usuari incorrecte o ja existeix")
-                builder.setPositiveButton("Acceptar", null)
-                val dialog: AlertDialog = builder.create()
-                dialog.show()
+                Snackbar.make(view, "Usuari incorrecte o ja existeix", Snackbar.LENGTH_LONG).show()
+
 
 
             }
