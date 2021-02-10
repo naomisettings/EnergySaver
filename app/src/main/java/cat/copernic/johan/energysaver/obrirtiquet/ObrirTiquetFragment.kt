@@ -65,8 +65,6 @@ class ObrirTiquetFragment : Fragment() {
                     Log.w(TAG, "Error getting documents: ", exception)
                 }
 
-
-
             val data = Calendar.getInstance().time
             val formatterdt = SimpleDateFormat("yyyy.MM.dd")
             val formatterhr = SimpleDateFormat("HH:mm:ss")
@@ -86,9 +84,16 @@ class ObrirTiquetFragment : Fragment() {
                 editTextTemaTiquet.text.clear()
                 editTxtDescripcioTiquet.text.clear()
             }
+            db.collection("tiquet")
+                .add(tiquet)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+                }
+                .addOnFailureListener { e ->
+                    Log.w(TAG, "Error adding document", e)
+                }
 
             }
-
 
         }
     }
