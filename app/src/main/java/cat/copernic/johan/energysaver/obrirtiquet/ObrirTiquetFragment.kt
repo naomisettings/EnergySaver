@@ -46,6 +46,7 @@ class ObrirTiquetFragment : Fragment() {
         }
 
         if (titol.isEmpty() || descripcio.isEmpty()) {
+            Log.w("ObrirTiquetFragment", "Entra fun rebre dades")
             Snackbar.make(view, R.string.campsBuitsToastObrirTiquet, Snackbar.LENGTH_LONG).show()
         } else {
 
