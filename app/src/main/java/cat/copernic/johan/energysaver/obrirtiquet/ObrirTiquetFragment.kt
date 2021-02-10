@@ -1,5 +1,6 @@
 package cat.copernic.johan.energysaver.obrirtiquet
 
+import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ObrirTiquetFragment : Fragment() {
 
@@ -35,6 +38,7 @@ class ObrirTiquetFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SimpleDateFormat")
     fun rebreDades(view: View) {
         binding.apply {
             titol = editTextTemaTiquet.text.toString()
@@ -62,9 +66,16 @@ class ObrirTiquetFragment : Fragment() {
 
            // val nickname = query.result.toString()
 
+            val data = Calendar.getInstance().time
+            val formatterdt = SimpleDateFormat("yyyy.MM.dd")
+            val formatterhr = SimpleDateFormat("HH:mm:ss")
+            val formatedDate = formatterdt.format(data)
+            val formatedHour = formatterhr.format(data)
 
             val tiquet = hashMapOf(
                 "usuari" to "prova",
+                "data" to formatedDate,
+                "hora" to formatedHour,
                 "titol" to titol,
                 "descripcio" to descripcio
             )
