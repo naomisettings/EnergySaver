@@ -54,7 +54,7 @@ class Registre : AppCompatActivity() {
             //recollirUsuari(it)
 
             //netejem els camps
-            binding.apply {
+         /*   binding.apply {
                 editTextNom.text.clear()
                 editTextCognoms.text.clear()
                 editTextTextEmailAddress.text.clear()
@@ -64,7 +64,7 @@ class Registre : AppCompatActivity() {
                 editTextTelefon.text.clear()
                 editTextContrasenyaRegistre.text.clear()
 
-            }
+            }*/
 
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent) }
