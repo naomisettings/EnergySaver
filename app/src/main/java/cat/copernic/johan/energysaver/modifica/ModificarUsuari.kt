@@ -18,7 +18,8 @@ import com.google.firebase.ktx.Firebase
 
 
 class ModificarUsuari : Fragment() {
-    val db = FirebaseFirestore.getInstance()
+
+
 
     var nom: String = ""
     var cognoms: String =""
@@ -53,8 +54,9 @@ class ModificarUsuari : Fragment() {
             view.findNavController().navigate(R.id.action_modificarUsuari_to_authActivity)
         }
         //funcio per recuperar les dades a modificar del usuari identificat
-        fun dadesModificar(view:View){
-            //val currentUser = Firebase.auth()
+        fun dadesModificar() {
+            var mail: String =""
+
 
 
         }
