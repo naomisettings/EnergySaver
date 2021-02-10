@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <string-array name="periode_array">
+            <item>1 mes</item>
+            <item>2 mesos</item>
+            <item>3 mesos</item>
+            <item>6 mesos</item>
+        </string-array>
+</resources>
