@@ -10,10 +10,12 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentSeleccionarEnergiaBinding
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -22,10 +24,10 @@ import com.google.firebase.ktx.Firebase
 class SeleccionarEnergiaFragment : Fragment(), AdapterView.OnItemSelectedListener{
     private val db = Firebase.firestore
 
-    private var periodeAigua = ""
-    private var periodeLlum = ""
-    private var periodeGas = ""
-    private var periodeGasoil = ""
+    private var periodeAigua = 0
+    private var periodeLlum = 0
+    private var periodeGas = 0
+    private var periodeGasoil = 0
 
     private lateinit var binding : FragmentSeleccionarEnergiaBinding
 
@@ -37,9 +39,12 @@ class SeleccionarEnergiaFragment : Fragment(), AdapterView.OnItemSelectedListene
         val spinnerAigua : Spinner = binding.spnAigua
         val spinnerLlum : Spinner = binding.spnLlum
         val spinnerGas : Spinner = binding.spnGas
-        val spinnerGasoil : Spinner = binding.spnGasoil
+        val spinnerCombustible : Spinner = binding.spnCombustible
 
-        Log.i("Ayuda: ", spinnerAigua.toString())
+        spinnerAigua.onItemSelectedListener = this
+        spinnerLlum.onItemSelectedListener = this
+        spinnerGas.onItemSelectedListener = this
+        spinnerCombustible.onItemSelectedListener = this
 
         this.context?.let {
             ArrayAdapter.createFromResource(it, R.array.periode_array, android.R.layout.simple_spinner_item
@@ -48,7 +53,7 @@ class SeleccionarEnergiaFragment : Fragment(), AdapterView.OnItemSelectedListene
                 spinnerAigua.adapter = adapter
                 spinnerLlum.adapter = adapter
                 spinnerGas.adapter = adapter
-                spinnerGasoil.adapter = adapter
+                spinnerCombustible.adapter = adapter
             }
         }
 
@@ -61,8 +66,14 @@ class SeleccionarEnergiaFragment : Fragment(), AdapterView.OnItemSelectedListene
     }
 
     fun rebreDades(){
+        //Guarda les dades del usuari connectat a la constant user
+        val user = Firebase.auth.currentUser
+
+        //Guarda el mail del usuari que ha fet login
+        val mail = user?.email.toString()
+
         val energies_usuari = hashMapOf(
-            "usuari" to "pedro" ,
+            "mail_usuari" to mail ,
             "llum" to binding.chbxLlum.isChecked,
             "periode_llum" to periodeLlum,
             "aigua" to binding.chbxAigua.isChecked,
@@ -88,6 +99,20 @@ class SeleccionarEnergiaFragment : Fragment(), AdapterView.OnItemSelectedListene
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        Log.i("Ayuda: ", parent.toString())
+        if (parent != null) {
+            Log.i("Ayuda: ", parent.getItemAtPosition(position).toString())
+        }
+        if(parent.toString().contains("Aigua")){
+            periodeAigua = position
+        }
+        if(parent.toString().contains("Llum")){
+            periodeLlum = position
+        }
+        if(parent.toString().contains("Gas")){
+            periodeGas = position
+        }
+        if(parent.toString().contains("Combustible")){
+            periodeGasoil = position
+        }
     }
 }
