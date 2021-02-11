@@ -13,7 +13,9 @@
             android:id="@+id/btnTancarModificar"
             android:layout_width="153dp"
             android:layout_height="68dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="30dp"
+            android:layout_marginBottom="16dp"
             android:background="@color/BtnColor"
             android:gravity="center"
             android:text="@string/TancaSessio"
@@ -44,6 +46,8 @@
             android:layout_width="153dp"
             android:layout_height="74dp"
             android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="16dp"
             android:background="@color/BtnColor"
             android:gravity="center"
             android:text="@string/SeleccionaEnergies"
@@ -51,11 +55,8 @@
             android:textColor="@color/textBtnColor"
             android:textSize="@dimen/btnTextSize"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnTancarModificar"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnConfirmarModificar"
-            app:layout_constraintVertical_bias="0.44" />
+            app:layout_constraintTop_toBottomOf="@+id/btnConfirmarModificar" />
 
         <Button
             android:id="@+id/btnConfirmarModificar"
@@ -69,10 +70,10 @@
             android:textColor="@color/textBtnColor"
             android:textSize="@dimen/btnTextSize"
             app:layout_constraintBaseline_toBaselineOf="@+id/btnBaixaModificar"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"  />
 
         <EditText
-            android:id="@+id/edtiTextPoblacioModificar"
+            android:id="@+id/editTextPoblacioModificar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
@@ -111,7 +112,7 @@
             android:inputType="phone"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edtiTextPoblacioModificar" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextPoblacioModificar" />
 
         <EditText
             android:id="@+id/editTextAdrecaModificar"
@@ -201,7 +202,7 @@
             android:text="@string/txtPoblacio"
             android:textColor="@color/TitolColor"
             android:textSize="@dimen/CampsSize"
-            app:layout_constraintBaseline_toBaselineOf="@+id/edtiTextPoblacioModificar"
+            app:layout_constraintBaseline_toBaselineOf="@+id/editTextPoblacioModificar"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
@@ -261,7 +262,6 @@
             android:textColor="@color/TitolColor"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.45"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageViewTitolModificar" />
 
@@ -271,8 +271,8 @@
             android:layout_height="64dp"
             android:layout_marginTop="30dp"
             android:contentDescription="@string/imViewTitol"
-            android:scrollbarSize="60dp"
 
+            android:scrollbarSize="60dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

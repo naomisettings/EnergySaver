@@ -33,9 +33,6 @@ class Registre : AppCompatActivity() {
     var telefon: String = ""
     var contrasenya: String = ""
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registre)
@@ -47,7 +44,6 @@ class Registre : AppCompatActivity() {
 
         binding.btnConfirmarRegistre.setOnClickListener {
 
-
             //guardar usuari al autentification
             createAccount(binding.editTextTextEmailAddress.text.toString(),
                 binding.editTextContrasenyaRegistre.text.toString(), it)
@@ -56,6 +52,7 @@ class Registre : AppCompatActivity() {
             startActivity(intent) }
 
     }
+
     //funcio per recollir les dades del formulari de registre
     fun recollirUsuari(view:View){
         binding.apply {
@@ -86,7 +83,7 @@ class Registre : AppCompatActivity() {
 
             )
 
-            //guardem el hashMap a un colleccio dek Firebase
+            //guardem el hashMap a un colleccio del Firebase
             db.collection("usuaris").add(usuari).addOnSuccessListener { documentReference ->
                 Snackbar.make(view, "Registre creat correctament", Snackbar.LENGTH_LONG).show()
             }.addOnFailureListener{ e->
@@ -96,7 +93,7 @@ class Registre : AppCompatActivity() {
 
         }
     }
-
+    //funcio per crear el compte d'usuari al Authentification amb les dades del registre
     private fun createAccount(email: String, password: String, view: View){
         if(!validateFormat()){
             return
@@ -108,6 +105,7 @@ class Registre : AppCompatActivity() {
             if(task.isSuccessful){
                 //si accedeix correctament
                 val user = auth.currentUser
+                //guardem les dades de la pantalla registre
                 recollirUsuari(view)
                 Snackbar.make(view, "Registre creat correctament", Snackbar.LENGTH_LONG).show()
 
