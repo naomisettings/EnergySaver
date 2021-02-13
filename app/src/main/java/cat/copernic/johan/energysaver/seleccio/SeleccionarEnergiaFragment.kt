@@ -111,7 +111,7 @@ class SeleccionarEnergiaFragment : Fragment(), AdapterView.OnItemSelectedListene
         val energies = db.collection("energies")
         val query = energies.whereEqualTo("mail_usuari", mail).get()
             .addOnSuccessListener { document ->
-                if (document != null) {
+                if (!document.isEmpty) {
                     val energia = document.toObjects(Energies::class.java)
                     Log.i("Proba", energia[0].toString())
                     val aiguaDoc = energia[0].aigua
