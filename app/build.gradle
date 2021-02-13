@@ -60,6 +60,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.google.firebase:firebase-firestore:21.6.0'
+    implementation 'com.google.firebase:firebase-storage-ktx'
 
     // Declarem la dependència de la biblioteca d'autenticació de Firebase
     // Quan utilitzem BoM, no especifiquem versions a les dependències de la biblioteca de Firebase
