@@ -23,7 +23,7 @@ import com.google.firebase.ktx.Firebase
 
 
 class SeleccionarEnergiaFragment : Fragment(), AdapterView.OnItemSelectedListener{
-    private val db = Firebase.firestore
+    private val db = FirebaseFirestore.getInstance()
 
     private var periodeAigua = 0
     private var periodeLlum = 0
@@ -107,13 +107,15 @@ class SeleccionarEnergiaFragment : Fragment(), AdapterView.OnItemSelectedListene
         Log.i("Proba", "Proba2")
         val user = Firebase.auth.currentUser
         val mail = user?.email.toString()
+        Log.i("proba", mail)
         val energies = db.collection("energies")
-        val query = energies.whereEqualTo("mail", mail).get()
+        val query = energies.whereEqualTo("mail_usuari", mail).get()
             .addOnSuccessListener { document ->
                 if (document != null) {
                     val energia = document.toObjects(Energies::class.java)
                     Log.i("Proba", energia[0].toString())
-                    aigua = energia!![0].aigua
+                    val aiguaDoc = energia[0].aigua
+                    var aigua = aiguaDoc
                     llum = energia!![0].llum
                     gas = energia!![0].gas
                     gasoil = energia!![0].gasoil
@@ -122,6 +124,11 @@ class SeleccionarEnergiaFragment : Fragment(), AdapterView.OnItemSelectedListene
                     periodeLlum = energia!![0].periode_llum
                     periodeGas = energia!![0].periode_gas
                     periodeGasoil = energia!![0].periode_gasoil
+
+                    binding.chbxAigua.isChecked = aigua
+                    binding.chbxLlum.isChecked = llum
+                    binding.chbxGas.isChecked = gas
+                    binding.chbxGasoil.isChecked = gasoil
                 }
             }
             .addOnFailureListener { exception ->
@@ -129,11 +136,6 @@ class SeleccionarEnergiaFragment : Fragment(), AdapterView.OnItemSelectedListene
             }
 
         Log.i("Proba", "Proba3")
-
-        binding.chbxAigua.isChecked = aigua
-        binding.chbxLlum.isChecked = llum
-        binding.chbxGas.isChecked = gas
-        binding.chbxGasoil.isChecked = gasoil
 
         Log.i("Proba", "Proba4")
     }
@@ -162,7 +164,7 @@ class SeleccionarEnergiaFragment : Fragment(), AdapterView.OnItemSelectedListene
 }
 
 data class Energies(
-    var aigua: Boolean = false, var gas: Boolean = false, var llum: Boolean = false,
-    var gasoil: Boolean = false, var periode_aigua: Int = 0, var periode_llum: Int = 0,
-    var periode_gas: Int = 0, var periode_gasoil: Int = 0, var mail_usuari: String = ""
+    var aigua: Boolean = false, var gas: Boolean = false,var gasoil: Boolean = false, var llum: Boolean = false,
+    var mail_usuari: String = "", var periode_aigua: Int = 0, var periode_gas: Int = 0,
+    var periode_gasoil: Int = 0, var periode_llum: Int = 0
 )
