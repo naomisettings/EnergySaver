@@ -56,7 +56,8 @@
             android:textSize="@dimen/btnTextSize"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnConfirmarModificar" />
+            app:layout_constraintTop_toBottomOf="@+id/btnConfirmarModificar"
+            app:layout_constraintVertical_bias="1.0" />
 
         <Button
             android:id="@+id/btnConfirmarModificar"
@@ -70,7 +71,7 @@
             android:textColor="@color/textBtnColor"
             android:textSize="@dimen/btnTextSize"
             app:layout_constraintBaseline_toBaselineOf="@+id/btnBaixaModificar"
-            app:layout_constraintStart_toStartOf="parent"  />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
             android:id="@+id/editTextPoblacioModificar"
