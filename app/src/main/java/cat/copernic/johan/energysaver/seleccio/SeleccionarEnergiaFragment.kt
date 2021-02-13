@@ -15,6 +15,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentSeleccionarEnergiaBinding
+import cat.copernic.johan.energysaver.obrirtiquet.Usuari
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -36,6 +37,7 @@ class SeleccionarEnergiaFragment : Fragment(), AdapterView.OnItemSelectedListene
         binding = DataBindingUtil.inflate<FragmentSeleccionarEnergiaBinding>(inflater,
             R.layout.fragment_seleccionar_energia,
             container, false)
+        omplirDades()
         val spinnerAigua : Spinner = binding.spnAigua
         val spinnerLlum : Spinner = binding.spnLlum
         val spinnerGas : Spinner = binding.spnGas
@@ -62,6 +64,7 @@ class SeleccionarEnergiaFragment : Fragment(), AdapterView.OnItemSelectedListene
             view.findNavController()
                 .navigate(R.id.action_seleccionarEnergiaFragment_to_menuPrincipalFragment)
         }
+
         return binding.root
     }
 
@@ -94,8 +97,49 @@ class SeleccionarEnergiaFragment : Fragment(), AdapterView.OnItemSelectedListene
             }
     }
 
+    private fun omplirDades(){
+        Log.i("Proba", "Proba1")
+        var aigua = false
+        var llum = false
+        var gas = false
+        var gasoil = false
+
+        Log.i("Proba", "Proba2")
+        val user = Firebase.auth.currentUser
+        val mail = user?.email.toString()
+        val energies = db.collection("energies")
+        val query = energies.whereEqualTo("mail", mail).get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val energia = document.toObjects(Energies::class.java)
+                    Log.i("Proba", energia[0].toString())
+                    aigua = energia!![0].aigua
+                    llum = energia!![0].llum
+                    gas = energia!![0].gas
+                    gasoil = energia!![0].gasoil
+
+                    periodeAigua = energia!![0].periode_aigua
+                    periodeLlum = energia!![0].periode_llum
+                    periodeGas = energia!![0].periode_gas
+                    periodeGasoil = energia!![0].periode_gasoil
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
+            }
+
+        Log.i("Proba", "Proba3")
+
+        binding.chbxAigua.isChecked = aigua
+        binding.chbxLlum.isChecked = llum
+        binding.chbxGas.isChecked = gas
+        binding.chbxGasoil.isChecked = gasoil
+
+        Log.i("Proba", "Proba4")
+    }
+
     override fun onNothingSelected(parent: AdapterView<*>?) {
-        Log.i("Ayuda: ", parent.toString())
+
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -116,3 +160,9 @@ class SeleccionarEnergiaFragment : Fragment(), AdapterView.OnItemSelectedListene
         }
     }
 }
+
+data class Energies(
+    var aigua: Boolean = false, var gas: Boolean = false, var llum: Boolean = false,
+    var gasoil: Boolean = false, var periode_aigua: Int = 0, var periode_llum: Int = 0,
+    var periode_gas: Int = 0, var periode_gasoil: Int = 0, var mail_usuari: String = ""
+)

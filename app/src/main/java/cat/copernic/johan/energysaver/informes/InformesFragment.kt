@@ -16,4 +16,6 @@ class InformesFragment : Fragment() {
         container, false)
         return binding.root
     }
+
+    //Implementar llibreria i métodes per realitzar els informes.
 }
