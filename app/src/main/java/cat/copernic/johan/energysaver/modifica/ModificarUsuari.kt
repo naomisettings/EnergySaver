@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.autentificacio.AuthActivity
 import cat.copernic.johan.energysaver.databinding.FragmentModificarUsuariBinding
+import cat.copernic.johan.energysaver.obrirtiquet.Usuari
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.oAuthCredential
@@ -142,81 +143,133 @@ class ModificarUsuari : Fragment() {
         //agafem el mail com a identificador unic de l'usuari
         val mail = user?.email.toString()
         val usuaris = db.collection("usuaris")
-        val query =
-            usuaris.whereEqualTo("mail", mail).get().addOnSuccessListener { document ->
-                if (document != null) {
-                    usuari = document.toObjects(Usuari::class.java)
-                  /*  val usuari = hashMapOf(
-                        "nom" to binding.editTextNomModificar.text.toString(),
-                        "cognoms" to binding.editTextCognomsModificar.text.toString(),
-                        "mail" to binding.editTextTextEmailAddressModificar.text.toString(),
-                        // "nickname" to nickname,
-                        "adreca" to binding.editTextAdrecaModificar.text.toString(),
-                        "poblacio" to binding.editTextPoblacioModificar.text.toString(),
-                        "telefon" to binding.editTextTelefonModificar.text.toString(),
-                        "contrasenya" to binding.editTextContrasenyaModificar.text.toString()
-                    )*/
-                    val mailModificat = binding.editTextTextEmailAddressModificar.text.toString()
-                    Log.d("nom hash", usuari.toString())
-                    val actualitza = db.collection("usuaris").addSnapshotListener { snapshot, e ->
-
-                        val doc = snapshot?.documents
-
-                        doc?.forEach {
-                            val usuariConsulta = it.toObject(Usuari::class.java)
-                            if (usuariConsulta?.mail == mail) {
-                                val usuariId = it.id
-                                Log.d("id usuari", usuariId)
-                                val sfDocRef = db.collection("usuaris").document(usuariId )
-                                db.runTransaction { transaction ->
-                                    val snapshot = transaction.get(sfDocRef)
-
-                                    // Note: this could be done without a transaction
-                                    //       by updating the population using FieldValue.increment()
-                                    val newUsuari = snapshot.getString("mail")!!
-                                    Log.d("nou usuari", mailModificat)
-                                    transaction.update(sfDocRef, "mail", mailModificat)
+        var usuari: MutableList<Usuari>? = null
+        val db = FirebaseFirestore.getInstance()
 
 
-                                    // Success
-                                    null
-                                }.addOnSuccessListener { Log.d("TAG", "Transaction success!") }
-                                    .addOnFailureListener { e -> Log.w("TAG2", "Transaction failure.", e) }
+        //update to set one field of usuaris collection
+        val actualitza = db.collection("usuaris").addSnapshotListener { snapshot, e ->
+            //get documents from usuaris
+            val doc = snapshot?.documents
 
-                               /* db.collection(usuariId).document().update("mail",mail)
-                                    ?.addOnSuccessListener { document ->
-                                        Log.d("usuari db ", usuari.toString())
-                                        view?.let {
-                                            Snackbar.make(
-                                                it,
-                                                "Registre creat correctament",
-                                                Snackbar.LENGTH_LONG
-                                            ).show()
-                                        }
-                                    }?.addOnFailureListener { e ->
-                                        view?.let {
-                                            Snackbar.make(
-                                                it,
-                                                "Error al crear el registre",
-                                                Snackbar.LENGTH_LONG
-                                            ).show()
-                                        }
+            //iterate to usuaris
+            doc?.forEach {
+                //save an usuari form a loop to object Usuari (Data class)
+                val usuariConsulta = it.toObject(Usuari::class.java)
+                //if mail is the same, got from user logined and user in the loop
+                //usuariConsulta?.mail is get from data class
 
-                                    }*/
+                if (usuariConsulta?.mail == mail) {
+                    //get oficial id from one document of usuaris
+                    val usuariId = it.id
+                    //get user from collection from his official ID
+                    val sfDocRef = db.collection("usuaris").document(usuariId)
 
-                            }
+                    //do update
+                    db.runTransaction { transaction ->
+                        //get ID
+                        val snapshot = transaction.get(sfDocRef)
+                        //do update
+                        val newUsuari = snapshot.getString("cognom")!!
+                        transaction.update(sfDocRef, "cognom", "IveChangeMyNickname")
 
-
-                        }
-
-
-                    }
-
-
+                        // Success
+                        null
+                    }.addOnSuccessListener { Log.d("TAG", "Transaction success!") }
+                        .addOnFailureListener { e -> Log.w("TAG2", "Transaction failure.", e) }
                 }
 
-
             }
+        }
+
+        /* val query =
+             usuaris.whereEqualTo("mail", mail).get().addOnSuccessListener { document ->
+                 if (document != null) {
+                     usuari = document.toObjects(Usuari::class.java)
+                   /*  val usuari = hashMapOf(
+                         "nom" to binding.editTextNomModificar.text.toString(),
+                         "cognoms" to binding.editTextCognomsModificar.text.toString(),
+                         "mail" to binding.editTextTextEmailAddressModificar.text.toString(),
+                         // "nickname" to nickname,
+                         "adreca" to binding.editTextAdrecaModificar.text.toString(),
+                         "poblacio" to binding.editTextPoblacioModificar.text.toString(),
+                         "telefon" to binding.editTextTelefonModificar.text.toString(),
+                         "contrasenya" to binding.editTextContrasenyaModificar.text.toString()
+                     )*/
+                     val mailModificat = binding.editTextTextEmailAddressModificar.text.toString()
+                     Log.d("nom hash", usuari.toString())
+                     val actualitza = db.collection("usuaris").addSnapshotListener { snapshot, e ->
+
+                         val doc = snapshot?.documents
+                         //busquem el id del document associat al usuari identificat
+                         doc?.forEach {
+                             val usuariConsulta = it.toObject(Usuari::class.java)
+                             if (usuariConsulta?.mail == mail) {
+                                 val usuariId = it.id
+                                 Log.d("id usuari", usuariId)
+                                 val sfDocRef = db.collection("usuaris").document(usuariId )
+                                 db.runTransaction { transaction ->
+                                     val snapshot = transaction.get(sfDocRef)
+
+                                     // actualitzem els camps amb les dades modificades
+                                     val newUsuari = snapshot.getString("mail")!!
+                                     Log.d("nou usuari", mailModificat)
+                                     transaction.update(sfDocRef, "mail", mailModificat)
+
+
+                                     // Success
+                                     null
+                                 }.addOnSuccessListener { Log.d("TAG", "Transaction success!")
+                                     view?.let {
+                                         Snackbar.make(
+                                             it,
+                                             "Registre creat correctament",
+                                             Snackbar.LENGTH_LONG
+                                         ).show()
+                                     }}
+                                     .addOnFailureListener { e -> Log.w("TAG2", "Transaction failure.", e)
+                                         view?.let {
+                                             Snackbar.make(
+                                                 it,
+                                                 "Error al crear el registre",
+                                                 Snackbar.LENGTH_LONG
+                                             ).show()
+                                         }}
+
+                                /* db.collection(usuariId).document().update("mail",mail)
+                                     ?.addOnSuccessListener { document ->
+                                         Log.d("usuari db ", usuari.toString())
+                                         view?.let {
+                                             Snackbar.make(
+                                                 it,
+                                                 "Registre creat correctament",
+                                                 Snackbar.LENGTH_LONG
+                                             ).show()
+                                         }
+                                     }?.addOnFailureListener { e ->
+                                         view?.let {
+                                             Snackbar.make(
+                                                 it,
+                                                 "Error al crear el registre",
+                                                 Snackbar.LENGTH_LONG
+                                             ).show()
+                                         }
+
+                                     }*/
+
+                             }
+
+
+                         }
+
+
+                     }
+
+
+                 }
+
+
+             }*/
 
     }
 
