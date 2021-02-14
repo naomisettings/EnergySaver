@@ -4,13 +4,14 @@ class Tiquet (val titol: String, val descripcio: String, val seleccionat: Boolea
 
     companion object {
 
-        fun createTiquetList(titol: String, descripcio: String, numTiquets: Int): ArrayList<Tiquet> {
+        fun createTiquetList(): ArrayList<Tiquet> {
             val tiquets = ArrayList<Tiquet>()
-            for (i in 1..numTiquets) {
-                tiquets.add(Tiquet( titol,  descripcio, false))
-            }
+
             return tiquets
         }
 
     }
+
+
 }
+

@@ -15,8 +15,8 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcvTiquets"
-                android:layout_width="380dp"
-                android:layout_height="348dp"
+                android:layout_width="377dp"
+                android:layout_height="438dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="16dp"
