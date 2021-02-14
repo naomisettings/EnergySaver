@@ -13,6 +13,18 @@
             android:layout_height="match_parent">
 
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="380dp"
+                android:layout_height="348dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="5dp"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtViewTiquetSuport" />
+
             <TextView
                 android:id="@+id/txtViewTiquetSuport"
                 style="@style/ColorsBasicsAplicacio"
@@ -26,24 +38,36 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
-                android:id="@+id/bttnNouTiquet"
+            <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="100dp"
-                android:text="@string/newTiquet"
-                app:layout_constraintBaseline_toBaselineOf="@+id/bttnBorrarTIquet"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <Button
-                android:id="@+id/bttnBorrarTIquet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
-                android:layout_marginEnd="100dp"
-                android:text="@string/bttnBorrarTiquet"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtViewTiquetSuport" />
+                app:layout_constraintStart_toStartOf="parent">
+
+                <Button
+                    android:id="@+id/bttnNouTiquet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="25dp"
+                    android:text="@string/newTiquet" />
+
+                <Button
+                    android:id="@+id/bttnBorrarTIquet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginRight="100dp"
+                    android:text="@string/bttnBorrarTiquet" />
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
