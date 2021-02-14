@@ -1,10 +1,11 @@
 package cat.copernic.johan.energysaver.obrirtiquet
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,10 +14,14 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentObrirBinding
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -26,9 +31,10 @@ class ObrirTiquetFragment : Fragment() {
     val db = FirebaseFirestore.getInstance()
     var titol: String = ""
     var descripcio: String = ""
+    private val GALLERY_REQUEST_CODE: Int = 101
 
-    //private var firebaseStore: FirebaseStorage? = null
-    //private var storageReference: StorageReference? = null
+    //nom arxiu de la imatge a pujar al storage
+    var fileName: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,18 +42,15 @@ class ObrirTiquetFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_obrir, container, false)
 
-/*
-        firebaseStore = FirebaseStorage.getInstance()
-        storageReference = FirebaseStorage.getInstance().reference
- */
+        //Pujar imatge al storage
         binding.imgBttnCarregaImatge.setOnClickListener {
-            val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
-            startActivityForResult(gallery, 101)
+            selectImageFromGallery()
         }
 
         //Botó confirmar que truca a la funció per inserir dades al firestore
         binding.bttnConfirmarTiquet.setOnClickListener {
             rebreDades(it)
+
         }
 
         return binding.root
@@ -106,7 +109,8 @@ class ObrirTiquetFragment : Fragment() {
             "data" to formatedDate,
             "hora" to formatedHour,
             "titol" to titol,
-            "descripcio" to descripcio
+            "descripcio" to descripcio,
+            "imatge" to "gs://energy-saver-a2dd7.appspot.com/images/$fileName"
         )
 
         //Neteja dels camps tema i descripció
@@ -124,6 +128,68 @@ class ObrirTiquetFragment : Fragment() {
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error adding document", e)
             }
+    }
+
+    private fun selectImageFromGallery() {
+
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(
+            Intent.createChooser(
+                intent,
+                "Please select..."
+            ),
+            GALLERY_REQUEST_CODE
+        )
+    }
+
+    //Generar uri per a la imatge
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?
+    ) {
+        super.onActivityResult(
+            requestCode,
+            resultCode,
+            data
+        )
+
+        if (requestCode == GALLERY_REQUEST_CODE
+            && resultCode == Activity.RESULT_OK
+            && data != null
+            && data.data != null
+        ) {
+
+            // Get the Uri of data
+            val file_uri = data.data
+            if (file_uri != null) {
+                uploadImageToFirebase(file_uri)
+            }
+        }
+    }
+
+    //Pujar la imatge al storage
+    private fun uploadImageToFirebase(fileUri: Uri) {
+        //Generar un nom per a la imatge
+        fileName = UUID.randomUUID().toString() + ".jpg"
+
+        //val database = FirebaseDatabase.getInstance()
+        //Crear una referencia per pujar la imatge
+        val refStorage = FirebaseStorage.getInstance().reference.child("images/$fileName")
+
+        refStorage.putFile(fileUri)
+            .addOnSuccessListener(
+                OnSuccessListener<UploadTask.TaskSnapshot> { taskSnapshot ->
+                    taskSnapshot.storage.downloadUrl.addOnSuccessListener {
+                        val imageUrl = it.toString()
+                    }
+                })
+
+            ?.addOnFailureListener(OnFailureListener { e ->
+                print(e.message)
+            })
     }
 }
 
