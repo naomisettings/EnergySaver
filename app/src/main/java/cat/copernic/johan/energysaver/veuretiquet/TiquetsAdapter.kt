@@ -38,11 +38,17 @@ class TiquetsAdapter (private val mTiquets :List<Tiquet>): RecyclerView.Adapter<
 
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+    override fun onBindViewHolder(holder: TiquetsAdapter.ViewHolder, position: Int) {
+        val tiquet: Tiquet = mTiquets.get(position)
+        val titolTextView = holder.titolTextView
+        titolTextView.setText(tiquet.titol)
+        val descTextView = holder.descripcioTextView
+        descTextView.setText(tiquet.descripcio)
+        val chbx = holder.seleccioCheckBox
+        chbx.isChecked = tiquet.seleccionat
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return mTiquets.size
     }
 }
