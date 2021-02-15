@@ -1,18 +1,15 @@
 package cat.copernic.johan.energysaver.veuretiquet
 
-import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import cat.copernic.johan.energysaver.databinding.ItemTiquetBinding
-import androidx.databinding.DataBindingUtil
 import cat.copernic.johan.energysaver.R
 
-class TiquetsAdapter (private val mTiquets :List<Tiquet>): RecyclerView.Adapter<TiquetsAdapter.ViewHolder>() {
+class TiquetsAdapter(private val mTiquets: ArrayList<Tiquet>, private val cellClickListener: CellClickListener): RecyclerView.Adapter<TiquetsAdapter.ViewHolder>() {
     private lateinit var binding: ItemTiquetBinding
 
 
@@ -36,6 +33,7 @@ class TiquetsAdapter (private val mTiquets :List<Tiquet>): RecyclerView.Adapter<
         // retorna una instancia del viewholder
         return ViewHolder(tiquetView)
 
+
     }
 
     override fun onBindViewHolder(holder: TiquetsAdapter.ViewHolder, position: Int) {
@@ -46,9 +44,25 @@ class TiquetsAdapter (private val mTiquets :List<Tiquet>): RecyclerView.Adapter<
         descTextView.setText(tiquet.descripcio)
         val chbx = holder.seleccioCheckBox
         chbx.isChecked = tiquet.seleccionat
+
+        val data = mTiquets[position]
+        holder.titolTextView.text = data.titol
+        holder.descripcioTextView.text = data.descripcio
+
+        holder.itemView.setOnClickListener {
+            cellClickListener.onCellClickListener(data)
+        }
     }
+
 
     override fun getItemCount(): Int {
         return mTiquets.size
     }
+
 }
+
+interface CellClickListener {
+    fun onCellClickListener(data: Tiquet)
+}
+
+
