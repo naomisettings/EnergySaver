@@ -13,6 +13,7 @@ class TiquetObertFragment : Fragment() {
 
     var titol: String = "prova"
     var descripcio: String = "prova2"
+    var inputText: String? = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,6 +24,8 @@ class TiquetObertFragment : Fragment() {
             inflater,
             R.layout.fragment_tiquet_obert, container, false
         )
+        inputText = arguments?.getString("input_txt")
+        binding.txtViewObrirTiquetMotiu.text = inputText
 
         return binding.root
     }

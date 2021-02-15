@@ -74,7 +74,10 @@ class VeureTiquetFragment : Fragment(){
                     */
 
                     val adapter = TiquetsAdapter(tiquets, CellClickListener { tiquetId ->
-                        Log.i("entraTos", tiquetId)
+                        comm.passDataCom(tiquetId)
+                        view?.findNavController()?.navigate(R.id.action_veureFragment_to_tiquetObertFragment)
+                        Log.i("entraFijo", tiquetId)
+
                     })
                     rvTiquets.adapter = adapter
                     rvTiquets.layoutManager = LinearLayoutManager(this.context)

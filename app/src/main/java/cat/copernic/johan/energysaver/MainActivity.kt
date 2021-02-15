@@ -10,8 +10,10 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.ui.*
+import cat.copernic.johan.energysaver.tiquetobert.TiquetObertFragment
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, Communicator {
@@ -85,7 +87,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun passDataCom(editext_input: String) {
-        TODO("Not yet implemented")
+        val bundle = Bundle()
+        bundle.putString("input_txt",editext_input)
+
+        val transaction = this.supportFragmentManager.beginTransaction()
+        val frag2 = TiquetObertFragment()
+        frag2.arguments = bundle
+
+        transaction.replace(R.id.content_id, frag2)
+        transaction.addToBackStack(null)
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+        transaction.commit()
     }
 }
 
