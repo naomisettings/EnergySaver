@@ -58,7 +58,7 @@ class VeureTiquetFragment : Fragment() {
                     val tiquetsDC = document.toObjects(TiquetDC::class.java)
 
                     for (i in 0 until tiquetsDC.size) {
-                        val tq = Tiquet(tiquetsDC[i].titol,  tiquetsDC[i].descripcio, false)
+                        val tq = Tiquet(tiquetsDC[i].id, tiquetsDC[i].titol,  tiquetsDC[i].descripcio, false)
                         tiquets.add(tq)
                     }
                     val adapter = TiquetsAdapter(tiquets)
@@ -72,9 +72,8 @@ class VeureTiquetFragment : Fragment() {
     }
 }
 
-
 //Classe que correspon als camps de la col·lecció usuaris
 data class TiquetDC(
-    var data: String = "", var descripcio: String = "", var hora: String = "",
+    var id: String = "", var data: String = "", var descripcio: String = "", var hora: String = "",
     var mail: String = "", var nickname: String = "", var titol: String = ""
 )

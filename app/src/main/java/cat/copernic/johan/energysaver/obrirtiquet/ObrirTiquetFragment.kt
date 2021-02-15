@@ -96,6 +96,7 @@ class ObrirTiquetFragment : Fragment() {
     @SuppressLint("SimpleDateFormat")
     fun guardarDadesFirestore(nickname: String, mail: String) {
         //Extreu la data i hora del sistema per guardar al document tiquet
+        val id = UUID.randomUUID().toString()
         val data = Calendar.getInstance().time
         val formatterdt = SimpleDateFormat("yyyy.MM.dd")
         val formatterhr = SimpleDateFormat("HH:mm:ss")
@@ -104,6 +105,7 @@ class ObrirTiquetFragment : Fragment() {
 
         //Map per fer l'insert
         val tiquet = hashMapOf(
+            "id" to id,
             "mail" to mail,
             "nickname" to nickname,
             "data" to formatedDate,
