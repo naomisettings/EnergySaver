@@ -1,31 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="tiquet"
+            type="cat.copernic.johan.energysaver.veuretiquet.Tiquet"/>
+        <variable
+            name="clickListener"
+            type="cat.copernic.johan.energysaver.veuretiquet.CellClickListener" />
+    </data>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        >
+        android:paddingBottom="10dp">
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewTiquet"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:onClick="@{() -> clickListener.onCellClickListener(tiquet)}" >
 
             <TextView
                 android:id="@+id/titolTiquet"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                app:tiquetQualityString="@{tiquet}"
+                />
 
             <TextView
                 android:id="@+id/descripcioTiquet"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                app:tiquetQualityString="@{tiquet}"/>
 
             <CheckBox
                 android:id="@+id/tiquetSeleccionat"

@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import cat.copernic.johan.energysaver.Communicator
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentVeureBinding
 import com.google.android.material.snackbar.Snackbar
@@ -19,9 +20,10 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
-class VeureTiquetFragment : Fragment(), CellClickListener{
+class VeureTiquetFragment : Fragment(){
     var tiquets: ArrayList<Tiquet> = arrayListOf()
     val db = FirebaseFirestore.getInstance()
+    lateinit var comm: Communicator
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +34,9 @@ class VeureTiquetFragment : Fragment(), CellClickListener{
         //tiquets = Tiquet.createTiquetList("titol","descripcio",20)
         val rvTiquets = binding.rcvTiquets
         omplirRecycleView(rvTiquets)
+
+        comm = activity as Communicator
+        //comm.passDataCom(binding..text.toString())
 
         binding.bttnNouTiquet.setOnClickListener {
                 view : View ->
@@ -62,21 +67,22 @@ class VeureTiquetFragment : Fragment(), CellClickListener{
                         val tq = Tiquet(tiquetsDC[i].id, tiquetsDC[i].titol,  tiquetsDC[i].descripcio, false)
                         tiquets.add(tq)
                     }
-
-                    val adapter = TiquetsAdapter(tiquets, this)
+                   /* val adapter = TiquetsAdapter(tiquets, this)
                     rvTiquets.adapter = adapter
                     rvTiquets.layoutManager = LinearLayoutManager(this.context)
 
+                    */
 
+                    val adapter = TiquetsAdapter(tiquets, CellClickListener { tiquetId ->
+                        Log.i("entraTos", tiquetId)
+                    })
+                    rvTiquets.adapter = adapter
+                    rvTiquets.layoutManager = LinearLayoutManager(this.context)
                 }
             }
             .addOnFailureListener { exception ->
                 Log.w(ContentValues.TAG, "Error getting documents: ", exception)
             }
-    }
-
-    override fun onCellClickListener(data: Tiquet) {
-        Log.i("prova", "entraoncellclickListener")
     }
 }
 

@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
+import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cat.copernic.johan.energysaver.databinding.ItemTiquetBinding
 import cat.copernic.johan.energysaver.R
@@ -61,8 +63,15 @@ class TiquetsAdapter(private val mTiquets: ArrayList<Tiquet>, private val cellCl
 
 }
 
-interface CellClickListener {
-    fun onCellClickListener(data: Tiquet)
+open class CellClickListener (val clickListener: (tiquetId: String) -> Unit) {
+    open fun onCellClickListener(data: Tiquet) = clickListener(data.idTiquet)
+}
+
+@BindingAdapter("tiquetQualityString")
+fun TextView.setSleepQualityString(item: Tiquet?) {
+    item?.let {
+        text = item.idTiquet
+    }
 }
 
 

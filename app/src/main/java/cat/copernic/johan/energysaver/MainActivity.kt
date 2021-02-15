@@ -14,7 +14,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.*
 import com.google.android.material.navigation.NavigationView
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, Communicator {
     //navigation drawer
     lateinit var toolbar: Toolbar
     lateinit var drawerLayout: DrawerLayout
@@ -83,4 +83,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
+
+    override fun passDataCom(editext_input: String) {
+        TODO("Not yet implemented")
+    }
+}
+
+
+interface Communicator {
+    fun passDataCom(editext_input: String)
+
 }
