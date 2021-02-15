@@ -82,7 +82,7 @@
     <string name="defaultcd">default</string>
     <string name="Menu_medalles">Medalles</string>
     <string name="campsBuitsToastObrirTiquet">Els camps de text han d estar emplenats</string>
-
+    <string name="txtViewTiquetTitolObert">TIQUET</string>
 
 
 </resources>

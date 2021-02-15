@@ -82,6 +82,9 @@
         <action
             android:id="@+id/action_veureFragment_to_obrirFragment"
             app:destination="@id/obrirFragment" />
+        <action
+            android:id="@+id/action_veureFragment_to_tiquetObertFragment"
+            app:destination="@id/tiquetObertFragment" />
     </fragment>
     <fragment
         android:id="@+id/obrirFragment"
@@ -126,4 +129,9 @@
         android:name="cat.copernic.johan.energysaver.medalles.Medalla4Fragment"
         android:label="Medalla4Fragment"
         tools:layout="@layout/fragment_medalla4"/>
+    <fragment
+        android:id="@+id/tiquetObertFragment"
+        android:name="cat.copernic.johan.energysaver.tiquetobert.TiquetObertFragment"
+        android:label="TiquetObertFragment"
+        tools:layout="@layout/fragment_tiquet_obert"/>
 </navigation>
