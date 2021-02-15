@@ -28,6 +28,9 @@ class MenuPrincipalFragment : Fragment() {
         binding.imgBttnSuport.setOnClickListener { view:View ->
             view.findNavController().navigate(R.id.action_menuPrincipalFragment_to_veureFragment)
         }
+        binding.imgBtnConsums.setOnClickListener{ view:View ->
+            view.findNavController().navigate(R.id.action_menuPrincipalFragment_to_consumEnergies)
+        }
         return binding.root
     }
 }
