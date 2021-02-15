@@ -125,20 +125,7 @@
             android:inputType="textPersonName"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddressModificar" />
-
-        <EditText
-            android:id="@+id/editTextTextEmailAddressModificar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:layout_marginEnd="30dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/editTextCorreu"
-            android:inputType="textEmailAddress"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextCognomsModificar" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextNicknameModificar" />
 
         <EditText
             android:id="@+id/editTextCognomsModificar"
@@ -216,17 +203,6 @@
             app:layout_constraintBaseline_toBaselineOf="@+id/editTextAdrecaModificar"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageViewCorreuModificar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="26dp"
-            android:contentDescription="@string/imViewcorreu"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtCognomsModificar"
-            app:srcCompat="@drawable/email2" />
-
         <TextView
             android:id="@+id/txtCognomsModificar"
             android:layout_width="wrap_content"
@@ -276,6 +252,30 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/energy2" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:fontFamily="@font/asap_bold"
+            android:text="Nickname"
+            android:textColor="@color/TitolColor"
+            android:textSize="@dimen/CampsSize"
+            app:layout_constraintBaseline_toBaselineOf="@+id/editTextNicknameModificar"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/editTextNicknameModificar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="30dp"
+            android:ems="10"
+            android:hint="nickname"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextCognomsModificar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

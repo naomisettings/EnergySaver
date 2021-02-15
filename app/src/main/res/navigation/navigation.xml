@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_menuPrincipalFragment_to_veureFragment"
             app:destination="@id/veureFragment" />
+        <action
+            android:id="@+id/action_menuPrincipalFragment_to_consumEnergies"
+            app:destination="@id/consumEnergies" />
     </fragment>
     <fragment
         android:id="@+id/informesFragment"
@@ -134,4 +137,13 @@
         android:name="cat.copernic.johan.energysaver.tiquetobert.TiquetObertFragment"
         android:label="TiquetObertFragment"
         tools:layout="@layout/fragment_tiquet_obert"/>
+    <fragment
+        android:id="@+id/consumEnergies"
+        android:name="cat.copernic.johan.energysaver.introduirconsums.ConsumEnergies"
+        android:label="fragment_consum_energies"
+        tools:layout="@layout/fragment_consum_energies" >
+        <action
+            android:id="@+id/action_consumEnergies_to_menuPrincipalFragment"
+            app:destination="@id/menuPrincipalFragment" />
+    </fragment>
 </navigation>
