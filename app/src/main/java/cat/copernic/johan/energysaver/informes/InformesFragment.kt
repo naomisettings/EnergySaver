@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentInformesBinding
 import cat.copernic.johan.energysaver.seleccio.Energies
+import cat.copernic.johan.energysaver.veuretiquet.Tiquet
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
@@ -19,11 +20,11 @@ import java.util.*
 class InformesFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
 
-    var aiguaGastada = 0
-    var llumGastada = 0
-    var gasGastat = 0
-    var gasoilGastat = 0
-    var data = ""
+    var aiguaGastada = ArrayList<Int>()
+    var llumGastada = ArrayList<Int>()
+    var gasGastat = ArrayList<Int>()
+    var gasoilGastat = ArrayList<Int>()
+    var data = ArrayList<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -41,10 +42,12 @@ class InformesFragment : Fragment() {
             .addOnSuccessListener { document ->
                 if (!document.isEmpty) {
                     val dadesEnergia = document.toObjects(DadesEnergia::class.java)
-                    aiguaGastada = dadesEnergia[0].aiguaGastats
-                    llumGastada = dadesEnergia[0].llumGastats
-                    gasGastat = dadesEnergia[0].gasGastats
-                    gasoilGastat = dadesEnergia[0].gasoilGastats
+                    for (i in 0 until dadesEnergia.size) {
+                        aiguaGastada.add(dadesEnergia[i].aiguaGastats)
+                        llumGastada.add(dadesEnergia[i].llumGastats)
+                        gasGastat.add(dadesEnergia[i].gasGastats)
+                        gasoilGastat.add(dadesEnergia[i].gasoilGastats)
+                    }
                 }
             }
     }
