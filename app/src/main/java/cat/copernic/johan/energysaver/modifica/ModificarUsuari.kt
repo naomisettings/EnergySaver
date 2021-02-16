@@ -1,5 +1,6 @@
 package cat.copernic.johan.energysaver.modifica
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,12 +11,14 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentModificarUsuariBinding
-import cat.copernic.johan.energysaver.obrirtiquet.Usuari
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.DialogFragment
+import cat.copernic.johan.energysaver.obrirtiquet.Usuari
 
 class ModificarUsuari : Fragment() {
     private lateinit var binding: FragmentModificarUsuariBinding
@@ -57,9 +60,11 @@ class ModificarUsuari : Fragment() {
         }
 
         binding.btnTancarModificar.setOnClickListener { view: View ->
+            logOut()
             view.findNavController().navigate(R.id.action_modificarUsuari_to_authActivity)
         }
         binding.btnBaixaModificar.setOnClickListener { view: View ->
+
             //cridem a la funcio per esborrar usuari
             esborrarUsuari()
             view.findNavController().navigate(R.id.action_modificarUsuari_to_authActivity)
@@ -67,30 +72,76 @@ class ModificarUsuari : Fragment() {
 
         return binding.root
     }
+    //funcio per tancar sessio
+    fun logOut(){
+        //guardem les dades de l'usari identificat
+        val user = Firebase.auth.currentUser
+        FirebaseAuth.getInstance().signOut()
+
+        view?.let {
+            Snackbar.make(
+                it,
+                "Has tancat sessió",
+                Snackbar.LENGTH_LONG
+            ).show()
+        }
+
+    }
 
     //funcio per esborrar usuari
     fun esborrarUsuari() {
+
         //guardem les dades de l'usari identificat
         val user = Firebase.auth.currentUser
         //agafem el mail com a identificador unic de l'usuari
         val mail = user?.email.toString()
-        Log.d("usari1 esborrar", usuari.toString())
-        val usuaris = db.collection("usuaris")
-        var usuariID = usuaris.document().get()
-        Log.d("usari id", usuariID.toString())
-        val query = usuaris.whereEqualTo("mail", mail).get().addOnSuccessListener { document ->
-            Log.d("usari2 esborrar", usuari.toString())
-            usuari = document.toObjects(Usuari::class.java)
-            Log.d("usari3 esborrar", usuari.toString())
-            db.collection("usuaris").document(usuari.toString())
-                .delete()
-                .addOnSuccessListener { Log.d("error", "DocumentSnapshot successfully deleted!") }
-                .addOnFailureListener { e -> Log.w("error", "Error deleting document", e) }
+        val db = FirebaseFirestore.getInstance()
+
+      //actualitza per establir un camp de col·lecció d 'usuaris
+        val actualitza = db.collection("usuaris").addSnapshotListener { snapshot, e ->
+            //guardem els documents dels usuaris
+            val doc = snapshot?.documents
+
+            //iterem pels documents dels usuaris
+            doc?.forEach {
+                //guardem els usuaris que hem trovat a l'objecte Usuari (Data Class)
+                val usuariConsulta = it.toObject(Usuari::class.java)
+                //si el mail de l'usuari identificat coincideix amb un dels guardarts
+                if (usuariConsulta?.mail == mail) {
+                    //guardem el id del document d'usuari identificat
+                    val usuariId = it.id
+                    Log.d("id document usuari", usuariId)
+                    //agafem l'usuari de la collecio amb el seu ID
+                    val sfDocRef = db.collection("usuaris").document(usuariId)
+
+                    //Actualitzem
+                    db.runTransaction { transaction ->
+                        //agafem el ID
+                        val snapshot = transaction.get(sfDocRef)
+                        //actualitzem el id amb el mail del usuari identificat i guardem els camps
+                        val newUsuari = snapshot.getString("mail")!!
+                        Log.d("nou usuari", newUsuari)
+                        //esborrem usuari del Firestore
+                        transaction.delete(sfDocRef)
+                        //esborrem usuari del Authentification
+                        user?.delete()
+
+                    }
+                        .addOnSuccessListener {
+                            Log.d(
+                                "error",
+                                "DocumentSnapshot successfully deleted!"
+                            )
+                        }
+                        .addOnFailureListener { e -> Log.w("error", "Error deleting document", e) }
+
+
+                }
+            }
+        }
 
         }
 
-
-    }
 
     //funcio per recuperar les dades a modificar del usuari identificat
     fun recollirDadesModificar() {
@@ -128,12 +179,10 @@ class ModificarUsuari : Fragment() {
         val user = Firebase.auth.currentUser
         //agafem el mail com a identificador unic de l'usuari
         val mail = user?.email.toString()
-        //  val usuaris = db.collection("usuaris")
-        //   var usuari: MutableList<Usuari>? = null
         val db = FirebaseFirestore.getInstance()
 
 
-        //update to set one field of usuaris collection
+        //actualitza per establir un camp de col·lecció d 'usuaris
         val actualitza = db.collection("usuaris").addSnapshotListener { snapshot, e ->
             //guardem els documents dels usuaris
             val doc = snapshot?.documents
@@ -194,6 +243,7 @@ class ModificarUsuari : Fragment() {
                         )
 
 
+
                         null
                     }.addOnSuccessListener {Log.d("TAG", "Transaction success!")
                         view?.let {
@@ -221,7 +271,7 @@ class ModificarUsuari : Fragment() {
     data class Usuari(
         var nom: String = "", var cognoms: String = "", var mail: String = "",
         var adreca: String = "", var poblacio: String = "", var telefon: String = "",
-        var nickname: String = "", var contrasenya: String = ""
+        var nickname: String = "", var contrasenya: String = "", var admin: Boolean = false
     )
 
 
