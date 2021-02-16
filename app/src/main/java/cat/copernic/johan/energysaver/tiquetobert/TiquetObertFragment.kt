@@ -25,8 +25,11 @@ class TiquetObertFragment : Fragment() {
         )
 
         val args = TiquetObertFragmentArgs.fromBundle(requireArguments())
-        Toast.makeText(context, "NumCorrect: ${args.tiquetId}", Toast.LENGTH_LONG).show()
-        binding.txtViewObrirTiquetMotiu.text = args.tiquetId
+
+        binding.txtViewObrirTiquetMotiu.text = args.titol
+        binding.txtViewTiquetObertDesc.text = args.descripcio
+
+
 
         return binding.root
     }
