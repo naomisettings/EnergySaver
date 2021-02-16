@@ -120,10 +120,6 @@ class Registre : AppCompatActivity() {
 
         }
 
-
-
-
-
     }
 
     //metode que valida que els camps no estiguin buits
