@@ -88,6 +88,9 @@
         <action
             android:id="@+id/action_veureFragment_to_tiquetObertFragment"
             app:destination="@id/tiquetObertFragment" />
+        <argument
+            android:name="tiquetId"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/obrirFragment"

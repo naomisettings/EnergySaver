@@ -11,8 +11,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentTiquetObertBinding
-import cat.copernic.johan.energysaver.veuretiquet.CellClickListener
-import cat.copernic.johan.energysaver.veuretiquet.VeureTiquetFragmentArgs
 
 class TiquetObertFragment : Fragment() {
 
@@ -26,7 +24,7 @@ class TiquetObertFragment : Fragment() {
             R.layout.fragment_tiquet_obert, container, false
         )
 
-        val args = VeureTiquetFragmentArgs.fromBundle(requireArguments())
+        val args = TiquetObertFragmentArgs.fromBundle(requireArguments())
         Toast.makeText(context, "NumCorrect: ${args.tiquetId}", Toast.LENGTH_LONG).show()
         binding.txtViewObrirTiquetMotiu.text = args.tiquetId
 
