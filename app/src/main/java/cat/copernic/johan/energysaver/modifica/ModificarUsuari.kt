@@ -271,7 +271,7 @@ class ModificarUsuari : Fragment() {
     data class Usuari(
         var nom: String = "", var cognoms: String = "", var mail: String = "",
         var adreca: String = "", var poblacio: String = "", var telefon: String = "",
-        var nickname: String = "", var contrasenya: String = ""
+        var nickname: String = "", var contrasenya: String = "", var admin: Boolean = false
     )
 
 

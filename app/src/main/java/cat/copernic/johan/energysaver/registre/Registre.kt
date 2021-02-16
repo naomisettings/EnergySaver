@@ -79,7 +79,8 @@ class Registre : AppCompatActivity() {
                 "adreca" to adreca,
                 "poblacio" to poblacio,
                 "telefon" to telefon,
-                "contrasenya" to contrasenya
+                "contrasenya" to contrasenya,
+                "admin" to false
 
             )
 
