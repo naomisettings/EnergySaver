@@ -58,9 +58,9 @@ class TiquetsAdapter(
     }
 }
 
-open class CellClickListener(val clickListener: (tiquetId: String) -> Unit){
+open class CellClickListener(val clickListener: (idTiquet: String, titol: String, descrpicio: String, imatge: String) -> Unit){
     fun onCellClickListener(data: Tiquet){
-        clickListener(data.idTiquet)
+        clickListener(data.idTiquet, data.titol, data.descripcio, data.imatge)
 
     }
 }
