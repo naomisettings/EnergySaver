@@ -1,19 +1,20 @@
+
 package cat.copernic.johan.energysaver.tiquetobert
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentTiquetObertBinding
+import cat.copernic.johan.energysaver.veuretiquet.CellClickListener
+import cat.copernic.johan.energysaver.veuretiquet.VeureTiquetFragmentArgs
 
 class TiquetObertFragment : Fragment() {
-
-    var titol: String = "prova"
-    var descripcio: String = "prova2"
-    var inputText: String? = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,10 +25,11 @@ class TiquetObertFragment : Fragment() {
             inflater,
             R.layout.fragment_tiquet_obert, container, false
         )
-        inputText = arguments?.getString("input_txt")
-        binding.txtViewObrirTiquetMotiu.text = inputText
+
+        val args = VeureTiquetFragmentArgs.fromBundle(requireArguments())
+        Toast.makeText(context, "NumCorrect: ${args.tiquetId}", Toast.LENGTH_LONG).show()
+        binding.txtViewObrirTiquetMotiu.text = args.tiquetId
 
         return binding.root
     }
-
 }

@@ -14,9 +14,13 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.ui.*
 import cat.copernic.johan.energysaver.tiquetobert.TiquetObertFragment
+import cat.copernic.johan.energysaver.veuretiquet.Tiquet
+import cat.copernic.johan.energysaver.veuretiquet.VeureTiquetFragment
 import com.google.android.material.navigation.NavigationView
+import java.lang.String
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, Communicator {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
+    //, Communicator
     //navigation drawer
     lateinit var toolbar: Toolbar
     lateinit var drawerLayout: DrawerLayout
@@ -28,27 +32,34 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val navController = this.findNavController(R.id.myNavHostFragment)
-        NavigationUI.setupActionBarWithNavController(this,navController)
+        NavigationUI.setupActionBarWithNavController(this, navController)
 
         //navigation drawer
         toolbar = findViewById(R.id.toolbar)
-      // setSupportActionBar(toolbar)
+        // setSupportActionBar(toolbar)
 
         drawerLayout = findViewById(R.id.drawer_layout)
         navView = findViewById(R.id.nav_view)
 
-        val toogle = ActionBarDrawerToggle(this, drawerLayout, toolbar,0,0)
+        val toogle = ActionBarDrawerToggle(this, drawerLayout, toolbar, 0, 0)
         drawerLayout.addDrawerListener(toogle)
         toogle.syncState()
-        navView.setNavigationItemSelectedListener (this)
+        navView.setNavigationItemSelectedListener(this)
 
-        appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.seleccionarEnergiaFragment, R.id.informesFragment, R.id.modificarFragment,
-            R.id.Baixa, R.id.obrirFragment, R.id.Sortir), drawerLayout)
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.seleccionarEnergiaFragment, R.id.informesFragment, R.id.modificarFragment,
+                R.id.Baixa, R.id.obrirFragment, R.id.Sortir
+            ), drawerLayout
+        )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-
+/*
+        val fragmentVeureTiquet = VeureTiquetFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragmentVeureTiquet).commit()
+ */
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -58,51 +69,33 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.seleccionarEnergiaFragment -> {
 
-                Toast.makeText(this,"Energies clicked", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Energies clicked", Toast.LENGTH_SHORT).show()
 
             }
             R.id.informesFragment -> {
 
-                Toast.makeText(this,"Informes clicked", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Informes clicked", Toast.LENGTH_SHORT).show()
             }
-            R.id.modificarFragment ->{
-                Toast.makeText(this,"Modificar clicked", Toast.LENGTH_SHORT).show()
+            R.id.modificarFragment -> {
+                Toast.makeText(this, "Modificar clicked", Toast.LENGTH_SHORT).show()
             }
-            R.id.Baixa ->{
-                Toast.makeText(this,"Baixa clicked", Toast.LENGTH_SHORT).show()
+            R.id.Baixa -> {
+                Toast.makeText(this, "Baixa clicked", Toast.LENGTH_SHORT).show()
             }
-            R.id.obrirFragment ->{
-                Toast.makeText(this,"Suport clicked", Toast.LENGTH_SHORT).show()
+            R.id.obrirFragment -> {
+                Toast.makeText(this, "Suport clicked", Toast.LENGTH_SHORT).show()
             }
-            R.id.Sortir ->{
-                Toast.makeText(this,"Sing Out clicked", Toast.LENGTH_SHORT).show()
+            R.id.Sortir -> {
+                Toast.makeText(this, "Sing Out clicked", Toast.LENGTH_SHORT).show()
 
             }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
-
-    override fun passDataCom(editext_input: String) {
-        val bundle = Bundle()
-        bundle.putString("input_txt",editext_input)
-
-        val transaction = this.supportFragmentManager.beginTransaction()
-        val frag2 = TiquetObertFragment()
-        frag2.arguments = bundle
-
-        transaction.replace(R.id.content_id, frag2)
-        transaction.addToBackStack(null)
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-        transaction.commit()
-    }
 }
 
 
-interface Communicator {
-    fun passDataCom(editext_input: String)
-
-}

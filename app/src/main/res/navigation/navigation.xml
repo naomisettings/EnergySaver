@@ -136,7 +136,11 @@
         android:id="@+id/tiquetObertFragment"
         android:name="cat.copernic.johan.energysaver.tiquetobert.TiquetObertFragment"
         android:label="TiquetObertFragment"
-        tools:layout="@layout/fragment_tiquet_obert"/>
+        tools:layout="@layout/fragment_tiquet_obert">
+        <argument
+            android:name="tiquetId"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/consumEnergies"
         android:name="cat.copernic.johan.energysaver.introduirconsums.ConsumEnergies"
