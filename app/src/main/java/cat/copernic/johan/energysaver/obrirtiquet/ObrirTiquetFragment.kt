@@ -112,7 +112,7 @@ class ObrirTiquetFragment : Fragment() {
             "hora" to formatedHour,
             "titol" to titol,
             "descripcio" to descripcio,
-            "imatge" to "gs://energy-saver-a2dd7.appspot.com/images/$fileName"
+            "imatge" to fileName
         )
 
         //Neteja dels camps tema i descripció

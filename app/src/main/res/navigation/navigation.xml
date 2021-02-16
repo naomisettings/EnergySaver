@@ -91,6 +91,15 @@
         <argument
             android:name="tiquetId"
             app:argType="string" />
+        <argument
+            android:name="titol"
+            app:argType="string" />
+        <argument
+            android:name="descripcio"
+            app:argType="string" />
+        <argument
+            android:name="imatge"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/obrirFragment"
@@ -142,6 +151,15 @@
         tools:layout="@layout/fragment_tiquet_obert">
         <argument
             android:name="tiquetId"
+            app:argType="string" />
+        <argument
+            android:name="titol"
+            app:argType="string" />
+        <argument
+            android:name="descripcio"
+            app:argType="string" />
+        <argument
+            android:name="imatge"
             app:argType="string" />
     </fragment>
     <fragment

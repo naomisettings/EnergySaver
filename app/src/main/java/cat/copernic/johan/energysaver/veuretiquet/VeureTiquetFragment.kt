@@ -40,7 +40,6 @@ class VeureTiquetFragment : Fragment() {
         return binding.root
     }
 
-
     fun omplirRecycleView(rvTiquets: RecyclerView) {
 
         //Guarda les dades del usuari connectat a la constant user
@@ -55,27 +54,25 @@ class VeureTiquetFragment : Fragment() {
             .addOnSuccessListener { document ->
                 if (document != null) {
                     val tiquetsDC = document.toObjects(TiquetDC::class.java)
-
+                    if (tiquets != null) {
+                        tiquets.clear()
+                    }
                     for (i in 0 until tiquetsDC.size) {
                         val tq = Tiquet(
                             tiquetsDC[i].id,
                             tiquetsDC[i].titol,
                             tiquetsDC[i].descripcio,
+                            tiquetsDC[i].imatge,
                             false
                         )
                         tiquets.add(tq)
                     }
-
-                    val adapter = TiquetsAdapter(tiquets, CellClickListener { tiquetId ->
-                        Log.d("entraFijo", tiquetId)
-
-                      // view?.findNavController()?.navigate(R.id.action_veureFragment_to_tiquetObertFragment)
-
+                    val adapter = TiquetsAdapter(tiquets, CellClickListener { tiquetId , titol, descripcio, imatge ->
                         view?.findNavController()
-                            ?.navigate(VeureTiquetFragmentDirections
-                                .actionVeureFragmentToTiquetObertFragment(tiquetId))
-
-
+                            ?.navigate(
+                                VeureTiquetFragmentDirections
+                                    .actionVeureFragmentToTiquetObertFragment(tiquetId, titol, descripcio, imatge)
+                            )
 
                     })
                     rvTiquets.adapter = adapter
@@ -87,20 +84,10 @@ class VeureTiquetFragment : Fragment() {
                 Log.w(ContentValues.TAG, "Error getting documents: ", exception)
             }
     }
-/*
-    private fun getShareIntent() : Intent {
-        val args = VeureTiquetFragmentArgs.fromBundle(requireArguments())
-        val shareIntent = Intent(Intent.ACTION_SEND)
-        shareIntent.setType("text/plain")
-            .putExtra(Intent.EXTRA_TEXT, getString(R.string.share_success_text, args.numCorrect, args.numQuestions))
-        return shareIntent
-    }
-
- */
 }
 
 //Classe que correspon als camps de la col·lecció usuaris
 data class TiquetDC(
     var id: String = "", var data: String = "", var descripcio: String = "", var hora: String = "",
-    var mail: String = "", var nickname: String = "", var titol: String = ""
+    var mail: String = "", var nickname: String = "", var titol: String = "", var imatge: String=""
 )
