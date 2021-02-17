@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".tiquetobert.RespostaTiquetFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtViewDescripcio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/ColorsBasicsAplicacio"
+            android:text="@string/txtViewDescripcioTiquet" />
+
+        <EditText
+            android:id="@+id/editTxtDescrResposta"
+            android:layout_width="match_parent"
+            android:layout_height="243dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="@string/editTxtDescripcioTiquet"
+            android:inputType="textMultiLine" />
+
+        <Button
+            android:id="@+id/bttnEnivarResposta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bttnEnviarResposta" />
+    </LinearLayout>
+</FrameLayout>
+
+
+    </layout>

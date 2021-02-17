@@ -161,6 +161,9 @@
         <argument
             android:name="imatge"
             app:argType="string" />
+        <action
+            android:id="@+id/action_tiquetObertFragment_to_respostaTiquetFragment"
+            app:destination="@id/respostaTiquetFragment" />
     </fragment>
     <fragment
         android:id="@+id/consumEnergies"
@@ -171,4 +174,9 @@
             android:id="@+id/action_consumEnergies_to_menuPrincipalFragment"
             app:destination="@id/menuPrincipalFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/respostaTiquetFragment"
+        android:name="cat.copernic.johan.energysaver.tiquetobert.RespostaTiquetFragment"
+        android:label="RespostaTiquetFragment"
+        tools:layout="@layout/fragment_resposta_tiquet" />
 </navigation>

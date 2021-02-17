@@ -32,7 +32,8 @@ class VeureTiquetFragment : Fragment() {
         setHasOptionsMenu(true)
 
         val rvTiquets = binding.rcvTiquets
-        omplirRecycleView(rvTiquets)
+
+        veureRecyclerView(rvTiquets)
 
         binding.bttnNouTiquet.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_veureFragment_to_obrirFragment)
@@ -40,7 +41,32 @@ class VeureTiquetFragment : Fragment() {
         return binding.root
     }
 
-    fun omplirRecycleView(rvTiquets: RecyclerView) {
+    fun veureRecyclerView(rvTiquets: RecyclerView) {
+        //Guarda les dades del usuari connectat a la constant user
+        val user = Firebase.auth.currentUser
+
+        //Guarda el mail del usuari que ha fet login
+        val mail = user?.email.toString()
+
+        //Consulta per extreure el nickname per guardar-lo al document tiquet
+        val tiquetsFirestore = db.collection("usuaris")
+        val query = tiquetsFirestore.whereEqualTo("mail", mail).get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val usuari = document.toObjects(TiquetDC::class.java)
+                    if (usuari[0].admin){
+                        adminTure(rvTiquets)
+                    }else{
+                        adminFalse(rvTiquets)
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
+            }
+    }
+
+    fun adminFalse(rvTiquets: RecyclerView) {
 
         //Guarda les dades del usuari connectat a la constant user
         val user = Firebase.auth.currentUser
@@ -67,17 +93,71 @@ class VeureTiquetFragment : Fragment() {
                         )
                         tiquets.add(tq)
                     }
-                    val adapter = TiquetsAdapter(tiquets, CellClickListener { tiquetId , titol, descripcio, imatge ->
-                        view?.findNavController()
-                            ?.navigate(
-                                VeureTiquetFragmentDirections
-                                    .actionVeureFragmentToTiquetObertFragment(tiquetId, titol, descripcio, imatge)
-                            )
-
-                    })
+                    val adapter = TiquetsAdapter(
+                        tiquets,
+                        CellClickListener { tiquetId, titol, descripcio, imatge ->
+                            view?.findNavController()
+                                ?.navigate(
+                                    VeureTiquetFragmentDirections
+                                        .actionVeureFragmentToTiquetObertFragment(
+                                            tiquetId,
+                                            titol,
+                                            descripcio,
+                                            imatge
+                                        )
+                                )
+                        })
                     rvTiquets.adapter = adapter
                     rvTiquets.layoutManager = LinearLayoutManager(this.context)
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w(ContentValues.TAG, "Error getting documents: ", exception)
+            }
+    }
 
+    fun adminTure(rvTiquets: RecyclerView) {
+        //Guarda les dades del usuari connectat a la constant user
+        val user = Firebase.auth.currentUser
+
+        //Guarda el mail del usuari que ha fet login
+        val mail = user?.email.toString()
+
+        //Consulta per extreure el nickname per guardar-lo al document tiquet
+        val tiquetsFirestore = db.collection("tiquet")
+        val query = tiquetsFirestore.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val tiquetsDC = document.toObjects(TiquetDC::class.java)
+                    if (tiquets != null) {
+                        tiquets.clear()
+                    }
+                    for (i in 0 until tiquetsDC.size) {
+                        val tq = Tiquet(
+                            tiquetsDC[i].id,
+                            tiquetsDC[i].titol,
+                            tiquetsDC[i].descripcio,
+                            tiquetsDC[i].imatge,
+                            false
+                        )
+                        tiquets.add(tq)
+                    }
+                    val adapter = TiquetsAdapter(
+                        tiquets,
+                        CellClickListener { tiquetId, titol, descripcio, imatge ->
+                            view?.findNavController()
+                                ?.navigate(
+                                    VeureTiquetFragmentDirections
+                                        .actionVeureFragmentToTiquetObertFragment(
+                                            tiquetId,
+                                            titol,
+                                            descripcio,
+                                            imatge
+                                        )
+                                )
+                        })
+                    rvTiquets.adapter = adapter
+                    rvTiquets.layoutManager = LinearLayoutManager(this.context)
                 }
             }
             .addOnFailureListener { exception ->
@@ -88,6 +168,13 @@ class VeureTiquetFragment : Fragment() {
 
 //Classe que correspon als camps de la col·lecció usuaris
 data class TiquetDC(
-    var id: String = "", var data: String = "", var descripcio: String = "", var hora: String = "",
-    var mail: String = "", var nickname: String = "", var titol: String = "", var imatge: String=""
+    var admin: Boolean = false,
+    var id: String = "",
+    var data: String = "",
+    var descripcio: String = "",
+    var hora: String = "",
+    var mail: String = "",
+    var nickname: String = "",
+    var titol: String = "",
+    var imatge: String = ""
 )

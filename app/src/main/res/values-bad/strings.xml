@@ -83,4 +83,7 @@
     <string name="Menu_medalles">LL</string>
     <string name="campsBuitsToastObrirTiquet">LL</string>
     <string name="txtViewTiquetTitolObert">LL</string>
+    <string name="bttnResposta">LL</string>
+    <string name="bttnEnviarResposta">LL</string>
+    <string name="txtViewResposta">LL</string>
 </resources>

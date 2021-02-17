@@ -78,6 +78,14 @@ dependencies {
     //dependencia per cardview
     implementation 'androidx.cardview:cardview:1.0.0'
 
+    //dependencia per storage
+    implementation 'com.firebaseui:firebase-ui-storage:6.2.0'
+    implementation 'com.google.firebase:firebase-storage-ktx:19.2.1'
+
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
 
 
 }

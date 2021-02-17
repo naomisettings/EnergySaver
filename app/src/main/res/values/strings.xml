@@ -83,6 +83,9 @@
     <string name="Menu_medalles">Medalles</string>
     <string name="campsBuitsToastObrirTiquet">Els camps de text han d estar emplenats</string>
     <string name="txtViewTiquetTitolObert">TIQUET</string>
+    <string name="bttnResposta">RESPOSTA</string>
+    <string name="bttnEnviarResposta">ENVIAR</string>
+    <string name="txtViewResposta">Resposta</string>
 
 
 </resources>
