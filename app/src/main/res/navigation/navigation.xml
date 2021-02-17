@@ -178,5 +178,9 @@
         android:id="@+id/respostaTiquetFragment"
         android:name="cat.copernic.johan.energysaver.tiquetobert.RespostaTiquetFragment"
         android:label="RespostaTiquetFragment"
-        tools:layout="@layout/fragment_resposta_tiquet" />
+        tools:layout="@layout/fragment_resposta_tiquet" >
+        <argument
+            android:name="idTiquet"
+            app:argType="string" />
+    </fragment>
 </navigation>

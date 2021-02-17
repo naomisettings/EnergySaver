@@ -19,11 +19,8 @@ import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.module.AppGlideModule
 import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
 import com.firebase.ui.storage.images.FirebaseImageLoader
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.ktx.storage
 import java.io.InputStream
 
 @GlideModule
@@ -56,11 +53,15 @@ class TiquetObertFragment : Fragment() { //
  */
         GlideAppModule().setImageFromUrl(binding.imgViewCarregarBBDD, args.imatge)
 
-        binding.bttnResposta.setOnClickListener(){
+        binding.bttnResposta.setOnClickListener() {
             view?.findNavController()
-                ?.navigate(R.id.action_tiquetObertFragment_to_respostaTiquetFragment)
+                ?.navigate(
+                    TiquetObertFragmentDirections
+                        .actionTiquetObertFragmentToRespostaTiquetFragment(
+                            args.tiquetId
+                        )
+                )
         }
-
         return binding.root
     }
 }
