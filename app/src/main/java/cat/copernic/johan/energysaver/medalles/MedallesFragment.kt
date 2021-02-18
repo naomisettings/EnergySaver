@@ -24,6 +24,7 @@ class MedallesFragment : Fragment() {
     val db = FirebaseFirestore.getInstance()
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
