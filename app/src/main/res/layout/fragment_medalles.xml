@@ -95,7 +95,7 @@
                 android:contentDescription="@string/imgBttnUnAny" />
 
             <TextView
-                android:id="@+id/txtViewUnAny"
+                android:id="@+id/txtViewMigAny"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="55dp"
@@ -105,7 +105,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/imgBttnMigAny" />
 
             <TextView
-                android:id="@+id/txtViewAny"
+                android:id="@+id/txtViewUnAny"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -113,6 +113,50 @@
                 android:text="@string/txtViewAny"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imgBttnUnAny" />
+
+            <ImageView
+                android:id="@+id/medallMigAnyGris"
+                android:layout_width="151dp"
+                android:layout_height="145dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="35dp"
+                android:contentDescription="@string/defaultcd"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtViewMedEstalviador"
+                app:srcCompat="@drawable/medalla" />
+
+            <ImageView
+                android:id="@+id/medallaUnAnyGris"
+                android:layout_width="152dp"
+                android:layout_height="148dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginEnd="35dp"
+                android:contentDescription="@string/defaultcd"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtViewGranEstalviador"
+                app:srcCompat="@drawable/medalla" />
+
+            <ImageView
+                android:id="@+id/medallaEstalviadorGris"
+                android:layout_width="154dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="35dp"
+                android:contentDescription="@string/defaultcd"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/logoESMedalles"
+                app:srcCompat="@drawable/medalla" />
+
+            <ImageView
+                android:id="@+id/medallaGranEstalviadorGris"
+                android:layout_width="155dp"
+                android:layout_height="149dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginEnd="35dp"
+                android:contentDescription="@string/defaultcd"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/logoESMedalles"
+                app:srcCompat="@drawable/medalla" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
