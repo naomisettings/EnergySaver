@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="img"
             type="cat.copernic.johan.energysaver.tiquetobert.TiquetObertFragment" />
