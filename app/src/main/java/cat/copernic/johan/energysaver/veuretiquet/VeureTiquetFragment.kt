@@ -175,6 +175,7 @@ data class TiquetDC(
     var hora: String = "",
     var mail: String = "",
     var nickname: String = "",
+    var resposta: String = "",
     var titol: String = "",
     var imatge: String = ""
 )
