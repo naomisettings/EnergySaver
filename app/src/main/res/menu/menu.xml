@@ -19,7 +19,7 @@
         android:title="@string/MenuInformes"
         android:icon="@drawable/ic_informes"/>
     <item
-        android:id="@+id/obrirFragment"
+        android:id="@+id/veureFragment"
         android:title="@string/Suport"
         android:icon="@drawable/ic_suport"/>
 
