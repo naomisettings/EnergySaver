@@ -2,14 +2,14 @@ package cat.copernic.johan.energysaver.seleccio
 
 import android.content.ContentValues
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
+import android.widget.*
 import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
@@ -22,7 +22,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 
-class SeleccionarEnergiaFragment : Fragment(), AdapterView.OnItemSelectedListener{
+class SeleccionarEnergiaFragment() : Fragment(), AdapterView.OnItemSelectedListener{
     private val db = FirebaseFirestore.getInstance()
 
     private var periodeAigua = 0
@@ -38,10 +38,33 @@ class SeleccionarEnergiaFragment : Fragment(), AdapterView.OnItemSelectedListene
             R.layout.fragment_seleccionar_energia,
             container, false)
         omplirDades()
+        val checkBoxAigua : CheckBox = binding.chbxAigua
+        val checkBoxLlum : CheckBox = binding.chbxLlum
+        val checkBoxGas : CheckBox = binding.chbxGas
+        val checkBoxGasoil : CheckBox = binding.chbxGasoil
+
         val spinnerAigua : Spinner = binding.spnAigua
         val spinnerLlum : Spinner = binding.spnLlum
         val spinnerGas : Spinner = binding.spnGas
         val spinnerCombustible : Spinner = binding.spnCombustible
+
+        spinnerAigua.setEnabled(checkBoxAigua.isChecked)
+        spinnerLlum.setEnabled(checkBoxLlum.isChecked)
+        spinnerGas.setEnabled(checkBoxGas.isChecked)
+        spinnerCombustible.setEnabled(checkBoxGasoil.isChecked)
+
+        checkBoxAigua.setOnCheckedChangeListener { view, isChecked ->
+            spinnerAigua.setEnabled(!spinnerAigua.isEnabled)
+        }
+        checkBoxLlum.setOnCheckedChangeListener { view, isChecked ->
+            spinnerLlum.setEnabled(!spinnerLlum.isEnabled)
+        }
+        checkBoxGas.setOnCheckedChangeListener { view, isChecked ->
+            spinnerGas.setEnabled(!spinnerGas.isEnabled)
+        }
+        checkBoxGasoil.setOnCheckedChangeListener { view, isChecked ->
+            spinnerCombustible.setEnabled(!spinnerCombustible.isEnabled)
+        }
 
         spinnerAigua.onItemSelectedListener = this
         spinnerLlum.onItemSelectedListener = this
