@@ -23,6 +23,11 @@
         android:title="@string/Suport"
         android:icon="@drawable/ic_suport"/>
 
+    <item
+        android:id="@+id/menuEnergies"
+        android:icon="@drawable/ic_consum"
+        android:title="@string/consum_energies" />
+
 </group>
 
     <item
@@ -35,10 +40,6 @@
                 android:title="@string/modificar_dades"
                 android:icon="@drawable/ic_modificar"/>
 
-            <item
-                android:id="@+id/Baixa"
-                android:title="@string/BaixaUsuari"
-                android:icon="@drawable/ic_baixa"/>
             <item
                 android:id="@+id/Sortir"
                 android:title="@string/Sortir"
