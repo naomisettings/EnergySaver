@@ -5,56 +5,75 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.R
+import cat.copernic.johan.energysaver.databinding.FragmentConsumAiguaBinding
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ConsumAigua.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ConsumAigua : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentConsumAiguaBinding
+    private lateinit var auth: FirebaseAuth
+    //instancia a firebase
+    val db = FirebaseFirestore.getInstance()
+    var consumAigua: String = ""
+    var importAigua: String = ""
+    var dataAigua: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_consum_aigua, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_consum_aigua, container, false)
+
+        binding.btnConfirmarConsumAigua.setOnClickListener { view:View ->
+            //retorn a menu energies i guardar dades
+            guardarConsum()
+            view.findNavController().navigate(R.id.action_consumAigua_to_menuEnergies)
+        }
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ConsumAigua.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ConsumAigua().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    fun guardarConsum(){
+        //guardem les dades de l'usari identificat
+        val user = Firebase.auth.currentUser
+        //agafem el mail com a identificador unic de l'usuari
+        val mail = user?.email.toString()
+        binding.apply {
+            consumAigua = editTextConsumAigua.text.toString()
+            importAigua = editTextImportAigua.text.toString()
+            dataAigua = editTextDataAigua.text.toString()
+        }
+
+        //validar camps
+        if(consumAigua.isEmpty() || importAigua.isEmpty() || dataAigua.isEmpty()){
+            view?.let { Snackbar.make(it, "Has d'omplir tots els camps", Snackbar.LENGTH_LONG).show() }
+
+        }else{
+            val despesaConsum = hashMapOf(
+                "aiguaConsum" to consumAigua,
+                "aiguaDiners" to importAigua,
+                "aiguaConsum" to dataAigua,
+                "aiguaDiners" to dataAigua,
+
+
+
+            )
+            db.collection("despesaConsum").add(despesaConsum).addOnSuccessListener { documentReference ->
+                view?.let { Snackbar.make(it, "Registre creat correctament", Snackbar.LENGTH_LONG).show() }
+            }.addOnFailureListener{ e->
+                view?.let { Snackbar.make(it, "Error al crear el registre", Snackbar.LENGTH_LONG).show() }
+
             }
+        }
+
     }
+
+
 }

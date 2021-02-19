@@ -1,14 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+
     tools:context=".introduirconsums.ConsumAigua">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/consumAiguaFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/textViewConsumAigua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:fontFamily="@font/asap_bold"
+            android:text="Introdueix el consum"
+            android:textColor="@color/TitolColor"
+            android:textSize="@dimen/CampsSize"
+            app:layout_constraintBaseline_toBaselineOf="@+id/editTextConsumAigua"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewImportAigua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:fontFamily="@font/asap_bold"
+            android:text="Introdueix l'import"
+            android:textColor="@color/TitolColor"
+            android:textSize="@dimen/CampsSize"
+            app:layout_constraintBaseline_toBaselineOf="@+id/editTextImportAigua"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewDataAigua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:fontFamily="@font/asap_bold"
+            android:text="Data Factura"
+            android:textColor="@color/TitolColor"
+            android:textSize="@dimen/CampsSize"
+            app:layout_constraintBaseline_toBaselineOf="@+id/editTextDataAigua"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/editTextConsumAigua"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="30dp"
+            android:ems="10"
+            android:fontFamily="@font/asap_bold"
+            android:gravity="center"
+            android:hint="m3"
+            android:inputType="number"
+            android:textSize="@dimen/CampsSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewAigua" />
+
+        <EditText
+            android:id="@+id/editTextImportAigua"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:ems="10"
+            android:fontFamily="@font/asap_bold"
+            android:gravity="center"
+            android:hint="€"
+            android:inputType="textPersonName"
+            android:textSize="@dimen/CampsSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextConsumAigua" />
+
+        <EditText
+            android:id="@+id/editTextDataAigua"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextImportAigua" />
+
+        <Button
+            android:id="@+id/btnConfirmarConsumAigua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="80dp"
+            android:text="Confirmar"
+            android:textSize="@dimen/btnTextSize"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextDataAigua" />
+
+        <ImageView
+            android:id="@+id/imageViewAigua"
+            android:layout_width="130dp"
+            android:layout_height="101dp"
+            android:layout_marginTop="50dp"
+            android:src="@drawable/waterdrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

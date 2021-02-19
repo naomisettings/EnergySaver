@@ -196,20 +196,36 @@
         android:id="@+id/consumAigua"
         android:name="cat.copernic.johan.energysaver.introduirconsums.ConsumAigua"
         android:label="fragment_consum_aigua"
-        tools:layout="@layout/fragment_consum_aigua" />
+        tools:layout="@layout/fragment_consum_aigua" >
+        <action
+            android:id="@+id/action_consumAigua_to_menuEnergies"
+            app:destination="@id/menuEnergies" />
+    </fragment>
     <fragment
         android:id="@+id/consumGas"
         android:name="cat.copernic.johan.energysaver.introduirconsums.ConsumGas"
         android:label="fragment_consum_gas"
-        tools:layout="@layout/fragment_consum_gas" />
+        tools:layout="@layout/fragment_consum_gas" >
+        <action
+            android:id="@+id/action_consumGas_to_menuEnergies"
+            app:destination="@id/menuEnergies" />
+    </fragment>
     <fragment
         android:id="@+id/consumGasoil"
         android:name="cat.copernic.johan.energysaver.introduirconsums.ConsumGasoil"
         android:label="fragment_consum_gasoil"
-        tools:layout="@layout/fragment_consum_gasoil" />
+        tools:layout="@layout/fragment_consum_gasoil" >
+        <action
+            android:id="@+id/action_consumGasoil_to_menuEnergies"
+            app:destination="@id/menuEnergies" />
+    </fragment>
     <fragment
         android:id="@+id/consumLlum"
         android:name="cat.copernic.johan.energysaver.introduirconsums.ConsumLlum"
         android:label="fragment_consum_llum"
-        tools:layout="@layout/fragment_consum_llum" />
+        tools:layout="@layout/fragment_consum_llum" >
+        <action
+            android:id="@+id/action_consumLlum_to_menuEnergies"
+            app:destination="@id/menuEnergies" />
+    </fragment>
 </navigation>
