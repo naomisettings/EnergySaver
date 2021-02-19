@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <variable
-            name="img"
-            type="cat.copernic.johan.energysaver.tiquetobert.TiquetObertFragment" />
-    </data>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,7 +23,7 @@
                     style="@style/ColorsBasicsAplicacio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="150dp"
+                    android:layout_marginStart="120dp"
                     android:layout_marginTop="15dp"
                     android:text="@string/txtViewTiquetTitolObert" />
 
@@ -37,7 +31,7 @@
                     android:id="@+id/txtViewObrirTiquetMotiu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="35dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="35dp"
                     android:fontFamily="@font/asap_bold"
@@ -45,51 +39,82 @@
                     android:textColor="@color/TitolColor"
                     android:textSize="@dimen/CampsSize" />
 
-                <TextView
-                    android:id="@+id/txtViewTiquetObertDesc"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="177dp"
-                    android:layout_marginStart="35dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="35dp"
-                    android:fontFamily="@font/asap_bold"
-                    android:textColor="@color/TitolColor"
-                    android:textSize="@dimen/CampsSize" />
+                    android:layout_height="264dp"
+                    android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/imgViewCarregarBBDD"
-                    android:layout_width="match_parent"
-                    android:layout_height="227dp"
-                    android:layout_marginStart="35dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="35dp"
-                    android:contentDescription="@string/defaultcd" />
+                    <TextView
+                        android:id="@+id/txtViewTiquetObertDesc"
+                        android:layout_width="186dp"
+                        android:layout_height="245dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="17dp"
+                        android:fontFamily="sans-serif"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/CampsSize" />
 
-                <Button
-                    android:id="@+id/bttnResposta"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="120dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="120dp"
-                    android:text="@string/bttnResposta" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgViewCarregarBBDD"
+                        android:layout_width="120dp"
+                        android:layout_height="218dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/borde_imatge"
+                        android:contentDescription="@string/defaultcd" />
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/txtViewResposta"
-                    style="@style/ColorsBasicsAplicacio"
-                    android:layout_width="match_parent"
+                    android:fontFamily="@font/asap_bold"
+                    android:layout_width="208dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="35dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="15dp"
-                    android:text="@string/txtViewResposta" />
+                    android:text="@string/txtViewResposta"
+                    style="@style/ColorsBasicsAplicacio"
+                    android:textSize="@dimen/CampsSize" />
 
-                <TextView
-                    android:id="@+id/txtViewMostraResposta"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="282dp"
-                    android:layout_marginStart="35dp"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/txtViewSenseResposta"
+                        android:layout_width="333dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/txtViewSenseResposta"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="@dimen/CampsSize"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txtViewMostraResposta"
+                        android:layout_width="322dp"
+                        android:layout_height="186dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="sans-serif"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/CampsSize"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <Button
+                    android:id="@+id/bttnResposta"
+                    android:layout_width="163dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="105dp"
                     android:layout_marginTop="15dp"
-                    android:layout_marginEnd="35dp" />
+                    android:layout_marginEnd="120dp"
+                    android:text="@string/bttnResposta" />
 
             </LinearLayout>
         </FrameLayout>

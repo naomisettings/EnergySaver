@@ -87,6 +87,7 @@
     <string name="bttnEnviarResposta">ENVIAR</string>
     <string name="txtViewResposta">Resposta</string>
     <string name="consum_energies">Consum Energies</string>
+    <string name="txtViewSenseResposta">Esperant la resposta...</string>
 
 
 </resources>
