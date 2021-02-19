@@ -115,6 +115,8 @@ class ObrirTiquetFragment : Fragment() {
             "imatge" to fileName
         )
 
+        Log.i("nomarxiu", fileName)
+
         //Neteja dels camps tema i descripció
         binding.apply {
             editTextTemaTiquet.text.clear()

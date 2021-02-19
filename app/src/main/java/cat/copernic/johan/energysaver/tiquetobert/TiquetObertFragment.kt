@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentTiquetObertBinding
 import cat.copernic.johan.energysaver.veuretiquet.*
+import coil.api.load
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Registry
 import com.bumptech.glide.annotation.GlideModule
@@ -27,10 +28,11 @@ import com.firebase.ui.storage.images.FirebaseImageLoader
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.InputStream
 
-@GlideModule
+//@GlideModule
 class TiquetObertFragment : Fragment() { //
 
     val db = FirebaseFirestore.getInstance()
@@ -52,17 +54,17 @@ var admin: String = "hola"
         binding.txtViewObrirTiquetMotiu.text = args.titol
         binding.txtViewTiquetObertDesc.text = args.descripcio
 
-        //PujarImatge().pujar(binding, args.imatge)
-/*
-        if (args.imatge !== null) {
-            Glide.with(this)
-                .load(args.imatge).override(100, 280).placeholder(android.R.drawable.progress_indeterminate_horizontal).error(android.R.drawable.stat_notify_error)
-                .into(binding.imgViewCarregarBBDD)
-        } else {
-            binding.imgViewCarregarBBDD.setImageResource(R.drawable.common_full_open_on_phone)
+        //Pujar una imatge
+        val storageRef = FirebaseStorage.getInstance().reference
+        val imageRef = storageRef.child("images/${args.imatge}")
+
+        imageRef.downloadUrl.addOnSuccessListener { url ->
+            binding.imgViewCarregarBBDD.load(url)
+        }.addOnFailureListener {
+
         }
- */
-        GlideAppModule().setImageFromUrl(binding.imgViewCarregarBBDD, args.imatge)
+
+
 
         binding.bttnResposta.visibility = View.INVISIBLE
         adminVeureBttn()
@@ -119,7 +121,14 @@ var admin: String = "hola"
             .addOnSuccessListener { document ->
                 if (document != null) {
                     val tiquetsDC = document.toObjects(TiquetDC::class.java)
-                    binding.txtViewMostraResposta.text = tiquetsDC[0].resposta
+                    if (tiquetsDC[0].resposta == ""){
+                        binding.txtViewMostraResposta.visibility = View.INVISIBLE
+                        binding.txtViewSenseResposta.visibility = View.VISIBLE
+                    }else{
+                        binding.txtViewMostraResposta.visibility = View.VISIBLE
+                        binding.txtViewSenseResposta.visibility = View.INVISIBLE
+                        binding.txtViewMostraResposta.text = tiquetsDC[0].resposta
+                    }
                 }
             }
             .addOnFailureListener { exception ->
@@ -128,31 +137,6 @@ var admin: String = "hola"
     }
 }
 
-@GlideModule
-class GlideAppModule : AppGlideModule() {
-    override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
-        super.registerComponents(context, glide, registry)
-        registry.append(
-            StorageReference::class.java,
-            InputStream::class.java,
-            FirebaseImageLoader.Factory()
-        )
-    }
-
-    @BindingAdapter("loadImage")
-    fun setImageFromUrl(view: ImageView, url: String?) {
-        if (!url.isNullOrEmpty()) {
-            Glide
-                .with(view)
-                .load(url)
-                .fitCenter()
-                .apply(RequestOptions.bitmapTransform(RoundedCorners(4)))
-                .into(view)
-        } else {
-            Log.d("prova", "pp")
-        }
-    }
-}
 
 
 
