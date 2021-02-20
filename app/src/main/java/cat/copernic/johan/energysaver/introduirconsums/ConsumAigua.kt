@@ -57,7 +57,7 @@ class ConsumAigua : Fragment() {
         db.collection("despesaConsum").whereEqualTo("mail", mail).get()
             .addOnSuccessListener { doc ->
                 //guardem els usuaris que hem trovat a l'objecte Usuari (Data Class)
-                val usuariConsulta = doc.toObjects(DadesTotals::class.java)
+                val usuariConsulta = doc.toObjects(DadesTotalsLlum::class.java)
                 //si el mail de l'usuari identificat coincideix amb un dels guardarts
 
                 if (usuariConsulta.isNullOrEmpty()) {
@@ -145,6 +145,8 @@ class ConsumAigua : Fragment() {
 data class DadesTotals(
     var aiguaConsum: HashMap<String, Double> = hashMapOf(),
     var aiguaDiners: HashMap<String, Double> = hashMapOf(),
+    var llumConsum: HashMap<String, Double> = hashMapOf(),
+    var llumDiners: HashMap<String, Double> = hashMapOf(),
     var mail: String = ""
 )
 

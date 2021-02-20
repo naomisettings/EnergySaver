@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
     tools:context=".introduirconsums.ConsumGasoil">
 
@@ -8,6 +9,112 @@
         android:id="@+id/consumGasoilFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textViewConsumGasoil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:fontFamily="@font/asap_bold"
+            android:text="Introdueix el consum"
+            android:textColor="@color/TitolColor"
+            android:textSize="@dimen/CampsSize"
+            app:layout_constraintBaseline_toBaselineOf="@+id/editTextConsumGasoil"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewImportGasoil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:fontFamily="@font/asap_bold"
+            android:text="Introdueix l'import"
+            android:textColor="@color/TitolColor"
+            android:textSize="@dimen/CampsSize"
+            app:layout_constraintBaseline_toBaselineOf="@+id/editTextImportGasoil"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <TextView
+            android:id="@+id/textViewDataGasoil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:fontFamily="@font/asap_bold"
+            android:text="Data Factura"
+            android:textColor="@color/TitolColor"
+            android:textSize="@dimen/CampsSize"
+            app:layout_constraintBaseline_toBaselineOf="@+id/editTextDataGasoil"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/editTextConsumGasoil"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="30dp"
+            android:ems="10"
+            android:fontFamily="@font/asap_bold"
+            android:gravity="center"
+            android:hint="m3"
+            android:inputType="number|numberDecimal"
+            android:textSize="@dimen/CampsSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewGasoil" />
+
+        <EditText
+            android:id="@+id/editTextImportGasoil"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:ems="10"
+            android:fontFamily="@font/asap_bold"
+            android:gravity="center"
+            android:hint="€"
+            android:inputType="number|numberDecimal"
+            android:textSize="@dimen/CampsSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextConsumGasoil" />
+
+        <Button
+
+
+            android:id="@+id/btnConfirmarConsumGasoil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="80dp"
+            android:text="Confirmar"
+            android:textSize="@dimen/btnTextSize"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextImportGas" />
+
+        <EditText
+            android:id="@+id/editTextDataGasoil"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextImportGasoil" />
+
+        <ImageView
+            android:id="@+id/imageViewGasoil"
+            android:layout_width="130dp"
+            android:layout_height="101dp"
+            android:layout_marginTop="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/gasoilconsum" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
