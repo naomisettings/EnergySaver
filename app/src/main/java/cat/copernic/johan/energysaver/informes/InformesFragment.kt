@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentInformesBinding
+import cat.copernic.johan.energysaver.medalles.DespesaConsumDC
 import cat.copernic.johan.energysaver.seleccio.Energies
 import cat.copernic.johan.energysaver.veuretiquet.Tiquet
 import com.google.firebase.auth.ktx.auth
@@ -35,16 +36,16 @@ class InformesFragment : Fragment() {
         val query = energies.whereEqualTo("mail", mail).get()
             .addOnSuccessListener { document ->
                 if (!document.isEmpty) {
-                    var consumAigua =  mapOf<String, Int>()
-                    var aiguaDiners = mapOf<String, Int>()
-                    var consumLlum =  mapOf<String, Int>()
-                    var llumDiners = mapOf<String, Int>()
-                    var consumGas =  mapOf<String, Int>()
-                    var gasDiners = mapOf<String, Int>()
-                    var consumGasoil =  mapOf<String, Int>()
-                    var gasoilDiners = mapOf<String, Int>()
+                    var consumAigua =  mapOf<String, Double>()
+                    var aiguaDiners = mapOf<String, Double>()
+                    var consumLlum =  mapOf<String, Double>()
+                    var llumDiners = mapOf<String, Double>()
+                    var consumGas =  mapOf<String, Double>()
+                    var gasDiners = mapOf<String, Double>()
+                    var consumGasoil =  mapOf<String, Double>()
+                    var gasoilDiners = mapOf<String, Double>()
 
-                    val dadesEnergia = document.toObjects(DadesEnergia::class.java)
+                    val dadesEnergia = document.toObjects(DespesaConsumDC::class.java)
                     consumAigua = dadesEnergia[0].aiguaConsum
                     aiguaDiners = dadesEnergia[0].aiguaDiners
 
@@ -70,21 +71,19 @@ class InformesFragment : Fragment() {
                 }
             }
     }
-    fun estalviadorTotal(map: Map<String, Int>): Int{
-        var aux: Int? = null
-        var estalviat = 0
+    fun estalviadorTotal(map: Map<String, Double>): Double{
+        var aux: Double? = null
+        var estalviat: Double = 0.0
         for (item in map){
             if(aux != null){
-                estalviat = aux - item.value
+                estalviat += (aux - item.value)
             }
             aux = item.value
         }
         return estalviat
     }
-}
 
-data class DadesEnergia(
-    var aiguaConsum: Map<String, Int>,
-    var aiguaDiners: Map<String, Int>,
-    var mail: String
-)
+    fun estalviadorPeriode(map: Map<String, Double>, periode: Int): Double{
+
+    }
+}
