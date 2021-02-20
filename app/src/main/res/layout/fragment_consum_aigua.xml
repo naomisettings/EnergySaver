@@ -56,7 +56,7 @@
             android:fontFamily="@font/asap_bold"
             android:gravity="center"
             android:hint="m3"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:textSize="@dimen/CampsSize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageViewAigua" />
@@ -71,7 +71,7 @@
             android:fontFamily="@font/asap_bold"
             android:gravity="center"
             android:hint="€"
-            android:inputType="textPersonName"
+            android:inputType="number|numberDecimal"
             android:textSize="@dimen/CampsSize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextConsumAigua" />

@@ -88,6 +88,8 @@
     <string name="txtViewResposta">Resposta</string>
     <string name="consum_energies">Consum Energies</string>
     <string name="txtViewSenseResposta">Esperant la resposta...</string>
+    <string name="borrarTiquet">Sel·lecciona algun tiquet!</string>
+    <string name="tempsBorrarTiquet">Només pots esborrar tiquets 30 minuts després!</string>
 
 
 </resources>

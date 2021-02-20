@@ -1,7 +1,7 @@
 package cat.copernic.johan.energysaver.introduirconsums
 
 import android.os.Bundle
-import android.util.Log
+
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentConsumAiguaBinding
-import com.google.firebase.auth.FirebaseAuth
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
@@ -18,13 +18,10 @@ import com.google.firebase.ktx.Firebase
 
 class ConsumAigua : Fragment() {
     private lateinit var binding: FragmentConsumAiguaBinding
-    private lateinit var auth: FirebaseAuth
 
     //instancia a firebase
     val db = FirebaseFirestore.getInstance()
-    var consumAigua: String = ""
-    var importAigua: String = ""
-    var dataAigua: String = ""
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,8 +32,15 @@ class ConsumAigua : Fragment() {
 
         binding.btnConfirmarConsumAigua.setOnClickListener { view: View ->
             //retorn a menu energies i guardar dades
-            guardarConsum()
-            view.findNavController().navigate(R.id.action_consumAigua_to_menuEnergies)
+            if(binding.editTextConsumAigua.text.isEmpty() || binding.editTextDataAigua.text.isEmpty()
+                || binding.editTextImportAigua.text.isEmpty()){
+                Snackbar.make(view, "Has d'omplir tots els camps", Snackbar.LENGTH_LONG).show()
+
+            }else {
+                guardarConsum()
+                view.findNavController().navigate(R.id.action_consumAigua_to_menuEnergies)
+            }
+
         }
 
         return binding.root
@@ -49,116 +53,98 @@ class ConsumAigua : Fragment() {
         //agafem el mail com a identificador unic de l'usuari
         val mail = user?.email.toString()
 
-        val consums = db.collection("despesaConsum")
-        val query = consums.whereEqualTo("mail", mail).get().addOnSuccessListener { document ->
-            //guardem els documents dels usuaris
 
+        db.collection("despesaConsum").whereEqualTo("mail", mail).get()
+            .addOnSuccessListener { doc ->
+                //guardem els usuaris que hem trovat a l'objecte Usuari (Data Class)
+                val usuariConsulta = doc.toObjects(DadesTotals::class.java)
+                //si el mail de l'usuari identificat coincideix amb un dels guardarts
 
-            val usuariConsulta = document.toObjects(dadesTotals::class.java)
-            //si el mail de l'usuari identificat coincideix amb un dels guardarts
-            if (document != null) {
+                if (usuariConsulta.isNullOrEmpty()) {
 
-                //agafem l'usuari de la collecio amb el seu ID
-                val sfDocRef = db.collection("despesaConsum").document(mail)
-                Log.d("Document", sfDocRef.get().toString())
-                /*val despesaConsum = hashMapOf(
-                    "aiguaConsum" to ,
-                    "aiguaDiners" to dadesImportAigua(dataAigua, importAigua),
-                    "mail" to mail
-                )
-                //afegim un nou registre al document del usuari identificat
-                db.runTransaction { transaction ->
-                    //agafem el ID
-                    val document = transaction.get(sfDocRef)
-                    val newConsum = document.getString("mail")!!
-                    //  Log.d("nou usuari", newConsum)
-                    transaction.set(sfDocRef, despesaConsum)
-                    Log.d(" dades afegir document", sfDocRef.toString())
-                }*/
-            } else {
-                var consumAiguaMap: HashMap<String,String> = hashMapOf()
-                var importAiguaMap: HashMap<String,String> = hashMapOf()
+                    var consumAiguaMap: HashMap<String, Double> = hashMapOf()
+                    var importAiguaMap: HashMap<String, Double> = hashMapOf()
 
-                var consumAiguaEntrada = binding.editTextConsumAigua.text.toString()
-                var dataAiguaEntrada = binding.editTextDataAigua.text.toString()
-                var importAiguaEntrada = binding.editTextImportAigua.text.toString()
+                    var consumAiguaEntrada = binding.editTextConsumAigua.text.toString().toDouble()
+                    var dataAiguaEntrada = binding.editTextDataAigua.text.toString()
+                    var importAiguaEntrada = binding.editTextImportAigua.text.toString().toDouble()
 
-                consumAiguaMap.put(dataAiguaEntrada,consumAiguaEntrada)
-                importAiguaMap.put(dataAiguaEntrada,importAiguaEntrada)
+                    consumAiguaMap.put(dataAiguaEntrada, consumAiguaEntrada)
+                    importAiguaMap.put(dataAiguaEntrada, importAiguaEntrada)
 
+                    //si no trova l'usuari identificat afegeix un nou document a la colleccio
+                    val despesaConsum = hashMapOf(
+                        "aiguaConsum" to consumAiguaMap,
+                        "aiguaDiners" to importAiguaMap,
+                        "mail" to mail
+                    )
 
-                //si no trova l'usuari identificat afegeix un nou document a la colleccio
-                val despesaConsum = hashMapOf(
-                    "aiguaConsum" to consumAiguaMap,
-                    "aiguaDiners" to importAiguaMap,
-                    "mail" to mail
-                )
-                Log.d("Map", despesaConsum.toString())
-                db.collection("despesaConsum").add(despesaConsum)
-                    /*.addOnSuccessListener { documentReference ->
-                        view?.let {
-                            Snackbar.make(
-                                it,
-                                "Registre creat correctament",
-                                Snackbar.LENGTH_LONG
-                            ).show()
+                    db.collection("despesaConsum").add(despesaConsum)
+                        .addOnSuccessListener { documentReference ->
+                            view?.let {
+                                Snackbar.make(
+                                    it,
+                                    "Registre creat correctament",
+                                    Snackbar.LENGTH_LONG
+                                ).show()
+                            }
+                        }.addOnFailureListener { e ->
+                            view?.let {
+                                Snackbar.make(
+                                    it,
+                                    "Error al crear el registre",
+                                    Snackbar.LENGTH_LONG
+                                ).show()
+                            }
+
                         }
-                    }.addOnFailureListener { e ->
-                    view?.let {
-                        Snackbar.make(
-                            it,
-                            "Error al crear el registre",
-                            Snackbar.LENGTH_LONG
-                        ).show()
+
+                } else {
+
+                    var consumsGuardats = doc.toObjects(DadesTotals::class.java)
+                    var consumAiguaMap: HashMap<String, Double>
+                    var importAiguaMap: HashMap<String, Double>
+                    consumAiguaMap = consumsGuardats[0].aiguaConsum
+                    importAiguaMap = consumsGuardats[0].aiguaDiners
+
+
+                    var consumAiguaEntrada = binding.editTextConsumAigua.text.toString().toDouble()
+                    var dataAiguaEntrada = binding.editTextDataAigua.text.toString()
+                    var importAiguaEntrada = binding.editTextImportAigua.text.toString().toDouble()
+
+                    consumAiguaMap.put(dataAiguaEntrada, consumAiguaEntrada)
+                    importAiguaMap.put(dataAiguaEntrada, importAiguaEntrada)
+                    val despesaConsum = hashMapOf(
+                        "aiguaConsum" to consumAiguaMap,
+                        "aiguaDiners" to importAiguaMap,
+                        "mail" to mail
+                    )
+
+
+                    doc?.forEach {
+
+                        //guardem el id del document d'usuari identificat
+                        val usuariId = it.id
+                        val sfDocRef = db.collection("despesaConsum").document(usuariId)
+
+                        //afegim un nou registre al document del usuari identificat
+                        db.runTransaction { transaction ->
+                            val snapshot = transaction.get(sfDocRef)
+                            transaction.set(sfDocRef, despesaConsum)
+
+                        }
+
                     }
 
-                }*/
-
+                }
             }
-
-
-        }
-
-
     }
-
-
-    //validar camps
-    /* if(consumAigua.isEmpty() || importAigua.isEmpty() || dataAigua.isEmpty()){
-            view?.let { Snackbar.make(it, "Has d'omplir tots els camps", Snackbar.LENGTH_LONG).show() }
-
-        }else{
-
-            val despesaConsum = hashMapOf(
-                "aiguaConsum" to dadesConsumAigua(dataAigua,consumAigua),
-                "aiguaDiners" to dadesImportAigua(dataAigua,importAigua),
-                "mail" to mail
-            )
-
-            db.collection("despesaConsum").add(despesaConsum).addOnSuccessListener { documentReference ->
-                view?.let { Snackbar.make(it, "Registre creat correctament", Snackbar.LENGTH_LONG).show() }
-            }.addOnFailureListener{ e->
-                view?.let { Snackbar.make(it, "Error al crear el registre", Snackbar.LENGTH_LONG).show() }
-
-            }
-        }*/
-
 }
 
 
-
-    //data class pel cosum d l'usuari
- /*   data class dadesConsumAigua(
-        var dataAigua: String = "", var consumAigua: String = ""
-       
-    )
-    data class dadesImportAigua(
-        var dataAigua: String = "", var importAigua: String = ""
-
-    )*/
-    data class dadesTotals(
-        var aiguaConsum: Map<String, String> = mapOf(),
-        var aiguaDiners: Map<String, String> = mapOf(),
-        var mail: String = ""
-    )
+data class DadesTotals(
+    var aiguaConsum: HashMap<String, Double> = hashMapOf(),
+    var aiguaDiners: HashMap<String, Double> = hashMapOf(),
+    var mail: String = ""
+)
 
