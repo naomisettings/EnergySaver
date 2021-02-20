@@ -14,6 +14,7 @@ import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentMedallesBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.ktx.Firebase
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -41,6 +42,8 @@ class MedallesFragment : Fragment() {
         //Només mostrar medalles temps en gris
         binding.imgBttnMigAny.visibility = View.INVISIBLE
         binding.imgBttnUnAny.visibility = View.INVISIBLE
+        binding.txtViewMigAny.visibility = View.INVISIBLE
+        binding.txtViewUnAny.visibility = View.INVISIBLE
 
 
         binding.imgBttnMedalla1.visibility = View.INVISIBLE
@@ -73,7 +76,7 @@ class MedallesFragment : Fragment() {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun mostrarMedallesTemps(){
+    fun mostrarMedallesTemps() {
         //consulta adepesa consum per a comprovar si s'han guañat les medalles
         val despesaConsumFirestore = db.collection("despesaConsum")
 
@@ -81,15 +84,11 @@ class MedallesFragment : Fragment() {
             .addOnSuccessListener { document ->
                 val despesaConsumDC = document.toObjects(DespesaConsumDC::class.java)
                 //Es comprova si el document despesa consum de l'usuari és null
-                if (!despesaConsumDC.isNullOrEmpty()){
-                    //En cas que tingui com a true el camp mig any i false la medalla d'un any
-                    if (despesaConsumDC[0].medallaMigAny && !despesaConsumDC[0].medallaUnAny) {
-                        binding.imgBttnMigAny.visibility = View.VISIBLE
-                        binding.txtViewMigAny.visibility = View.VISIBLE
-                        binding.txtViewUnAny.visibility = View.INVISIBLE
-                        binding.medallMigAnyGris.visibility = View.INVISIBLE
-                        binding.imgBttnUnAny.visibility = View.INVISIBLE
-                    //En el cas que estigui com a true la medalla d'un any
+                if (!despesaConsumDC.isNullOrEmpty()) {
+                    //Si encara no s'han actualitzat els camps medalles entra a la funció per a fer la comprovació
+                    if (!despesaConsumDC[0].medallaMigAny || !despesaConsumDC[0].medallaUnAny) {
+                        medallesDeTemps()
+                        //En cas que tingui com a true el camp mig any i false la medalla d'un any
                     } else if (despesaConsumDC[0].medallaUnAny) {
                         binding.imgBttnMigAny.visibility = View.VISIBLE
                         binding.imgBttnUnAny.visibility = View.VISIBLE
@@ -97,13 +96,19 @@ class MedallesFragment : Fragment() {
                         binding.txtViewUnAny.visibility = View.VISIBLE
                         binding.medallMigAnyGris.visibility = View.INVISIBLE
                         binding.medallaUnAnyGris.visibility = View.INVISIBLE
-                    //Si encara no s'han actualitzat els camps medalles entra a la funció per a fer la comprovació
-                    } else {
+                        //En el cas que estigui com a true la medalla d'un any
+                    } else if (despesaConsumDC[0].medallaMigAny) {
+                        binding.imgBttnMigAny.visibility = View.VISIBLE
+                        binding.txtViewMigAny.visibility = View.VISIBLE
+                        binding.txtViewUnAny.visibility = View.INVISIBLE
+                        binding.medallMigAnyGris.visibility = View.INVISIBLE
+                        binding.imgBttnUnAny.visibility = View.INVISIBLE
                         medallesDeTemps()
                     }
                 }
             }
     }
+
     //Funció per a comprovar si s'han guanyat les medalles de temps
     @RequiresApi(Build.VERSION_CODES.O)
     fun medallesDeTemps() {
@@ -116,7 +121,7 @@ class MedallesFragment : Fragment() {
                 //Guardem el consum en un objecte
                 val despesaConsumDC = document.toObjects(DespesaConsumDC::class.java)
 
-                if (despesaConsumDC.isEmpty()) {
+                if (!despesaConsumDC.isNullOrEmpty()) {
                     //Guardem les dates de tots els consums en un arrayList
                     // per mostra les medalles (mig any estalviant i un any estalviant)
                     val dates = arrayListOf<String>()
@@ -164,7 +169,7 @@ class MedallesFragment : Fragment() {
                     Log.d("dataMesGran", dataMajor1.toString())
 
                     //Comproven si l'usuari ha guanyat alguna medalla de temps (Mig any)
-                    if (dataMajor1.toEpochDay() - dateMenor1.toEpochDay() >= 183) {
+                    if (dataMajor1.toEpochDay() - dateMenor1.toEpochDay() >= 182) {
                         //En cas que hagi guanyat es truca a questa funció per a modificar el camp
                         //medalla (Boolean) a la BBDD
                         afegirMedallesDataBD(dateMenor1, dataMajor1)
@@ -181,7 +186,12 @@ class MedallesFragment : Fragment() {
         val diferencia = dataMajor.toEpochDay() - dataMenor.toEpochDay()
 
         //Si ha guanyat la de mig any fa un update per a modifica el camp (Si el camp no hi és s'afegeix)
-        if (diferencia in 183..365) {
+        if (diferencia.toInt() in 182..365) {
+            binding.imgBttnMigAny.visibility = View.VISIBLE
+            binding.txtViewMigAny.visibility = View.VISIBLE
+            binding.txtViewUnAny.visibility = View.INVISIBLE
+            binding.medallMigAnyGris.visibility = View.INVISIBLE
+            binding.imgBttnUnAny.visibility = View.INVISIBLE
             val actualitza = db.collection("despesaConsum").addSnapshotListener { snapshot, e ->
                 val doc = snapshot?.documents
                 doc?.forEach {
@@ -191,34 +201,44 @@ class MedallesFragment : Fragment() {
                         val sfDocRef = db.collection("despesaConsum").document(usuariId)
 
                         db.runTransaction { transaction ->
-                            transaction.update(
-                                sfDocRef,
-                                "medallaMigAny",
-                                true
+                            val despesaConsum = hashMapOf(
+                                "medallaMigUnAny" to true,
                             )
-                            null
+                            transaction.set(sfDocRef, despesaConsum, SetOptions.merge())
                         }
                     }
 
                 }
             }
-        //Aquí es mira si s'ha guanyat la de un any estalviant i s'afageix a la BBDD
+            //Aquí es mira si s'ha guanyat la de un any estalviant i s'afageix a la BBDD
         } else if (diferencia >= 365) {
+            binding.imgBttnMigAny.visibility = View.VISIBLE
+            binding.imgBttnUnAny.visibility = View.VISIBLE
+            binding.txtViewMigAny.visibility = View.VISIBLE
+            binding.txtViewUnAny.visibility = View.VISIBLE
+            binding.medallMigAnyGris.visibility = View.INVISIBLE
+            binding.medallaUnAnyGris.visibility = View.INVISIBLE
             val actualitza = db.collection("despesaConsum").addSnapshotListener { snapshot, e ->
                 val doc = snapshot?.documents
-              doc?.forEach {
+                doc?.forEach {
                     val despesaConsumConsulta = it.toObject(DespesaConsumDC::class.java)
                     if (despesaConsumConsulta?.mail == mail) {
                         val usuariId = it.id
                         val sfDocRef = db.collection("despesaConsum").document(usuariId)
 
                         db.runTransaction { transaction ->
-                            transaction.update(
-                                sfDocRef,
-                                "medallaUnAny",
-                                true
-                            )
-                            null
+                            var despesaConsum: HashMap<String, Boolean>
+                            if (!despesaConsumConsulta.medallaMigAny){
+                                despesaConsum = hashMapOf(
+                                    "medallaMigAny" to true,
+                                    "medallaUnAny" to true
+                                )
+                            }else {
+                                despesaConsum = hashMapOf(
+                                    "medallaUnAny" to true
+                                )
+                            }
+                            transaction.set(sfDocRef, despesaConsum, SetOptions.merge())
                         }
                     }
 
