@@ -36,7 +36,7 @@ class ConsumAigua : Fragment() {
                 || binding.editTextImportAigua.text.isEmpty()){
                 Snackbar.make(view, "Has d'omplir tots els camps", Snackbar.LENGTH_LONG).show()
 
-            }else{
+            }else {
                 guardarConsum()
                 view.findNavController().navigate(R.id.action_consumAigua_to_menuEnergies)
             }
@@ -62,12 +62,12 @@ class ConsumAigua : Fragment() {
 
                 if (usuariConsulta.isNullOrEmpty()) {
 
-                    var consumAiguaMap: HashMap<String, String> = hashMapOf()
-                    var importAiguaMap: HashMap<String, String> = hashMapOf()
+                    var consumAiguaMap: HashMap<String, Double> = hashMapOf()
+                    var importAiguaMap: HashMap<String, Double> = hashMapOf()
 
-                    var consumAiguaEntrada = binding.editTextConsumAigua.text.toString()
+                    var consumAiguaEntrada = binding.editTextConsumAigua.text.toString().toDouble()
                     var dataAiguaEntrada = binding.editTextDataAigua.text.toString()
-                    var importAiguaEntrada = binding.editTextImportAigua.text.toString()
+                    var importAiguaEntrada = binding.editTextImportAigua.text.toString().toDouble()
 
                     consumAiguaMap.put(dataAiguaEntrada, consumAiguaEntrada)
                     importAiguaMap.put(dataAiguaEntrada, importAiguaEntrada)
@@ -102,15 +102,15 @@ class ConsumAigua : Fragment() {
                 } else {
 
                     var consumsGuardats = doc.toObjects(DadesTotals::class.java)
-                    var consumAiguaMap: HashMap<String, String>
-                    var importAiguaMap: HashMap<String, String>
+                    var consumAiguaMap: HashMap<String, Double>
+                    var importAiguaMap: HashMap<String, Double>
                     consumAiguaMap = consumsGuardats[0].aiguaConsum
                     importAiguaMap = consumsGuardats[0].aiguaDiners
 
 
-                    var consumAiguaEntrada = binding.editTextConsumAigua.text.toString()
+                    var consumAiguaEntrada = binding.editTextConsumAigua.text.toString().toDouble()
                     var dataAiguaEntrada = binding.editTextDataAigua.text.toString()
-                    var importAiguaEntrada = binding.editTextImportAigua.text.toString()
+                    var importAiguaEntrada = binding.editTextImportAigua.text.toString().toDouble()
 
                     consumAiguaMap.put(dataAiguaEntrada, consumAiguaEntrada)
                     importAiguaMap.put(dataAiguaEntrada, importAiguaEntrada)
@@ -143,8 +143,8 @@ class ConsumAigua : Fragment() {
 
 
 data class DadesTotals(
-    var aiguaConsum: HashMap<String, String> = hashMapOf(),
-    var aiguaDiners: HashMap<String, String> = hashMapOf(),
+    var aiguaConsum: HashMap<String, Double> = hashMapOf(),
+    var aiguaDiners: HashMap<String, Double> = hashMapOf(),
     var mail: String = ""
 )
 
