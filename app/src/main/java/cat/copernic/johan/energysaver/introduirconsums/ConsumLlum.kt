@@ -12,6 +12,7 @@ import cat.copernic.johan.energysaver.databinding.FragmentConsumLlumBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.ktx.Firebase
 
 
@@ -100,7 +101,7 @@ class ConsumLlum : Fragment() {
 
                 } else {
 
-                    var consumsGuardats = doc.toObjects(DadesTotals::class.java)
+                    var consumsGuardats = doc.toObjects(DadesTotalsLlum::class.java)
                     var consumLlumMap: HashMap<String, Double>
                     var importLlumMap: HashMap<String, Double>
                     consumLlumMap = consumsGuardats[0].llumConsum
@@ -129,7 +130,7 @@ class ConsumLlum : Fragment() {
                         //afegim un nou registre al document del usuari identificat
                         db.runTransaction { transaction ->
                             val snapshot = transaction.get(sfDocRef)
-                            transaction.set(sfDocRef, despesaConsum)
+                            transaction.set(sfDocRef, despesaConsum, SetOptions.merge())
 
                         }
 
@@ -144,7 +145,5 @@ class ConsumLlum : Fragment() {
 data class DadesTotalsLlum(
     var llumConsum: HashMap<String, Double> = hashMapOf(),
     var llumDiners: HashMap<String, Double> = hashMapOf(),
-    var aiguaConsum: HashMap<String, Double> = hashMapOf(),
-    var aiguaDiners: HashMap<String, Double> = hashMapOf(),
     var mail: String = ""
 )

@@ -12,6 +12,7 @@ import cat.copernic.johan.energysaver.databinding.FragmentConsumGasBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.ktx.Firebase
 
 
@@ -129,7 +130,7 @@ class ConsumGas : Fragment() {
                         //afegim un nou registre al document del usuari identificat
                         db.runTransaction { transaction ->
                             val snapshot = transaction.get(sfDocRef)
-                            transaction.set(sfDocRef, despesaConsum)
+                            transaction.set(sfDocRef, despesaConsum, SetOptions.merge())
 
                         }
 

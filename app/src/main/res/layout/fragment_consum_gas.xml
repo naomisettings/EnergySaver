@@ -43,7 +43,7 @@
             android:text="Data Factura"
             android:textColor="@color/TitolColor"
             android:textSize="@dimen/CampsSize"
-            app:layout_constraintBaseline_toBaselineOf="@+id/editTextDataGasoil"
+            app:layout_constraintBaseline_toBaselineOf="@+id/editTextDataGas"
             app:layout_constraintStart_toStartOf="parent" />
 
 
@@ -92,7 +92,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextImportGas" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextDataGas" />
 
         <EditText
             android:id="@+id/editTextDataGas"
