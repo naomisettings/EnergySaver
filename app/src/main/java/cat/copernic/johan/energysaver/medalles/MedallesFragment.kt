@@ -41,6 +41,8 @@ class MedallesFragment : Fragment() {
         //Només mostrar medalles temps en gris
         binding.imgBttnMigAny.visibility = View.INVISIBLE
         binding.imgBttnUnAny.visibility = View.INVISIBLE
+        binding.txtViewMigAny.visibility = View.INVISIBLE
+        binding.txtViewUnAny.visibility = View.INVISIBLE
 
 
         binding.imgBttnMedalla1.visibility = View.INVISIBLE
@@ -116,7 +118,7 @@ class MedallesFragment : Fragment() {
                 //Guardem el consum en un objecte
                 val despesaConsumDC = document.toObjects(DespesaConsumDC::class.java)
 
-                if (despesaConsumDC.isEmpty()) {
+                if (!despesaConsumDC.isNullOrEmpty()) {
                     //Guardem les dates de tots els consums en un arrayList
                     // per mostra les medalles (mig any estalviant i un any estalviant)
                     val dates = arrayListOf<String>()
@@ -164,7 +166,7 @@ class MedallesFragment : Fragment() {
                     Log.d("dataMesGran", dataMajor1.toString())
 
                     //Comproven si l'usuari ha guanyat alguna medalla de temps (Mig any)
-                    if (dataMajor1.toEpochDay() - dateMenor1.toEpochDay() >= 183) {
+                    if (dataMajor1.toEpochDay() - dateMenor1.toEpochDay() >= 182) {
                         //En cas que hagi guanyat es truca a questa funció per a modificar el camp
                         //medalla (Boolean) a la BBDD
                         afegirMedallesDataBD(dateMenor1, dataMajor1)
@@ -181,7 +183,12 @@ class MedallesFragment : Fragment() {
         val diferencia = dataMajor.toEpochDay() - dataMenor.toEpochDay()
 
         //Si ha guanyat la de mig any fa un update per a modifica el camp (Si el camp no hi és s'afegeix)
-        if (diferencia in 183..365) {
+        if (diferencia in 182..365) {
+            binding.imgBttnMigAny.visibility = View.VISIBLE
+            binding.txtViewMigAny.visibility = View.VISIBLE
+            binding.txtViewUnAny.visibility = View.INVISIBLE
+            binding.medallMigAnyGris.visibility = View.INVISIBLE
+            binding.imgBttnUnAny.visibility = View.INVISIBLE
             val actualitza = db.collection("despesaConsum").addSnapshotListener { snapshot, e ->
                 val doc = snapshot?.documents
                 doc?.forEach {
@@ -204,6 +211,12 @@ class MedallesFragment : Fragment() {
             }
         //Aquí es mira si s'ha guanyat la de un any estalviant i s'afageix a la BBDD
         } else if (diferencia >= 365) {
+            binding.imgBttnMigAny.visibility = View.VISIBLE
+            binding.imgBttnUnAny.visibility = View.VISIBLE
+            binding.txtViewMigAny.visibility = View.VISIBLE
+            binding.txtViewUnAny.visibility = View.VISIBLE
+            binding.medallMigAnyGris.visibility = View.INVISIBLE
+            binding.medallaUnAnyGris.visibility = View.INVISIBLE
             val actualitza = db.collection("despesaConsum").addSnapshotListener { snapshot, e ->
                 val doc = snapshot?.documents
               doc?.forEach {
