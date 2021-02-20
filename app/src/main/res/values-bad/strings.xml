@@ -88,4 +88,6 @@
     <string name="txtViewResposta">LL</string>
     <string name="consum_energies">LL</string>
     <string name="txtViewSenseResposta">LL</string>
+    <string name="borrarTiquet">LL</string>
+    <string name="tempsBorrarTiquet">LL</string>
 </resources>
