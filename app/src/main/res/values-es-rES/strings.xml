@@ -87,4 +87,8 @@
     <string name="bttnResposta">RESPUESTA</string>
     <string name="bttnEnviarResposta">ENVIAR</string>
     <string name="txtViewResposta">Respuesta</string>
+    <string name="consum_energies">Consumo Energías</string>
+    <string name="txtViewSenseResposta">Esperando la respuesta...</string>
+    <string name="borrarTiquet">Selecciona algún tíquet</string>
+    <string name="tempsBorrarTiquet">Solo puedes borrar tíquets 30 minutos depués</string>
 </resources>
