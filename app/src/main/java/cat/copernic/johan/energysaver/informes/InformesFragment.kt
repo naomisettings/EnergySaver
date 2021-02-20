@@ -20,12 +20,6 @@ import java.util.*
 class InformesFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
 
-    var aiguaGastada = ArrayList<Int>()
-    var llumGastada = ArrayList<Int>()
-    var gasGastat = ArrayList<Int>()
-    var gasoilGastat = ArrayList<Int>()
-    var data = ArrayList<String>()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = DataBindingUtil.inflate<FragmentInformesBinding>(inflater, R.layout.fragment_informes,
@@ -37,24 +31,60 @@ class InformesFragment : Fragment() {
         val user = Firebase.auth.currentUser
         val mail = user?.email.toString()
 
-        val energies = db.collection("entrarEnergia")
+        val energies = db.collection("despesaConsum")
         val query = energies.whereEqualTo("mail", mail).get()
             .addOnSuccessListener { document ->
                 if (!document.isEmpty) {
+                    var consumAigua =  mapOf<String, Int>()
+                    var aiguaDiners = mapOf<String, Int>()
+                    var consumLlum =  mapOf<String, Int>()
+                    var llumDiners = mapOf<String, Int>()
+                    var consumGas =  mapOf<String, Int>()
+                    var gasDiners = mapOf<String, Int>()
+                    var consumGasoil =  mapOf<String, Int>()
+                    var gasoilDiners = mapOf<String, Int>()
+
                     val dadesEnergia = document.toObjects(DadesEnergia::class.java)
-                    for (i in 0 until dadesEnergia.size) {
-                        aiguaGastada.add(dadesEnergia[i].aiguaGastats)
-                        llumGastada.add(dadesEnergia[i].llumGastats)
-                        gasGastat.add(dadesEnergia[i].gasGastats)
-                        gasoilGastat.add(dadesEnergia[i].gasoilGastats)
-                    }
+                    consumAigua = dadesEnergia[0].aiguaConsum
+                    aiguaDiners = dadesEnergia[0].aiguaDiners
+
+                    var estalviPeriode = 0
+                    var estalviTotal = 0
+                    var percentatgeTotal = 0
+
+                    var aiguaEstalviPeriode = 0
+                    var aiguaEstalviTotal = 0
+                    var aiguaPercentatgeTotal = 0
+
+                    var llumEstalviPeriode = 0
+                    var llumEstalviTotal = 0
+                    var llumPercentatgeTotal = 0
+
+                    var gasEstalviPeriode = 0
+                    var gasEstalviTotal = 0
+                    var gasPercentatgeTotal = 0
+
+                    var gasoilEstalviPeriode = 0
+                    var gasoilEstalviTotal = 0
+                    var gasoilPercentatgeTotal = 0
                 }
             }
     }
-    //Implementar llibreria i métodes per realitzar els informes.
+    fun estalviadorTotal(map: Map<String, Int>): Int{
+        var aux: Int? = null
+        var estalviat = 0
+        for (item in map){
+            if(aux != null){
+                estalviat = aux - item.value
+            }
+            aux = item.value
+        }
+        return estalviat
+    }
 }
 
 data class DadesEnergia(
-    var aiguaGastats: Int = 0, var data: String = "", var gasGastats: Int = 0, var gasoilGastats: Int = 0,
-    var llumGastats: Int = 0, var mail: String = ""
+    var aiguaConsum: Map<String, Int>,
+    var aiguaDiners: Map<String, Int>,
+    var mail: String
 )
