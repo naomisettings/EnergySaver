@@ -80,7 +80,8 @@ class MedallesFragment : Fragment() {
         val query = despesaConsumFirestore.whereEqualTo("mail", mail).get()
             .addOnSuccessListener { document ->
                 val despesaConsumDC = document.toObjects(DespesaConsumDC::class.java)
-                if (despesaConsumDC.toString().isEmpty()){
+                //Es comprova si el document despesa consum de l'usuari és null
+                if (!despesaConsumDC.isNullOrEmpty()){
                     //En cas que tingui com a true el camp mig any i false la medalla d'un any
                     if (despesaConsumDC[0].medallaMigAny && !despesaConsumDC[0].medallaUnAny) {
                         binding.imgBttnMigAny.visibility = View.VISIBLE
@@ -229,14 +230,14 @@ class MedallesFragment : Fragment() {
 
 //Data class per a guardar el document despesaConsum
 data class DespesaConsumDC(
-    var aiguaConsum: Map<String, String> = mapOf(),
-    var llumConsum: Map<String, String> = mapOf(),
-    var gasConsum: Map<String, String> = mapOf(),
-    var gasoilConsum: Map<String, String> = mapOf(),
-    var aiguaDiners: Map<String, String> = mapOf(),
-    var llumDiners: Map<String, String> = mapOf(),
-    var gasDiners: Map<String, String> = mapOf(),
-    var gasoilDiners: Map<String, String> = mapOf(),
+    var aiguaConsum: Map<String, Double> = mapOf(),
+    var llumConsum: Map<String, Double> = mapOf(),
+    var gasConsum: Map<String, Double> = mapOf(),
+    var gasoilConsum: Map<String, Double> = mapOf(),
+    var aiguaDiners: Map<String, Double> = mapOf(),
+    var llumDiners: Map<String, Double> = mapOf(),
+    var gasDiners: Map<String, Double> = mapOf(),
+    var gasoilDiners: Map<String, Double> = mapOf(),
     var mail: String = "",
     var medallaMigAny: Boolean = false,
     var medallaUnAny: Boolean = false,
