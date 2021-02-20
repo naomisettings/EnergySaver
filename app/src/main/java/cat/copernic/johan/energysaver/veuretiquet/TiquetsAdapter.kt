@@ -1,5 +1,7 @@
 package cat.copernic.johan.energysaver.veuretiquet
 
+import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +11,11 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.ItemTiquetBinding
+import com.squareup.okhttp.internal.Internal.logger
 
 class TiquetsAdapter(
     private val mTiquets: ArrayList<Tiquet>,
-    private val cellClickListener: CellClickListener
+    private val cellClickListener: CellClickListener,
 ) : RecyclerView.Adapter<TiquetsAdapter.ViewHolder>() {
 
     private lateinit var binding: ItemTiquetBinding
@@ -26,6 +29,7 @@ class TiquetsAdapter(
         val seleccioCheckBox = itemView.findViewById<CheckBox>(R.id.tiquetSeleccionat)
     }
 
+    var checkedTiquets: ArrayList<Tiquet> = arrayListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TiquetsAdapter.ViewHolder {
         val context = parent.context
         val inflater = LayoutInflater.from(context)
@@ -35,6 +39,7 @@ class TiquetsAdapter(
         return ViewHolder(tiquetView)
     }
 
+    @SuppressLint("LongLogTag")
     override fun onBindViewHolder(holder: TiquetsAdapter.ViewHolder, position: Int) {
         val tiquet: Tiquet = mTiquets.get(position)
         val titolTextView = holder.titolTextView
@@ -51,15 +56,22 @@ class TiquetsAdapter(
         holder.itemView.setOnClickListener {
             cellClickListener.onCellClickListener(data)
         }
+        //seleccionar checkbox
+        holder.seleccioCheckBox.setOnClickListener {
+            if (chbx.isChecked) {
+                tiquet.seleccionat = true
+                checkedTiquets.add(tiquet)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
         return mTiquets.size
     }
 }
-
-open class CellClickListener(val clickListener: (idTiquet: String, titol: String, descrpicio: String, imatge: String) -> Unit){
-    fun onCellClickListener(data: Tiquet){
+//Veure si s'ha clicat en un tiquet
+open class CellClickListener(val clickListener: (idTiquet: String, titol: String, descrpicio: String, imatge: String) -> Unit) {
+    fun onCellClickListener(data: Tiquet) {
         clickListener(data.idTiquet, data.titol, data.descripcio, data.imatge)
 
     }

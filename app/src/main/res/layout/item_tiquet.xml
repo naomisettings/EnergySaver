@@ -28,25 +28,28 @@
 
             <TextView
                 android:id="@+id/titolTiquet"
-                android:layout_width="280dp"
+                android:layout_width="239dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:tiquetQualityString="@{tiquet}"
-                />
+                android:textColor="@color/TitolColor"
+                android:textSize="18sp"
+                app:tiquetQualityString="@{tiquet}" />
 
             <TextView
                 android:id="@+id/descripcioTiquet"
-                android:layout_width="280dp"
+                android:layout_width="238dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_weight="1"
-                app:tiquetQualityString="@{tiquet}"/>
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:tiquetQualityString="@{tiquet}" />
 
             <CheckBox
                 android:id="@+id/tiquetSeleccionat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="300dp"
+                android:layout_marginStart="250dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:textSize="12sp" />
