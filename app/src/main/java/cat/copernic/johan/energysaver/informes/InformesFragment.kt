@@ -88,19 +88,40 @@ class InformesFragment : Fragment() {
     fun estalviadorPeriode(map: Map<String, Double>): Double{
         val llistaString = arrayListOf<String>()
         var llistaDates = arrayListOf<LocalDate>()
+        var datePrimera: LocalDate? = null
+        var dinersPrimera: Double = 0.0
+        var dinersSegona: Double = 0.0
+        var estalviData: Double
 
         for (x in map){
             llistaString.add(x.key)
         }
+
         llistaDates = getLlistaDates(llistaString)
 
+        for(x in map){
+            if(x.key == stringParser(getNearestDate(llistaDates, LocalDate.now()))){
+                dinersPrimera = x.value
+                datePrimera = dataParser(x.key)
+            }
 
+            if(x.key == stringParser(getNearestDate(llistaDates, datePrimera)) && datePrimera != null){
+                dinersSegona = x.value
+            }
+        }
+
+        return dinersPrimera - dinersSegona
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun dataParser(data: String): LocalDate{
         val formatCorrecte = data.replace(".", "-")
         return LocalDate.parse(formatCorrecte, DateTimeFormatter.ISO_DATE)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun stringParser(data: LocalDate): String{
+        return data.toString().replace("-", ".")
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -115,20 +136,22 @@ class InformesFragment : Fragment() {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun getNearestDate(dates: ArrayList<LocalDate>, targetDate: LocalDate): LocalDate{
+    fun getNearestDate(dates: ArrayList<LocalDate>, targetDate: LocalDate?): LocalDate{
         var nearestDate = LocalDate.now()
-        var diff = 1298724
+        if(targetDate != null){
+            var diff = 999999
 
-        for (x in dates) {
-            var diffAux: Int
-            diffAux = x.compareTo(targetDate)
+            for (x in dates) {
+                var diffAux: Int
+                diffAux = x.compareTo(targetDate)
 
-            if(diff == -1){
-                nearestDate = x
-            }
+                if(diff == 999999){
+                    nearestDate = x
+                }
 
-            if(diffAux > diff){
-                nearestDate = x
+                if(diffAux > diff){
+                    nearestDate = x
+                }
             }
         }
         return nearestDate
