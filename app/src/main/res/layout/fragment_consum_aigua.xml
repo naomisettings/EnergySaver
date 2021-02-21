@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:fontFamily="@font/asap_bold"
-            android:text="Introdueix el consum"
+            android:text="@string/introdueix_el_consum"
             android:textColor="@color/TitolColor"
             android:textSize="@dimen/CampsSize"
             app:layout_constraintBaseline_toBaselineOf="@+id/editTextConsumAigua"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:fontFamily="@font/asap_bold"
-            android:text="Introdueix l'import"
+            android:text="@string/introdueix_l_import"
             android:textColor="@color/TitolColor"
             android:textSize="@dimen/CampsSize"
             app:layout_constraintBaseline_toBaselineOf="@+id/editTextImportAigua"
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:fontFamily="@font/asap_bold"
-            android:text="Data Factura"
+            android:text="@string/data_factura"
             android:textColor="@color/TitolColor"
             android:textSize="@dimen/CampsSize"
             app:layout_constraintBaseline_toBaselineOf="@+id/editTextDataAigua"
@@ -55,11 +55,12 @@
             android:ems="10"
             android:fontFamily="@font/asap_bold"
             android:gravity="center"
-            android:hint="m3"
+            android:hint="@string/m3"
             android:inputType="number|numberDecimal"
             android:textSize="@dimen/CampsSize"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewAigua" />
+            app:layout_constraintTop_toBottomOf="@+id/imageViewAigua"
+            android:autofillHints="" />
 
         <EditText
             android:id="@+id/editTextImportAigua"
@@ -74,7 +75,8 @@
             android:inputType="number|numberDecimal"
             android:textSize="@dimen/CampsSize"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextConsumAigua" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextConsumAigua"
+            android:autofillHints="" />
 
         <EditText
             android:id="@+id/editTextDataAigua"
@@ -82,11 +84,16 @@
             android:layout_height="40dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="30dp"
+            android:clickable="true"
             android:ems="10"
+            android:focusable="false"
             android:gravity="center"
-            android:inputType="textPersonName"
+            android:hint="@string/data"
+            android:inputType="date"
+            android:textSize="@dimen/CampsSize"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextImportAigua" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextImportAigua"
+            android:autofillHints="" />
 
         <Button
             android:id="@+id/btnConfirmarConsumAigua"
@@ -96,7 +103,7 @@
             android:layout_marginTop="40dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="80dp"
-            android:text="Confirmar"
+            android:text="@string/btnConfirmar"
             android:textSize="@dimen/btnTextSize"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -109,6 +116,7 @@
             android:layout_width="130dp"
             android:layout_height="101dp"
             android:layout_marginTop="50dp"
+            android:contentDescription="@string/defaultcd"
             android:src="@drawable/waterdrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

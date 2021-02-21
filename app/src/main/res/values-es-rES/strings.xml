@@ -91,4 +91,9 @@
     <string name="txtViewSenseResposta">Esperando la respuesta...</string>
     <string name="borrarTiquet">Selecciona algún tíquet</string>
     <string name="tempsBorrarTiquet">Solo puedes borrar tíquets 30 minutos depués</string>
+    <string name="introdueix_el_consum">Introduce el consumo</string>
+    <string name="introdueix_l_import">Introduce el importe</string>
+    <string name="data_factura">Fecha Factura</string>
+    <string name="data">Fecha</string>
+    <string name="llitres">litros</string>
 </resources>

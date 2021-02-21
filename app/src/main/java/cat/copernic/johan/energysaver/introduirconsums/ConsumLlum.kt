@@ -1,5 +1,6 @@
 package cat.copernic.johan.energysaver.introduirconsums
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentConsumLlumBinding
+import cat.copernic.johan.energysaver.utils.DatePickerFragment
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -42,8 +44,21 @@ class ConsumLlum : Fragment() {
             }
 
         }
+        binding.editTextDataLLum.setOnClickListener { showDatePickerDialog() }
 
         return binding.root
+    }
+
+    //funcio per capturar el DataPicker
+    private fun showDatePickerDialog() {
+        val newFragment = DatePickerFragment.newInstance(DatePickerDialog.OnDateSetListener { _, year, month, day ->
+            // +1 perque Gener es zero
+
+            val selectedDate = year.toString() + "." + "0" + (month + 1) + "." + day
+            binding.editTextDataLLum.setText(selectedDate)
+        })
+
+        newFragment.show(requireActivity().supportFragmentManager, "datePicker")
     }
 
     fun guardarConsum() {
