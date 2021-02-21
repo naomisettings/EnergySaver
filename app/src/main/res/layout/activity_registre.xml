@@ -69,6 +69,7 @@
 
     <Button
         android:id="@+id/btnConfirmarRegistre"
+        style="@style/Bottons"
         android:layout_width="153dp"
         android:layout_height="43dp"
         android:layout_marginBottom="16dp"
@@ -84,6 +85,7 @@
 
     <TextView
         android:id="@+id/txtNom"
+        style="@style/TextViews"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -96,6 +98,7 @@
 
     <TextView
         android:id="@+id/txtCognoms"
+        style="@style/TextViews"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -108,6 +111,7 @@
 
     <TextView
         android:id="@+id/txtNickname"
+        style="@style/TextViews"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -120,6 +124,7 @@
 
     <TextView
         android:id="@+id/txtAdreca"
+        style="@style/TextViews"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -132,6 +137,7 @@
 
     <TextView
         android:id="@+id/txtPoblacio"
+        style="@style/TextViews"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -140,9 +146,7 @@
         android:textColor="@color/TitolColor"
         android:textSize="@dimen/CampsSize"
         app:layout_constraintBaseline_toBaselineOf="@+id/editTextPoblacio"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteX="34dp"
-        tools:layout_editor_absoluteY="468dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/txtContrasenyaRegistre"

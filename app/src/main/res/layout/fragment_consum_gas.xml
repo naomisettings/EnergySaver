@@ -12,6 +12,7 @@
 
         <TextView
             android:id="@+id/textViewConsumGas"
+            style="@style/TextViews"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -24,6 +25,7 @@
 
         <TextView
             android:id="@+id/textViewImportGas"
+            style="@style/TextViews"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -36,6 +38,7 @@
 
         <TextView
             android:id="@+id/textViewDataGas"
+            style="@style/TextViews"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -83,6 +86,7 @@
 
 
             android:id="@+id/btnConfirmarConsumGas"
+            style="@style/Bottons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"

@@ -65,11 +65,9 @@
             android:background="@color/BtnColor"
             android:gravity="center"
             android:text="@string/btnConfirmar"
-            android:textAlignment="center"
-            android:textColor="@color/textBtnColor"
-            android:textSize="@dimen/btnTextSize"
             app:layout_constraintBaseline_toBaselineOf="@+id/btnBaixaModificar"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            style="@style/Bottons" />
 
         <EditText
             android:id="@+id/editTextPoblacioModificar"
@@ -220,12 +218,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:fontFamily="@font/asap_bold"
             android:text="@string/btnNom"
-            android:textColor="@color/TitolColor"
-            android:textSize="@dimen/CampsSize"
             app:layout_constraintBaseline_toBaselineOf="@+id/editTextNomModificar"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            style="@style/TextViews" />
 
         <TextView
             android:id="@+id/txtModificar"

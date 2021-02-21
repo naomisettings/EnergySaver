@@ -12,6 +12,7 @@
 
         <TextView
             android:id="@+id/textViewConsumLlum"
+            style="@style/TextViews"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -24,6 +25,7 @@
 
         <TextView
             android:id="@+id/textViewImportLlum"
+            style="@style/TextViews"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -36,6 +38,7 @@
 
         <TextView
             android:id="@+id/textViewDataLlum"
+            style="@style/TextViews"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -97,6 +100,7 @@
 
         <Button
             android:id="@+id/btnConfirmarConsumLlum"
+            style="@style/Bottons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
