@@ -1,21 +1,21 @@
 package cat.copernic.johan.energysaver.informes
 
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentInformesBinding
 import cat.copernic.johan.energysaver.medalles.DespesaConsumDC
-import cat.copernic.johan.energysaver.seleccio.Energies
-import cat.copernic.johan.energysaver.veuretiquet.Tiquet
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class InformesFragment : Fragment() {
@@ -44,6 +44,7 @@ class InformesFragment : Fragment() {
                     var gasDiners = mapOf<String, Double>()
                     var consumGasoil =  mapOf<String, Double>()
                     var gasoilDiners = mapOf<String, Double>()
+                    var dinersTotal = mapOf<String, Double>()
 
                     val dadesEnergia = document.toObjects(DespesaConsumDC::class.java)
                     consumAigua = dadesEnergia[0].aiguaConsum
@@ -83,7 +84,53 @@ class InformesFragment : Fragment() {
         return estalviat
     }
 
-    fun estalviadorPeriode(map: Map<String, Double>, periode: Int): Double{
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun estalviadorPeriode(map: Map<String, Double>): Double{
+        val llistaString = arrayListOf<String>()
+        var llistaDates = arrayListOf<LocalDate>()
 
+        for (x in map){
+            llistaString.add(x.key)
+        }
+        llistaDates = getLlistaDates(llistaString)
+
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun dataParser(data: String): LocalDate{
+        val formatCorrecte = data.replace(".", "-")
+        return LocalDate.parse(formatCorrecte, DateTimeFormatter.ISO_DATE)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getLlistaDates(llista: ArrayList<String>): ArrayList<LocalDate>{
+        val llistaCorrecte = arrayListOf<LocalDate>()
+
+        for (x in llista){
+            var data = dataParser(x)
+            llistaCorrecte.add(data)
+        }
+        return llistaCorrecte
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getNearestDate(dates: ArrayList<LocalDate>, targetDate: LocalDate): LocalDate{
+        var nearestDate = LocalDate.now()
+        var diff = 1298724
+
+        for (x in dates) {
+            var diffAux: Int
+            diffAux = x.compareTo(targetDate)
+
+            if(diff == -1){
+                nearestDate = x
+            }
+
+            if(diffAux > diff){
+                nearestDate = x
+            }
+        }
+        return nearestDate
     }
 }
