@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EnergySaver</string>
+    <string name="app_name">Energy Saver</string>
     <string name="correu">Adreça electrònica</string>
     <string name="correu_el_ctronic">correu elèctronic</string>
     <string name="contrasenya">Contrasenya</string>
@@ -90,6 +90,28 @@
     <string name="txtViewSenseResposta">Esperant la resposta...</string>
     <string name="borrarTiquet">Sel·lecciona algun tiquet!</string>
     <string name="tempsBorrarTiquet">Només pots esborrar tiquets 30 minuts després!</string>
+    <string name="FragmentMenu">Menú Principal</string>
+    <string name="FragmentInformes">Informes</string>
+    <string name="FragmentSeleccionarEnergia">Seleccionar Energia</string>
+    <string name="FragmentModificarUsuari">Modificar Usuari</string>
+    <string name="FragmentBaixaUsuari">Baixa Usuari</string>
+    <string name="FragmentRegistre">Registre</string>
+    <string name="ActivityLogin">Login</string>
+    <string name="FragmentTiquet">Tiquets</string>
+    <string name="FragmentNouTiquet">Nou Tiquet</string>
+    <string name="FragmentMedalles">Medalles</string>
+    <string name="FragmentMedallaEstalviador">Medalla Estalviador</string>
+    <string name="FragmentMedallaGranEstalviador">Medalla Gran Estalviador</string>
+    <string name="FragmentMedallaMigAny">Medalla Mig Any</string>
+    <string name="FragmentMedallaUnAny">Medalla Un Any</string>
+    <string name="FragmentVeureTiquet">Tiquet</string>
+    <string name="FragmentRespostaTiquet">Respondre</string>
+    <string name="FragmentMenuEnergies">Menú Energies</string>
+    <string name="FragmentConsumAigua">Aigua</string>
+    <string name="FragmentConsumGas">Gas</string>
+    <string name="FragmentConsumGasoil">Gasoil</string>
+    <string name="FragmentConsumLlum">Llum</string>
+
 
 
 </resources>
