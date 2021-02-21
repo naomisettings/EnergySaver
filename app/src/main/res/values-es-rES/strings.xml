@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">EnergySaver</string>
+    <string name="app_name">Energy Saver</string>
     <string name="correu">Correo electrónico</string>
     <string name="correu_el_ctronic">correo eléctronico</string>
     <string name="contrasenya">Contraseña</string>
@@ -91,4 +91,25 @@
     <string name="txtViewSenseResposta">Esperando la respuesta...</string>
     <string name="borrarTiquet">Selecciona algún tíquet</string>
     <string name="tempsBorrarTiquet">Solo puedes borrar tíquets 30 minutos depués</string>
+    <string name="FragmentMenu">Menú Principal</string>
+    <string name="FragmentInformes">Informes</string>
+    <string name="FragmentSeleccionarEnergia">Seleccionar Energía</string>
+    <string name="FragmentModificarUsuari">Modificar Usuario</string>
+    <string name="FragmentBaixaUsuari">Baja Usuario</string>
+    <string name="FragmentRegistre">Registro</string>
+    <string name="ActivityLogin">Login</string>
+    <string name="FragmentTiquet">Tickets</string>
+    <string name="FragmentNouTiquet">Nuevo Ticket</string>
+    <string name="FragmentMedalles">Medallas</string>
+    <string name="FragmentMedallaEstalviador">Medalla Ahorrador</string>
+    <string name="FragmentMedallaGranEstalviador">Medalla Gran Ahorrador</string>
+    <string name="FragmentMedallaMigAny">Medalla Medio Año</string>
+    <string name="FragmentMedallaUnAny">Medalla Un Año</string>
+    <string name="FragmentVeureTiquet">Ticket</string>
+    <string name="FragmentRespostaTiquet">Responder</string>
+    <string name="FragmentMenuEnergies">Menú Energías</string>
+    <string name="FragmentConsumAigua">Agua</string>
+    <string name="FragmentConsumGas">Gas</string>
+    <string name="FragmentConsumGasoil">Gasóleo</string>
+    <string name="FragmentConsumLlum">Luz</string>
 </resources>
