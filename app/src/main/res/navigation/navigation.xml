@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/menuPrincipalFragment"
         android:name="cat.copernic.johan.energysaver.principal.MenuPrincipalFragment"
-        android:label="MenuPrincipalFragment"
+        android:label="@string/FragmentMenu"
         tools:layout="@layout/fragment_menu_principal">
         <action
             android:id="@+id/action_menuPrincipalFragment_to_informesFragment"
@@ -29,12 +29,12 @@
     <fragment
         android:id="@+id/informesFragment"
         android:name="cat.copernic.johan.energysaver.informes.InformesFragment"
-        android:label="InformesFragment"
+        android:label="@string/FragmentInformes"
         tools:layout="@layout/fragment_informes"/>
     <fragment
         android:id="@+id/seleccionarEnergiaFragment"
         android:name="cat.copernic.johan.energysaver.seleccio.SeleccionarEnergiaFragment"
-        android:label="SeleccionarEnergiaFragment"
+        android:label="@string/FragmentSeleccionarEnergia"
         tools:layout="@layout/fragment_seleccionar_energia">
         <action
             android:id="@+id/action_seleccionarEnergiaFragment_to_menuPrincipalFragment"
@@ -43,7 +43,7 @@
     <fragment
         android:id="@+id/modificarUsuari"
         android:name="cat.copernic.johan.energysaver.modifica.ModificarUsuari"
-        android:label="fragment_modificar_usuari"
+        android:label="@string/FragmentModificarUsuari"
         tools:layout="@layout/fragment_modificar_usuari" >
         <action
             android:id="@+id/action_modificarUsuari_to_seleccionarEnergiaFragment"
@@ -61,7 +61,7 @@
     <fragment
         android:id="@+id/baixaUsuari"
         android:name="cat.copernic.johan.energysaver.baixa.BaixaUsuari"
-        android:label="fragment_baixa_usuari"
+        android:label="@string/FragmentBaixaUsuari"
         tools:layout="@layout/fragment_baixa_usuari" >
         <action
             android:id="@+id/action_baixaUsuari_to_authActivity"
@@ -70,17 +70,17 @@
     <activity
         android:id="@+id/registre"
         android:name="cat.copernic.johan.energysaver.registre.Registre"
-        android:label="activity_registre"
+        android:label="@string/FragmentRegistre"
         tools:layout="@layout/activity_registre" />
     <activity
         android:id="@+id/authActivity"
         android:name="cat.copernic.johan.energysaver.autentificacio.AuthActivity"
-        android:label="AuthActivity"
+        android:label="@string/ActivityLogin"
         tools:layout="@layout/activity_auth"/>
     <fragment
         android:id="@+id/veureFragment"
         android:name="cat.copernic.johan.energysaver.veuretiquet.VeureTiquetFragment"
-        android:label="veureFragment"
+        android:label="@string/FragmentTiquet"
         tools:layout="@layout/fragment_veure">
         <action
             android:id="@+id/action_veureFragment_to_obrirFragment"
@@ -104,12 +104,12 @@
     <fragment
         android:id="@+id/obrirFragment"
         android:name="cat.copernic.johan.energysaver.obrirtiquet.ObrirTiquetFragment"
-        android:label="ObrirFragment"
+        android:label="@string/FragmentNouTiquet"
         tools:layout="@layout/fragment_obrir"/>
     <fragment
         android:id="@+id/medallesFragment"
         android:name="cat.copernic.johan.energysaver.medalles.MedallesFragment"
-        android:label="MedallesFragment"
+        android:label="@string/FragmentMedalles"
         tools:layout="@layout/fragment_medalles">
         <action
             android:id="@+id/action_medallesFragment_to_medalla1Fragment"
@@ -127,27 +127,27 @@
     <fragment
         android:id="@+id/medalla1Fragment"
         android:name="cat.copernic.johan.energysaver.medalles.Medalla1Fragment"
-        android:label="Medalla1Fragment"
+        android:label="@string/FragmentMedallaEstalviador"
         tools:layout="@layout/fragment_medalla1"/>
     <fragment
         android:id="@+id/medalla2Fragment"
         android:name="cat.copernic.johan.energysaver.medalles.Medalla2Fragment"
-        android:label="Medalla2Fragment"
+        android:label="@string/FragmentMedallaGranEstalviador"
         tools:layout="@layout/fragment_medalla2"/>
     <fragment
         android:id="@+id/medalla3Fragment"
         android:name="cat.copernic.johan.energysaver.medalles.Medalla3Fragment"
-        android:label="Medalla3Fragment"
+        android:label="@string/FragmentMedallaMigAny"
         tools:layout="@layout/fragment_medalla3"/>
     <fragment
         android:id="@+id/medalla4Fragment"
         android:name="cat.copernic.johan.energysaver.medalles.Medalla4Fragment"
-        android:label="Medalla4Fragment"
+        android:label="@string/FragmentMedallaUnAny"
         tools:layout="@layout/fragment_medalla4"/>
     <fragment
         android:id="@+id/tiquetObertFragment"
         android:name="cat.copernic.johan.energysaver.tiquetobert.TiquetObertFragment"
-        android:label="TiquetObertFragment"
+        android:label="@string/FragmentVeureTiquet"
         tools:layout="@layout/fragment_tiquet_obert">
         <argument
             android:name="tiquetId"
@@ -168,7 +168,7 @@
     <fragment
         android:id="@+id/respostaTiquetFragment"
         android:name="cat.copernic.johan.energysaver.tiquetobert.RespostaTiquetFragment"
-        android:label="RespostaTiquetFragment"
+        android:label="@string/FragmentRespostaTiquet"
         tools:layout="@layout/fragment_resposta_tiquet">
     <argument
         android:name="idTiquet"
@@ -177,7 +177,7 @@
     <fragment
         android:id="@+id/menuEnergies"
         android:name="cat.copernic.johan.energysaver.introduirconsums.MenuEnergies"
-        android:label="fragment_menu_energies"
+        android:label="@string/FragmentMenuEnergies"
         tools:layout="@layout/fragment_menu_energies" >
         <action
             android:id="@+id/action_menuEnergies_to_consumLlum"
@@ -195,7 +195,7 @@
     <fragment
         android:id="@+id/consumAigua"
         android:name="cat.copernic.johan.energysaver.introduirconsums.ConsumAigua"
-        android:label="fragment_consum_aigua"
+        android:label="@string/FragmentConsumAigua"
         tools:layout="@layout/fragment_consum_aigua" >
         <action
             android:id="@+id/action_consumAigua_to_menuEnergies"
@@ -204,7 +204,7 @@
     <fragment
         android:id="@+id/consumGas"
         android:name="cat.copernic.johan.energysaver.introduirconsums.ConsumGas"
-        android:label="fragment_consum_gas"
+        android:label="@string/FragmentConsumGas"
         tools:layout="@layout/fragment_consum_gas" >
         <action
             android:id="@+id/action_consumGas_to_menuEnergies"
@@ -213,7 +213,7 @@
     <fragment
         android:id="@+id/consumGasoil"
         android:name="cat.copernic.johan.energysaver.introduirconsums.ConsumGasoil"
-        android:label="fragment_consum_gasoil"
+        android:label="@string/FragmentConsumGasoil"
         tools:layout="@layout/fragment_consum_gasoil" >
         <action
             android:id="@+id/action_consumGasoil_to_menuEnergies"
@@ -222,7 +222,7 @@
     <fragment
         android:id="@+id/consumLlum"
         android:name="cat.copernic.johan.energysaver.introduirconsums.ConsumLlum"
-        android:label="fragment_consum_llum"
+        android:label="@string/FragmentConsumLlum"
         tools:layout="@layout/fragment_consum_llum" >
         <action
             android:id="@+id/action_consumLlum_to_menuEnergies"

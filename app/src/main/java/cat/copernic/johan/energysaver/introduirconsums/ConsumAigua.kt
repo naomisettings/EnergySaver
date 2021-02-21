@@ -13,6 +13,7 @@ import cat.copernic.johan.energysaver.databinding.FragmentConsumAiguaBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.ktx.Firebase
 
 
@@ -57,7 +58,7 @@ class ConsumAigua : Fragment() {
         db.collection("despesaConsum").whereEqualTo("mail", mail).get()
             .addOnSuccessListener { doc ->
                 //guardem els usuaris que hem trovat a l'objecte Usuari (Data Class)
-                val usuariConsulta = doc.toObjects(DadesTotals::class.java)
+                val usuariConsulta = doc.toObjects(DadesTotalsLlum::class.java)
                 //si el mail de l'usuari identificat coincideix amb un dels guardarts
 
                 if (usuariConsulta.isNullOrEmpty()) {
@@ -130,7 +131,7 @@ class ConsumAigua : Fragment() {
                         //afegim un nou registre al document del usuari identificat
                         db.runTransaction { transaction ->
                             val snapshot = transaction.get(sfDocRef)
-                            transaction.set(sfDocRef, despesaConsum)
+                            transaction.set(sfDocRef, despesaConsum, SetOptions.merge())
 
                         }
 
