@@ -95,4 +95,25 @@
     <string name="data_factura">LL</string>
     <string name="data">LL</string>
     <string name="llitres">LL</string>
+    <string name="FragmentMenu">LL</string>
+    <string name="FragmentInformes">LL</string>
+    <string name="FragmentSeleccionarEnergia">LL</string>
+    <string name="FragmentModificarUsuari">LL</string>
+    <string name="FragmentBaixaUsuari">LL</string>
+    <string name="FragmentRegistre">LL</string>
+    <string name="FragmentTiquet">LL</string>
+    <string name="ActivityLogin">LL</string>
+    <string name="FragmentNouTiquet">LL</string>
+    <string name="FragmentMedalles">LL</string>
+    <string name="FragmentMedallaEstalviador">LL</string>
+    <string name="FragmentMedallaGranEstalviador">LL</string>
+    <string name="FragmentMedallaMigAny">LL</string>
+    <string name="FragmentMedallaUnAny">LL</string>
+    <string name="FragmentVeureTiquet">LL</string>
+    <string name="FragmentMenuEnergies">LL</string>
+    <string name="FragmentRespostaTiquet">LL</string>
+    <string name="FragmentConsumAigua">LL</string>
+    <string name="FragmentConsumGas">LL</string>
+    <string name="FragmentConsumGasoil">LL</string>
+    <string name="FragmentConsumLlum">LL</string>
 </resources>

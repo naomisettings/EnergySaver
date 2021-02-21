@@ -96,4 +96,25 @@
     <string name="data_factura">Fecha Factura</string>
     <string name="data">Fecha</string>
     <string name="llitres">litros</string>
+    <string name="FragmentMenu">Menú Principal</string>
+    <string name="FragmentInformes">Informes</string>
+    <string name="FragmentSeleccionarEnergia">Seleccionar Energía</string>
+    <string name="FragmentModificarUsuari">Modificar Usuario</string>
+    <string name="FragmentBaixaUsuari">Baja Usuario</string>
+    <string name="FragmentRegistre">Registro</string>
+    <string name="ActivityLogin">Login</string>
+    <string name="FragmentTiquet">Tickets</string>
+    <string name="FragmentNouTiquet">Nuevo Ticket</string>
+    <string name="FragmentMedalles">Medallas</string>
+    <string name="FragmentMedallaEstalviador">Medalla Ahorrador</string>
+    <string name="FragmentMedallaGranEstalviador">Medalla Gran Ahorrador</string>
+    <string name="FragmentMedallaMigAny">Medalla Medio Año</string>
+    <string name="FragmentMedallaUnAny">Medalla Un Año</string>
+    <string name="FragmentVeureTiquet">Ticket</string>
+    <string name="FragmentRespostaTiquet">Responder</string>
+    <string name="FragmentMenuEnergies">Menú Energías</string>
+    <string name="FragmentConsumAigua">Agua</string>
+    <string name="FragmentConsumGas">Gas</string>
+    <string name="FragmentConsumGasoil">Gasóleo</string>
+    <string name="FragmentConsumLlum">Luz</string>
 </resources>
