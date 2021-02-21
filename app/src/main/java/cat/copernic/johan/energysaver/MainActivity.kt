@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
         // Set up the listener for take photo button
 
-       /* imgBttnCamera.setOnClickListener {
+        /* imgBttnCamera.setOnClickListener {
             if (allPermissionsGranted()) {
                 startCamera()
             } else {
