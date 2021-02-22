@@ -16,7 +16,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import cat.copernic.johan.energysaver.R
-import kotlinx.android.synthetic.main.activity_obrir_tiquet.*
+import kotlinx.android.synthetic.main.activity_camerax.*
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -32,9 +32,15 @@ class ObrirTiquetActivity : AppCompatActivity() {
     private var cameraExecutor: ExecutorService? = null
     private lateinit var outputDirectory: File
 
+    init {
+       Singleton.nameImg
+       Singleton.nameImg
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_obrir_tiquet)
+        setContentView(R.layout.activity_camerax)
 
         // calling the action bar
         var actionBar = getSupportActionBar()
@@ -53,7 +59,11 @@ class ObrirTiquetActivity : AppCompatActivity() {
         }
 
         // Set up the listener for take photo button
-        camera_capture_button.setOnClickListener { takePhoto() }
+        camera_capture_button.setOnClickListener {
+            takePhoto()
+            Thread.sleep(1000)
+            finish()
+        }
 
         outputDirectory = getOutputDirectory()
 
@@ -95,15 +105,23 @@ class ObrirTiquetActivity : AppCompatActivity() {
         // Get a stable reference of the modifiable image capture use case
         val imageCapture = imageCapture ?: return
 
+        val nameFile = SimpleDateFormat(FILENAME_FORMAT, Locale.US
+        ).format(System.currentTimeMillis()) + ".jpg"
+
+
+        Singleton.nameImg = nameFile
+
         // Create time-stamped output file to hold the image
         val photoFile = File(
             outputDirectory,
-            SimpleDateFormat(FILENAME_FORMAT, Locale.US
-            ).format(System.currentTimeMillis()) + ".jpg")
+            nameFile
+            )
 
         // Create output options object which contains file + metadata
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
 
+        val savedUri = Uri.fromFile(photoFile)
+        Singleton.rutaImg = savedUri
         // Set up image capture listener, which is triggered after photo has
         // been taken
         imageCapture.takePicture(
@@ -113,7 +131,7 @@ class ObrirTiquetActivity : AppCompatActivity() {
                 }
 
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                    val savedUri = Uri.fromFile(photoFile)
+
                     val msg = "Photo capture succeeded: $savedUri"
                     Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, msg)
