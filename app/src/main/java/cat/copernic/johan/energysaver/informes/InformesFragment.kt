@@ -20,10 +20,11 @@ import java.util.*
 
 class InformesFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
+    private lateinit var binding: FragmentInformesBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = DataBindingUtil.inflate<FragmentInformesBinding>(inflater, R.layout.fragment_informes,
+        binding = DataBindingUtil.inflate<FragmentInformesBinding>(inflater, R.layout.fragment_informes,
         container, false)
         return binding.root
     }
@@ -44,11 +45,25 @@ class InformesFragment : Fragment() {
                     var gasDiners = mapOf<String, Double>()
                     var consumGasoil =  mapOf<String, Double>()
                     var gasoilDiners = mapOf<String, Double>()
-                    var dinersTotal = mapOf<String, Double>()
+                    var dinersTotal = arrayListOf<Double>()
 
                     val dadesEnergia = document.toObjects(DespesaConsumDC::class.java)
-                    consumAigua = dadesEnergia[0].aiguaConsum
-                    aiguaDiners = dadesEnergia[0].aiguaDiners
+                    val de = dadesEnergia[0]
+                    consumAigua = de.aiguaConsum
+                    aiguaDiners = de.aiguaDiners
+                    consumLlum = de.llumConsum
+                    llumDiners = de.llumDiners
+                    consumGas = de.gasConsum
+                    gasDiners = de.gasDiners
+                    consumGasoil = de.gasoilConsum
+                    gasoilDiners = de.gasoilDiners
+
+                    arrayListDeValors(dinersTotal, aiguaDiners)
+                    arrayListDeValors(dinersTotal, llumDiners)
+                    arrayListDeValors(dinersTotal, gasDiners)
+                    arrayListDeValors(dinersTotal, gasoilDiners)
+
+                    binding.txvTotal.setText(estalviadorTotal(dinersTotal).toString())
 
                     var estalviPeriode = 0
                     var estalviTotal = 0
@@ -72,14 +87,14 @@ class InformesFragment : Fragment() {
                 }
             }
     }
-    fun estalviadorTotal(map: Map<String, Double>): Double{
+    fun estalviadorTotal(list: ArrayList<Double>): Double{
         var aux: Double? = null
         var estalviat: Double = 0.0
-        for (item in map){
+        for (item in list){
             if(aux != null){
-                estalviat += (aux - item.value)
+                estalviat += (aux - item)
             }
-            aux = item.value
+            aux = item
         }
         return estalviat
     }
@@ -155,5 +170,11 @@ class InformesFragment : Fragment() {
             }
         }
         return nearestDate
+    }
+
+    fun arrayListDeValors(list: ArrayList<Double>, map: Map<String, Double>){
+        for(x in map){
+            list.add(x.value)
+        }
     }
 }
