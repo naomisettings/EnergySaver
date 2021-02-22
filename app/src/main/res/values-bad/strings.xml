@@ -90,6 +90,11 @@
     <string name="txtViewSenseResposta">LL</string>
     <string name="borrarTiquet">LL</string>
     <string name="tempsBorrarTiquet">LL</string>
+    <string name="introdueix_el_consum">LL</string>
+    <string name="introdueix_l_import">LL</string>
+    <string name="data_factura">LL</string>
+    <string name="data">LL</string>
+    <string name="llitres">LL</string>
     <string name="FragmentMenu">LL</string>
     <string name="FragmentInformes">LL</string>
     <string name="FragmentSeleccionarEnergia">LL</string>

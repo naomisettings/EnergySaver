@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Energy Saver</string>
+    <string name="app_name">EnergySaver</string>
     <string name="correu">Adreça electrònica</string>
     <string name="correu_el_ctronic">correu elèctronic</string>
     <string name="contrasenya">Contrasenya</string>
@@ -90,6 +90,14 @@
     <string name="txtViewSenseResposta">Esperant la resposta...</string>
     <string name="borrarTiquet">Sel·lecciona algun tiquet!</string>
     <string name="tempsBorrarTiquet">Només pots esborrar tiquets 30 minuts després!</string>
+    <string name="introdueix_el_consum">Introdueix el consum</string>
+    <string name="introdueix_l_import">Introdueix import</string>
+    <string name="data_factura">Data Factura</string>
+    <string name="m3" translatable="false">m3</string>
+    <string name="Euro" translatable="false">€</string>
+    <string name="llitres">llitres</string>
+    <string name="kw" translatable="false">kw</string>
+    <string name="data">Data</string>
     <string name="FragmentMenu">Menú Principal</string>
     <string name="FragmentInformes">Informes</string>
     <string name="FragmentSeleccionarEnergia">Seleccionar Energia</string>
@@ -111,7 +119,6 @@
     <string name="FragmentConsumGas">Gas</string>
     <string name="FragmentConsumGasoil">Gasoil</string>
     <string name="FragmentConsumLlum">Llum</string>
-
 
 
 </resources>

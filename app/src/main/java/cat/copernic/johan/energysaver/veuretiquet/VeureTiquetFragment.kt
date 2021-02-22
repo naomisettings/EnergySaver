@@ -2,6 +2,7 @@ package cat.copernic.johan.energysaver.veuretiquet
 
 import android.content.ContentValues
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,8 +16,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import cat.copernic.johan.energysaver.MainActivity
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentVeureBinding
+import cat.copernic.johan.energysaver.obrirtiquet.ObrirTiquetActivity
 import cat.copernic.johan.energysaver.tiquetobert.TiquetDC
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
@@ -39,10 +42,19 @@ class VeureTiquetFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
-        var rvTiquets = binding.rcvTiquets
+        binding.bttnNouTiquet.setOnClickListener { view: View ->
+            //view.findNavController().navigate(R.id.action_veureFragment_to_obrirFragment)
+            val intent = Intent(activity, ObrirTiquetActivity::class.java)
+            startActivity(intent)
+        }
 
+
+
+        var rvTiquets = binding.rcvTiquets
         veureRecyclerView(rvTiquets)
         var sb = StringBuilder()
+
+        //Borrar tiquets
         binding.bttnBorrarTIquet.setOnClickListener {
 
             if (adapter.checkedTiquets.size > 0) {
@@ -52,7 +64,7 @@ class VeureTiquetFragment : Fragment() {
                         .addOnSuccessListener { document ->
                             for (doc in document) {
 
-                                Log.d("prova33",doc.get("hora").toString())
+                                Log.d("prova33", doc.get("hora").toString())
 
                                 db.collection("tiquet").document(doc.id)
                                     .delete()
@@ -82,10 +94,6 @@ class VeureTiquetFragment : Fragment() {
             }
 
         }
-        binding.bttnNouTiquet.setOnClickListener { view: View ->
-            view.findNavController().navigate(R.id.action_veureFragment_to_obrirFragment)
-        }
-
 
         return binding.root
     }

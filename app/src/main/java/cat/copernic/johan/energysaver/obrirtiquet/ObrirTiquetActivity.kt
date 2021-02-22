@@ -1,19 +1,21 @@
 package cat.copernic.johan.energysaver.obrirtiquet
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.ContentValues.TAG
+import android.content.ContentValues
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import cat.copernic.johan.energysaver.R
-import cat.copernic.johan.energysaver.databinding.FragmentObrirBinding
+import cat.copernic.johan.energysaver.databinding.ActivityObrirTiquetBinding
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.snackbar.Snackbar
@@ -22,12 +24,16 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
-class ObrirTiquetFragment : Fragment() {
+typealias LumaListener = (luma: Double) -> Unit
 
-    private lateinit var binding: FragmentObrirBinding
+class ObrirTiquetActivity : AppCompatActivity() {
+
     val db = FirebaseFirestore.getInstance()
     var titol: String = ""
     var descripcio: String = ""
@@ -36,11 +42,16 @@ class ObrirTiquetFragment : Fragment() {
     //nom arxiu de la imatge a pujar al storage
     var fileName: String = ""
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_obrir, container, false)
+    private lateinit var binding: ActivityObrirTiquetBinding
+    private lateinit var cameraExecutor: ExecutorService
+    private lateinit var outputDirectory: File
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_obrir_tiquet)
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_obrir_tiquet)
+
 
         //Pujar imatge al storage
         binding.imgBttnCarregaImatge.setOnClickListener {
@@ -53,14 +64,54 @@ class ObrirTiquetFragment : Fragment() {
 
         }
 
-        binding.imgBttnCamera.setOnClickListener{
+        // Set up the listener for take photo button
+        binding.imgBttnCamera.setOnClickListener {
+            if (allPermissionsGranted()) {
+                startCamera()
+            } else {
+                ActivityCompat.requestPermissions(
+                    this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
+                )
+            }
 
+
+            takePhoto()
+            outputDirectory = getOutputDirectory()
+
+            cameraExecutor = Executors.newSingleThreadExecutor()
         }
-
-
-
-        return binding.root
     }
+
+    private fun takePhoto() {}
+
+    fun startCamera() {}
+
+    fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
+        ContextCompat.checkSelfPermission(
+            baseContext, it
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    fun getOutputDirectory(): File {
+        val mediaDir = externalMediaDirs.firstOrNull()?.let {
+            File(it, resources.getString(R.string.app_name)).apply { mkdirs() }
+        }
+        return if (mediaDir != null && mediaDir.exists())
+            mediaDir else filesDir
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cameraExecutor.shutdown()
+    }
+
+    companion object {
+        private const val TAG = "CameraXBasic"
+        private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
+        private const val REQUEST_CODE_PERMISSIONS = 10
+        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+    }
+
 
     fun rebreDades(view: View) {
 
@@ -94,7 +145,7 @@ class ObrirTiquetFragment : Fragment() {
                     }
                 }
                 .addOnFailureListener { exception ->
-                    Log.w(TAG, "Error getting documents: ", exception)
+                    Log.w(ContentValues.TAG, "Error getting documents: ", exception)
                 }
         }
     }
@@ -133,10 +184,10 @@ class ObrirTiquetFragment : Fragment() {
         db.collection("tiquet")
             .add(tiquet)
             .addOnSuccessListener { documentReference ->
-                Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+                Log.d(ContentValues.TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
             }
             .addOnFailureListener { e ->
-                Log.w(TAG, "Error adding document", e)
+                Log.w(ContentValues.TAG, "Error adding document", e)
             }
     }
 
@@ -202,10 +253,10 @@ class ObrirTiquetFragment : Fragment() {
             })
     }
 }
-/*
+
 //Classe que correspon als camps de la col·lecció usuaris
 data class Usuari(
     var adreca: String = "", var cognoms: String = "", var contrasenya: String = "",
     var mail: String = "", var nickname: String = "", var nom: String = "",
     var poblacio: String = "", var telefon: String = ""
-)*/
+)

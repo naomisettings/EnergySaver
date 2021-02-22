@@ -116,6 +116,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imgBttnCarregaImatge" />
 
+            <ImageButton
+                android:id="@+id/imgBttnCamera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/defaultcd"
+                app:layout_constraintStart_toEndOf="@+id/imgBttnCarregaImatge"
+                app:layout_constraintTop_toBottomOf="@+id/txtViewCapturaTiquet"
+                app:srcCompat="@android:drawable/ic_menu_camera" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Energy Saver</string>
+    <string name="app_name">EnergySaver</string>
     <string name="correu">Correo electrónico</string>
     <string name="correu_el_ctronic">correo eléctronico</string>
     <string name="contrasenya">Contraseña</string>
@@ -91,6 +91,11 @@
     <string name="txtViewSenseResposta">Esperando la respuesta...</string>
     <string name="borrarTiquet">Selecciona algún tíquet</string>
     <string name="tempsBorrarTiquet">Solo puedes borrar tíquets 30 minutos depués</string>
+    <string name="introdueix_el_consum">Introduce el consumo</string>
+    <string name="introdueix_l_import">Introduce el importe</string>
+    <string name="data_factura">Fecha Factura</string>
+    <string name="data">Fecha</string>
+    <string name="llitres">litros</string>
     <string name="FragmentMenu">Menú Principal</string>
     <string name="FragmentInformes">Informes</string>
     <string name="FragmentSeleccionarEnergia">Seleccionar Energía</string>
