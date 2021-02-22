@@ -53,11 +53,11 @@ class ObrirTiquetFragment : Fragment() {
 
         }
 
-        binding.imgBttnCamera.setOnClickListener{
+        binding.imgBttnCamera.setOnClickListener {
+            val intent = Intent(activity, ObrirTiquetActivity::class.java).apply{}
+            startActivity(intent)
 
         }
-
-
 
         return binding.root
     }
@@ -202,10 +202,11 @@ class ObrirTiquetFragment : Fragment() {
             })
     }
 }
-/*
+
+
 //Classe que correspon als camps de la col·lecció usuaris
 data class Usuari(
     var adreca: String = "", var cognoms: String = "", var contrasenya: String = "",
     var mail: String = "", var nickname: String = "", var nom: String = "",
     var poblacio: String = "", var telefon: String = ""
-)*/
+)

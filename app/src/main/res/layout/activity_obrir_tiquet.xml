@@ -1,130 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
 
+        <Button
+            android:id="@+id/camera_capture_button"
+            android:layout_width="123dp"
+            android:layout_height="79dp"
+            android:layout_marginBottom="50dp"
+            android:elevation="2dp"
+            android:scaleType="fitCenter"
+            android:text="@string/bttnCamera"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
 
-        <TextView
-            android:id="@+id/txtViewObrirTiquet"
-            style="@style/ColorsBasicsAplicacio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="35dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/txtViewObrirTiquet"
+        <androidx.camera.view.PreviewView
+            android:id="@+id/viewFinder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/txtViewTemaTiquet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="25dp"
-            android:fontFamily="@font/asap_bold"
-            android:text="@string/txtViewTemaTiquet"
-            android:textColor="@color/TitolColor"
-            android:textSize="@dimen/CampsSize"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtViewObrirTiquet" />
-
-        <EditText
-            android:id="@+id/editTextTemaTiquet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="10dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/editTxtTemaTiquet"
-            android:inputType="textPersonName"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtViewTemaTiquet" />
-
-        <TextView
-            android:id="@+id/txtViewDescripcioTiquet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="25dp"
-            android:fontFamily="@font/asap_bold"
-            android:text="@string/txtViewDescripcioTiquet"
-            android:textColor="@color/TitolColor"
-            android:textSize="@dimen/CampsSize"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTemaTiquet" />
-
-        <EditText
-            android:id="@+id/editTxtDescripcioTiquet"
-            android:layout_width="296dp"
-            android:layout_height="172dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="10dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:gravity="start|top"
-            android:hint="@string/editTxtDescripcioTiquet"
-            android:inputType="textMultiLine"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtViewDescripcioTiquet" />
-
-        <TextView
-            android:id="@+id/txtViewCapturaTiquet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="25dp"
-            android:fontFamily="@font/asap_bold"
-            android:text="@string/txtViewCapturaTiquet"
-            android:textColor="@color/TitolColor"
-            android:textSize="@dimen/CampsSize"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTxtDescripcioTiquet" />
-
-        <ImageButton
-            android:id="@+id/imgBttnCarregaImatge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="10dp"
-            android:contentDescription="@string/descrpitionImageBttnCaptura"
-            android:src="@android:drawable/ic_menu_set_as"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtViewCapturaTiquet" />
-
-        <Button
-            android:id="@+id/bttnConfirmarTiquet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginTop="25dp"
-            android:text="@string/bttnConfirmarTiquet"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgBttnCarregaImatge" />
-
-        <ImageButton
-            android:id="@+id/imgBttnCamera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="10dp"
-            android:contentDescription="@string/defaultcd"
-            app:layout_constraintStart_toEndOf="@+id/imgBttnCarregaImatge"
-            app:layout_constraintTop_toBottomOf="@+id/txtViewCapturaTiquet"
-            app:srcCompat="@android:drawable/ic_menu_camera" />
-
-        <!--  <androidx.camera.view.PreviewView
-              android:id="@+id/viewFinder"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent" />-->
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-</layout>

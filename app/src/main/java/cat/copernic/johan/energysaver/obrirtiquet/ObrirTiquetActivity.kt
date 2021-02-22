@@ -1,33 +1,22 @@
 package cat.copernic.johan.energysaver.obrirtiquet
 
 import android.Manifest
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.ContentValues
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageCaptureException
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
 import cat.copernic.johan.energysaver.R
-import cat.copernic.johan.energysaver.databinding.ActivityObrirTiquetBinding
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.UploadTask
+import kotlinx.android.synthetic.main.activity_obrir_tiquet.*
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -38,15 +27,8 @@ typealias LumaListener = (luma: Double) -> Unit
 
 class ObrirTiquetActivity : AppCompatActivity() {
 
-    val db = FirebaseFirestore.getInstance()
-    var titol: String = ""
-    var descripcio: String = ""
-    private val GALLERY_REQUEST_CODE: Int = 101
+    private var imageCapture: ImageCapture? = null
 
-    //nom arxiu de la imatge a pujar al storage
-    var fileName: String = ""
-
-    private lateinit var binding: ActivityObrirTiquetBinding
     private var cameraExecutor: ExecutorService? = null
     private lateinit var outputDirectory: File
 
@@ -62,38 +44,21 @@ class ObrirTiquetActivity : AppCompatActivity() {
             actionBar.setDisplayHomeAsUpEnabled(true)
         }
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_obrir_tiquet)
-
-
-        //Pujar imatge al storage
-        binding.imgBttnCarregaImatge.setOnClickListener {
-            selectImageFromGallery()
-        }
-
-        //Botó confirmar que truca a la funció per inserir dades al firestore
-        binding.bttnConfirmarTiquet.setOnClickListener {
-            rebreDades(it)
-            finish()
-
+        // Request camera permissions
+        if (allPermissionsGranted()) {
+            startCamera()
+        } else {
+            ActivityCompat.requestPermissions(
+                this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
         }
 
         // Set up the listener for take photo button
-        binding.imgBttnCamera.setOnClickListener {
-            if (allPermissionsGranted()) {
-                startCamera()
-            } else {
-                ActivityCompat.requestPermissions(
-                    this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
-                )
-            }
+        camera_capture_button.setOnClickListener { takePhoto() }
 
-            takePhoto()
-            outputDirectory = getOutputDirectory()
+        outputDirectory = getOutputDirectory()
 
-            cameraExecutor = Executors.newSingleThreadExecutor()
-        }
+        cameraExecutor = Executors.newSingleThreadExecutor()
 
-        //onSupportNavigateUp()
     }
 
     //Mostrar back button toolbar
@@ -110,22 +75,86 @@ class ObrirTiquetActivity : AppCompatActivity() {
     //Permisos per la camera
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<String>, grantResults:
-        IntArray) {
+        IntArray
+    ) {
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (allPermissionsGranted()) {
                 startCamera()
             } else {
-                Toast.makeText(this,
+                Toast.makeText(
+                    this,
                     "Permissions not granted by the user.",
-                    Toast.LENGTH_SHORT).show()
+                    Toast.LENGTH_SHORT
+                ).show()
                 finish()
             }
         }
     }
 
-    private fun takePhoto() {}
+    private fun takePhoto() {
+        // Get a stable reference of the modifiable image capture use case
+        val imageCapture = imageCapture ?: return
 
-    fun startCamera() {}
+        // Create time-stamped output file to hold the image
+        val photoFile = File(
+            outputDirectory,
+            SimpleDateFormat(FILENAME_FORMAT, Locale.US
+            ).format(System.currentTimeMillis()) + ".jpg")
+
+        // Create output options object which contains file + metadata
+        val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
+
+        // Set up image capture listener, which is triggered after photo has
+        // been taken
+        imageCapture.takePicture(
+            outputOptions, ContextCompat.getMainExecutor(this), object : ImageCapture.OnImageSavedCallback {
+                override fun onError(exc: ImageCaptureException) {
+                    Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
+                }
+
+                override fun onImageSaved(output: ImageCapture.OutputFileResults) {
+                    val savedUri = Uri.fromFile(photoFile)
+                    val msg = "Photo capture succeeded: $savedUri"
+                    Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, msg)
+                }
+            })
+    }
+
+    fun startCamera() {
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
+
+        cameraProviderFuture.addListener(Runnable {
+            // Used to bind the lifecycle of cameras to the lifecycle owner
+            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
+
+            // Preview
+            val preview = Preview.Builder()
+                .build()
+                .also {
+                    it.setSurfaceProvider(viewFinder.createSurfaceProvider())
+                }
+
+            imageCapture = ImageCapture.Builder()
+                .build()
+
+            // Select back camera as a default
+            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+
+            try {
+                // Unbind use cases before rebinding
+                cameraProvider.unbindAll()
+
+                // Bind use cases to camera
+                cameraProvider.bindToLifecycle(
+                    this, cameraSelector, preview, imageCapture)
+
+            } catch(exc: Exception) {
+                Log.e(TAG, "Use case binding failed", exc)
+            }
+
+        }, ContextCompat.getMainExecutor(this))
+    }
 
     fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(
@@ -152,153 +181,4 @@ class ObrirTiquetActivity : AppCompatActivity() {
         private const val REQUEST_CODE_PERMISSIONS = 10
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
     }
-
-    //Funció per a rebre dades dels editText i consulta per guardar el mail de l'usuari loginat
-    fun rebreDades(view: View) {
-
-        //Agafar dades del editText titol i descripció
-        binding.apply {
-            titol = editTextTemaTiquet.text.toString()
-            descripcio = editTxtDescripcioTiquet.text.toString()
-        }
-        //Comprova que els camps esitguin emplenats
-        if (titol.isEmpty() || descripcio.isEmpty()) {
-            Log.w("ObrirTiquetFragment", "Entra fun rebre dades")
-            Snackbar.make(view, R.string.campsBuitsToastObrirTiquet, Snackbar.LENGTH_LONG)
-                .show()
-        } else {
-
-            //Guarda les dades del usuari connectat a la constant user
-            val user = Firebase.auth.currentUser
-
-            //Guarda el mail del usuari que ha fet login
-            val mail = user?.email.toString()
-
-            //Consulta per extreure el mail per guardar-lo al document tiquet
-            val usuaris = db.collection("usuaris")
-            val query = usuaris.whereEqualTo("mail", mail).get()
-                .addOnSuccessListener { document ->
-                    if (document != null) {
-                        val usuari = document.toObjects(Usuari::class.java)
-                        val nickname = usuari[0].nickname
-
-                        guardarDadesFirestore(nickname, mail)
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    Log.w(ContentValues.TAG, "Error getting documents: ", exception)
-                }
-        }
-    }
-
-    //Guardar dades del tiquet al firestore
-    @SuppressLint("SimpleDateFormat")
-    fun guardarDadesFirestore(nickname: String, mail: String) {
-        //Extreu la data i hora del sistema per guardar al document tiquet
-        val id = UUID.randomUUID().toString()
-        val data = Calendar.getInstance().time
-        val formatterdt = SimpleDateFormat("yyyy.MM.dd")
-        val formatterhr = SimpleDateFormat("HH:mm:ss")
-        val formatedDate = formatterdt.format(data)
-        val formatedHour = formatterhr.format(data)
-
-        //Map per fer l'insert
-        val tiquet = hashMapOf(
-            "id" to id,
-            "mail" to mail,
-            "nickname" to nickname,
-            "data" to formatedDate,
-            "hora" to formatedHour,
-            "titol" to titol,
-            "descripcio" to descripcio,
-            "imatge" to fileName
-        )
-
-        Log.i("nomarxiu", fileName)
-
-        //Neteja dels camps tema i descripció
-        binding.apply {
-            editTextTemaTiquet.text.clear()
-            editTxtDescripcioTiquet.text.clear()
-        }
-
-        //Incerció a la col·lecció tiquet
-        db.collection("tiquet")
-            .add(tiquet)
-            .addOnSuccessListener { documentReference ->
-                Log.d(ContentValues.TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-            }
-            .addOnFailureListener { e ->
-                Log.w(ContentValues.TAG, "Error adding document", e)
-            }
-    }
-
-    private fun selectImageFromGallery() {
-
-        val intent = Intent()
-        intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(
-            Intent.createChooser(
-                intent,
-                "Please select..."
-            ),
-            GALLERY_REQUEST_CODE
-        )
-    }
-
-    //Generar uri per a la imatge
-    override fun onActivityResult(
-        requestCode: Int,
-        resultCode: Int,
-        data: Intent?
-    ) {
-        super.onActivityResult(
-            requestCode,
-            resultCode,
-            data
-        )
-
-        if (requestCode == GALLERY_REQUEST_CODE
-            && resultCode == Activity.RESULT_OK
-            && data != null
-            && data.data != null
-        ) {
-
-            // Get the Uri of data
-            val file_uri = data.data
-            if (file_uri != null) {
-                uploadImageToFirebase(file_uri)
-            }
-        }
-    }
-
-    //Pujar la imatge al storage
-    private fun uploadImageToFirebase(fileUri: Uri) {
-        //Generar un nom per a la imatge
-        fileName = UUID.randomUUID().toString() + ".jpg"
-
-        //val database = FirebaseDatabase.getInstance()
-        //Crear una referencia per pujar la imatge
-        val refStorage = FirebaseStorage.getInstance().reference.child("images/$fileName")
-
-        refStorage.putFile(fileUri)
-            .addOnSuccessListener(
-                OnSuccessListener<UploadTask.TaskSnapshot> { taskSnapshot ->
-                    taskSnapshot.storage.downloadUrl.addOnSuccessListener {
-                        val imageUrl = it.toString()
-                    }
-                })
-
-            ?.addOnFailureListener(OnFailureListener { e ->
-                print(e.message)
-            })
-    }
 }
-
-//Classe que correspon als camps de la col·lecció usuaris
-data class Usuari(
-    var adreca: String = "", var cognoms: String = "", var contrasenya: String = "",
-    var mail: String = "", var nickname: String = "", var nom: String = "",
-    var poblacio: String = "", var telefon: String = ""
-)
