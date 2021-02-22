@@ -10,10 +10,14 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.ActivityObrirTiquetBinding
 import com.google.android.gms.tasks.OnFailureListener
@@ -43,12 +47,20 @@ class ObrirTiquetActivity : AppCompatActivity() {
     var fileName: String = ""
 
     private lateinit var binding: ActivityObrirTiquetBinding
-    private lateinit var cameraExecutor: ExecutorService
+    private var cameraExecutor: ExecutorService? = null
     private lateinit var outputDirectory: File
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_obrir_tiquet)
+
+        // calling the action bar
+        var actionBar = getSupportActionBar()
+
+        // showing the back button in action bar
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true)
+        }
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_obrir_tiquet)
 
@@ -61,6 +73,7 @@ class ObrirTiquetActivity : AppCompatActivity() {
         //Botó confirmar que truca a la funció per inserir dades al firestore
         binding.bttnConfirmarTiquet.setOnClickListener {
             rebreDades(it)
+            finish()
 
         }
 
@@ -74,11 +87,39 @@ class ObrirTiquetActivity : AppCompatActivity() {
                 )
             }
 
-
             takePhoto()
             outputDirectory = getOutputDirectory()
 
             cameraExecutor = Executors.newSingleThreadExecutor()
+        }
+
+        //onSupportNavigateUp()
+    }
+
+    //Mostrar back button toolbar
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onContextItemSelected(item)
+    }
+
+    //Permisos per la camera
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<String>, grantResults:
+        IntArray) {
+        if (requestCode == REQUEST_CODE_PERMISSIONS) {
+            if (allPermissionsGranted()) {
+                startCamera()
+            } else {
+                Toast.makeText(this,
+                    "Permissions not granted by the user.",
+                    Toast.LENGTH_SHORT).show()
+                finish()
+            }
         }
     }
 
@@ -102,7 +143,7 @@ class ObrirTiquetActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        cameraExecutor.shutdown()
+        cameraExecutor?.shutdown()
     }
 
     companion object {
@@ -112,7 +153,7 @@ class ObrirTiquetActivity : AppCompatActivity() {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
     }
 
-
+    //Funció per a rebre dades dels editText i consulta per guardar el mail de l'usuari loginat
     fun rebreDades(view: View) {
 
         //Agafar dades del editText titol i descripció
@@ -133,7 +174,7 @@ class ObrirTiquetActivity : AppCompatActivity() {
             //Guarda el mail del usuari que ha fet login
             val mail = user?.email.toString()
 
-            //Consulta per extreure el nickname per guardar-lo al document tiquet
+            //Consulta per extreure el mail per guardar-lo al document tiquet
             val usuaris = db.collection("usuaris")
             val query = usuaris.whereEqualTo("mail", mail).get()
                 .addOnSuccessListener { document ->
@@ -150,6 +191,7 @@ class ObrirTiquetActivity : AppCompatActivity() {
         }
     }
 
+    //Guardar dades del tiquet al firestore
     @SuppressLint("SimpleDateFormat")
     fun guardarDadesFirestore(nickname: String, mail: String) {
         //Extreu la data i hora del sistema per guardar al document tiquet

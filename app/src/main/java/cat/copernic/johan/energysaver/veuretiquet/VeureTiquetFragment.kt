@@ -43,9 +43,11 @@ class VeureTiquetFragment : Fragment() {
         setHasOptionsMenu(true)
 
         binding.bttnNouTiquet.setOnClickListener { view: View ->
-            //view.findNavController().navigate(R.id.action_veureFragment_to_obrirFragment)
+           // view.findNavController().navigate(R.id.action_veureFragment_to_obrirTiquetActivity)
             val intent = Intent(activity, ObrirTiquetActivity::class.java)
             startActivity(intent)
+
+
         }
 
 
@@ -97,6 +99,7 @@ class VeureTiquetFragment : Fragment() {
 
         return binding.root
     }
+
 
     fun veureRecyclerView(rvTiquets: RecyclerView) {
         //Guarda les dades del usuari connectat a la constant user

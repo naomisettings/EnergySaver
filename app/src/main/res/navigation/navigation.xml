@@ -100,6 +100,9 @@
         <argument
             android:name="imatge"
             app:argType="string" />
+        <action
+            android:id="@+id/action_veureFragment_to_obrirTiquetActivity"
+            app:destination="@id/obrirTiquetActivity" />
     </fragment>
     <fragment
         android:id="@+id/obrirFragment"
@@ -228,4 +231,9 @@
             android:id="@+id/action_consumLlum_to_menuEnergies"
             app:destination="@id/menuEnergies" />
     </fragment>
+    <activity
+        android:id="@+id/obrirTiquetActivity"
+        android:name="cat.copernic.johan.energysaver.obrirtiquet.ObrirTiquetActivity"
+        android:label="ObrirTiquetActivity"
+        tools:layout="@layout/activity_obrir_tiquet"/>
 </navigation>
