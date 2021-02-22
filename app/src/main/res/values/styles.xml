@@ -20,6 +20,17 @@
 
     </style>
 
+    <style name="Bottons">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/textBtnColor</item>
+        <item name="android:textSize">@dimen/btnTextSize</item>
+    </style>
+
+    <style name="TextViews">
+        <item name="android:fontFamily">@font/asap_bold</item>
+        <item name="android:textColor">@color/TitolColor</item>
+        <item name="android:textSize">@dimen/CampsSize</item>
+    </style>
 
 
 </resources>
