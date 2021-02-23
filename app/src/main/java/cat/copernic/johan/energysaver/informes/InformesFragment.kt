@@ -20,16 +20,18 @@ import java.util.*
 
 class InformesFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
-    private lateinit var binding: FragmentInformesBinding
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate<FragmentInformesBinding>(inflater, R.layout.fragment_informes,
+        val binding = DataBindingUtil.inflate<FragmentInformesBinding>(inflater, R.layout.fragment_informes,
         container, false)
+        omplirDades(binding)
         return binding.root
     }
 
-    fun omplirDades(){
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun omplirDades(binding: FragmentInformesBinding){
         val user = Firebase.auth.currentUser
         val mail = user?.email.toString()
 
@@ -65,25 +67,10 @@ class InformesFragment : Fragment() {
 
                     binding.txvTotal.setText(estalviadorTotal(dinersTotal).toString())
 
-                    var estalviPeriode = 0
-                    var estalviTotal = 0
-                    var percentatgeTotal = 0
-
-                    var aiguaEstalviPeriode = 0
-                    var aiguaEstalviTotal = 0
-                    var aiguaPercentatgeTotal = 0
-
-                    var llumEstalviPeriode = 0
-                    var llumEstalviTotal = 0
-                    var llumPercentatgeTotal = 0
-
-                    var gasEstalviPeriode = 0
-                    var gasEstalviTotal = 0
-                    var gasPercentatgeTotal = 0
-
-                    var gasoilEstalviPeriode = 0
-                    var gasoilEstalviTotal = 0
-                    var gasoilPercentatgeTotal = 0
+                    binding.btnAigua.setOnClickListener{view: View ->
+                        binding.txvTotal.setText(estalviadorTotal(aiguaDiners).toString())
+                        binding.txvPeriodeInfo.setText(estalviadorPeriode(aiguaDiners).toString())
+                    }
                 }
             }
     }
@@ -96,6 +83,18 @@ class InformesFragment : Fragment() {
             }
             aux = item
         }
+        return -estalviat
+    }
+
+    fun estalviadorTotal(map: Map<String, Double>): Double{
+        var aux: Double? = null
+        var estalviat: Double = 0.0
+        for (item in map){
+            if(aux != null){
+                estalviat += (aux - item.value)
+            }
+            aux = item.value
+        }
         return estalviat
     }
 
@@ -104,8 +103,8 @@ class InformesFragment : Fragment() {
         val llistaString = arrayListOf<String>()
         var llistaDates = arrayListOf<LocalDate>()
         var datePrimera: LocalDate? = null
-        var dinersPrimera: Double = 0.0
-        var dinersSegona: Double = 0.0
+        var dinersPrimera: Double = 2.0
+        var dinersSegona: Double = 5.0
         var estalviData: Double
 
         for (x in map){
