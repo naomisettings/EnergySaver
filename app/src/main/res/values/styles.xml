@@ -32,5 +32,10 @@
         <item name="android:textSize">@dimen/CampsSize</item>
     </style>
 
+    <style name="textColorNegre">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/CampsSize</item>
+    </style>
 
 </resources>
