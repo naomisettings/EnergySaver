@@ -53,6 +53,7 @@
 
                 <Button
                     android:id="@+id/bttnNouTiquet"
+                    style="@style/Bottons"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="0dp"
@@ -61,6 +62,7 @@
 
                 <Button
                     android:id="@+id/bttnBorrarTIquet"
+                    style="@style/Bottons"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="0dp"

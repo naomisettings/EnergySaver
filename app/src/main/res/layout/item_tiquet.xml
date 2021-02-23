@@ -28,6 +28,7 @@
 
             <TextView
                 android:id="@+id/titolTiquet"
+                style="@style/TextViews"
                 android:layout_width="239dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -37,12 +38,12 @@
 
             <TextView
                 android:id="@+id/descripcioTiquet"
+                style="@style/textColorNegre"
                 android:layout_width="238dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_weight="1"
                 android:textColor="@color/black"
-                android:textSize="15sp"
                 app:tiquetQualityString="@{tiquet}" />
 
             <CheckBox

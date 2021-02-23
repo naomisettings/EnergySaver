@@ -11,6 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.R
+import cat.copernic.johan.energysaver.databinding.FragmentInformesBinding
 import cat.copernic.johan.energysaver.databinding.FragmentMedallesBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -18,6 +19,7 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.ktx.Firebase
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.ArrayList
 
 class MedallesFragment : Fragment() {
 
@@ -244,6 +246,61 @@ class MedallesFragment : Fragment() {
 
                 }
             }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun omplirDades(binding: FragmentInformesBinding){
+        val user = Firebase.auth.currentUser
+        val mail = user?.email.toString()
+
+        val energies = db.collection("despesaConsum")
+        val query = energies.whereEqualTo("mail", mail).get()
+            .addOnSuccessListener { document ->
+                if (!document.isEmpty) {
+                    var consumAigua =  mapOf<String, Double>()
+                    var aiguaDiners = mapOf<String, Double>()
+                    var consumLlum =  mapOf<String, Double>()
+                    var llumDiners = mapOf<String, Double>()
+                    var consumGas =  mapOf<String, Double>()
+                    var gasDiners = mapOf<String, Double>()
+                    var consumGasoil =  mapOf<String, Double>()
+                    var gasoilDiners = mapOf<String, Double>()
+                    var dinersTotal = arrayListOf<Double>()
+
+                    val dadesEnergia = document.toObjects(DespesaConsumDC::class.java)
+                    val de = dadesEnergia[0]
+                    consumAigua = de.aiguaConsum
+                    aiguaDiners = de.aiguaDiners
+                    consumLlum = de.llumConsum
+                    llumDiners = de.llumDiners
+                    consumGas = de.gasConsum
+                    gasDiners = de.gasDiners
+                    consumGasoil = de.gasoilConsum
+                    gasoilDiners = de.gasoilDiners
+
+                    arrayListDeValors(dinersTotal, aiguaDiners)
+                    arrayListDeValors(dinersTotal, llumDiners)
+                    arrayListDeValors(dinersTotal, gasDiners)
+                    arrayListDeValors(dinersTotal, gasoilDiners)
+                }
+            }
+    }
+    fun estalviadorTotal(list: ArrayList<Double>): Double{
+        var aux: Double? = null
+        var estalviat: Double = 0.0
+        for (item in list){
+            if(aux != null){
+                estalviat += (aux - item)
+            }
+            aux = item
+        }
+        return -estalviat
+    }
+
+    fun arrayListDeValors(list: ArrayList<Double>, map: Map<String, Double>){
+        for(x in map){
+            list.add(x.value)
         }
     }
 }
