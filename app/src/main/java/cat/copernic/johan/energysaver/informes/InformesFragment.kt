@@ -2,6 +2,7 @@ package cat.copernic.johan.energysaver.informes
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,6 +66,8 @@ class InformesFragment : Fragment() {
                     arrayListDeValors(dinersTotal, gasDiners)
                     arrayListDeValors(dinersTotal, gasoilDiners)
 
+                    Log.i("prova", dinersTotal.toString())
+
                     binding.txvTotal.setText(estalviadorTotal(dinersTotal).toString())
 
                     binding.btnAigua.setOnClickListener{view: View ->
@@ -83,7 +86,7 @@ class InformesFragment : Fragment() {
             }
             aux = item
         }
-        return -estalviat
+        return estalviat
     }
 
     fun estalviadorTotal(map: Map<String, Double>): Double{
@@ -156,24 +159,69 @@ class InformesFragment : Fragment() {
             var diff = 999999
 
             for (x in dates) {
-                var diffAux: Int
-                diffAux = x.compareTo(targetDate)
+                var diffAux = x.compareTo(targetDate)
 
                 if(diff == 999999){
                     nearestDate = x
+                    diff = diffAux
                 }
 
                 if(diffAux > diff){
                     nearestDate = x
+                    diff = diffAux
                 }
             }
         }
         return nearestDate
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getFurthestDate(dates: ArrayList<LocalDate>, targetDate: LocalDate?): LocalDate{
+        var furthestDate = LocalDate.now()
+        if(targetDate != null){
+            var diff = 999999
+
+            for (x in dates) {
+                var diffAux: Int
+                diffAux = x.compareTo(targetDate)
+
+                if(diff == 999999){
+                    furthestDate = x
+                    diff = diffAux
+                }
+
+                if(diffAux < diff){
+                    furthestDate = x
+                    diff = diffAux
+                }
+            }
+        }
+        return furthestDate
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
     fun arrayListDeValors(list: ArrayList<Double>, map: Map<String, Double>){
+        val llistaString = arrayListOf<String>()
+        var llistaDates = arrayListOf<LocalDate>()
+
+        for (x in map){
+            llistaString.add(x.key)
+        }
+
+        llistaDates = getLlistaDates(llistaString)
+
         for(x in map){
-            list.add(x.value)
+            if(x.key == stringParser(getFurthestDate(llistaDates, LocalDate.now()))){
+                list.add(x.value)
+                Log.i("prova", "a" + x.value.toString())
+                }
+            }
+
+        for(x in map){
+            if(x.key != stringParser(getFurthestDate(llistaDates, LocalDate.now()))){
+                list.add(x.value)
+                Log.i("prova", "b" + x.value.toString())
+            }
         }
     }
 }
