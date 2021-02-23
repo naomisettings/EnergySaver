@@ -33,7 +33,6 @@
     <string name="btnSortir">Salir</string>
     <string name="btnGoogle2">G</string>
     <string name="boto_google">botón google</string>
-    <string name="hello_blank_fragment">Hola soy un fragmento blanco</string>
     <string name="txtViewTiquetsSuport">TIQUETS DE SOPORTE</string>
     <string name="txtSeleccionarEnergia">Seleccionar Energia</string>
     <string name="txtPeriode">Periodo</string>
@@ -117,4 +116,5 @@
     <string name="FragmentConsumGas">Gas</string>
     <string name="FragmentConsumGasoil">Gasóleo</string>
     <string name="FragmentConsumLlum">Luz</string>
+    <string name="bttnCamera">Capturar</string>
 </resources>

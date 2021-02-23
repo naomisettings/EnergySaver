@@ -1,60 +1,179 @@
 package cat.copernic.johan.energysaver.informes
 
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentInformesBinding
-import cat.copernic.johan.energysaver.seleccio.Energies
-import cat.copernic.johan.energysaver.veuretiquet.Tiquet
+import cat.copernic.johan.energysaver.medalles.DespesaConsumDC
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class InformesFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
 
-    var aiguaGastada = ArrayList<Int>()
-    var llumGastada = ArrayList<Int>()
-    var gasGastat = ArrayList<Int>()
-    var gasoilGastat = ArrayList<Int>()
-    var data = ArrayList<String>()
-
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = DataBindingUtil.inflate<FragmentInformesBinding>(inflater, R.layout.fragment_informes,
         container, false)
+        omplirDades(binding)
         return binding.root
     }
 
-    fun omplirDades(){
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun omplirDades(binding: FragmentInformesBinding){
         val user = Firebase.auth.currentUser
         val mail = user?.email.toString()
 
-        val energies = db.collection("entrarEnergia")
+        val energies = db.collection("despesaConsum")
         val query = energies.whereEqualTo("mail", mail).get()
             .addOnSuccessListener { document ->
                 if (!document.isEmpty) {
-                    val dadesEnergia = document.toObjects(DadesEnergia::class.java)
-                    for (i in 0 until dadesEnergia.size) {
-                        aiguaGastada.add(dadesEnergia[i].aiguaGastats)
-                        llumGastada.add(dadesEnergia[i].llumGastats)
-                        gasGastat.add(dadesEnergia[i].gasGastats)
-                        gasoilGastat.add(dadesEnergia[i].gasoilGastats)
+                    var consumAigua =  mapOf<String, Double>()
+                    var aiguaDiners = mapOf<String, Double>()
+                    var consumLlum =  mapOf<String, Double>()
+                    var llumDiners = mapOf<String, Double>()
+                    var consumGas =  mapOf<String, Double>()
+                    var gasDiners = mapOf<String, Double>()
+                    var consumGasoil =  mapOf<String, Double>()
+                    var gasoilDiners = mapOf<String, Double>()
+                    var dinersTotal = arrayListOf<Double>()
+
+                    val dadesEnergia = document.toObjects(DespesaConsumDC::class.java)
+                    val de = dadesEnergia[0]
+                    consumAigua = de.aiguaConsum
+                    aiguaDiners = de.aiguaDiners
+                    consumLlum = de.llumConsum
+                    llumDiners = de.llumDiners
+                    consumGas = de.gasConsum
+                    gasDiners = de.gasDiners
+                    consumGasoil = de.gasoilConsum
+                    gasoilDiners = de.gasoilDiners
+
+                    arrayListDeValors(dinersTotal, aiguaDiners)
+                    arrayListDeValors(dinersTotal, llumDiners)
+                    arrayListDeValors(dinersTotal, gasDiners)
+                    arrayListDeValors(dinersTotal, gasoilDiners)
+
+                    binding.txvTotal.setText(estalviadorTotal(dinersTotal).toString())
+
+                    binding.btnAigua.setOnClickListener{view: View ->
+                        binding.txvTotal.setText(estalviadorTotal(aiguaDiners).toString())
+                        binding.txvPeriodeInfo.setText(estalviadorPeriode(aiguaDiners).toString())
                     }
                 }
             }
     }
-    //Implementar llibreria i métodes per realitzar els informes.
-}
+    fun estalviadorTotal(list: ArrayList<Double>): Double{
+        var aux: Double? = null
+        var estalviat: Double = 0.0
+        for (item in list){
+            if(aux != null){
+                estalviat += (aux - item)
+            }
+            aux = item
+        }
+        return -estalviat
+    }
 
-data class DadesEnergia(
-    var aiguaGastats: Int = 0, var data: String = "", var gasGastats: Int = 0, var gasoilGastats: Int = 0,
-    var llumGastats: Int = 0, var mail: String = ""
-)
+    fun estalviadorTotal(map: Map<String, Double>): Double{
+        var aux: Double? = null
+        var estalviat: Double = 0.0
+        for (item in map){
+            if(aux != null){
+                estalviat += (aux - item.value)
+            }
+            aux = item.value
+        }
+        return estalviat
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun estalviadorPeriode(map: Map<String, Double>): Double{
+        val llistaString = arrayListOf<String>()
+        var llistaDates = arrayListOf<LocalDate>()
+        var datePrimera: LocalDate? = null
+        var dinersPrimera: Double = 2.0
+        var dinersSegona: Double = 5.0
+        var estalviData: Double
+
+        for (x in map){
+            llistaString.add(x.key)
+        }
+
+        llistaDates = getLlistaDates(llistaString)
+
+        for(x in map){
+            if(x.key == stringParser(getNearestDate(llistaDates, LocalDate.now()))){
+                dinersPrimera = x.value
+                datePrimera = dataParser(x.key)
+            }
+
+            if(x.key == stringParser(getNearestDate(llistaDates, datePrimera)) && datePrimera != null){
+                dinersSegona = x.value
+            }
+        }
+
+        return dinersPrimera - dinersSegona
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun dataParser(data: String): LocalDate{
+        val formatCorrecte = data.replace(".", "-")
+        return LocalDate.parse(formatCorrecte, DateTimeFormatter.ISO_DATE)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun stringParser(data: LocalDate): String{
+        return data.toString().replace("-", ".")
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getLlistaDates(llista: ArrayList<String>): ArrayList<LocalDate>{
+        val llistaCorrecte = arrayListOf<LocalDate>()
+
+        for (x in llista){
+            var data = dataParser(x)
+            llistaCorrecte.add(data)
+        }
+        return llistaCorrecte
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getNearestDate(dates: ArrayList<LocalDate>, targetDate: LocalDate?): LocalDate{
+        var nearestDate = LocalDate.now()
+        if(targetDate != null){
+            var diff = 999999
+
+            for (x in dates) {
+                var diffAux: Int
+                diffAux = x.compareTo(targetDate)
+
+                if(diff == 999999){
+                    nearestDate = x
+                }
+
+                if(diffAux > diff){
+                    nearestDate = x
+                }
+            }
+        }
+        return nearestDate
+    }
+
+    fun arrayListDeValors(list: ArrayList<Double>, map: Map<String, Double>){
+        for(x in map){
+            list.add(x.value)
+        }
+    }
+}

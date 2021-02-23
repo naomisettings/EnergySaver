@@ -173,6 +173,14 @@
     <argument
         android:name="idTiquet"
         app:argType="string" />
+        <action
+            android:id="@+id/action_respostaTiquetFragment_to_tiquetObertFragment"
+            app:destination="@id/tiquetObertFragment" />
+        <argument
+            android:name="titol"
+            app:argType="string" />
+        <argument android:name="descripcio" />
+        <argument android:name="imatge" />
     </fragment>
     <fragment
         android:id="@+id/menuEnergies"

@@ -22,6 +22,7 @@
 
         <EditText
             android:id="@+id/editTxtDescrResposta"
+            style="@style/textColorNegre"
             android:layout_width="297dp"
             android:layout_height="243dp"
             android:layout_marginStart="25dp"
@@ -34,6 +35,7 @@
 
         <Button
             android:id="@+id/bttnEnivarResposta"
+            style="@style/Bottons"
             android:layout_width="138dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="120dp"

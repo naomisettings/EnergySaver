@@ -51,9 +51,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="17dp"
-                        android:fontFamily="sans-serif"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/CampsSize" />
+                        style="@style/textColorNegre" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/imgViewCarregarBBDD"
@@ -68,13 +66,13 @@
 
                 <TextView
                     android:id="@+id/txtViewResposta"
-                    android:fontFamily="@font/asap_bold"
+                    style="@style/ColorsBasicsAplicacio"
                     android:layout_width="208dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="15dp"
+                    android:fontFamily="@font/asap_bold"
                     android:text="@string/txtViewResposta"
-                    style="@style/ColorsBasicsAplicacio"
                     android:textSize="@dimen/CampsSize" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -96,6 +94,7 @@
 
                     <TextView
                         android:id="@+id/txtViewMostraResposta"
+                        style="@style/textColorNegre"
                         android:layout_width="322dp"
                         android:layout_height="186dp"
                         android:layout_marginStart="16dp"

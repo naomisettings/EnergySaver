@@ -118,6 +118,7 @@
     <string name="FragmentConsumGasoil">Gasoil</string>
     <string name="FragmentConsumLlum">Llum</string>
     <string name="TancaSessio">Tanca Sessió</string>
+    <string name="bttnCamera">Capturar</string>
 
 
 </resources>

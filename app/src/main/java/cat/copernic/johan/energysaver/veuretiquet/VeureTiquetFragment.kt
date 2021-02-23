@@ -9,14 +9,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.Toast
-import androidx.core.view.size
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import cat.copernic.johan.energysaver.MainActivity
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentVeureBinding
 import cat.copernic.johan.energysaver.obrirtiquet.ObrirTiquetActivity
@@ -24,7 +20,6 @@ import cat.copernic.johan.energysaver.tiquetobert.TiquetDC
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 
 class VeureTiquetFragment : Fragment() {
@@ -43,12 +38,12 @@ class VeureTiquetFragment : Fragment() {
         setHasOptionsMenu(true)
 
         binding.bttnNouTiquet.setOnClickListener { view: View ->
-            //view.findNavController().navigate(R.id.action_veureFragment_to_obrirFragment)
-            val intent = Intent(activity, ObrirTiquetActivity::class.java)
+            view.findNavController().navigate(R.id.action_veureFragment_to_obrirFragment)
+            /*val intent = Intent(activity, ObrirTiquetActivity::class.java)
             startActivity(intent)
+
+             */
         }
-
-
 
         var rvTiquets = binding.rcvTiquets
         veureRecyclerView(rvTiquets)
@@ -97,6 +92,7 @@ class VeureTiquetFragment : Fragment() {
 
         return binding.root
     }
+
 
     fun veureRecyclerView(rvTiquets: RecyclerView) {
         //Guarda les dades del usuari connectat a la constant user

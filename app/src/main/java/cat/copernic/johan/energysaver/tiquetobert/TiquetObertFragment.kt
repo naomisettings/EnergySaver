@@ -23,6 +23,7 @@ class TiquetObertFragment : Fragment() { //
     val db = FirebaseFirestore.getInstance()
     lateinit var binding: FragmentTiquetObertBinding
     lateinit var args: TiquetObertFragmentArgs
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,9 +34,10 @@ class TiquetObertFragment : Fragment() { //
             R.layout.fragment_tiquet_obert, container, false
         )
 
-        //Rebre variables de veure tiquets
+        //Rebre dades d'altres fragments
         args = TiquetObertFragmentArgs.fromBundle(requireArguments())
 
+        Log.d("tiquetid", args.tiquetId)
         //Assignar al titol i motiu les variables
         binding.txtViewObrirTiquetMotiu.text = args.titol
         binding.txtViewTiquetObertDesc.text = args.descripcio
@@ -59,7 +61,10 @@ class TiquetObertFragment : Fragment() { //
                 ?.navigate(
                     TiquetObertFragmentDirections
                         .actionTiquetObertFragmentToRespostaTiquetFragment(
-                            args.tiquetId
+                            args.tiquetId,
+                            args.titol,
+                            args.descripcio,
+                            args.imatge
                         )
                 )
         }
@@ -115,6 +120,7 @@ class TiquetObertFragment : Fragment() { //
                     val tiquetsDC = document.toObjects(TiquetDC::class.java)
                     //En el cas que la resposta estigui buida fa invisible el txt view de mostrar resposta
                     //I fa visible el text view sense resposta
+                    Log.d("resposta2", tiquetsDC[0].resposta)
                     if (tiquetsDC[0].resposta == "") {
                         binding.txtViewMostraResposta.visibility = View.INVISIBLE
                         binding.txtViewSenseResposta.visibility = View.VISIBLE

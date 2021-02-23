@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentRespostaTiquetBinding
 import cat.copernic.johan.energysaver.databinding.FragmentVeureBinding
@@ -32,10 +33,22 @@ class RespostaTiquetFragment : Fragment() {
 
 
 
-        binding.bttnEnivarResposta.setOnClickListener {
+        binding.bttnEnivarResposta.setOnClickListener { view: View ->
             val resposta = binding.editTxtDescrResposta.text.toString()
             afegirRespostaBBDD(args.idTiquet, resposta)
             binding.editTxtDescrResposta.text.clear()
+
+            view.findNavController()
+                .navigate(
+                    RespostaTiquetFragmentDirections
+                        .actionRespostaTiquetFragmentToTiquetObertFragment(
+                            args.idTiquet,
+                            args.titol,
+                            args.descripcio,
+                            args.imatge
+                        )
+                )
+
         }
 
         return binding.root
