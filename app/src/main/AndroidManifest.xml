@@ -17,7 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EnergySaver"
         tools:ignore="AllowBackup">
-        <activity android:name=".obrirtiquet.ObrirTiquetActivity"></activity>
+        <activity android:name=".obrirtiquet.ObrirTiquetActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cat.copernic.johan.energysaver.MainActivity" />
+        </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".registre.Registre" />
         <activity

@@ -24,6 +24,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.HashMap
 
 class ObrirTiquetFragment : Fragment() {
 
@@ -32,6 +33,11 @@ class ObrirTiquetFragment : Fragment() {
     var titol: String = ""
     var descripcio: String = ""
     private val GALLERY_REQUEST_CODE: Int = 101
+
+    init {
+        Singleton.nameImg
+        Singleton.rutaImg
+    }
 
     //nom arxiu de la imatge a pujar al storage
     var fileName: String = ""
@@ -49,15 +55,18 @@ class ObrirTiquetFragment : Fragment() {
 
         //Botó confirmar que truca a la funció per inserir dades al firestore
         binding.bttnConfirmarTiquet.setOnClickListener {
+            val uriFoto = Singleton.rutaImg
+            if (uriFoto != null) {
+                uploadImageToFirebase(uriFoto)
+            }
             rebreDades(it)
 
         }
 
-        binding.imgBttnCamera.setOnClickListener{
-
+        binding.imgBttnCamera.setOnClickListener {
+            val intent = Intent(activity, ObrirTiquetActivity::class.java).apply {}
+            startActivity(intent)
         }
-
-
 
         return binding.root
     }
@@ -103,23 +112,43 @@ class ObrirTiquetFragment : Fragment() {
     fun guardarDadesFirestore(nickname: String, mail: String) {
         //Extreu la data i hora del sistema per guardar al document tiquet
         val id = UUID.randomUUID().toString()
+
+
         val data = Calendar.getInstance().time
         val formatterdt = SimpleDateFormat("yyyy.MM.dd")
         val formatterhr = SimpleDateFormat("HH:mm:ss")
         val formatedDate = formatterdt.format(data)
         val formatedHour = formatterhr.format(data)
 
-        //Map per fer l'insert
-        val tiquet = hashMapOf(
-            "id" to id,
-            "mail" to mail,
-            "nickname" to nickname,
-            "data" to formatedDate,
-            "hora" to formatedHour,
-            "titol" to titol,
-            "descripcio" to descripcio,
-            "imatge" to fileName
-        )
+        //Accedir al nom de la foto feta amb la camera
+        val nameFoto = Singleton.nameImg
+        var tiquet: HashMap<String, String>
+
+        //En el cas que s'hagi fet una foto amb la camera entrarà al else
+        if (nameFoto == "") {
+            //Map per fer l'insert
+            tiquet = hashMapOf(
+                "id" to id,
+                "mail" to mail,
+                "nickname" to nickname,
+                "data" to formatedDate,
+                "hora" to formatedHour,
+                "titol" to titol,
+                "descripcio" to descripcio,
+                "imatge" to fileName
+            )
+        } else {
+            tiquet = hashMapOf(
+                "id" to id,
+                "mail" to mail,
+                "nickname" to nickname,
+                "data" to formatedDate,
+                "hora" to formatedHour,
+                "titol" to titol,
+                "descripcio" to descripcio,
+                "imatge" to nameFoto
+            )
+        }
 
         Log.i("nomarxiu", fileName)
 
@@ -173,7 +202,8 @@ class ObrirTiquetFragment : Fragment() {
         ) {
 
             // Get the Uri of data
-            val file_uri = data.data
+            val file_uri = data.data!!
+
             if (file_uri != null) {
                 uploadImageToFirebase(file_uri)
             }
@@ -183,7 +213,17 @@ class ObrirTiquetFragment : Fragment() {
     //Pujar la imatge al storage
     private fun uploadImageToFirebase(fileUri: Uri) {
         //Generar un nom per a la imatge
-        fileName = UUID.randomUUID().toString() + ".jpg"
+        val nameFoto = Singleton.nameImg
+
+        Log.d("imguri", fileUri.toString())
+        if (nameFoto == "") {
+            fileName = SimpleDateFormat(
+                FILENAME_FORMAT, Locale.US
+            ).format(System.currentTimeMillis()) + ".jpg"
+        } else {
+            fileName = nameFoto
+        }
+
 
         //val database = FirebaseDatabase.getInstance()
         //Crear una referencia per pujar la imatge
@@ -201,11 +241,16 @@ class ObrirTiquetFragment : Fragment() {
                 print(e.message)
             })
     }
+
+    companion object {
+        private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
+    }
 }
-/*
+
+
 //Classe que correspon als camps de la col·lecció usuaris
 data class Usuari(
     var adreca: String = "", var cognoms: String = "", var contrasenya: String = "",
     var mail: String = "", var nickname: String = "", var nom: String = "",
     var poblacio: String = "", var telefon: String = ""
-)*/
+)
