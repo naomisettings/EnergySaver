@@ -14,7 +14,7 @@ class DatePickerFragment : DialogFragment() {
     private var initialYear: Int = -1
     private var initialMonth: Int = -1
     private var initialDay: Int = -1
-
+    //aqui iniciem i mostrem el datePiker
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         // data
         val c = Calendar.getInstance()
@@ -30,11 +30,12 @@ class DatePickerFragment : DialogFragment() {
         if (initialDay == -1)
             initialDay = c.get(Calendar.DAY_OF_MONTH)
 
-        // Data seleccionada (valor inicial)
+        // Data seleccionada (valor inicial) del calendari
         val datePickerDialog = DatePickerDialog(requireActivity(),
             listener, initialYear,initialMonth,initialDay)
 
-        // data minima i maxima que contrindra el calendari
+        // data minima que pot mostrar 10 anys enrera
+        // data maxima que es pot entrar el dia actual
         c.set(Calendar.YEAR, year - 10)
         datePickerDialog.datePicker.minDate = c.timeInMillis
         c.set(Calendar.YEAR, year)
@@ -51,14 +52,14 @@ class DatePickerFragment : DialogFragment() {
             return fragment
         }
 
-        fun newInstance(listener: DatePickerDialog.OnDateSetListener, year: Int, month: Int, day: Int): DatePickerFragment {
+       /* fun newInstance(listener: DatePickerDialog.OnDateSetListener, year: Int, month: Int, day: Int): DatePickerFragment {
             val fragment = DatePickerFragment()
             fragment.listener = listener
             fragment.initialYear = year
             fragment.initialMonth = month
             fragment.initialDay = day
             return fragment
-        }
+        }*/
     }
 
 }

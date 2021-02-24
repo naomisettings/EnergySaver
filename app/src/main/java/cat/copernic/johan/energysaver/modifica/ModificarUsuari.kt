@@ -1,5 +1,6 @@
 package cat.copernic.johan.energysaver.modifica
 
+import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
@@ -17,9 +18,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.AlertDialogLayout
-import androidx.fragment.app.DialogFragment
-import cat.copernic.johan.energysaver.obrirtiquet.Usuari
+
+
 
 class ModificarUsuari : Fragment() {
     private lateinit var binding: FragmentModificarUsuariBinding
@@ -51,25 +51,38 @@ class ModificarUsuari : Fragment() {
             view.findNavController().navigate(R.id.action_modificarUsuari_to_menuPrincipalFragment)
 
         }
-
-        binding.btnEnergiesModificar.setOnClickListener {
-
-                view: View ->
+        binding.btnEnergiesModificar.setOnClickListener {view: View ->
             view.findNavController()
                 .navigate(R.id.action_modificarUsuari_to_seleccionarEnergiaFragment)
 
         }
-
         binding.btnTancarModificar.setOnClickListener { view: View ->
             logOut()
             view.findNavController().navigate(R.id.action_modificarUsuari_to_authActivity)
         }
         binding.btnBaixaModificar.setOnClickListener { view: View ->
+           //alerta de confirmacio per esborrar usuari
+            val alertDialog: AlertDialog? = activity?.let {
+                val builder = AlertDialog.Builder(it)
+                builder.setTitle("Vols esborrar el teu usuari?")
+                builder.setPositiveButton("Acceptar",
+                    DialogInterface.OnClickListener { dialog, id ->
+                        //si l'usuari accepta esborrar cridem a la funcio d'esborrar usuari
+                        esborrarUsuari()
+                        view.findNavController().navigate(R.id.action_modificarUsuari_to_authActivity)
 
-            //cridem a la funcio per esborrar usuari
-            esborrarUsuari()
-            
-            view.findNavController().navigate(R.id.action_modificarUsuari_to_authActivity)
+                    })
+                builder.setNegativeButton("Cancelar",
+                    DialogInterface.OnClickListener { dialog, id ->
+                        //si l'usuari cancela l'accio tornem al menu principal
+                        view.findNavController().navigate(R.id.menuPrincipalFragment)
+                    })
+                val dialog: AlertDialog = builder.create()
+                dialog.show()
+                // Create the AlertDialog
+                builder.create()
+            }
+
         }
 
         return binding.root
@@ -87,6 +100,7 @@ class ModificarUsuari : Fragment() {
                 Snackbar.LENGTH_LONG
             ).show()
         }
+
 
     }
 
@@ -144,8 +158,6 @@ class ModificarUsuari : Fragment() {
         }
 
     }
-
-
     //funcio per recuperar les dades a modificar del usuari identificat
     fun recollirDadesModificar() {
         //guardem les dades de l'usari identificat
@@ -279,6 +291,8 @@ class ModificarUsuari : Fragment() {
 
 
 }
+
+
 
 
 

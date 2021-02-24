@@ -51,7 +51,7 @@ class ConsumAigua : Fragment() {
         return binding.root
     }
 
-    //funcio per capturar el DataPicker
+    //funcio per capturar el DataPicker en un dialog
     private fun showDatePickerDialog() {
         val newFragment = DatePickerFragment.newInstance(DatePickerDialog.OnDateSetListener { _, year, month, day ->
             Log.d("mes", month.toString())
