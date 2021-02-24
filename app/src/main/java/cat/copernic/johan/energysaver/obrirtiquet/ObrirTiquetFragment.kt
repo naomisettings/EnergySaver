@@ -11,7 +11,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentObrirBinding
 import com.google.android.gms.tasks.OnFailureListener
@@ -50,22 +52,35 @@ class ObrirTiquetFragment : Fragment() {
 
         //Pujar imatge al storage
         binding.imgBttnCarregaImatge.setOnClickListener {
+            Singleton.nameImg = ""
             selectImageFromGallery()
-        }
-
-        //Botó confirmar que truca a la funció per inserir dades al firestore
-        binding.bttnConfirmarTiquet.setOnClickListener {
-            val uriFoto = Singleton.rutaImg
-            if (uriFoto != null) {
-                uploadImageToFirebase(uriFoto)
-            }
-            rebreDades(it)
-
+            Toast.makeText(context, R.string.imatgeCarrgada, Toast.LENGTH_SHORT).show()
         }
 
         binding.imgBttnCamera.setOnClickListener {
             val intent = Intent(activity, ObrirTiquetActivity::class.java).apply {}
             startActivity(intent)
+
+        }
+
+        //Snackbar carregar imatge carregada
+        if (Singleton.nameImg != ""){
+            view?.let { Snackbar.make(it, R.string.imatgeCarrgada, Snackbar.LENGTH_SHORT).show() }
+        }
+
+        //Botó confirmar que truca a la funció per inserir dades al firestore
+        binding.bttnConfirmarTiquet.setOnClickListener {
+            val nomFoto = Singleton.nameImg
+            val ruta = Singleton.rutaImg
+            if (nomFoto != "") {
+                if (ruta != null) {
+                    uploadImageToFirebase(ruta)
+                }
+            }
+            rebreDades(it)
+
+            view?.findNavController()
+                ?.navigate(R.id.action_obrirFragment_to_veureFragment)
         }
 
         return binding.root
@@ -135,7 +150,8 @@ class ObrirTiquetFragment : Fragment() {
                 "hora" to formatedHour,
                 "titol" to titol,
                 "descripcio" to descripcio,
-                "imatge" to fileName
+                "imatge" to fileName,
+                "resposta" to ""
             )
         } else {
             tiquet = hashMapOf(
@@ -146,7 +162,8 @@ class ObrirTiquetFragment : Fragment() {
                 "hora" to formatedHour,
                 "titol" to titol,
                 "descripcio" to descripcio,
-                "imatge" to nameFoto
+                "imatge" to nameFoto,
+                "resposta" to ""
             )
         }
 

@@ -1,11 +1,14 @@
 package cat.copernic.johan.energysaver.tiquetobert
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.R
@@ -31,34 +34,39 @@ class RespostaTiquetFragment : Fragment() {
 
         val args = fromBundle(requireArguments())
 
-
-
         binding.bttnEnivarResposta.setOnClickListener { view: View ->
             val resposta = binding.editTxtDescrResposta.text.toString()
             afegirRespostaBBDD(args.idTiquet, resposta)
             binding.editTxtDescrResposta.text.clear()
 
-            view.findNavController()
-                .navigate(
-                    RespostaTiquetFragmentDirections
-                        .actionRespostaTiquetFragmentToTiquetObertFragment(
-                            args.idTiquet,
-                            args.titol,
-                            args.descripcio,
-                            args.imatge
-                        )
-                )
+            hideKeyboard()
 
+            view.findNavController()
+                .navigate(R.id.action_respostaTiquetFragment_to_veureFragment)
         }
 
         return binding.root
     }
+
+    //Amagar teclat
+    fun Context.hideKeyboard(view: View) {
+        val inputMethodManager =
+            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    //Amagar teclat
+    fun Fragment.hideKeyboard() {
+        view?.let { activity?.hideKeyboard(it) }
+    }
+
 
     //Fragment només per a l'administrador per a constestar la resposta
     fun afegirRespostaBBDD(idTiquet: String, resposta: String) {
         val actualitza = db.collection("tiquet").addSnapshotListener { snapshot, e ->
             val doc = snapshot?.documents
 
+            Log.d("forma", "forma")
             doc?.forEach {
                 //Assignem la id del tíquet al objecte tiquetConsulta
                 val tiquetConsulta = it.toObject(TiquetDC::class.java)

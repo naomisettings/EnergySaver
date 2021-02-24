@@ -20,6 +20,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/btnTotal"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="172dp"
+        android:layout_marginTop="412dp"
+        android:background="@color/totColor"
+        android:contentDescription="@string/telefon"
+        android:src="@drawable/aigua"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
         android:id="@+id/btnLlum"
         android:layout_width="70dp"
         android:layout_height="70dp"
@@ -49,7 +61,7 @@
         android:layout_height="70dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="500dp"
-        android:background="@color/gasoilColor"
+        android:background="#BA1B1B"
         android:contentDescription="@string/textGasoil"
         android:src="@drawable/gasoil"
         app:layout_constraintStart_toEndOf="@+id/btnGas"
@@ -63,6 +75,15 @@
         android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/txvTotalConsum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="@+id/TextView12"
+        app:layout_constraintTop_toBottomOf="@+id/TextView12" />
 
     <TextView
         android:id="@+id/txvPeriodeInfo"
@@ -88,7 +109,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="170dp"
         android:layout_marginTop="45dp"
-        android:text="PERIODE"
+        android:text="@string/textPeriode"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -98,7 +119,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="288dp"
         android:layout_marginTop="45dp"
-        android:text="TEMPS"
+        android:text="@string/textTemps"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -108,9 +129,78 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="45dp"
-        android:text="TOTAL"
+        android:text="@string/textTotal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TextView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="105dp"
+        android:text="@string/textTotal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="ESTALVI DINERS"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="ESTALVI ENERGIA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="170dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/textPeriode"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="288dp"
+        android:layout_marginTop="105dp"
+        android:text="@string/textTemps"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/txvPeriodeConsum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <TextView
+        android:id="@+id/txvTempsConsum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

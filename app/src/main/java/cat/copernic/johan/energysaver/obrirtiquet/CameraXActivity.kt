@@ -6,8 +6,10 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.Size
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
@@ -61,7 +63,7 @@ class ObrirTiquetActivity : AppCompatActivity() {
         // Set up the listener for take photo button
         camera_capture_button.setOnClickListener {
             takePhoto()
-            Thread.sleep(1000)
+            Thread.sleep(300)
             finish()
         }
 
@@ -128,13 +130,14 @@ class ObrirTiquetActivity : AppCompatActivity() {
             outputOptions, ContextCompat.getMainExecutor(this), object : ImageCapture.OnImageSavedCallback {
                 override fun onError(exc: ImageCaptureException) {
                     Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
+                   // Snackbar.make(view, R.string.imatgeCarrgada, Snackbar.LENGTH_SHORT).show()
                 }
 
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
 
-                    val msg = "Photo capture succeeded: $savedUri"
-                    Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
-                    Log.d(TAG, msg)
+                   /* Snackbar.make(view, R.string.imatgeCarrgada, Snackbar.LENGTH_SHORT).show()
+                    val msg = "Photo capture succeeded: $savedUri"*/
+                    Toast.makeText(baseContext, R.string.imatgeCarrgada, Toast.LENGTH_SHORT).show()
                 }
             })
     }
@@ -154,6 +157,7 @@ class ObrirTiquetActivity : AppCompatActivity() {
                 }
 
             imageCapture = ImageCapture.Builder()
+                .setTargetResolution(Size(480, 640))
                 .build()
 
             // Select back camera as a default

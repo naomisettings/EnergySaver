@@ -117,4 +117,9 @@
     <string name="defaultcd">Standard</string>
     <string name="btnGoogle2">G</string>
     <string name="bttnCamera">Erfassung</string>
+    <string name="perdreMedalla">Medaillen sparen können verloren gehen! Sparen ist Konstanz</string>
+    <string name="imatgeCarrgada">Bild hochgeladen, bestätigen Sie, um das Ticket zu senden</string>
+    <string name="textPeriode">ZEITRAUM</string>
+    <string name="textTemps">WETTER</string>
+    <string name="textTotal">GESAMT</string>
 </resources>

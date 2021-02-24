@@ -8,5 +8,7 @@
     <color name="aiguaColor">#1762DA</color>
     <color name="llumColor">#FFAE3A</color>
     <color name="gasColor">#44C349</color>
-    <color name="gasoilColor">#5A5A5A</color>
+    <color name="gasoilColor">#BA1B1B</color>
+    <color name="totalColor">#525252</color>
+    <color name="totColor">#5500A0</color>
 </resources>
