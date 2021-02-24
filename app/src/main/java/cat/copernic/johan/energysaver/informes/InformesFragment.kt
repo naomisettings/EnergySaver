@@ -88,7 +88,8 @@ class InformesFragment : Fragment() {
                     var gasDiners = mapOf<String, Double>()
                     var consumGasoil =  mapOf<String, Double>()
                     var gasoilDiners = mapOf<String, Double>()
-                    var dinersTotal = arrayListOf<Double>()
+
+                    var estalviatTotal: Double
 
                     val dadesEnergia = document.toObjects(DespesaConsumDC::class.java)
                     val de = dadesEnergia[0]
@@ -101,29 +102,25 @@ class InformesFragment : Fragment() {
                     consumGasoil = de.gasoilConsum
                     gasoilDiners = de.gasoilDiners
 
-                    arrayListDeValors(dinersTotal, aiguaDiners)
-                    arrayListDeValors(dinersTotal, llumDiners)
-                    arrayListDeValors(dinersTotal, gasDiners)
-                    arrayListDeValors(dinersTotal, gasoilDiners)
+                    estalviatTotal = estalviadorTotalIndiv(aiguaDiners) +
+                                     estalviadorTotalIndiv(llumDiners) +
+                                     estalviadorTotalIndiv(gasDiners) +
+                                     estalviadorTotalIndiv(gasoilDiners)
 
-                    Log.i("prova", dinersTotal.toString())
-
-                    if(dinersTotal != null){
-                        binding.txvTotal.setText(estalviadorTotal(dinersTotal).toString())
-                    }
+                        binding.txvTotal.setText(estalviatTotal.toString())
 
                     binding.btnTotal.setOnClickListener{view: View ->
                         resetFields(binding)
-                        binding.txvTotal.setText(estalviadorTotal(dinersTotal).toString())
+                        binding.txvTotal.setText(estalviatTotal.toString())
                     }
 
                     if(!aiguaDiners.isEmpty()){
                         binding.btnAigua.setOnClickListener{view: View ->
                             resetFields(binding)
-                            binding.txvTotal.setText(estalviadorTotal(aiguaDiners).toString())
+                            binding.txvTotal.setText(estalviadorTotalIndiv(aiguaDiners).toString())
                             binding.txvPeriodeInfo.setText(estalviadorPeriode(aiguaDiners).toString())
                             binding.txvTemps.setText(tempsEstalviat(aiguaDiners).toString())
-                            binding.txvTotalConsum.setText(estalviadorTotal(consumAigua).toString())
+                            binding.txvTotalConsum.setText(estalviadorTotalIndiv(consumAigua).toString())
                             binding.txvPeriodeConsum.setText(estalviadorPeriode(consumAigua).toString())
                             binding.txvTempsConsum.setText(tempsEstalviat(consumAigua).toString())
                         }
@@ -132,10 +129,10 @@ class InformesFragment : Fragment() {
                     if(!llumDiners.isEmpty()){
                         binding.btnLlum.setOnClickListener{view: View ->
                             resetFields(binding)
-                            binding.txvTotal.setText(estalviadorTotal(llumDiners).toString())
+                            binding.txvTotal.setText(estalviadorTotalIndiv(llumDiners).toString())
                             binding.txvPeriodeInfo.setText(estalviadorPeriode(llumDiners).toString())
                             binding.txvTemps.setText(tempsEstalviat(llumDiners).toString())
-                            binding.txvTotalConsum.setText(estalviadorTotal(consumLlum).toString())
+                            binding.txvTotalConsum.setText(estalviadorTotalIndiv(consumLlum).toString())
                             binding.txvPeriodeConsum.setText(estalviadorPeriode(consumLlum).toString())
                             binding.txvTempsConsum.setText(tempsEstalviat(consumLlum).toString())
                         }
@@ -144,10 +141,10 @@ class InformesFragment : Fragment() {
                     if(!gasDiners.isEmpty()){
                         binding.btnGas.setOnClickListener{view: View ->
                             resetFields(binding)
-                            binding.txvTotal.setText(estalviadorTotal(gasDiners).toString())
+                            binding.txvTotal.setText(estalviadorTotalIndiv(gasDiners).toString())
                             binding.txvPeriodeInfo.setText(estalviadorPeriode(gasDiners).toString())
                             binding.txvTemps.setText(tempsEstalviat(gasDiners).toString())
-                            binding.txvTotalConsum.setText(estalviadorTotal(consumGas).toString())
+                            binding.txvTotalConsum.setText(estalviadorTotalIndiv(consumGas).toString())
                             binding.txvPeriodeConsum.setText(estalviadorPeriode(consumGas).toString())
                             binding.txvTempsConsum.setText(tempsEstalviat(consumGas).toString())
                         }
@@ -156,10 +153,10 @@ class InformesFragment : Fragment() {
                     if(!gasoilDiners.isEmpty()){
                         binding.btnGasoil.setOnClickListener{view: View ->
                             resetFields(binding)
-                            binding.txvTotal.setText(estalviadorTotal(gasoilDiners).toString())
+                            binding.txvTotal.setText(estalviadorTotalIndiv(gasoilDiners).toString())
                             binding.txvPeriodeInfo.setText(estalviadorPeriode(gasoilDiners).toString())
                             binding.txvTemps.setText(tempsEstalviat(gasoilDiners).toString())
-                            binding.txvTotalConsum.setText(estalviadorTotal(consumGasoil).toString())
+                            binding.txvTotalConsum.setText(estalviadorTotalIndiv(consumGasoil).toString())
                             binding.txvPeriodeConsum.setText(estalviadorPeriode(consumGasoil).toString())
                             binding.txvTempsConsum.setText(tempsEstalviat(consumGasoil).toString())
                         }
@@ -167,28 +164,30 @@ class InformesFragment : Fragment() {
                 }
             }
     }
-    fun estalviadorTotal(list: ArrayList<Double>): Double{
-        var aux: Double? = null
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun estalviadorTotalIndiv(map: Map<String, Double>): Double{
         var estalviat: Double = 0.0
-        for (item in list){
-            if(aux != null){
-                estalviat += (aux - item)
-            }
-            aux = item
-        }
-        return -estalviat
-    }
+        var dataPrimera = LocalDate.now()
+        var dataSegona = LocalDate.now()
+        var valorPrimera = 0.0
+        var valorSegona = 0.0
 
-    fun estalviadorTotal(map: Map<String, Double>): Double{
-        var aux: Double? = null
-        var estalviat: Double = 0.0
-        for (item in map){
-            if(aux != null){
-                estalviat += (aux - item.value)
+        for(x in map) {
+            if(x.key == stringParser(getFurthestDate(getLlistaDates(extreureDatesMap(map)), dataPrimera))){
+                dataPrimera = dataParser(x.key)
+                valorPrimera = x.value
             }
-            aux = item.value
         }
-        return -estalviat
+
+        for(x in map){
+            if(x.key == stringParser(getNearestDate(getLlistaDates(extreureDatesMap(map)), dataSegona))){
+                dataSegona = dataParser(x.key)
+                valorSegona = x.value
+            }
+        }
+        estalviat = valorPrimera - valorSegona
+
+        return estalviat
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
