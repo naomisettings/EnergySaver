@@ -117,4 +117,6 @@
     <string name="FragmentConsumGasoil">Gasóleo</string>
     <string name="FragmentConsumLlum">Luz</string>
     <string name="bttnCamera">Capturar</string>
+    <string name="perdreMedalla">Las medallas de ahorro se pueden perder! Ahorro es constancia</string>
+    <string name="imatgeCarrgada">Imagen cargada, confirma para enviar el ticket</string>
 </resources>

@@ -13,13 +13,16 @@ import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentInformesBinding
 import cat.copernic.johan.energysaver.databinding.FragmentMedallesBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.ktx.Firebase
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.ArrayList
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class MedallesFragment : Fragment() {
 
@@ -27,6 +30,7 @@ class MedallesFragment : Fragment() {
     val db = FirebaseFirestore.getInstance()
     val user = Firebase.auth.currentUser
     val mail = user?.email.toString()
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -41,21 +45,14 @@ class MedallesFragment : Fragment() {
             container, false
         )
 
-        //Només mostrar medalles temps en gris
-        binding.imgBttnMigAny.visibility = View.INVISIBLE
-        binding.imgBttnUnAny.visibility = View.INVISIBLE
-        binding.txtViewMigAny.visibility = View.INVISIBLE
-        binding.txtViewUnAny.visibility = View.INVISIBLE
-
-
-        binding.imgBttnMedalla1.visibility = View.INVISIBLE
-        binding.imgBttnGranEstalviador.visibility = View.INVISIBLE
-
-        binding.txtViewMedEstalviador.visibility = View.INVISIBLE
-        binding.txtViewGranEstalviador.visibility = View.INVISIBLE
+        //Inicalitzar totes les medalles en gris
+        medallesEnGris()
 
         //Mostre les dues medalles de temps (Mig any estalviant i un any)
         mostrarMedallesTemps()
+
+        //Medalles diners estalviats
+        omplirDades()
 
         //Accedir als fragments per a veure les medalles en gran
         binding.imgBttnMedalla1.setOnClickListener { view: View ->
@@ -77,6 +74,61 @@ class MedallesFragment : Fragment() {
         return binding.root
     }
 
+    fun medallesEnGris() {
+        binding.apply {
+            imgBttnMigAny.visibility = View.INVISIBLE
+            imgBttnUnAny.visibility = View.INVISIBLE
+            txtViewMigAny.visibility = View.INVISIBLE
+            txtViewUnAny.visibility = View.INVISIBLE
+
+            imgBttnMedalla1.visibility = View.INVISIBLE
+            imgBttnGranEstalviador.visibility = View.INVISIBLE
+            txtViewMedEstalviador.visibility = View.INVISIBLE
+            txtViewGranEstalviador.visibility = View.INVISIBLE
+        }
+    }
+
+    fun medallaMigAnyVisible() {
+        binding.apply {
+            imgBttnMigAny.visibility = View.VISIBLE
+            txtViewMigAny.visibility = View.VISIBLE
+            txtViewUnAny.visibility = View.INVISIBLE
+            medallMigAnyGris.visibility = View.INVISIBLE
+            imgBttnUnAny.visibility = View.INVISIBLE
+        }
+    }
+
+    fun medallaUnAnyVisible() {
+        binding.apply {
+            imgBttnMigAny.visibility = View.VISIBLE
+            imgBttnUnAny.visibility = View.VISIBLE
+            txtViewMigAny.visibility = View.VISIBLE
+            txtViewUnAny.visibility = View.VISIBLE
+            medallMigAnyGris.visibility = View.INVISIBLE
+            medallaUnAnyGris.visibility = View.INVISIBLE
+        }
+    }
+
+    fun medallaEstalviadorVisible() {
+        binding.apply {
+            medallaEstalviadorGris.visibility = View.INVISIBLE
+            imgBttnMedalla1.visibility = View.VISIBLE
+            txtViewMedEstalviador.visibility = View.VISIBLE
+        }
+        view?.let { Snackbar.make(it, R.string.perdreMedalla, Snackbar.LENGTH_LONG).show() }
+
+
+    }
+
+    fun medallaGranEstalviadorVisible() {
+        binding.apply {
+            medallaGranEstalviadorGris.visibility = View.INVISIBLE
+            imgBttnGranEstalviador.visibility = View.VISIBLE
+            txtViewGranEstalviador.visibility = View.VISIBLE
+        }
+        view?.let { Snackbar.make(it, R.string.perdreMedalla, Snackbar.LENGTH_LONG).show() }
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     fun mostrarMedallesTemps() {
         //consulta adepesa consum per a comprovar si s'han guañat les medalles
@@ -92,19 +144,10 @@ class MedallesFragment : Fragment() {
                         medallesDeTemps()
                         //En cas que tingui com a true el camp mig any i false la medalla d'un any
                     } else if (despesaConsumDC[0].medallaUnAny) {
-                        binding.imgBttnMigAny.visibility = View.VISIBLE
-                        binding.imgBttnUnAny.visibility = View.VISIBLE
-                        binding.txtViewMigAny.visibility = View.VISIBLE
-                        binding.txtViewUnAny.visibility = View.VISIBLE
-                        binding.medallMigAnyGris.visibility = View.INVISIBLE
-                        binding.medallaUnAnyGris.visibility = View.INVISIBLE
+                        medallaUnAnyVisible()
                         //En el cas que estigui com a true la medalla d'un any
                     } else if (despesaConsumDC[0].medallaMigAny) {
-                        binding.imgBttnMigAny.visibility = View.VISIBLE
-                        binding.txtViewMigAny.visibility = View.VISIBLE
-                        binding.txtViewUnAny.visibility = View.INVISIBLE
-                        binding.medallMigAnyGris.visibility = View.INVISIBLE
-                        binding.imgBttnUnAny.visibility = View.INVISIBLE
+                        medallaMigAnyVisible()
                         medallesDeTemps()
                     }
                 }
@@ -189,11 +232,7 @@ class MedallesFragment : Fragment() {
 
         //Si ha guanyat la de mig any fa un update per a modifica el camp (Si el camp no hi és s'afegeix)
         if (diferencia.toInt() in 182..365) {
-            binding.imgBttnMigAny.visibility = View.VISIBLE
-            binding.txtViewMigAny.visibility = View.VISIBLE
-            binding.txtViewUnAny.visibility = View.INVISIBLE
-            binding.medallMigAnyGris.visibility = View.INVISIBLE
-            binding.imgBttnUnAny.visibility = View.INVISIBLE
+            medallaMigAnyVisible()
             val actualitza = db.collection("despesaConsum").addSnapshotListener { snapshot, e ->
                 val doc = snapshot?.documents
                 doc?.forEach {
@@ -214,12 +253,7 @@ class MedallesFragment : Fragment() {
             }
             //Aquí es mira si s'ha guanyat la de un any estalviant i s'afageix a la BBDD
         } else if (diferencia >= 365) {
-            binding.imgBttnMigAny.visibility = View.VISIBLE
-            binding.imgBttnUnAny.visibility = View.VISIBLE
-            binding.txtViewMigAny.visibility = View.VISIBLE
-            binding.txtViewUnAny.visibility = View.VISIBLE
-            binding.medallMigAnyGris.visibility = View.INVISIBLE
-            binding.medallaUnAnyGris.visibility = View.INVISIBLE
+            medallaUnAnyVisible()
             val actualitza = db.collection("despesaConsum").addSnapshotListener { snapshot, e ->
                 val doc = snapshot?.documents
                 doc?.forEach {
@@ -230,12 +264,12 @@ class MedallesFragment : Fragment() {
 
                         db.runTransaction { transaction ->
                             var despesaConsum: HashMap<String, Boolean>
-                            if (!despesaConsumConsulta.medallaMigAny){
+                            if (!despesaConsumConsulta.medallaMigAny) {
                                 despesaConsum = hashMapOf(
                                     "medallaMigAny" to true,
                                     "medallaUnAny" to true
                                 )
-                            }else {
+                            } else {
                                 despesaConsum = hashMapOf(
                                     "medallaUnAny" to true
                                 )
@@ -250,7 +284,7 @@ class MedallesFragment : Fragment() {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun omplirDades(binding: FragmentInformesBinding){
+    fun omplirDades() {
         val user = Firebase.auth.currentUser
         val mail = user?.email.toString()
 
@@ -258,13 +292,13 @@ class MedallesFragment : Fragment() {
         val query = energies.whereEqualTo("mail", mail).get()
             .addOnSuccessListener { document ->
                 if (!document.isEmpty) {
-                    var consumAigua =  mapOf<String, Double>()
+                    var consumAigua = mapOf<String, Double>()
                     var aiguaDiners = mapOf<String, Double>()
-                    var consumLlum =  mapOf<String, Double>()
+                    var consumLlum = mapOf<String, Double>()
                     var llumDiners = mapOf<String, Double>()
-                    var consumGas =  mapOf<String, Double>()
+                    var consumGas = mapOf<String, Double>()
                     var gasDiners = mapOf<String, Double>()
-                    var consumGasoil =  mapOf<String, Double>()
+                    var consumGasoil = mapOf<String, Double>()
                     var gasoilDiners = mapOf<String, Double>()
                     var dinersTotal = arrayListOf<Double>()
 
@@ -283,23 +317,35 @@ class MedallesFragment : Fragment() {
                     arrayListDeValors(dinersTotal, llumDiners)
                     arrayListDeValors(dinersTotal, gasDiners)
                     arrayListDeValors(dinersTotal, gasoilDiners)
+
+                    estalviadorTotal(dinersTotal)
                 }
             }
     }
-    fun estalviadorTotal(list: ArrayList<Double>): Double{
+
+    fun estalviadorTotal(list: ArrayList<Double>): Double {
         var aux: Double? = null
         var estalviat: Double = 0.0
-        for (item in list){
-            if(aux != null){
+        for (item in list) {
+            if (aux != null) {
                 estalviat += (aux - item)
             }
             aux = item
         }
-        return -estalviat
+
+        Log.d("estalviat", estalviat.toString())
+        if (estalviat >= -10) {
+            medallaEstalviadorVisible()
+        }
+        if (estalviat >= -5) {
+            medallaGranEstalviadorVisible()
+
+        }
+        return estalviat
     }
 
-    fun arrayListDeValors(list: ArrayList<Double>, map: Map<String, Double>){
-        for(x in map){
+    fun arrayListDeValors(list: ArrayList<Double>, map: Map<String, Double>) {
+        for (x in map) {
             list.add(x.value)
         }
     }
