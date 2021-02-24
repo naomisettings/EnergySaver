@@ -116,6 +116,7 @@ class ModificarUsuari : Fragment() {
                     //agafem l'usuari de la collecio amb el seu ID
                     val sfDocRef = db.collection("usuaris").document(usuariId)
 
+
                     //Actualitzem
                     db.runTransaction { transaction ->
                         //agafem el ID

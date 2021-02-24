@@ -28,6 +28,7 @@
         android:icon="@drawable/ic_consum"
         android:title="@string/consum_energies" />
 
+
 </group>
 
     <item
@@ -40,10 +41,10 @@
                 android:title="@string/modificar_dades"
                 android:icon="@drawable/ic_modificar"/>
 
-            <item
+            <!--<item
                 android:id="@+id/Sortir"
                 android:title="@string/Sortir"
-                android:icon="@drawable/ic_sortir"/>
+                android:icon="@drawable/ic_sortir"/>-->
 
         </menu>
     </item>

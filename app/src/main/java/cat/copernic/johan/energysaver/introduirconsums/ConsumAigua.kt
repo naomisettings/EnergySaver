@@ -2,6 +2,7 @@ package cat.copernic.johan.energysaver.introduirconsums
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -53,10 +54,18 @@ class ConsumAigua : Fragment() {
     //funcio per capturar el DataPicker
     private fun showDatePickerDialog() {
         val newFragment = DatePickerFragment.newInstance(DatePickerDialog.OnDateSetListener { _, year, month, day ->
+            Log.d("mes", month.toString())
             // +1 perque Gener es zero
+            if(month <=9){
+                val selectedDate = year.toString() + "." + "0" + (month + 1) + "." + day
+                binding.editTextDataAigua.setText(selectedDate)
 
-            val selectedDate = year.toString() + "." + "0" + (month + 1) + "." + day
-            binding.editTextDataAigua.setText(selectedDate)
+            }else if(month >=10){
+                val selectedDate = year.toString() + "."  + (month + 1) + "." + day
+                binding.editTextDataAigua.setText(selectedDate)
+
+            }
+
         })
 
         newFragment.show(requireActivity().supportFragmentManager, "datePicker")
