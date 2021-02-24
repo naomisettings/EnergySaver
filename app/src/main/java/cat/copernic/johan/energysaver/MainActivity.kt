@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.seleccionarEnergiaFragment, R.id.informesFragment, R.id.modificarFragment,
-                R.id.menuPrincipalFragment, R.id.obrirFragment, R.id.Sortir, R.id.registre,
+                R.id.menuPrincipalFragment, R.id.obrirFragment, R.id.registre,
                 R.id.veureFragment, R.id.menuEnergies
             ), drawerLayout
         )

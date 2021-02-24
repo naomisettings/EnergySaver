@@ -76,7 +76,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
         val currentUser = auth.currentUser
 
         if(currentUser!=null){
-           // reload()
+            reload()
 
         }
     }
@@ -234,8 +234,8 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
         auth.currentUser!!.reload().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 Snackbar.make(findViewById(R.id.ConstraintLayout), "Recarrega correcte", Snackbar.LENGTH_SHORT).show()
-                //val intent = Intent(this, MainActivity::class.java)
-               // startActivity(intent)
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
 
             }
         }

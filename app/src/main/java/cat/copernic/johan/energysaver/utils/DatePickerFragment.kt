@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
+import com.google.type.CalendarPeriod
 import java.util.*
 
 class DatePickerFragment : DialogFragment() {
@@ -18,6 +19,7 @@ class DatePickerFragment : DialogFragment() {
         // data
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
+        val currentDate = Calendar.getInstance().time
         // Valor seleccionat inicial, posem que el calendari mostri 1 any enrera de l'actual
         if (initialYear == -1)
             initialYear = year - 1
@@ -33,10 +35,11 @@ class DatePickerFragment : DialogFragment() {
             listener, initialYear,initialMonth,initialDay)
 
         // data minima i maxima que contrindra el calendari
-        c.set(Calendar.YEAR, year - 100)
+        c.set(Calendar.YEAR, year - 10)
         datePickerDialog.datePicker.minDate = c.timeInMillis
         c.set(Calendar.YEAR, year)
-        datePickerDialog.datePicker.maxDate = c.timeInMillis
+        datePickerDialog.datePicker.maxDate = currentDate.time
+
 
         return datePickerDialog
     }

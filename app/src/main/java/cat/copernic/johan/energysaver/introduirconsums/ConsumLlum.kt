@@ -54,8 +54,15 @@ class ConsumLlum : Fragment() {
         val newFragment = DatePickerFragment.newInstance(DatePickerDialog.OnDateSetListener { _, year, month, day ->
             // +1 perque Gener es zero
 
-            val selectedDate = year.toString() + "." + "0" + (month + 1) + "." + day
-            binding.editTextDataLLum.setText(selectedDate)
+            if(month <=9){
+                val selectedDate = year.toString() + "." + "0" + (month + 1) + "." + day
+                binding.editTextDataLLum.setText(selectedDate)
+
+            }else if(month >=10){
+                val selectedDate = year.toString() + "."  + (month + 1) + "." + day
+                binding.editTextDataLLum.setText(selectedDate)
+
+            }
         })
 
         newFragment.show(requireActivity().supportFragmentManager, "datePicker")
