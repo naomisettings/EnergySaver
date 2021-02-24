@@ -49,7 +49,7 @@ class ConsumGasoil : Fragment() {
         return binding.root
     }
 
-    //funcio per capturar el DataPicker
+    //funcio per capturar el DataPicker en un dialog
     private fun showDatePickerDialog() {
         val newFragment = DatePickerFragment.newInstance(DatePickerDialog.OnDateSetListener { _, year, month, day ->
             // +1 perque Gener es zero
