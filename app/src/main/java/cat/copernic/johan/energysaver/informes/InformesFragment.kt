@@ -117,7 +117,7 @@ class InformesFragment : Fragment() {
                         binding.txvTotal.setText(estalviadorTotal(dinersTotal).toString())
                     }
 
-                    if(aiguaDiners != null){
+                    if(!aiguaDiners.isEmpty()){
                         binding.btnAigua.setOnClickListener{view: View ->
                             resetFields(binding)
                             binding.txvTotal.setText(estalviadorTotal(aiguaDiners).toString())
@@ -129,7 +129,7 @@ class InformesFragment : Fragment() {
                         }
                     }
 
-                    if(llumDiners != null){
+                    if(!llumDiners.isEmpty()){
                         binding.btnLlum.setOnClickListener{view: View ->
                             resetFields(binding)
                             binding.txvTotal.setText(estalviadorTotal(llumDiners).toString())
@@ -141,7 +141,7 @@ class InformesFragment : Fragment() {
                         }
                     }
 
-                    if(gasDiners != null){
+                    if(!gasDiners.isEmpty()){
                         binding.btnGas.setOnClickListener{view: View ->
                             resetFields(binding)
                             binding.txvTotal.setText(estalviadorTotal(gasDiners).toString())
@@ -153,7 +153,7 @@ class InformesFragment : Fragment() {
                         }
                     }
 
-                    if(gasoilDiners != null){
+                    if(!gasoilDiners.isEmpty()){
                         binding.btnGasoil.setOnClickListener{view: View ->
                             resetFields(binding)
                             binding.txvTotal.setText(estalviadorTotal(gasoilDiners).toString())
