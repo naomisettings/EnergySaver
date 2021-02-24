@@ -17,6 +17,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.AlertDialogLayout
 import androidx.fragment.app.DialogFragment
 import cat.copernic.johan.energysaver.obrirtiquet.Usuari
 
@@ -67,6 +68,7 @@ class ModificarUsuari : Fragment() {
 
             //cridem a la funcio per esborrar usuari
             esborrarUsuari()
+            
             view.findNavController().navigate(R.id.action_modificarUsuari_to_authActivity)
         }
 
@@ -97,7 +99,7 @@ class ModificarUsuari : Fragment() {
         val mail = user?.email.toString()
         val db = FirebaseFirestore.getInstance()
 
-      //actualitza per establir un camp de col·lecció d 'usuaris
+        //actualitza per establir un camp de col·lecció d 'usuaris
         val actualitza = db.collection("usuaris").addSnapshotListener { snapshot, e ->
             //guardem els documents dels usuaris
             val doc = snapshot?.documents
@@ -140,7 +142,7 @@ class ModificarUsuari : Fragment() {
             }
         }
 
-        }
+    }
 
 
     //funcio per recuperar les dades a modificar del usuari identificat
@@ -255,8 +257,8 @@ class ModificarUsuari : Fragment() {
                         }}
                         .addOnFailureListener {e -> Log.w("TAG2", "Transaction failure.", e)
                             view?.let {
-                            Snackbar.make(it, "Error al crear el registre", Snackbar.LENGTH_LONG).show()
-                        }}
+                                Snackbar.make(it, "Error al crear el registre", Snackbar.LENGTH_LONG).show()
+                            }}
                 }
 
             }
@@ -276,6 +278,7 @@ class ModificarUsuari : Fragment() {
 
 
 }
+
 
 
 

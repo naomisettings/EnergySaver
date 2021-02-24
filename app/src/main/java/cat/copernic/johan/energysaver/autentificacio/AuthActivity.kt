@@ -25,6 +25,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.GoogleAuthProvider
 import androidx.appcompat.widget.Toolbar
+import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.MainActivity
 import cat.copernic.johan.energysaver.registre.Registre
 
@@ -75,7 +76,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
         val currentUser = auth.currentUser
 
         if(currentUser!=null){
-            reload()
+           // reload()
 
         }
     }
@@ -232,8 +233,10 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
     private fun reload() {
         auth.currentUser!!.reload().addOnCompleteListener { task ->
             if (task.isSuccessful) {
-
                 Snackbar.make(findViewById(R.id.ConstraintLayout), "Recarrega correcte", Snackbar.LENGTH_SHORT).show()
+                //val intent = Intent(this, MainActivity::class.java)
+               // startActivity(intent)
+
             }
         }
     }

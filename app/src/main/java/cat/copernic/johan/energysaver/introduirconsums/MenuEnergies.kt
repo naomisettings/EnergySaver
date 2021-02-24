@@ -34,11 +34,8 @@ class MenuEnergies : Fragment() {
         )
         comprovarEnergies()
         binding.imgbAigua.setOnClickListener { view: View ->
-
-                view.findNavController().navigate(R.id.action_menuEnergies_to_consumAigua)
+             view.findNavController().navigate(R.id.action_menuEnergies_to_consumAigua)
             }
-
-
         binding.imgbLlum.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_menuEnergies_to_consumLlum)
         }
