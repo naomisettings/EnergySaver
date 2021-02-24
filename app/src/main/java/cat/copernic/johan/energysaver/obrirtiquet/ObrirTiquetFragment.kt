@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.R
@@ -53,7 +54,7 @@ class ObrirTiquetFragment : Fragment() {
         binding.imgBttnCarregaImatge.setOnClickListener {
             Singleton.nameImg = ""
             selectImageFromGallery()
-            view?.let { Snackbar.make(it, R.string.imatgeCarrgada, Snackbar.LENGTH_LONG).show() }
+            Toast.makeText(context, R.string.imatgeCarrgada, Toast.LENGTH_SHORT).show()
         }
 
         binding.imgBttnCamera.setOnClickListener {

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.NonNull
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,11 +17,13 @@ import androidx.recyclerview.widget.RecyclerView
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentVeureBinding
 import cat.copernic.johan.energysaver.obrirtiquet.ObrirTiquetActivity
+import cat.copernic.johan.energysaver.obrirtiquet.Usuari
 import cat.copernic.johan.energysaver.tiquetobert.TiquetDC
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 
 class VeureTiquetFragment : Fragment() {
     var tiquets = arrayListOf<Tiquet>()
@@ -51,15 +54,30 @@ class VeureTiquetFragment : Fragment() {
 
         //Borrar tiquets
         binding.bttnBorrarTIquet.setOnClickListener {
-
+            //Veure si hi han checkbox seleccionats
             if (adapter.checkedTiquets.size > 0) {
                 for (x in adapter.checkedTiquets) {
+
+                    //Consulta per obtenir la id dels tiquets i borrar-los
                     val tiquetsFirestore = db.collection("tiquet")
                     val query = tiquetsFirestore.whereEqualTo("id", x.idTiquet).get()
                         .addOnSuccessListener { document ->
                             for (doc in document) {
-
-                                Log.d("prova33", doc.get("hora").toString())
+                                val tiquet =
+                                    document.toObjects(cat.copernic.johan.energysaver.veuretiquet.TiquetDC::class.java)
+                                //Elminar la imatge del Storage
+                                for ((i, x) in tiquet.withIndex()) {
+                                    if (tiquet[i].imatge != "") {
+                                        val desertRef =
+                                            FirebaseStorage.getInstance().reference.child("images/${tiquet[i].imatge}")
+                                        // Delete the file
+                                        desertRef.delete().addOnSuccessListener {
+                                            // File deleted successfully
+                                        }.addOnFailureListener {
+                                            // Uh-oh, an error occurred!
+                                        }
+                                    }
+                                }
 
                                 db.collection("tiquet").document(doc.id)
                                     .delete()
