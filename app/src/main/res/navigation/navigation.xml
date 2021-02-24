@@ -105,7 +105,11 @@
         android:id="@+id/obrirFragment"
         android:name="cat.copernic.johan.energysaver.obrirtiquet.ObrirTiquetFragment"
         android:label="@string/FragmentNouTiquet"
-        tools:layout="@layout/fragment_obrir"/>
+        tools:layout="@layout/fragment_obrir">
+        <action
+            android:id="@+id/action_obrirFragment_to_veureFragment"
+            app:destination="@id/veureFragment" />
+    </fragment>
     <fragment
         android:id="@+id/medallesFragment"
         android:name="cat.copernic.johan.energysaver.medalles.MedallesFragment"
@@ -173,14 +177,15 @@
     <argument
         android:name="idTiquet"
         app:argType="string" />
-        <action
-            android:id="@+id/action_respostaTiquetFragment_to_tiquetObertFragment"
-            app:destination="@id/tiquetObertFragment" />
         <argument
             android:name="titol"
             app:argType="string" />
         <argument android:name="descripcio" />
         <argument android:name="imatge" />
+        <action
+            android:id="@+id/action_respostaTiquetFragment_to_veureFragment"
+            app:destination="@id/veureFragment"
+            app:popUpTo="@id/respostaTiquetFragment" />
     </fragment>
     <fragment
         android:id="@+id/menuEnergies"

@@ -130,6 +130,9 @@ class TiquetObertFragment : Fragment() { //
                         binding.txtViewSenseResposta.visibility = View.INVISIBLE
                         binding.txtViewMostraResposta.text = tiquetsDC[0].resposta
                     }
+                    if(tiquetsDC[0].resposta != ""){
+                        binding.bttnResposta.visibility = View.INVISIBLE
+                    }
                 }
             }
             .addOnFailureListener { exception ->

@@ -26,7 +26,7 @@
             android:id="@+id/imgbModificar"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="80dp"
+            android:layout_marginStart="65dp"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="65dp"
             android:backgroundTint="@color/BtnColor"
@@ -41,8 +41,8 @@
         <ImageButton
             android:id="@+id/imgbGoInformes"
             android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="136dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="130dp"
             android:layout_marginTop="50dp"
             android:backgroundTint="@color/BtnColor"
             android:contentDescription="@string/defaultcd"
@@ -56,7 +56,7 @@
             android:id="@+id/imgbMedalles"
             android:layout_width="133dp"
             android:layout_height="131dp"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="74dp"
             android:backgroundTint="@color/BtnColor"
             android:contentDescription="@string/defaultcd"
@@ -66,13 +66,13 @@
 
         <ImageButton
             android:id="@+id/imgBttnSuport"
-            android:layout_width="129dp"
-            android:layout_height="129dp"
+            android:layout_width="131dp"
+            android:layout_height="127dp"
+            android:layout_marginStart="45dp"
             android:layout_marginTop="74dp"
-            android:layout_marginEnd="53dp"
             android:backgroundTint="@color/BtnColor"
             android:contentDescription="@string/defaultcd"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imgbMedalles"
             app:layout_constraintTop_toBottomOf="@+id/imgbGoInformes"
             app:srcCompat="@drawable/suport" />
 
@@ -80,14 +80,14 @@
             android:id="@+id/imgBtnConsums"
             android:layout_width="133dp"
             android:layout_height="131dp"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="25dp"
             android:backgroundTint="@color/BtnColor"
+            android:contentDescription="TODO"
             android:src="@drawable/greenenergy"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imgBttnSuport"
-            app:layout_constraintVertical_bias="0.209"
-            android:contentDescription="TODO" />
+            app:layout_constraintVertical_bias="0.209" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
