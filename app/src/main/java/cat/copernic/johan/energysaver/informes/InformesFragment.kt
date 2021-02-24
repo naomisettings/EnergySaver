@@ -1,5 +1,6 @@
 package cat.copernic.johan.energysaver.informes
 
+import android.annotation.SuppressLint
 import android.icu.util.TimeUnit
 import android.os.Build
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import cat.copernic.johan.energysaver.R
@@ -29,12 +31,13 @@ class InformesFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = DataBindingUtil.inflate<FragmentInformesBinding>(inflater, R.layout.fragment_informes,
-        container, false)
+            container, false)
         activacioButtons(binding)
         omplirDades(binding)
         return binding.root
     }
 
+    @SuppressLint("ResourceAsColor")
     fun activacioButtons(binding: FragmentInformesBinding){
         val user = Firebase.auth.currentUser
         val mail_usuari = user?.email.toString()
@@ -44,13 +47,28 @@ class InformesFragment : Fragment() {
         val query = energiesSeleccionades.whereEqualTo("mail_usuari", mail_usuari).get()
             .addOnSuccessListener { document ->
                 if (!document.isEmpty){
-                val energia = document.toObjects(Contractades::class.java)
-                    binding.btnAigua.isEnabled = energia[0].aigua
-                    binding.btnLlum.isEnabled = energia[0].llum
-                    binding.btnGas.isEnabled = energia[0].gas
-                    binding.btnGasoil.isEnabled = energia[0].gasoil
+                    val energia = document.toObjects(Contractades::class.java)
+                    if(!energia[0].aigua){
+                        binding.btnAigua.setBackgroundColor(R.color.totalColor)
+                        binding.btnAigua.isClickable = false
+                    }
+
+                    if(!energia[0].llum){
+                        binding.btnLlum.setBackgroundColor(R.color.totalColor)
+                        binding.btnAigua.isClickable = false
+                    }
+
+                    if(!energia[0].gas){
+                        binding.btnGas.setBackgroundColor(R.color.totalColor)
+                        binding.btnAigua.isClickable = false
+                    }
+
+                    if(!energia[0].gasoil){
+                        binding.btnGasoil.setBackgroundColor(R.color.totalColor)
+                        binding.btnAigua.isClickable = false
+                    }
                 }
-        }
+            }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -193,9 +211,10 @@ class InformesFragment : Fragment() {
         }
 
         for (x in map){
-            if(x.key == stringParser(getNearestDate(llistaDates, datePrimera)) && datePrimera != null){
+            if(datePrimera != null && x.key == stringParser(getNearestDate(llistaDates,
+                    LocalDate.of(datePrimera.year, datePrimera.month, datePrimera.dayOfMonth - 1)))){
                 dinersSegona = x.value
-                Log.i("prova", x.key + " -> " + x.value.toString())
+                Log.i("prova", x.key + " -> " + x.value.toString() + " 2")
             }
         }
 
@@ -302,8 +321,8 @@ class InformesFragment : Fragment() {
         for(x in map){
             if(x.key == stringParser(getFurthestDate(llistaDates, LocalDate.now()))){
                 list.add(x.value)
-                }
             }
+        }
 
         for(x in map){
             if(x.key != stringParser(getFurthestDate(llistaDates, LocalDate.now()))){
