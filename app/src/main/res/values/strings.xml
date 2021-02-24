@@ -121,6 +121,9 @@
     <string name="bttnCamera">Capturar</string>
     <string name="perdreMedalla">Les medalles d estalvi es poden perdre! Estalvi és constància!</string>
     <string name="imatgeCarrgada">Imatge carregada, confirma per enviar el tiquet</string>
+    <string name="textPeriode">PERIODE</string>
+    <string name="textTemps">TEMPS</string>
+    <string name="textTotal">TOTAL</string>
 
 
 </resources>

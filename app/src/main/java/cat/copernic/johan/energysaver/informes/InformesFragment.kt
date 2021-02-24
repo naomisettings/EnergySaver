@@ -1,5 +1,6 @@
 package cat.copernic.johan.energysaver.informes
 
+import android.icu.util.TimeUnit
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -11,12 +12,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentInformesBinding
+import cat.copernic.johan.energysaver.introduirconsums.Contractades
 import cat.copernic.johan.energysaver.medalles.DespesaConsumDC
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 import java.util.*
 
 class InformesFragment : Fragment() {
@@ -27,8 +30,27 @@ class InformesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = DataBindingUtil.inflate<FragmentInformesBinding>(inflater, R.layout.fragment_informes,
         container, false)
+        activacioButtons(binding)
         omplirDades(binding)
         return binding.root
+    }
+
+    fun activacioButtons(binding: FragmentInformesBinding){
+        val user = Firebase.auth.currentUser
+        val mail_usuari = user?.email.toString()
+        Log.d("mail", mail_usuari)
+
+        val energiesSeleccionades = db.collection("energies")
+        val query = energiesSeleccionades.whereEqualTo("mail_usuari", mail_usuari).get()
+            .addOnSuccessListener { document ->
+                if (!document.isEmpty){
+                val energia = document.toObjects(Contractades::class.java)
+                    binding.btnAigua.isEnabled = energia[0].aigua
+                    binding.btnLlum.isEnabled = energia[0].llum
+                    binding.btnGas.isEnabled = energia[0].gas
+                    binding.btnGasoil.isEnabled = energia[0].gasoil
+                }
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -68,11 +90,61 @@ class InformesFragment : Fragment() {
 
                     Log.i("prova", dinersTotal.toString())
 
-                    binding.txvTotal.setText(estalviadorTotal(dinersTotal).toString())
+                    if(dinersTotal != null){
+                        binding.txvTotal.setText(estalviadorTotal(dinersTotal).toString())
+                    }
 
-                    binding.btnAigua.setOnClickListener{view: View ->
-                        binding.txvTotal.setText(estalviadorTotal(aiguaDiners).toString())
-                        binding.txvPeriodeInfo.setText(estalviadorPeriode(aiguaDiners).toString())
+                    binding.btnTotal.setOnClickListener{view: View ->
+                        resetFields(binding)
+                        binding.txvTotal.setText(estalviadorTotal(dinersTotal).toString())
+                    }
+
+                    if(aiguaDiners != null){
+                        binding.btnAigua.setOnClickListener{view: View ->
+                            resetFields(binding)
+                            binding.txvTotal.setText(estalviadorTotal(aiguaDiners).toString())
+                            binding.txvPeriodeInfo.setText(estalviadorPeriode(aiguaDiners).toString())
+                            binding.txvTemps.setText(tempsEstalviat(aiguaDiners).toString())
+                            binding.txvTotalConsum.setText(estalviadorTotal(consumAigua).toString())
+                            binding.txvPeriodeConsum.setText(estalviadorPeriode(consumAigua).toString())
+                            binding.txvTempsConsum.setText(tempsEstalviat(consumAigua).toString())
+                        }
+                    }
+
+                    if(llumDiners != null){
+                        binding.btnLlum.setOnClickListener{view: View ->
+                            resetFields(binding)
+                            binding.txvTotal.setText(estalviadorTotal(llumDiners).toString())
+                            binding.txvPeriodeInfo.setText(estalviadorPeriode(llumDiners).toString())
+                            binding.txvTemps.setText(tempsEstalviat(llumDiners).toString())
+                            binding.txvTotalConsum.setText(estalviadorTotal(consumLlum).toString())
+                            binding.txvPeriodeConsum.setText(estalviadorPeriode(consumLlum).toString())
+                            binding.txvTempsConsum.setText(tempsEstalviat(consumLlum).toString())
+                        }
+                    }
+
+                    if(gasDiners != null){
+                        binding.btnGas.setOnClickListener{view: View ->
+                            resetFields(binding)
+                            binding.txvTotal.setText(estalviadorTotal(gasDiners).toString())
+                            binding.txvPeriodeInfo.setText(estalviadorPeriode(gasDiners).toString())
+                            binding.txvTemps.setText(tempsEstalviat(gasDiners).toString())
+                            binding.txvTotalConsum.setText(estalviadorTotal(consumGas).toString())
+                            binding.txvPeriodeConsum.setText(estalviadorPeriode(consumGas).toString())
+                            binding.txvTempsConsum.setText(tempsEstalviat(consumGas).toString())
+                        }
+                    }
+
+                    if(gasoilDiners != null){
+                        binding.btnGasoil.setOnClickListener{view: View ->
+                            resetFields(binding)
+                            binding.txvTotal.setText(estalviadorTotal(gasoilDiners).toString())
+                            binding.txvPeriodeInfo.setText(estalviadorPeriode(gasoilDiners).toString())
+                            binding.txvTemps.setText(tempsEstalviat(gasoilDiners).toString())
+                            binding.txvTotalConsum.setText(estalviadorTotal(consumGasoil).toString())
+                            binding.txvPeriodeConsum.setText(estalviadorPeriode(consumGasoil).toString())
+                            binding.txvTempsConsum.setText(tempsEstalviat(consumGasoil).toString())
+                        }
                     }
                 }
             }
@@ -86,7 +158,7 @@ class InformesFragment : Fragment() {
             }
             aux = item
         }
-        return estalviat
+        return -estalviat
     }
 
     fun estalviadorTotal(map: Map<String, Double>): Double{
@@ -98,7 +170,7 @@ class InformesFragment : Fragment() {
             }
             aux = item.value
         }
-        return estalviat
+        return -estalviat
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -106,28 +178,40 @@ class InformesFragment : Fragment() {
         val llistaString = arrayListOf<String>()
         var llistaDates = arrayListOf<LocalDate>()
         var datePrimera: LocalDate? = null
-        var dinersPrimera: Double = 2.0
-        var dinersSegona: Double = 5.0
+        var dinersPrimera: Double = 0.0
+        var dinersSegona: Double = 0.0
         var estalviData: Double
 
-        for (x in map){
-            llistaString.add(x.key)
-        }
-
-        llistaDates = getLlistaDates(llistaString)
+        llistaDates = getLlistaDates(extreureDatesMap(map))
 
         for(x in map){
             if(x.key == stringParser(getNearestDate(llistaDates, LocalDate.now()))){
                 dinersPrimera = x.value
                 datePrimera = dataParser(x.key)
+                Log.i("prova", x.key + " -> " + x.value.toString())
             }
+        }
 
+        for (x in map){
             if(x.key == stringParser(getNearestDate(llistaDates, datePrimera)) && datePrimera != null){
                 dinersSegona = x.value
+                Log.i("prova", x.key + " -> " + x.value.toString())
             }
         }
 
         return dinersPrimera - dinersSegona
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun tempsEstalviat(map: Map<String, Double>): Int{
+        var dateComparar = LocalDate.now()
+        var tempsEstalviat = 0
+        var llistaDates = getLlistaDates(extreureDatesMap(map))
+
+        tempsEstalviat = ChronoUnit.DAYS.between(getFurthestDate(llistaDates, dateComparar), dateComparar).toInt()
+
+        Log.i("temps", getFurthestDate(llistaDates, dateComparar).toString())
+        return tempsEstalviat
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -139,6 +223,14 @@ class InformesFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     fun stringParser(data: LocalDate): String{
         return data.toString().replace("-", ".")
+    }
+
+    fun extreureDatesMap(map: Map<String, Double>): ArrayList<String>{
+        val llistaString = arrayListOf<String>()
+        for (x in map){
+            llistaString.add(x.key)
+        }
+        return llistaString
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -156,17 +248,17 @@ class InformesFragment : Fragment() {
     fun getNearestDate(dates: ArrayList<LocalDate>, targetDate: LocalDate?): LocalDate{
         var nearestDate = LocalDate.now()
         if(targetDate != null){
-            var diff = 999999
+            var diff = -1
 
             for (x in dates) {
-                var diffAux = x.compareTo(targetDate)
+                var diffAux = ChronoUnit.DAYS.between(x, targetDate).toInt()
 
-                if(diff == 999999){
+                if(diff == -1){
                     nearestDate = x
                     diff = diffAux
                 }
 
-                if(diffAux > diff){
+                if(diffAux < diff){
                     nearestDate = x
                     diff = diffAux
                 }
@@ -179,20 +271,21 @@ class InformesFragment : Fragment() {
     fun getFurthestDate(dates: ArrayList<LocalDate>, targetDate: LocalDate?): LocalDate{
         var furthestDate = LocalDate.now()
         if(targetDate != null){
-            var diff = 999999
+            var diff = -1
 
             for (x in dates) {
                 var diffAux: Int
-                diffAux = x.compareTo(targetDate)
+                diffAux = ChronoUnit.DAYS.between(x, targetDate).toInt()
 
-                if(diff == 999999){
+                if(diff == -1){
                     furthestDate = x
                     diff = diffAux
                 }
 
-                if(diffAux < diff){
+                if(diffAux > diff){
                     furthestDate = x
                     diff = diffAux
+                    Log.i("temps", furthestDate.toString())
                 }
             }
         }
@@ -204,24 +297,27 @@ class InformesFragment : Fragment() {
         val llistaString = arrayListOf<String>()
         var llistaDates = arrayListOf<LocalDate>()
 
-        for (x in map){
-            llistaString.add(x.key)
-        }
-
-        llistaDates = getLlistaDates(llistaString)
+        llistaDates = getLlistaDates(extreureDatesMap(map))
 
         for(x in map){
             if(x.key == stringParser(getFurthestDate(llistaDates, LocalDate.now()))){
                 list.add(x.value)
-                Log.i("prova", "a" + x.value.toString())
                 }
             }
 
         for(x in map){
             if(x.key != stringParser(getFurthestDate(llistaDates, LocalDate.now()))){
                 list.add(x.value)
-                Log.i("prova", "b" + x.value.toString())
             }
         }
+    }
+
+    fun resetFields(binding: FragmentInformesBinding){
+        binding.txvTemps.setText("")
+        binding.txvPeriodeInfo.setText("")
+        binding.txvTotal.setText("")
+        binding.txvPeriodeConsum.setText("")
+        binding.txvTotalConsum.setText("")
+        binding.txvTempsConsum.setText("")
     }
 }
