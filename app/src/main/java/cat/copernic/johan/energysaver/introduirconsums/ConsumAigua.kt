@@ -3,12 +3,11 @@ package cat.copernic.johan.energysaver.introduirconsums
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
-
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentConsumAiguaBinding
@@ -56,19 +55,16 @@ class ConsumAigua : Fragment() {
         val newFragment = DatePickerFragment.newInstance(DatePickerDialog.OnDateSetListener { _, year, month, day ->
             Log.d("mes", month.toString())
             // +1 perque Gener es zero
-            if(month <=9){
-                val selectedDate = year.toString() + "." + "0" + (month + 1) + "." + day
+                val selectedDate = year.toString() + "." + twoDigits(month + 1) + "." + twoDigits(day)
                 binding.editTextDataAigua.setText(selectedDate)
-
-            }else if(month >=10){
-                val selectedDate = year.toString() + "."  + (month + 1) + "." + day
-                binding.editTextDataAigua.setText(selectedDate)
-
-            }
 
         })
 
         newFragment.show(requireActivity().supportFragmentManager, "datePicker")
+    }
+    //funcio per passar a dos digits el mes i dia quan no ho son
+    private fun twoDigits(n: Int): String? {
+        return if (n <= 9) "0$n" else n.toString()
     }
 
     fun guardarConsum() {

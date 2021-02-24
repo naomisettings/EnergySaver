@@ -53,19 +53,17 @@ class ConsumGas : Fragment() {
     private fun showDatePickerDialog() {
         val newFragment = DatePickerFragment.newInstance(DatePickerDialog.OnDateSetListener { _, year, month, day ->
             // +1 perque Gener es zero
+            val selectedDate = year.toString() + "." + twoDigits(month + 1) + "." + twoDigits(day)
+            binding.editTextDataGas.setText(selectedDate)
 
-            if(month <=9){
-                val selectedDate = year.toString() + "." + "0" + (month + 1) + "." + day
-                binding.editTextDataGas.setText(selectedDate)
-
-            }else if(month >=10){
-                val selectedDate = year.toString() + "."  + (month + 1) + "." + day
-                binding.editTextDataGas.setText(selectedDate)
-
-            }
         })
 
         newFragment.show(requireActivity().supportFragmentManager, "datePicker")
+    }
+
+    //funcio per passar a dos digits el mes i dia quan no ho son
+    private fun twoDigits(n: Int): String? {
+        return if (n <= 9) "0$n" else n.toString()
     }
 
     fun guardarConsum() {
