@@ -4,173 +4,171 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ConstraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/degradat">
 
+        <Button
+            android:id="@+id/btnGoogle"
+            android:layout_width="92dp"
+            android:layout_height="84dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="55dp"
+            android:background="@drawable/rodo"
+            android:drawableBottom="@drawable/google"
+            android:fontFamily="@font/asap_bold"
+            android:gravity="center"
+            android:textSize="@dimen/btnTextSize"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnAccedir"
+            app:layout_constraintVertical_bias="0.0" />
 
+        <Button
+            android:id="@+id/btnRegistre"
+            style="@style/Bottons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="70dp"
+            android:background="@color/BtnColor"
+            android:fontFamily="@font/asap_bold"
+            android:gravity="center"
+            android:text="@string/btnRegistre"
+            android:textAlignment="center"
+            android:textColor="@color/textBtnColor"
+            android:textSize="@dimen/btnTextSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextContrasenya" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/ConstraintLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/txtIdentificacio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
+            android:fontFamily="@font/asap_bold"
+            android:text="@string/txtIdentificaci"
+            android:textColor="@color/TitolColor"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewtTitol" />
 
-                <Button
-                    android:id="@+id/btnGoogle"
-                    android:layout_width="92dp"
-                    android:layout_height="84dp"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginTop="55dp"
-                    android:background="@drawable/rodo"
-                    android:drawableBottom="@drawable/google"
-                    android:fontFamily="@font/asap_bold"
-                    android:gravity="center"
-                    android:textSize="@dimen/btnTextSize"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/btnAccedir"
-                    app:layout_constraintVertical_bias="0.0" />
+        <TextView
+            android:id="@+id/txtCorreu"
+            style="@style/TextViews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/asap_bold"
+            android:text="@string/correu"
+            android:textColor="@color/TitolColor"
+            android:textSize="@dimen/CampsSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.393"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtIdentificacio" />
 
-                <Button
-                    android:id="@+id/btnRegistre"
-                    style="@style/Bottons"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginEnd="70dp"
-                    android:background="@color/BtnColor"
-                    android:fontFamily="@font/asap_bold"
-                    android:gravity="center"
-                    android:text="@string/btnRegistre"
-                    android:textAlignment="center"
-                    android:textColor="@color/textBtnColor"
-                    android:textSize="@dimen/btnTextSize"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextContrasenya" />
+        <EditText
+            android:id="@+id/editTextCorreu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:fontFamily="@font/asap_bold"
+            android:hint="@string/correu_el_ctronic"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/material_on_background_disabled"
+            android:textColorLink="@color/TitolColor"
+            android:textSize="@dimen/CampsSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtCorreu" />
 
-                <TextView
-                    android:id="@+id/txtIdentificacio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="55dp"
-                    android:fontFamily="@font/asap_bold"
-                    android:text="@string/txtIdentificaci"
-                    android:textColor="@color/TitolColor"
-                    android:textSize="24sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageViewtTitol" />
+        <TextView
+            android:id="@+id/txtContrasenya"
+            style="@style/TextViews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/asap_bold"
+            android:text="@string/contrasenya"
+            android:textColor="@color/TitolColor"
+            android:textSize="@dimen/CampsSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.33"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextCorreu" />
 
-                <TextView
-                    android:id="@+id/txtCorreu"
-                    style="@style/TextViews"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="60dp"
-                    android:fontFamily="@font/asap_bold"
-                    android:text="@string/correu"
-                    android:textColor="@color/TitolColor"
-                    android:textSize="@dimen/CampsSize"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.393"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtIdentificacio" />
+        <EditText
+            android:id="@+id/editTextContrasenya"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:fontFamily="@font/asap_bold"
+            android:hint="@string/Editcontrasenya"
+            android:inputType="textPassword"
+            android:textColor="@color/material_on_background_disabled"
+            android:textColorLink="@color/TitolColor"
+            android:textSize="@dimen/CampsSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtContrasenya" />
 
-                <EditText
-                    android:id="@+id/editTextCorreu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    android:autofillHints=""
-                    android:ems="10"
-                    android:fontFamily="@font/asap_bold"
-                    android:hint="@string/correu_el_ctronic"
-                    android:inputType="textEmailAddress"
-                    android:textColor="@color/material_on_background_disabled"
-                    android:textColorLink="@color/TitolColor"
-                    android:textSize="@dimen/CampsSize"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtCorreu" />
+        <Button
+            android:id="@+id/btnAccedir"
+            style="@style/Bottons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="70dp"
+            android:background="@color/BtnColor"
+            android:fontFamily="@font/asap_bold"
+            android:gravity="center"
+            android:text="@string/btnAccedir"
+            android:textAlignment="center"
+            android:textColor="@color/textBtnColor"
+            android:textSize="@dimen/btnTextSize"
+            app:layout_constraintBaseline_toBaselineOf="@+id/btnRegistre"
+            app:layout_constraintStart_toStartOf="parent" />
 
-                <TextView
-                    android:id="@+id/txtContrasenya"
-                    style="@style/TextViews"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:fontFamily="@font/asap_bold"
-                    android:text="@string/contrasenya"
-                    android:textColor="@color/TitolColor"
-                    android:textSize="@dimen/CampsSize"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.33"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextCorreu" />
+        <ImageView
+            android:id="@+id/imageViewtTitol"
+            android:layout_width="229dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="30dp"
+            android:contentDescription="@string/titol"
+            android:scrollbarSize="60dp"
 
-                <EditText
-                    android:id="@+id/editTextContrasenya"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    android:autofillHints=""
-                    android:ems="10"
-                    android:fontFamily="@font/asap_bold"
-                    android:hint="@string/Editcontrasenya"
-                    android:inputType="textPassword"
-                    android:textColor="@color/material_on_background_disabled"
-                    android:textColorLink="@color/TitolColor"
-                    android:textSize="@dimen/CampsSize"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtContrasenya" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/energy2" />
 
-                <Button
-                    android:id="@+id/btnAccedir"
-                    style="@style/Bottons"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="70dp"
-                    android:background="@color/BtnColor"
-                    android:fontFamily="@font/asap_bold"
-                    android:gravity="center"
-                    android:text="@string/btnAccedir"
-                    android:textAlignment="center"
-                    android:textColor="@color/textBtnColor"
-                    android:textSize="@dimen/btnTextSize"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/btnRegistre"
-                    app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/btnSortir"
+            style="@style/Bottons"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="70dp"
+            android:background="@color/BtnColor"
+            android:fontFamily="@font/asap_bold"
+            android:gravity="center"
+            android:text="@string/btnSortir"
+            android:textSize="@dimen/btnTextSize"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/btnGoogle"
+            app:layout_constraintTop_toBottomOf="@+id/btnRegistre"
+            app:layout_constraintVertical_bias="0.0" />
 
-                <ImageView
-                    android:id="@+id/imageViewtTitol"
-                    android:layout_width="229dp"
-                    android:layout_height="64dp"
-                    android:layout_marginTop="30dp"
-                    android:contentDescription="@string/titol"
-                    android:scrollbarSize="60dp"
-
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/energy2" />
-
-                <Button
-                    android:id="@+id/btnSortir"
-                    style="@style/Bottons"
-                    android:layout_width="125dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="64dp"
-                    android:layout_marginEnd="70dp"
-                    android:background="@color/BtnColor"
-                    android:fontFamily="@font/asap_bold"
-                    android:gravity="center"
-                    android:text="@string/btnSortir"
-                    android:textSize="@dimen/btnTextSize"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/btnGoogle"
-                    app:layout_constraintTop_toBottomOf="@+id/btnRegistre"
-                    app:layout_constraintVertical_bias="0.0" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

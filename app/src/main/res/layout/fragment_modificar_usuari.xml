@@ -7,7 +7,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/modificarFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/degradat">
 
         <Button
             android:id="@+id/btnTancarModificar"
@@ -59,6 +60,7 @@
 
         <Button
             android:id="@+id/btnConfirmarModificar"
+            style="@style/Bottons"
             android:layout_width="153dp"
             android:layout_height="43dp"
             android:layout_marginStart="28dp"
@@ -66,8 +68,7 @@
             android:gravity="center"
             android:text="@string/btnConfirmar"
             app:layout_constraintBaseline_toBaselineOf="@+id/btnBaixaModificar"
-            app:layout_constraintStart_toStartOf="parent"
-            style="@style/Bottons" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
             android:id="@+id/editTextPoblacioModificar"
@@ -215,13 +216,13 @@
 
         <TextView
             android:id="@+id/txtNomModificar"
+            style="@style/TextViews"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:text="@string/btnNom"
             app:layout_constraintBaseline_toBaselineOf="@+id/editTextNomModificar"
-            app:layout_constraintStart_toStartOf="parent"
-            style="@style/TextViews" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/txtModificar"

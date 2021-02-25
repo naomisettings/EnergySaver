@@ -8,7 +8,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/consumAiguaFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/degradat">
 
         <TextView
             android:id="@+id/textViewConsumAigua"
@@ -55,6 +56,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="60dp"
             android:layout_marginEnd="30dp"
+            android:autofillHints=""
             android:ems="10"
             android:fontFamily="@font/asap_bold"
             android:gravity="center"
@@ -62,8 +64,7 @@
             android:inputType="number|numberDecimal"
             android:textSize="@dimen/CampsSize"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewAigua"
-            android:autofillHints="" />
+            app:layout_constraintTop_toBottomOf="@+id/imageViewAigua" />
 
         <EditText
             android:id="@+id/editTextImportAigua"
@@ -71,6 +72,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="30dp"
+            android:autofillHints=""
             android:ems="10"
             android:fontFamily="@font/asap_bold"
             android:gravity="center"
@@ -78,8 +80,7 @@
             android:inputType="number|numberDecimal"
             android:textSize="@dimen/CampsSize"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextConsumAigua"
-            android:autofillHints="" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextConsumAigua" />
 
         <EditText
             android:id="@+id/editTextDataAigua"
@@ -87,6 +88,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="30dp"
+            android:autofillHints=""
             android:clickable="true"
             android:ems="10"
             android:focusable="false"
@@ -95,8 +97,7 @@
             android:inputType="date"
             android:textSize="@dimen/CampsSize"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextImportAigua"
-            android:autofillHints="" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextImportAigua" />
 
         <Button
             android:id="@+id/btnConfirmarConsumAigua"

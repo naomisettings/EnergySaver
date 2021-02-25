@@ -6,7 +6,8 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".veuretiquet.VeureTiquetFragment" >
+        android:background="@drawable/degradat"
+        tools:context=".veuretiquet.VeureTiquetFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

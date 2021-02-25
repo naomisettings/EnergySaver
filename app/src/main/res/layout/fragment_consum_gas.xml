@@ -8,7 +8,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/consumGasFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/degradat">
 
         <TextView
             android:id="@+id/textViewConsumGas"
@@ -56,6 +57,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="60dp"
             android:layout_marginEnd="30dp"
+            android:autofillHints=""
             android:ems="10"
             android:fontFamily="@font/asap_bold"
             android:gravity="center"
@@ -63,8 +65,7 @@
             android:inputType="number|numberDecimal"
             android:textSize="@dimen/CampsSize"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewGas"
-            android:autofillHints="" />
+            app:layout_constraintTop_toBottomOf="@+id/imageViewGas" />
 
         <EditText
             android:id="@+id/editTextImportGas"
@@ -106,6 +107,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="30dp"
+            android:autofillHints=""
             android:clickable="true"
             android:ems="10"
             android:focusable="false"
@@ -114,8 +116,7 @@
             android:inputType="date"
             android:textSize="@dimen/CampsSize"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextImportGas"
-            android:autofillHints="" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextImportGas" />
 
         <ImageView
             android:id="@+id/imageViewGas"

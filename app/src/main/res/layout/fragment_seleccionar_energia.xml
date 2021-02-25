@@ -5,7 +5,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/degradat">
 
         <TextView
             android:id="@+id/txvSeleccionarEnergia"
@@ -43,7 +44,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="100dp"
             android:layout_marginTop="20dp"
+            android:fontFamily="@font/asap_bold"
             android:text="@string/textAigua"
+            android:textColor="@color/TitolColor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txvSeleccionarEnergia" />
 
@@ -53,7 +56,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="100dp"
             android:layout_marginTop="3dp"
+            android:fontFamily="@font/asap_bold"
             android:text="@string/textLlum"
+            android:textColor="@color/TitolColor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chbxAigua" />
 
@@ -63,7 +68,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="115dp"
+            android:fontFamily="@font/asap_bold"
             android:text="@string/textGas"
+            android:textColor="@color/TitolColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txvSeleccionarEnergia" />
 
@@ -73,7 +80,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:layout_marginEnd="100dp"
+            android:fontFamily="@font/asap_bold"
             android:text="@string/textGasoil"
+            android:textColor="@color/TitolColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chbxGas" />
 
@@ -121,6 +130,7 @@
             android:layout_marginEnd="30dp"
             android:fontFamily="@font/asap_bold"
             android:text="@string/textAigua"
+            android:textColor="@color/TitolColor"
             android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/spnAigua"
             app:layout_constraintTop_toBottomOf="@+id/txvPeriode" />
@@ -133,6 +143,7 @@
             android:layout_marginEnd="30dp"
             android:fontFamily="@font/asap_bold"
             android:text="@string/textLlum"
+            android:textColor="@color/TitolColor"
             android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/spnAigua"
             app:layout_constraintTop_toBottomOf="@+id/txvAigua" />
@@ -145,6 +156,7 @@
             android:layout_marginEnd="30dp"
             android:fontFamily="@font/asap_bold"
             android:text="@string/textGas"
+            android:textColor="@color/TitolColor"
             android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/spnGas"
             app:layout_constraintTop_toBottomOf="@+id/txvLlum" />
@@ -157,6 +169,7 @@
             android:layout_marginEnd="30dp"
             android:fontFamily="@font/asap_bold"
             android:text="@string/textGasoil"
+            android:textColor="@color/TitolColor"
             android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/spnCombustible"
             app:layout_constraintTop_toBottomOf="@+id/txvGas" />

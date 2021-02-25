@@ -7,6 +7,7 @@
         android:id="@+id/menuEnergies"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/degradat"
         tools:context=".introduirconsums.MenuEnergies">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -85,9 +86,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="35dp"
                 android:layout_marginTop="45dp"
+                android:alpha="15"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewEnergiesConsum"
-                android:alpha="15"
                 app:srcCompat="@drawable/waterdropdisable" />
 
             <ImageButton
@@ -96,9 +97,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="35dp"
                 android:layout_marginTop="35dp"
+                android:alpha="15"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imgbAigua"
-                android:alpha="15"
                 app:srcCompat="@drawable/gasdisable" />
 
             <ImageButton
@@ -107,9 +108,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="45dp"
                 android:layout_marginEnd="35dp"
+                android:alpha="15"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewEnergiesConsum"
-                android:alpha="15"
                 app:srcCompat="@drawable/lightbulbdisable" />
 
             <ImageButton
@@ -118,9 +119,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="35dp"
                 android:layout_marginEnd="35dp"
+                android:alpha="15"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imgbLlum"
-                android:alpha="15"
                 app:srcCompat="@drawable/gasoildisable" />
 
             <TextView

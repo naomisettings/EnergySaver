@@ -1,48 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".tiquetobert.RespostaTiquetFragment">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="@drawable/degradat"
+        tools:context=".tiquetobert.RespostaTiquetFragment">
 
-        <TextView
-            android:id="@+id/txtViewDescripcio"
-            style="@style/ColorsBasicsAplicacio"
-            android:layout_width="238dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="35dp"
-            android:text="@string/txtViewDescripcioTiquet" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/editTxtDescrResposta"
-            style="@style/textColorNegre"
-            android:layout_width="297dp"
-            android:layout_height="243dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="15dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:gravity="start|top"
-            android:hint="@string/editTxtDescripcioTiquet"
-            android:inputType="textMultiLine" />
+            <TextView
+                android:id="@+id/txtViewDescripcio"
+                style="@style/ColorsBasicsAplicacio"
+                android:layout_width="238dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="35dp"
+                android:text="@string/txtViewDescripcioTiquet" />
 
-        <Button
-            android:id="@+id/bttnEnivarResposta"
-            style="@style/Bottons"
-            android:layout_width="138dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="120dp"
-            android:layout_marginTop="25dp"
-            android:text="@string/bttnEnviarResposta" />
-    </LinearLayout>
-</FrameLayout>
+            <EditText
+                android:id="@+id/editTxtDescrResposta"
+                style="@style/textColorNegre"
+                android:layout_width="297dp"
+                android:layout_height="243dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="15dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="@string/editTxtDescripcioTiquet"
+                android:inputType="textMultiLine" />
+
+            <Button
+                android:id="@+id/bttnEnivarResposta"
+                style="@style/Bottons"
+                android:layout_width="138dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="25dp"
+                android:text="@string/bttnEnviarResposta" />
+        </LinearLayout>
+    </FrameLayout>
 
 
     </layout>
