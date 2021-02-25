@@ -27,7 +27,7 @@
             android:id="@+id/imgbModificar"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="65dp"
+            android:layout_marginStart="70dp"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="65dp"
             android:backgroundTint="@color/BtnColor"
@@ -57,8 +57,8 @@
             android:id="@+id/imgbMedalles"
             android:layout_width="133dp"
             android:layout_height="131dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="74dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="70dp"
             android:backgroundTint="@color/BtnColor"
             android:contentDescription="@string/defaultcd"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +70,7 @@
             android:layout_width="131dp"
             android:layout_height="127dp"
             android:layout_marginStart="45dp"
-            android:layout_marginTop="74dp"
+            android:layout_marginTop="70dp"
             android:backgroundTint="@color/BtnColor"
             android:contentDescription="@string/defaultcd"
             app:layout_constraintStart_toEndOf="@+id/imgbMedalles"
@@ -81,14 +81,13 @@
             android:id="@+id/imgBtnConsums"
             android:layout_width="133dp"
             android:layout_height="131dp"
-            android:layout_marginStart="25dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="35dp"
             android:backgroundTint="@color/BtnColor"
             android:contentDescription="TODO"
             android:src="@drawable/greenenergy"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgBttnSuport"
-            app:layout_constraintVertical_bias="0.209" />
+            app:layout_constraintTop_toBottomOf="@+id/imgBttnSuport" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
