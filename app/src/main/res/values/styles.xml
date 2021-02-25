@@ -41,7 +41,7 @@
     <style name="stlTitolInformes">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">60dp</item>
+        <item name="android:layout_marginTop">@dimen/marginTitol</item>
         <item name="android:background">@color/TitolColor</item>
         <item name="android:fontFamily">@font/asap_bold</item>
         <item name="android:paddingStart">@dimen/TitolPantallaSize</item>
