@@ -49,7 +49,7 @@ class MenuEnergies : Fragment() {
         return binding.root
     }
 
-    //funcio per habilitar nome les energies seleccionades al menu entrar consum energies
+    //funcio per habilitar nom de les energies seleccionades al menu entrar consum energies
     fun comprovarEnergies() {
 
         //guardem les dades de l'usari identificat

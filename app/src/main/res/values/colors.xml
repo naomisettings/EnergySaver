@@ -2,8 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="TitolColor">#0844A4</color>
-    <color name="BtnColor">#0844A4</color>
+    <color name="TitolColor">#009688</color>
+    <color name="BtnColor">#009688</color>
     <color name="textBtnColor">#FFFFFF</color>
     <color name="aiguaColor">#1762DA</color>
     <color name="llumColor">#FFAE3A</color>
