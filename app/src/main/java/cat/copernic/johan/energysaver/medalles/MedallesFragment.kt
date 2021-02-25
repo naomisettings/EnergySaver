@@ -32,7 +32,7 @@ class MedallesFragment : Fragment() {
     val mail = user?.email.toString()
 
     val LIMIT_ESTALVIADOR = 70
-    val LIMIT_GRAN_ESTALVIADOR = 120
+    val LIMIT_GRAN_ESTALVIADOR = 150
 
 
     @RequiresApi(Build.VERSION_CODES.O)
