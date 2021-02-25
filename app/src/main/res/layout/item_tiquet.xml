@@ -15,6 +15,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        android:backgroundTint="#00FFFFFF"
+        android:color="@android:color/transparent"
         android:orientation="horizontal"
         android:paddingTop="10dp"
         android:paddingBottom="10dp">
@@ -24,7 +27,17 @@
             android:id="@+id/cardViewTiquet"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:onClick="@{() -> clickListener.onCellClickListener(tiquet)}" >
+            android:background="#00FFFFFF"
+            android:backgroundTint="#00FFFFFF"
+            android:color="@android:color/transparent"
+            android:isScrollContainer="false"
+            android:onClick="@{() -> clickListener.onCellClickListener(tiquet)}"
+            app:cardBackgroundColor="#00831010"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="0dp"
+            app:cardMaxElevation="0dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="false">
 
             <TextView
                 android:id="@+id/titolTiquet"
@@ -32,6 +45,7 @@
                 android:layout_width="239dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="#00FFFFFF"
                 android:textColor="@color/TitolColor"
                 android:textSize="18sp"
                 app:tiquetQualityString="@{tiquet}" />
@@ -43,6 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_weight="1"
+                android:background="#00FFFFFF"
                 android:textColor="@color/black"
                 app:tiquetQualityString="@{tiquet}" />
 
