@@ -17,6 +17,7 @@ import cat.copernic.johan.energysaver.databinding.FragmentVeureBinding
 import cat.copernic.johan.energysaver.modifica.ModificarUsuari
 import cat.copernic.johan.energysaver.tiquetobert.RespostaTiquetFragmentArgs.fromBundle
 import cat.copernic.johan.energysaver.veuretiquet.TiquetDC
+import com.google.android.material.transition.MaterialSharedAxis
 import com.google.firebase.firestore.FirebaseFirestore
 
 
@@ -31,6 +32,13 @@ class RespostaTiquetFragment : Fragment() {
 
         val binding: FragmentRespostaTiquetBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_resposta_tiquet, container, false)
+
+        enterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply {
+            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+        }
+        returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
+            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+        }
 
         val args = fromBundle(requireArguments())
 

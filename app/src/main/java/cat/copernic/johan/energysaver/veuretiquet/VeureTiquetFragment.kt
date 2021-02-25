@@ -20,6 +20,7 @@ import cat.copernic.johan.energysaver.obrirtiquet.ObrirTiquetActivity
 import cat.copernic.johan.energysaver.obrirtiquet.Usuari
 import cat.copernic.johan.energysaver.tiquetobert.TiquetDC
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.transition.MaterialSharedAxis
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
@@ -38,6 +39,12 @@ class VeureTiquetFragment : Fragment() {
         val binding: FragmentVeureBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_veure, container, false)
 
+        enterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply {
+            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+        }
+        returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
+            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+        }
         setHasOptionsMenu(true)
 
         binding.bttnNouTiquet.setOnClickListener { view: View ->

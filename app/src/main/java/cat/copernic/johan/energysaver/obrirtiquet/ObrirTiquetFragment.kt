@@ -19,6 +19,7 @@ import cat.copernic.johan.energysaver.databinding.FragmentObrirBinding
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.transition.MaterialSharedAxis
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
@@ -50,6 +51,12 @@ class ObrirTiquetFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_obrir, container, false)
 
+        enterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply {
+            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+        }
+        returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
+            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+        }
         //Pujar imatge al storage
         binding.imgBttnCarregaImatge.setOnClickListener {
             Singleton.nameImg = ""

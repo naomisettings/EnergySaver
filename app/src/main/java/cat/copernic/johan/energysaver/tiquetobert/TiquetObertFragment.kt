@@ -13,6 +13,7 @@ import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentTiquetObertBinding
 import coil.api.load
+import com.google.android.material.transition.MaterialSharedAxis
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
@@ -33,6 +34,13 @@ class TiquetObertFragment : Fragment() { //
             inflater,
             R.layout.fragment_tiquet_obert, container, false
         )
+
+        enterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply {
+            duration = resources.getInteger(R.integer.reply_motion_duration_large_img).toLong()
+        }
+        returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
+            duration = resources.getInteger(R.integer.reply_motion_duration_large_img).toLong()
+        }
 
         //Rebre dades d'altres fragments
         args = TiquetObertFragmentArgs.fromBundle(requireArguments())

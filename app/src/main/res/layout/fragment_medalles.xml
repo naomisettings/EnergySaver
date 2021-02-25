@@ -10,11 +10,8 @@
         android:background="@drawable/degradat"
         tools:context=".medalles.MedallesFragment">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:transitionGroup="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -164,7 +161,6 @@
                     app:srcCompat="@drawable/medalla" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </RelativeLayout>
     </FrameLayout>
 
 </layout>

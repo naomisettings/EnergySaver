@@ -98,6 +98,8 @@ dependencies {
     // CameraX View class
     implementation "androidx.camera:camera-view:1.0.0-alpha14"
 
+    //Transactions
+    implementation 'com.google.android.material:material:1.2.0'
 
 
 }
