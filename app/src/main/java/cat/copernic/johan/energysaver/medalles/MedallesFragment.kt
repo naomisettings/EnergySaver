@@ -20,7 +20,7 @@ import com.google.firebase.firestore.SetOptions
 import com.google.firebase.ktx.Firebase
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.*
+import java.time.temporal.ChronoUnit
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
@@ -30,6 +30,9 @@ class MedallesFragment : Fragment() {
     val db = FirebaseFirestore.getInstance()
     val user = Firebase.auth.currentUser
     val mail = user?.email.toString()
+
+    val LIMIT_ESTALVIADOR = 70
+    val LIMIT_GRAN_ESTALVIADOR = 120
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -283,6 +286,9 @@ class MedallesFragment : Fragment() {
         }
     }
 
+
+    //CODI COPIAT DEL SERGIO (PER REALITZAR CÀLCULS DE L'ESTALVI) RELACIONAT AMB LES MEDALLES.
+
     @RequiresApi(Build.VERSION_CODES.O)
     fun omplirDades() {
         val user = Firebase.auth.currentUser
@@ -300,7 +306,8 @@ class MedallesFragment : Fragment() {
                     var gasDiners = mapOf<String, Double>()
                     var consumGasoil = mapOf<String, Double>()
                     var gasoilDiners = mapOf<String, Double>()
-                    var dinersTotal = arrayListOf<Double>()
+
+                    var estalviatTotal: Double
 
                     val dadesEnergia = document.toObjects(DespesaConsumDC::class.java)
                     val de = dadesEnergia[0]
@@ -313,42 +320,169 @@ class MedallesFragment : Fragment() {
                     consumGasoil = de.gasoilConsum
                     gasoilDiners = de.gasoilDiners
 
-                    arrayListDeValors(dinersTotal, aiguaDiners)
-                    arrayListDeValors(dinersTotal, llumDiners)
-                    arrayListDeValors(dinersTotal, gasDiners)
-                    arrayListDeValors(dinersTotal, gasoilDiners)
+                    estalviatTotal = estalviadorTotalIndiv(aiguaDiners) +
+                            estalviadorTotalIndiv(llumDiners) +
+                            estalviadorTotalIndiv(gasDiners) +
+                            estalviadorTotalIndiv(gasoilDiners)
 
-                    estalviadorTotal(dinersTotal)
+                    if (estalviatTotal > LIMIT_GRAN_ESTALVIADOR) {
+                        medallaEstalviadorVisible()
+                        medallaGranEstalviadorVisible()
+                    } else if (estalviatTotal > LIMIT_ESTALVIADOR) {
+                        medallaEstalviadorVisible()
+                    }
                 }
             }
     }
 
-    fun estalviadorTotal(list: ArrayList<Double>): Double {
-        var aux: Double? = null
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun estalviadorTotalIndiv(map: Map<String, Double>): Double {
         var estalviat: Double = 0.0
-        for (item in list) {
-            if (aux != null) {
-                estalviat += (aux - item)
+        var dataPrimera = LocalDate.now()
+        var dataSegona = LocalDate.now()
+        var valorPrimera = 0.0
+        var valorSegona = 0.0
+
+        for (x in map) {
+            if (x.key == stringParser(
+                    getFurthestDate(
+                        getLlistaDates(extreureDatesMap(map)),
+                        dataPrimera
+                    )
+                )
+            ) {
+                dataPrimera = dataParser(x.key)
+                valorPrimera = x.value
             }
-            aux = item
         }
 
-        Log.d("estalviat", estalviat.toString())
-        if (estalviat >= -10) {
-            medallaEstalviadorVisible()
+        for (x in map) {
+            if (x.key == stringParser(
+                    getNearestDate(
+                        getLlistaDates(extreureDatesMap(map)),
+                        dataSegona
+                    )
+                )
+            ) {
+                dataSegona = dataParser(x.key)
+                valorSegona = x.value
+            }
         }
-        if (estalviat >= -5) {
-            medallaGranEstalviadorVisible()
+        estalviat = valorPrimera - valorSegona
 
-        }
         return estalviat
     }
 
-    fun arrayListDeValors(list: ArrayList<Double>, map: Map<String, Double>) {
-        for (x in map) {
-            list.add(x.value)
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getNearestDate(dates: java.util.ArrayList<LocalDate>, targetDate: LocalDate?): LocalDate {
+        var nearestDate = LocalDate.now()
+        if (targetDate != null) {
+            var diff = -1
+
+            for (x in dates) {
+                var diffAux = ChronoUnit.DAYS.between(x, targetDate).toInt()
+
+                if (diff == -1) {
+                    nearestDate = x
+                    diff = diffAux
+                }
+
+                if (diffAux < diff) {
+                    nearestDate = x
+                    diff = diffAux
+                }
+            }
         }
+        return nearestDate
     }
+
+
+    fun algoritmeEstalvi (): Double {
+
+        val li = arrayListOf<Double>(100.0, 90.0, 80.0, 70.0, 100.0, 90.0)
+        var auxResta = 0.0
+
+        var arrayResultats = arrayListOf<Double>()
+        for ((i, item) in li.withIndex()) {
+            if (i + 1 < li.size) {
+                auxResta = item - li[i + 1]
+                arrayResultats.add(auxResta)
+            }
+        }
+        var resFinal = 0.0
+        for ((i, x) in arrayResultats.withIndex()) {
+            if (x > 0) {
+                for (w in i until arrayResultats.size) {
+                    resFinal += x
+                }
+            } else {
+                resFinal += x
+            }
+        }
+
+        Log.d("resArrayResta", "jjjjj")
+        Log.d("resTotal", resFinal.toString())
+
+        return 0.0
+    }
+
+    fun extreureDatesMap(map: Map<String, Double>): java.util.ArrayList<String> {
+        val llistaString = arrayListOf<String>()
+        for (x in map) {
+            llistaString.add(x.key)
+        }
+        return llistaString
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getFurthestDate(dates: java.util.ArrayList<LocalDate>, targetDate: LocalDate?): LocalDate {
+        var furthestDate = LocalDate.now()
+        if (targetDate != null) {
+            var diff = -1
+
+            for (x in dates) {
+                var diffAux: Int
+                diffAux = ChronoUnit.DAYS.between(x, targetDate).toInt()
+
+                if (diff == -1) {
+                    furthestDate = x
+                    diff = diffAux
+                }
+
+                if (diffAux > diff) {
+                    furthestDate = x
+                    diff = diffAux
+                    Log.i("temps", furthestDate.toString())
+                }
+            }
+        }
+        return furthestDate
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun stringParser(data: LocalDate): String {
+        return data.toString().replace("-", ".")
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun dataParser(data: String): LocalDate {
+        val formatCorrecte = data.replace(".", "-")
+        return LocalDate.parse(formatCorrecte, DateTimeFormatter.ISO_DATE)
+    }
+
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getLlistaDates(llista: ArrayList<String>): ArrayList<LocalDate> {
+        val llistaCorrecte = arrayListOf<LocalDate>()
+
+        for (x in llista) {
+            var data = dataParser(x)
+            llistaCorrecte.add(data)
+        }
+        return llistaCorrecte
+    }
+
+
 }
 
 //Data class per a guardar el document despesaConsum

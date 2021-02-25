@@ -62,23 +62,22 @@ class VeureTiquetFragment : Fragment() {
                     val tiquetsFirestore = db.collection("tiquet")
                     val query = tiquetsFirestore.whereEqualTo("id", x.idTiquet).get()
                         .addOnSuccessListener { document ->
-                            for (doc in document) {
-                                val tiquet =
-                                    document.toObjects(cat.copernic.johan.energysaver.veuretiquet.TiquetDC::class.java)
-                                //Elminar la imatge del Storage
-                                for ((i, x) in tiquet.withIndex()) {
-                                    if (tiquet[i].imatge != "") {
-                                        val desertRef =
-                                            FirebaseStorage.getInstance().reference.child("images/${tiquet[i].imatge}")
-                                        // Delete the file
-                                        desertRef.delete().addOnSuccessListener {
-                                            // File deleted successfully
-                                        }.addOnFailureListener {
-                                            // Uh-oh, an error occurred!
-                                        }
+                            val tiquet =
+                                document.toObjects(cat.copernic.johan.energysaver.veuretiquet.TiquetDC::class.java)
+                            //Elminar la imatge del Storage
+                            for ((i, x) in tiquet.withIndex()) {
+                                if (tiquet[i].imatge != "") {
+                                    val desertRef =
+                                        FirebaseStorage.getInstance().reference.child("images/${tiquet[i].imatge}")
+                                    // Delete the file
+                                    desertRef.delete().addOnSuccessListener {
+                                        // File deleted successfully
+                                    }.addOnFailureListener {
+                                        // Uh-oh, an error occurred!
                                     }
                                 }
-
+                            }
+                            for (doc in document) {
                                 db.collection("tiquet").document(doc.id)
                                     .delete()
                                     .addOnSuccessListener {
