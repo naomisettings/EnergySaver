@@ -57,9 +57,9 @@ class TiquetsAdapter(
         holder.descripcioTextView.text = data.descripcio
 
         if (tiquet.respost) {
-            holder.seleccioCheckBox.setBackgroundColor(Color.parseColor("#fc9797"))
+            holder.seleccioCheckBox.setBackgroundResource(R.drawable.borde_imatge_red)
         } else {
-            holder.seleccioCheckBox.setBackgroundColor(Color.parseColor("#defdde"))
+            holder.seleccioCheckBox.setBackgroundResource(R.drawable.borde_imatge)
         }
 
         holder.itemView.setOnClickListener {

@@ -122,4 +122,5 @@
     <string name="textPeriode">ZEITRAUM</string>
     <string name="textTemps">WETTER</string>
     <string name="textTotal">GESAMT</string>
+    <string name="txtViewRespost">Beantwortet / Iöschen</string>
 </resources>

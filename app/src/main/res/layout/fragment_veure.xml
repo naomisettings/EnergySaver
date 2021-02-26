@@ -15,6 +15,16 @@
             android:layout_height="match_parent">
 
 
+            <TextView
+                android:id="@+id/txtViewRespost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="250dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/txtViewRespost"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtViewTiquetSuport" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcvTiquets"
                 android:layout_width="315dp"

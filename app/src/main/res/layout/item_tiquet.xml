@@ -64,7 +64,7 @@
             <CheckBox
                 android:id="@+id/tiquetSeleccionat"
                 android:layout_width="32dp"
-                android:layout_height="22dp"
+                android:layout_height="27dp"
                 android:layout_marginStart="250dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
