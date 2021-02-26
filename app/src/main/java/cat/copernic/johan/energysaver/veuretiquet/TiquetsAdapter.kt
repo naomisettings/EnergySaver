@@ -57,10 +57,11 @@ class TiquetsAdapter(
         holder.descripcioTextView.text = data.descripcio
 
         if (tiquet.respost) {
-            holder.seleccioCheckBox.setBackgroundResource(R.drawable.borde_imatge_red)
-        } else {
             holder.seleccioCheckBox.setBackgroundResource(R.drawable.borde_imatge)
+        } else {
+            holder.seleccioCheckBox.setBackgroundResource(R.drawable.borde_imatge_red)
         }
+
 
         holder.itemView.setOnClickListener {
             cellClickListener.onCellClickListener(data)
@@ -80,9 +81,9 @@ class TiquetsAdapter(
 }
 
 //Veure si s'ha clicat en un tiquet
-open class CellClickListener(val clickListener: (idTiquet: String, titol: String, descrpicio: String, imatge: String) -> Unit) {
+open class CellClickListener(val clickListener: (idTiquet: String, titol: String, descrpicio: String, imatge: String, respost: Boolean) -> Unit) {
     fun onCellClickListener(data: Tiquet) {
-        clickListener(data.idTiquet, data.titol, data.descripcio, data.imatge)
+        clickListener(data.idTiquet, data.titol, data.descripcio, data.imatge, data.respost)
 
     }
 }

@@ -2,14 +2,10 @@ package cat.copernic.johan.energysaver
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Gravity.apply
-import androidx.core.view.GravityCompat.apply
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.*
-import cat.copernic.johan.energysaver.medalles.MedallesFragment
 import cat.copernic.johan.energysaver.medalles.MedallesFragmentDirections
 import cat.copernic.johan.energysaver.principal.MenuPrincipalFragmentDirections
 import cat.copernic.johan.energysaver.tiquetobert.TiquetObertFragmentDirections
@@ -57,7 +53,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun navigateToMedalles() {
         val directionsMedalles = MenuPrincipalFragmentDirections.actionMenuPrincipalFragmentToMedallesFragment()
-        val directionsTiquetObert = VeureTiquetFragmentDirections.actionVeureFragmentToTiquetObertFragment("","","","")
+        val directionsTiquetObert = VeureTiquetFragmentDirections.actionVeureFragmentToTiquetObertFragment(
+            "",
+            "",
+            "",
+            ""
+        )
         val directionsVeureTiquet = MenuPrincipalFragmentDirections.actionMenuPrincipalFragmentToVeureFragment("","","","")
         val directionsNouTiquet = VeureTiquetFragmentDirections.actionVeureFragmentToObrirFragment()
         val directionsResposta = TiquetObertFragmentDirections.actionTiquetObertFragmentToRespostaTiquetFragment("","","","")

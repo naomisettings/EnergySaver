@@ -2,22 +2,18 @@ package cat.copernic.johan.energysaver.veuretiquet
 
 import android.content.ContentValues
 import android.content.ContentValues.TAG
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.NonNull
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentVeureBinding
-import cat.copernic.johan.energysaver.obrirtiquet.ObrirTiquetActivity
-import cat.copernic.johan.energysaver.obrirtiquet.Usuari
 import cat.copernic.johan.energysaver.tiquetobert.TiquetDC
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialSharedAxis
@@ -49,10 +45,6 @@ class VeureTiquetFragment : Fragment() {
 
         binding.bttnNouTiquet.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_veureFragment_to_obrirFragment)
-            /*val intent = Intent(activity, ObrirTiquetActivity::class.java)
-            startActivity(intent)
-
-             */
         }
 
         var rvTiquets = binding.rcvTiquets
@@ -113,6 +105,7 @@ class VeureTiquetFragment : Fragment() {
             }
 
         }
+
 
         return binding.root
     }
@@ -178,7 +171,7 @@ class VeureTiquetFragment : Fragment() {
                     }
                     val adapter = TiquetsAdapter(
                         tiquets,
-                        CellClickListener { tiquetId, titol, descripcio, imatge ->
+                        CellClickListener { tiquetId, titol, descripcio, imatge, respost ->
                             view?.findNavController()
                                 ?.navigate(
                                     VeureTiquetFragmentDirections
@@ -214,9 +207,7 @@ class VeureTiquetFragment : Fragment() {
                 if (document != null) {
                     val tiquetsDC = document.toObjects(TiquetDC::class.java)
 
-                    if (tiquets != null) {
-                        tiquets.clear()
-                    }
+                    tiquets.clear()
                     var respost = true
                     for (i in 0 until tiquetsDC.size) {
                         if (tiquetsDC[i].resposta != ""){
@@ -235,7 +226,7 @@ class VeureTiquetFragment : Fragment() {
                     }
                     adapter = TiquetsAdapter(
                         tiquets,
-                        CellClickListener { tiquetId, titol, descripcio, imatge ->
+                        CellClickListener { tiquetId, titol, descripcio, imatge, respost ->
                             view?.findNavController()
                                 ?.navigate(
                                     VeureTiquetFragmentDirections

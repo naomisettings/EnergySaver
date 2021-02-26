@@ -50,7 +50,7 @@ class RespostaTiquetFragment : Fragment() {
             hideKeyboard()
 
             view.findNavController()
-                .navigate(R.id.action_respostaTiquetFragment_to_veureFragment)
+                .navigate(R.id.action_respostaTiquetFragment_to_menuPrincipalFragment)
         }
 
         return binding.root

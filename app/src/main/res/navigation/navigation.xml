@@ -185,8 +185,8 @@
         <argument android:name="descripcio" />
         <argument android:name="imatge" />
         <action
-            android:id="@+id/action_respostaTiquetFragment_to_veureFragment"
-            app:destination="@id/veureFragment"
+            android:id="@+id/action_respostaTiquetFragment_to_menuPrincipalFragment"
+            app:destination="@id/menuPrincipalFragment"
             app:popUpTo="@id/veureFragment"
             app:popUpToInclusive="true" />
     </fragment>
