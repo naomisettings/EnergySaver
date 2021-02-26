@@ -160,15 +160,21 @@ class VeureTiquetFragment : Fragment() {
                     if (tiquets != null) {
                         tiquets.clear()
                     }
+                    var respost = true
                     for (i in 0 until tiquetsDC.size) {
+                        if (tiquetsDC[i].resposta != ""){
+                            respost = false
+                        }
                         val tq = Tiquet(
                             tiquetsDC[i].id,
                             tiquetsDC[i].titol,
                             tiquetsDC[i].descripcio,
                             tiquetsDC[i].imatge,
-                            false
+                            false,
+                            respost
                         )
                         tiquets.add(tq)
+                        respost = true
                     }
                     val adapter = TiquetsAdapter(
                         tiquets,
@@ -207,18 +213,25 @@ class VeureTiquetFragment : Fragment() {
             .addOnSuccessListener { document ->
                 if (document != null) {
                     val tiquetsDC = document.toObjects(TiquetDC::class.java)
+
                     if (tiquets != null) {
                         tiquets.clear()
                     }
+                    var respost = true
                     for (i in 0 until tiquetsDC.size) {
+                        if (tiquetsDC[i].resposta != ""){
+                            respost = false
+                        }
                         val tq = Tiquet(
                             tiquetsDC[i].id,
                             tiquetsDC[i].titol,
                             tiquetsDC[i].descripcio,
                             tiquetsDC[i].imatge,
-                            false
+                            false,
+                            respost
                         )
                         tiquets.add(tq)
+                        respost = true
                     }
                     adapter = TiquetsAdapter(
                         tiquets,

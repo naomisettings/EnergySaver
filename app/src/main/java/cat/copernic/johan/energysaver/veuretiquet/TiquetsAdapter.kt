@@ -1,17 +1,20 @@
 package cat.copernic.johan.energysaver.veuretiquet
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.ItemTiquetBinding
 import com.squareup.okhttp.internal.Internal.logger
+import java.util.*
 
 class TiquetsAdapter(
     private val mTiquets: ArrayList<Tiquet>,
@@ -53,6 +56,12 @@ class TiquetsAdapter(
         holder.titolTextView.text = data.titol
         holder.descripcioTextView.text = data.descripcio
 
+        if (tiquet.respost) {
+            holder.seleccioCheckBox.setBackgroundColor(Color.parseColor("#fc9797"))
+        } else {
+            holder.seleccioCheckBox.setBackgroundColor(Color.parseColor("#defdde"))
+        }
+
         holder.itemView.setOnClickListener {
             cellClickListener.onCellClickListener(data)
         }
@@ -69,6 +78,7 @@ class TiquetsAdapter(
         return mTiquets.size
     }
 }
+
 //Veure si s'ha clicat en un tiquet
 open class CellClickListener(val clickListener: (idTiquet: String, titol: String, descrpicio: String, imatge: String) -> Unit) {
     fun onCellClickListener(data: Tiquet) {

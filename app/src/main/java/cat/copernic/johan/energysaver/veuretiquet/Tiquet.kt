@@ -1,6 +1,6 @@
 package cat.copernic.johan.energysaver.veuretiquet
 
-class Tiquet (val idTiquet: String, val titol: String, val descripcio: String, val imatge: String, var seleccionat: Boolean) {
+class Tiquet (val idTiquet: String, val titol: String, val descripcio: String, val imatge: String, var seleccionat: Boolean, var respost: Boolean) {
 }
 
 
