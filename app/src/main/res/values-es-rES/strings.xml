@@ -123,4 +123,8 @@
     <string name="textTemps">TIEMPO</string>
     <string name="textTotal">TOTAL</string>
     <string name="txtViewRespost">Contestado / Borrar</string>
+    <string name="notificacions_canal">noti</string>
+    <string name="notificacions_titol">Notificación Energy Saver</string>
+    <string name="channel_name">Energy Saver</string>
+    <string name="channel_description">Ahorro Energetico</string>
 </resources>

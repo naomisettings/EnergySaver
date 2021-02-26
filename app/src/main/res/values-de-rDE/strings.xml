@@ -123,4 +123,8 @@
     <string name="textTemps">WETTER</string>
     <string name="textTotal">GESAMT</string>
     <string name="txtViewRespost">Beantwortet / Iöschen</string>
+    <string name="notificacions_canal">noti</string>
+    <string name="notificacions_titol">Benachrichtigung Energy Saver</string>
+    <string name="channel_name">Energy Saver</string>
+    <string name="channel_description">Große Sparmedaille</string>
 </resources>

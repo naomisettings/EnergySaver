@@ -1,5 +1,10 @@
 package cat.copernic.johan.energysaver.medalles
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.content.res.Resources
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +13,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.R
@@ -19,6 +26,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.ktx.Firebase
+import java.security.AccessController
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
@@ -34,6 +42,8 @@ class MedallesFragment : Fragment() {
 
     val LIMIT_ESTALVIADOR = 70
     val LIMIT_GRAN_ESTALVIADOR = 150
+
+    val CHANNEL_ID = "rdS3Jq"
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -55,6 +65,7 @@ class MedallesFragment : Fragment() {
         returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
             duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
         }
+
 
         //Inicalitzar totes les medalles en gris
         medallesEnGris()
@@ -84,6 +95,29 @@ class MedallesFragment : Fragment() {
         }
         return binding.root
     }
+
+/*
+    private fun createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = Resources.getSystem().getString(R.string.channel_name)
+            val descriptionText = Resources.getSystem().getString(R.string.channel_description)
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+                description = descriptionText
+            }
+
+            val context = AccessController.getContext()
+            // Register the channel with the system
+            val notificationManager: NotificationManager =
+                ContextCompat.getSystemService().NOTIFICATION_SERVICE as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+ */
+
 
     fun medallesEnGris() {
         binding.apply {
