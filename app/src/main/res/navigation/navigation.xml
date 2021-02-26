@@ -108,7 +108,9 @@
         tools:layout="@layout/fragment_obrir">
         <action
             android:id="@+id/action_obrirFragment_to_veureFragment"
-            app:destination="@id/veureFragment" />
+            app:destination="@id/veureFragment"
+            app:popUpTo="@id/veureFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/medallesFragment"
@@ -185,7 +187,8 @@
         <action
             android:id="@+id/action_respostaTiquetFragment_to_veureFragment"
             app:destination="@id/veureFragment"
-            app:popUpTo="@id/respostaTiquetFragment" />
+            app:popUpTo="@id/veureFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/menuEnergies"
@@ -212,7 +215,9 @@
         tools:layout="@layout/fragment_consum_aigua" >
         <action
             android:id="@+id/action_consumAigua_to_menuEnergies"
-            app:destination="@id/menuEnergies" />
+            app:destination="@id/menuEnergies"
+            app:popUpTo="@id/menuEnergies"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/consumGas"
@@ -221,7 +226,9 @@
         tools:layout="@layout/fragment_consum_gas" >
         <action
             android:id="@+id/action_consumGas_to_menuEnergies"
-            app:destination="@id/menuEnergies" />
+            app:destination="@id/menuEnergies"
+            app:popUpTo="@id/menuEnergies"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/consumGasoil"
@@ -230,7 +237,9 @@
         tools:layout="@layout/fragment_consum_gasoil" >
         <action
             android:id="@+id/action_consumGasoil_to_menuEnergies"
-            app:destination="@id/menuEnergies" />
+            app:destination="@id/menuEnergies"
+            app:popUpTo="@id/menuEnergies"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/consumLlum"
@@ -239,6 +248,8 @@
         tools:layout="@layout/fragment_consum_llum" >
         <action
             android:id="@+id/action_consumLlum_to_menuEnergies"
-            app:destination="@id/menuEnergies" />
+            app:destination="@id/menuEnergies"
+            app:popUpTo="@id/menuEnergies"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
