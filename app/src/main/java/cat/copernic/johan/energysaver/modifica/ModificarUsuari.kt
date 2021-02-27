@@ -18,7 +18,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import androidx.appcompat.app.AlertDialog
-
+import com.google.android.material.transition.MaterialSharedAxis
 
 
 class ModificarUsuari : Fragment() {
@@ -45,6 +45,14 @@ class ModificarUsuari : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_modificar_usuari, container, false)
         recollirDadesModificar()
+
+        //TRANSACTION
+        enterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply {
+            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+        }
+        returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
+            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+        }
 
         binding.btnConfirmarModificar.setOnClickListener { view: View ->
             modificarUsuari()

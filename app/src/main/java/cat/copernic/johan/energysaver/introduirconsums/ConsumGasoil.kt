@@ -12,6 +12,7 @@ import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentConsumGasoilBinding
 import cat.copernic.johan.energysaver.utils.DatePickerFragment
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.transition.MaterialSharedAxis
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
@@ -31,6 +32,14 @@ class ConsumGasoil : Fragment() {
     ): View? {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_consum_gasoil, container, false)
+
+        //TRANSACTION
+        enterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply {
+            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+        }
+        returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
+            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+        }
 
         binding.btnConfirmarConsumGasoil.setOnClickListener { view: View ->
             //retorn a menu energies i guardar dades

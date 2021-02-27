@@ -16,6 +16,7 @@ import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentSeleccionarEnergiaBinding
 import cat.copernic.johan.energysaver.obrirtiquet.Usuari
+import com.google.android.material.transition.MaterialSharedAxis
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -37,6 +38,15 @@ class SeleccionarEnergiaFragment() : Fragment(), AdapterView.OnItemSelectedListe
         binding = DataBindingUtil.inflate<FragmentSeleccionarEnergiaBinding>(inflater,
             R.layout.fragment_seleccionar_energia,
             container, false)
+
+        //TRANSACTION
+        enterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply {
+            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+        }
+        returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
+            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+        }
+
         omplirDades()
         val checkBoxAigua : CheckBox = binding.chbxAigua
         val checkBoxLlum : CheckBox = binding.chbxLlum

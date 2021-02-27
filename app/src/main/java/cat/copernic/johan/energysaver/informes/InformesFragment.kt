@@ -16,6 +16,7 @@ import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentInformesBinding
 import cat.copernic.johan.energysaver.introduirconsums.Contractades
 import cat.copernic.johan.energysaver.medalles.DespesaConsumDC
+import com.google.android.material.transition.MaterialSharedAxis
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
@@ -32,6 +33,15 @@ class InformesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = DataBindingUtil.inflate<FragmentInformesBinding>(inflater, R.layout.fragment_informes,
             container, false)
+
+        //TRANSACTION
+        enterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply {
+            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+        }
+        returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
+            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+        }
+
         activacioButtons(binding)
         omplirDades(binding)
         return binding.root

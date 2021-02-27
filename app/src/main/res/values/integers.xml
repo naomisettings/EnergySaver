@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer name="reply_motion_duration_large">1150</integer>
-    <integer name="reply_motion_duration_large_img">2000</integer>
+    <integer name="reply_motion_duration_large">1000</integer>
+    <integer name="reply_motion_duration_large_img">3500</integer>
+    <integer name="reply_motion_duration_large_medalles">3000</integer>
 </resources>

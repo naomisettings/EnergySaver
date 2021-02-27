@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentMenuPrincipalBinding
+import com.google.android.material.transition.MaterialSharedAxis
 
 
 class MenuPrincipalFragment : Fragment() {
@@ -16,6 +17,15 @@ class MenuPrincipalFragment : Fragment() {
         val binding = DataBindingUtil.inflate<FragmentMenuPrincipalBinding>(inflater,
             R.layout.fragment_menu_principal,
             container, false)
+
+        //TRANSACTION
+        enterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply {
+            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+        }
+        returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
+            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+        }
+
         binding.imgbModificar.setOnClickListener { view:View ->
         view.findNavController().navigate(R.id.action_menuPrincipalFragment_to_modificarUsuari)
         }
