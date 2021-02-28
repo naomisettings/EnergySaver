@@ -129,4 +129,6 @@
     <string name="channel_description">Energy Saving</string>
     <string name="Energies">Energies</string>
     <string name="energies_activades">Energies activated in your profile</string>
+    <string name="estalviDiners">MONEY SAVING</string>
+    <string name="estalviEnergia">ENERGY SAVING</string>
 </resources>

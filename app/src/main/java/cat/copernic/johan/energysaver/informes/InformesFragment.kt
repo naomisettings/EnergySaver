@@ -59,23 +59,27 @@ class InformesFragment : Fragment() {
                 if (!document.isEmpty){
                     val energia = document.toObjects(Contractades::class.java)
                     if(!energia[0].aigua){
-                        binding.btnAigua.setBackgroundColor(R.color.totalColor)
+                        binding.btnAigua.setBackgroundColor(R.color.greyColor)
+                        binding.btnAigua.alpha = 0.5f
                         binding.btnAigua.isClickable = false
                     }
 
                     if(!energia[0].llum){
-                        binding.btnLlum.setBackgroundColor(R.color.totalColor)
-                        binding.btnAigua.isClickable = false
+                        binding.btnLlum.setBackgroundColor(R.color.greyColor)
+                        binding.btnLlum.alpha = 0.5f
+                        binding.btnLlum.isClickable = false
                     }
 
                     if(!energia[0].gas){
-                        binding.btnGas.setBackgroundColor(R.color.totalColor)
-                        binding.btnAigua.isClickable = false
+                        binding.btnGas.setBackgroundColor(R.color.greyColor)
+                        binding.btnGas.alpha = 0.5f
+                        binding.btnGas.isClickable = false
                     }
 
                     if(!energia[0].gasoil){
-                        binding.btnGasoil.setBackgroundColor(R.color.totalColor)
-                        binding.btnAigua.isClickable = false
+                        binding.btnGasoil.setBackgroundColor(R.color.greyColor)
+                        binding.btnGasoil.alpha = 0.5f
+                        binding.btnGasoil.isClickable = false
                     }
                 }
             }

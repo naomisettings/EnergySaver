@@ -129,4 +129,6 @@
     <string name="channel_description">Ahorro Energetico</string>
     <string name="Energies">Energías</string>
     <string name="energies_activades">Energías activadas en tu perfil</string>
+    <string name="estalviDiners">AHORRO DE DINERO</string>
+    <string name="estalviEnergia">AHORRO DE ENERGIA</string>
 </resources>

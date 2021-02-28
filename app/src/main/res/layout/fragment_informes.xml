@@ -76,6 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
+            android:fontFamily="@font/asap"
             app:layout_constraintStart_toStartOf="@+id/textView4"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -85,6 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
+            android:fontFamily="@font/asap"
             app:layout_constraintStart_toStartOf="@+id/TextView12"
             app:layout_constraintTop_toBottomOf="@+id/TextView12" />
 
@@ -94,6 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
+            android:fontFamily="@font/asap"
             app:layout_constraintStart_toStartOf="@+id/textView2"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -103,6 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
+            android:fontFamily="@font/asap"
             app:layout_constraintStart_toStartOf="@+id/textView5"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -112,6 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="170dp"
             android:layout_marginTop="45dp"
+            android:fontFamily="@font/asap_bold"
             android:text="@string/textPeriode"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -122,6 +127,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="288dp"
             android:layout_marginTop="45dp"
+            android:fontFamily="@font/asap_bold"
             android:text="@string/textTemps"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -132,6 +138,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
             android:layout_marginTop="45dp"
+            android:fontFamily="@font/asap_bold"
             android:text="@string/textTotal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -142,6 +149,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
             android:layout_marginTop="105dp"
+            android:fontFamily="@font/asap_bold"
             android:text="@string/textTotal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -152,7 +160,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="ESTALVI DINERS"
+            android:text="@string/estalviDiners"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -160,7 +168,7 @@
         <TextView
             android:id="@+id/txvTitolEstalviEnergia"
             style="@style/stlTitolInformes"
-            android:text="ESTALVI ENERGIA"
+            android:text="@string/estalviEnergia"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
@@ -172,6 +180,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="170dp"
             android:layout_marginTop="25dp"
+            android:fontFamily="@font/asap_bold"
             android:text="@string/textPeriode"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txvTitolEstalviEnergia" />
@@ -182,6 +191,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="288dp"
             android:layout_marginTop="105dp"
+            android:fontFamily="@font/asap_bold"
             android:text="@string/textTemps"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -192,6 +202,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
+            android:fontFamily="@font/asap"
             app:layout_constraintStart_toStartOf="@+id/textView8"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -201,6 +212,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
+            android:fontFamily="@font/asap"
             app:layout_constraintStart_toStartOf="@+id/textView9"
             app:layout_constraintTop_toBottomOf="@+id/textView9" />
 

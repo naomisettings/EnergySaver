@@ -129,4 +129,6 @@
     <string name="Suport">Hilfe</string>
     <string name="btnNom">Vorname</string>
     <string name="bttnBorrarTiquet">Löschen</string>
+    <string name="estalviDiners">GELD SPAREN</string>
+    <string name="estalviEnergia">ENERGIE SPAREN</string>
 </resources>

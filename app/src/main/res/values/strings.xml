@@ -131,6 +131,8 @@
     <string name="channel_description">Estalvi Energetic</string>
     <string name="Energies">Energies</string>
     <string name="energies_activades">Energies activades al teu perfil</string>
+    <string name="estalviDiners">ESTALVI DINERS</string>
+    <string name="estalviEnergia">ESTALVI ENERGIA</string>
 
 
 </resources>
