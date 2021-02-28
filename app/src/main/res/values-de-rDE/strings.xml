@@ -120,7 +120,7 @@
     <string name="perdreMedalla">Medaillen sparen können verloren gehen! Sparen ist Konstanz</string>
     <string name="imatgeCarrgada">Bild hochgeladen, bestätigen Sie, um das Ticket zu senden</string>
     <string name="textPeriode">ZEITRAUM</string>
-    <string name="textTemps">WETTER</string>
+    <string name="textTemps">TAGE</string>
     <string name="textTotal">GESAMT</string>
     <string name="txtViewRespost">Beantwortet / Iöschen</string>
     <string name="notificacions_canal">noti</string>

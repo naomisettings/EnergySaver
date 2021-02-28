@@ -122,7 +122,7 @@
     <string name="perdreMedalla">Les medalles d estalvi es poden perdre! Estalvi és constància!</string>
     <string name="imatgeCarrgada">Imatge carregada, confirma per enviar el tiquet</string>
     <string name="textPeriode">PERIODE</string>
-    <string name="textTemps">TEMPS</string>
+    <string name="textTemps">DIES</string>
     <string name="textTotal">TOTAL</string>
     <string name="txtViewRespost">Respost / Esorrar</string>
     <string name="notificacions_canal">Noti</string>
