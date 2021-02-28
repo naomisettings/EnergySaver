@@ -129,6 +129,8 @@
     <string name="notificacions_titol">Notificació Energy Saver</string>
     <string name="channel_name">Energy Saver</string>
     <string name="channel_description">Estalvi Energetic</string>
+    <string name="Energies">Energies</string>
+    <string name="energies_activades">Energies activades al teu perfil</string>
 
 
 </resources>

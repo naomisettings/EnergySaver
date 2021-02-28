@@ -56,7 +56,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
         binding.btnAccedir.setOnClickListener(this)
         binding.btnRegistre.setOnClickListener (this)
         binding.btnSortir.setOnClickListener (this)
-        binding.btnGoogle.setOnClickListener (this)
+      //  binding.btnGoogle.setOnClickListener (this)
 
 
 
@@ -132,39 +132,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
     }
-    //metode que rep per parametre el mail i la contrasenya per crear l'usuari
-    /*private fun createAccount(email: String, password: String){
-        if(!validateFormat()){
-            return
-        }
 
-
-        auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this){
-                task ->
-            if(task.isSuccessful){
-                //si accedeix correctament
-                val user = auth.currentUser
-                val builder = AlertDialog.Builder(this)
-                builder.setTitle("Success")
-                builder.setMessage("Usuari creat correctament")
-                builder.setPositiveButton("Acceptar", null)
-                val dialog: AlertDialog = builder.create()
-                dialog.show()
-
-            }else {
-                //si falla la validacio
-                val builder = AlertDialog.Builder(this)
-                builder.setTitle("Error")
-                builder.setMessage("Usuari incorrecte o ja existeix")
-                builder.setPositiveButton("Acceptar", null)
-                val dialog: AlertDialog = builder.create()
-                dialog.show()
-
-
-            }
-        }
-
-    }*/
     //metode d'acces
     private fun signIn(email: String,password: String){
         Log.d("EmailPassword", "Acces amb el:$email")
@@ -282,7 +250,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.btnAccedir -> signIn(binding.editTextCorreu.text.toString(), binding.editTextContrasenya.text.toString())
             R.id.btnSortir -> signOUt()
-            R.id.btnGoogle -> signInWithGoogle()
+           // R.id.btnGoogle -> signInWithGoogle()
         }
 
     }

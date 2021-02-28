@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_menuPrincipalFragment_to_menuEnergies"
             app:destination="@id/menuEnergies" />
+        <action
+            android:id="@+id/action_menuPrincipalFragment_to_seleccionarEnergiaFragment"
+            app:destination="@id/seleccionarEnergiaFragment" />
     </fragment>
     <fragment
         android:id="@+id/informesFragment"

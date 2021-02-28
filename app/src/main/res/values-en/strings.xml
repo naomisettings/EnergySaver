@@ -63,7 +63,7 @@
     <string name="bttnConfirmarTiquet">Confirm</string>
     <string name="MenuEnergies">Energies</string>
     <string name="MenuInformes">Reports</string>
-    <string name="MenuConfiguraciUsuari">User Configuration</string>
+    <string name="MenuConfiguraciUsuari">User Settings</string>
     <string name="logoESmedalles">Energy Saver Logo</string>
     <string name="medalla1">Saver Medal</string>
     <string name="txtViewMedEstalviador">Saver</string>
@@ -80,7 +80,7 @@
     <string name="multiLineTxtViewMedalla4">You have won the One Year Saving medal!! Congratulations!!</string>
     <string name="defaultcd">default</string>
     <string name="Menu_medalles">Medals</string>
-    <string name="campsBuitsToastObrirTiquet">The text field must be filled</string>
+    <string name="campsBuitsToastObrirTiquet">The text fields must be filled</string>
     <string name="txtViewTiquetTitolObert">TICKET</string>
     <string name="bttnResposta">RESPONSE</string>
     <string name="bttnEnviarResposta">SEND</string>
@@ -88,7 +88,7 @@
     <string name="consum_energies">Energy Consumption</string>
     <string name="txtViewSenseResposta">Awaiting for response...</string>
     <string name="borrarTiquet">Select a ticket!!</string>
-    <string name="tempsBorrarTiquet">You can only delete tickets for the first 30 minutes!</string>
+    <string name="tempsBorrarTiquet">You can only delete tickets 30 minutes later!</string>
     <string name="introdueix_el_consum">Insert the consumption</string>
     <string name="introdueix_l_import">Insert amount</string>
     <string name="data_factura">Bill Date</string>
@@ -127,4 +127,6 @@
     <string name="notificacions_titol">Notification Energy Saver</string>
     <string name="channel_name">Energy Saver</string>
     <string name="channel_description">Energy Saving</string>
+    <string name="Energies">Energies</string>
+    <string name="energies_activades">Energies activated in your profile</string>
 </resources>
