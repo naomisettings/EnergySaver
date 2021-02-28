@@ -225,13 +225,13 @@ class InformesFragment : Fragment() {
 
         for (x in map){
             if(datePrimera != null && x.key == stringParser(getNearestDate(llistaDates,
-                    LocalDate.of(datePrimera.year, datePrimera.month, datePrimera.dayOfMonth - 1)))){
+                    LocalDate.of(datePrimera.year, datePrimera.month, datePrimera.dayOfMonth)))){
                 dinersSegona = x.value
                 Log.i("prova", x.key + " -> " + x.value.toString() + " 2")
             }
         }
 
-        return dinersPrimera - dinersSegona
+        return dinersSegona - dinersPrimera
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -285,12 +285,11 @@ class InformesFragment : Fragment() {
             for (x in dates) {
                 var diffAux = ChronoUnit.DAYS.between(x, targetDate).toInt()
 
-                if(diff == -1){
-                    nearestDate = x
+                if(diff == -1 && x != targetDate){
                     diff = diffAux
                 }
 
-                if(diffAux < diff){
+                if(diffAux < diff && x != targetDate){
                     nearestDate = x
                     diff = diffAux
                 }
@@ -309,12 +308,12 @@ class InformesFragment : Fragment() {
                 var diffAux: Int
                 diffAux = ChronoUnit.DAYS.between(x, targetDate).toInt()
 
-                if(diff == -1){
+                if(diff == -1 && x != targetDate){
                     furthestDate = x
                     diff = diffAux
                 }
 
-                if(diffAux > diff){
+                if(diffAux > diff && x != targetDate){
                     furthestDate = x
                     diff = diffAux
                     Log.i("temps", furthestDate.toString())
