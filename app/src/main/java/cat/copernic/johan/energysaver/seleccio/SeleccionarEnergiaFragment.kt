@@ -15,10 +15,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.R
 import cat.copernic.johan.energysaver.databinding.FragmentSeleccionarEnergiaBinding
+import cat.copernic.johan.energysaver.introduirconsums.DadesTotalsLlum
 import cat.copernic.johan.energysaver.obrirtiquet.Usuari
 import com.google.android.material.transition.MaterialSharedAxis
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -108,25 +110,47 @@ class SeleccionarEnergiaFragment() : Fragment(), AdapterView.OnItemSelectedListe
         //Guarda el mail del usuari que ha fet login
         val mail = user?.email.toString()
 
-        val energies_usuari = hashMapOf(
-            "mail_usuari" to mail ,
-            "llum" to binding.chbxLlum.isChecked,
-            "periode_llum" to periodeLlum,
-            "aigua" to binding.chbxAigua.isChecked,
-            "periode_aigua" to periodeAigua,
-            "gas" to binding.chbxGas.isChecked,
-            "periode_gas" to periodeGas,
-            "gasoil" to binding.chbxGasoil.isChecked,
-            "periode_gasoil" to periodeGasoil,
-        )
+        db.collection("energies").whereEqualTo("mail_usuari", mail).get()
+            .addOnSuccessListener { doc ->
+                val usuariConsulta = doc.toObjects(Energies::class.java)
 
-        db.collection("energies")
-            .add(energies_usuari)
-            .addOnSuccessListener { documentReference ->
-                Log.d(ContentValues.TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-            }
-            .addOnFailureListener { e ->
-                Log.w(ContentValues.TAG, "Error adding document", e)
+                val energies_usuari = hashMapOf(
+                    "mail_usuari" to mail ,
+                    "llum" to binding.chbxLlum.isChecked,
+                    "periode_llum" to periodeLlum,
+                    "aigua" to binding.chbxAigua.isChecked,
+                    "periode_aigua" to periodeAigua,
+                    "gas" to binding.chbxGas.isChecked,
+                    "periode_gas" to periodeGas,
+                    "gasoil" to binding.chbxGasoil.isChecked,
+                    "periode_gasoil" to periodeGasoil,
+                )
+
+                if(usuariConsulta.isNullOrEmpty()){
+                    db.collection("energies")
+                        .add(energies_usuari)
+                        .addOnSuccessListener { documentReference ->
+                            Log.d(ContentValues.TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+                        }
+                        .addOnFailureListener { e ->
+                            Log.w(ContentValues.TAG, "Error adding document", e)
+                        }
+                }else{
+                    doc?.forEach {
+
+                        //guardem el id del document d'usuari identificat
+                        val usuariId = it.id
+                        val sfDocRef = db.collection("energies").document(usuariId)
+
+                        //afegim un nou registre al document del usuari identificat
+                        db.runTransaction { transaction ->
+                            val snapshot = transaction.get(sfDocRef)
+                            transaction.set(sfDocRef, energies_usuari, SetOptions.merge())
+
+                        }
+
+                    }
+                }
             }
     }
 
