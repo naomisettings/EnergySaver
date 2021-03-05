@@ -66,24 +66,24 @@
             android:id="@+id/chbxGas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="115dp"
             android:fontFamily="@font/asap_bold"
             android:text="@string/textGas"
             android:textColor="@color/TitolColor"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/chbxAigua"
             app:layout_constraintTop_toBottomOf="@+id/txvSeleccionarEnergia" />
 
         <CheckBox
             android:id="@+id/chbxGasoil"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="3dp"
-            android:layout_marginEnd="100dp"
             android:fontFamily="@font/asap_bold"
             android:text="@string/textGasoil"
             android:textColor="@color/TitolColor"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/chbxLlum"
             app:layout_constraintTop_toBottomOf="@+id/chbxGas" />
 
         <Spinner

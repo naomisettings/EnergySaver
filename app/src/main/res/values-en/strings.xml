@@ -38,7 +38,7 @@
     <string name="txtPeriode">Period</string>
     <string name="textAigua">Water</string>
     <string name="textLlum">Light</string>
-    <string name="textGas">You have won the Saver medal!! Congratulations!!</string>
+    <string name="textGas">Gas</string>
     <string name="textGasoil">Gasoline</string>
     <string name="graficPlaceholder">Graph</string>
     <string name="SeleccionaEnergies">Select Energies</string>
@@ -131,4 +131,7 @@
     <string name="energies_activades">Energies activated in your profile</string>
     <string name="estalviDiners">MONEY SAVING</string>
     <string name="estalviEnergia">ENERGY SAVING</string>
+    <string name="Medalles">Medals</string>
+    <string name="medalles">Medals</string>
+    <string name="medalles_notification_channel_description">Congratulations! you have won a medal!</string>
 </resources>

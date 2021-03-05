@@ -26,6 +26,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.fragment_medalles.*
 import java.security.AccessController
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -66,6 +67,10 @@ class MedallesFragment : Fragment() {
             duration = resources.getInteger(R.integer.reply_motion_duration_large_medalles).toLong()
         }
 
+        createChannel(
+            getString(R.string.energy_notification_channel_id),
+            getString(R.string.medalles)
+        )
 
         //Inicalitzar totes les medalles en gris
         medallesEnGris()
@@ -95,29 +100,6 @@ class MedallesFragment : Fragment() {
         }
         return binding.root
     }
-
-/*
-    private fun createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = Resources.getSystem().getString(R.string.channel_name)
-            val descriptionText = Resources.getSystem().getString(R.string.channel_description)
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
-                description = descriptionText
-            }
-
-            val context = AccessController.getContext()
-            // Register the channel with the system
-            val notificationManager: NotificationManager =
-                ContextCompat.getSystemService().NOTIFICATION_SERVICE as NotificationManager
-            notificationManager.createNotificationChannel(channel)
-        }
-    }
-
- */
-
 
     fun medallesEnGris() {
         binding.apply {
@@ -522,6 +504,37 @@ class MedallesFragment : Fragment() {
             llistaCorrecte.add(data)
         }
         return llistaCorrecte
+    }
+
+    private fun createChannel(channelId: String, channelName: String) {
+        // TODO: Step 1.6 START create a channel
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val notificationChannel = NotificationChannel(
+                channelId,
+                channelName,
+                // TODO: Step 2.4 change importance
+                NotificationManager.IMPORTANCE_HIGH
+            )// TODO: Step 2.6 disable badges for this channel
+                .apply {
+                    setShowBadge(false)
+                }
+
+            notificationChannel.enableLights(true)
+            notificationChannel.lightColor = Color.RED
+            notificationChannel.enableVibration(true)
+            notificationChannel.description = getString(R.string.medalles_notification_channel_description)
+
+            val notificationManager = requireActivity().getSystemService(
+                NotificationManager::class.java
+            )
+            notificationManager.createNotificationChannel(notificationChannel)
+
+        }
+        // TODO: Step 1.6 END create a channel
+    }
+
+    companion object {
+        fun newInstance() = MedallesFragment()
     }
 
 
