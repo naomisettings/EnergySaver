@@ -76,18 +76,22 @@ class MenuEnergies : Fragment() {
                    if (energia[0].aigua == false) {
                         binding.imgbAiguaDisable.visibility = View.VISIBLE
                         binding.imgbAiguaDisable.isClickable = false
+
                        binding.imgbAigua.visibility = View.INVISIBLE
                     }else{
                        binding.imgbAiguaDisable.visibility = View.INVISIBLE
+                       binding.imgbAiguaDisable.alpha = 0.5f
                        binding.imgbAigua.visibility = View.VISIBLE
 
                    }
                     if(energia[0].gas == false){
                         binding.imgbGasDisable.visibility = View.VISIBLE
                         binding.imgbGasDisable.isClickable = false
+
                         binding.imgbGas.visibility = View.INVISIBLE
                     }else{
                         binding.imgbGasDisable.visibility = View.INVISIBLE
+                        binding.imgbGasDisable.alpha = 0.5f
                         binding.imgbGas.visibility = View.VISIBLE
 
                     }
@@ -97,6 +101,7 @@ class MenuEnergies : Fragment() {
                         binding.imgbLlum.visibility = View.INVISIBLE
                     }else{
                         binding.imgbLlumDisable.visibility = View.INVISIBLE
+                        binding.imgbLlumDisable.alpha = 0.5f
                         binding.imgbLlum.visibility = View.VISIBLE
 
                     }
