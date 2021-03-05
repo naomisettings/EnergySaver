@@ -2,8 +2,6 @@ package cat.copernic.johan.energysaver.medalles
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.Context
-import android.content.res.Resources
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -13,12 +11,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.R
-import cat.copernic.johan.energysaver.databinding.FragmentInformesBinding
 import cat.copernic.johan.energysaver.databinding.FragmentMedallesBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialSharedAxis
@@ -26,13 +21,12 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.fragment_medalles.*
-import java.security.AccessController
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
+import androidx.lifecycle.ViewModelProvider
 
 class MedallesFragment : Fragment() {
 
@@ -66,6 +60,11 @@ class MedallesFragment : Fragment() {
         returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
             duration = resources.getInteger(R.integer.reply_motion_duration_large_medalles).toLong()
         }
+
+        val viewModel = ViewModelProvider(this).get(cat.copernic.johan.energysaver.medalles.MedallesViewModel::class.java)
+
+        viewModel //ACABAR
+        binding.lifecycleOwner = this.viewLifecycleOwner
 
         createChannel(
             getString(R.string.energy_notification_channel_id),
