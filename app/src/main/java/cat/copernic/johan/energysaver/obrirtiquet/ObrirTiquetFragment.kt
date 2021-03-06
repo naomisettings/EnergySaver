@@ -1,9 +1,11 @@
 package cat.copernic.johan.energysaver.obrirtiquet
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +14,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.R
@@ -59,8 +63,19 @@ class ObrirTiquetFragment : Fragment() {
         }
         //Pujar imatge al storage
         binding.imgBttnCarregaImatge.setOnClickListener {
+
             Singleton.nameImg = ""
-            selectImageFromGallery()
+
+            if (allPermissionsGranted()) {
+                selectImageFromGallery()
+            } else {
+                ActivityCompat.requestPermissions(
+                    context as Activity,
+                    ObrirTiquetFragment.REQUIRED_PERMISSIONS,
+                    ObrirTiquetFragment.REQUEST_CODE_PERMISSIONS
+                )
+            }
+           // selectImageFromGallery()
             Toast.makeText(context, R.string.imatgeCarrgada, Toast.LENGTH_SHORT).show()
         }
 
@@ -266,8 +281,36 @@ class ObrirTiquetFragment : Fragment() {
             })
     }
 
+    //Permisos per la camera
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<String>, grantResults:
+        IntArray
+    ) {
+        if (requestCode == ObrirTiquetFragment.REQUEST_CODE_PERMISSIONS) {
+            if (allPermissionsGranted()) {
+                selectImageFromGallery()
+            } else {
+                Toast.makeText(
+                    context,
+                    "Permissions not granted by the user.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
+
+    fun allPermissionsGranted() = ObrirTiquetFragment.REQUIRED_PERMISSIONS.all {
+        context?.let { it1 ->
+            ContextCompat.checkSelfPermission(
+                it1, it
+            )
+        } == PackageManager.PERMISSION_GRANTED
+    }
+
     companion object {
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
+        private const val REQUEST_CODE_PERMISSIONS = 5
+        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
     }
 }
 
