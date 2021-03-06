@@ -181,21 +181,18 @@ class InformesFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     fun estalviadorTotalIndiv(map: Map<String, Double>): Double{
         var estalviat: Double = 0.0
-        var dataPrimera = LocalDate.now()
-        var dataSegona = LocalDate.now()
+        var avui = LocalDate.now()
         var valorPrimera = 0.0
         var valorSegona = 0.0
 
         for(x in map) {
-            if(x.key == stringParser(getFurthestDate(getLlistaDates(extreureDatesMap(map)), dataPrimera))){
-                dataPrimera = dataParser(x.key)
+            if(x.key == stringParser(getFurthestDate(getLlistaDates(extreureDatesMap(map)), avui))){
                 valorPrimera = x.value
             }
         }
 
         for(x in map){
-            if(x.key == stringParser(getNearestDate(getLlistaDates(extreureDatesMap(map)), dataSegona))){
-                dataSegona = dataParser(x.key)
+            if(x.key == stringParser(getNearestDate(getLlistaDates(extreureDatesMap(map)), avui))){
                 valorSegona = x.value
             }
         }
@@ -214,20 +211,23 @@ class InformesFragment : Fragment() {
         var estalviData: Double
 
         llistaDates = getLlistaDates(extreureDatesMap(map))
+        Log.i("llistaDates", llistaDates.toString())
 
         for(x in map){
             if(x.key == stringParser(getNearestDate(llistaDates, LocalDate.now()))){
                 dinersPrimera = x.value
                 datePrimera = dataParser(x.key)
-                Log.i("prova", x.key + " -> " + x.value.toString())
+                Log.i("comparar", x.key + " -> " + x.value.toString())
+                Log.i("comparar", stringParser(getNearestDate(llistaDates, LocalDate.now())))
             }
         }
 
         for (x in map){
-            if(datePrimera != null && x.key == stringParser(getNearestDate(llistaDates,
-                    LocalDate.of(datePrimera.year, datePrimera.month, datePrimera.dayOfMonth)))){
+
+            Log.i("comparar", x.key + " -> " + x.value.toString() + " 2")
+            Log.i("comparar", stringParser(getNearestDate(llistaDates, datePrimera)) + " 2")
+            if(x.key == stringParser(getNearestDate(llistaDates, datePrimera))){
                 dinersSegona = x.value
-                Log.i("prova", x.key + " -> " + x.value.toString() + " 2")
             }
         }
 
@@ -286,6 +286,7 @@ class InformesFragment : Fragment() {
                 var diffAux = ChronoUnit.DAYS.between(x, targetDate).toInt()
 
                 if(diff == -1 && x != targetDate){
+                    nearestDate = x
                     diff = diffAux
                 }
 
