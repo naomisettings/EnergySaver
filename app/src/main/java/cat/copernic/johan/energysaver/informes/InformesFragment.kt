@@ -26,7 +26,7 @@ import java.time.temporal.ChronoUnit
 import java.util.*
 
 class InformesFragment : Fragment() {
-    private val db = FirebaseFirestore.getInstance()
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -52,6 +52,9 @@ class InformesFragment : Fragment() {
         val user = Firebase.auth.currentUser
         val mail_usuari = user?.email.toString()
         Log.d("mail", mail_usuari)
+
+
+        val db = FirebaseFirestore.getInstance()
 
         val energiesSeleccionades = db.collection("energies")
         val query = energiesSeleccionades.whereEqualTo("mail_usuari", mail_usuari).get()
@@ -87,6 +90,11 @@ class InformesFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun omplirDades(binding: FragmentInformesBinding){
+
+        val db = FirebaseFirestore.getInstance()
+
+
+
         val user = Firebase.auth.currentUser
         val mail = user?.email.toString()
 
@@ -197,7 +205,7 @@ class InformesFragment : Fragment() {
             }
         }
         estalviat = valorPrimera - valorSegona
-        println("test$estalviat")
+
         return estalviat
     }
 
@@ -211,21 +219,21 @@ class InformesFragment : Fragment() {
         var estalviData: Double
 
         llistaDates = getLlistaDates(extreureDatesMap(map))
-        Log.i("llistaDates", llistaDates.toString())
+       // Log.i("llistaDates", llistaDates.toString())
 
         for(x in map){
             if(x.key == stringParser(getNearestDate(llistaDates, LocalDate.now()))){
                 dinersPrimera = x.value
                 datePrimera = dataParser(x.key)
-                Log.i("comparar", x.key + " -> " + x.value.toString())
-                Log.i("comparar", stringParser(getNearestDate(llistaDates, LocalDate.now())))
+              //  Log.i("comparar", x.key + " -> " + x.value.toString())
+              //  Log.i("comparar", stringParser(getNearestDate(llistaDates, LocalDate.now())))
             }
         }
 
         for (x in map){
 
-            Log.i("comparar", x.key + " -> " + x.value.toString() + " 2")
-            Log.i("comparar", stringParser(getNearestDate(llistaDates, datePrimera)) + " 2")
+           // Log.i("comparar", x.key + " -> " + x.value.toString() + " 2")
+           // Log.i("comparar", stringParser(getNearestDate(llistaDates, datePrimera)) + " 2")
             if(x.key == stringParser(getNearestDate(llistaDates, datePrimera))){
                 dinersSegona = x.value
             }
@@ -242,7 +250,7 @@ class InformesFragment : Fragment() {
 
         tempsEstalviat = ChronoUnit.DAYS.between(getFurthestDate(llistaDates, dateComparar), dateComparar).toInt()
 
-        Log.i("temps", getFurthestDate(llistaDates, dateComparar).toString())
+       // Log.i("temps", getFurthestDate(llistaDates, dateComparar).toString())
         return tempsEstalviat
     }
 
