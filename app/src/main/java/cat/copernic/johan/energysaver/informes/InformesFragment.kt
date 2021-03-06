@@ -197,7 +197,7 @@ class InformesFragment : Fragment() {
             }
         }
         estalviat = valorPrimera - valorSegona
-
+        println("test$estalviat")
         return estalviat
     }
 
