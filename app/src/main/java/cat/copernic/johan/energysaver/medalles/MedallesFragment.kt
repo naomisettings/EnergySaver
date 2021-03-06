@@ -2,6 +2,8 @@ package cat.copernic.johan.energysaver.medalles
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -11,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.R
@@ -27,6 +30,8 @@ import java.time.temporal.ChronoUnit
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 import androidx.lifecycle.ViewModelProvider
+import cat.copernic.johan.energysaver.utils.cancelNotifications
+import cat.copernic.johan.energysaver.utils.sendNotification
 
 class MedallesFragment : Fragment() {
 
@@ -60,11 +65,6 @@ class MedallesFragment : Fragment() {
         returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
             duration = resources.getInteger(R.integer.reply_motion_duration_large_medalles).toLong()
         }
-
-        val viewModel = ViewModelProvider(this).get(cat.copernic.johan.energysaver.medalles.MedallesViewModel::class.java)
-
-        viewModel //ACABAR
-        binding.lifecycleOwner = this.viewLifecycleOwner
 
         createChannel(
             getString(R.string.energy_notification_channel_id),
@@ -258,7 +258,19 @@ class MedallesFragment : Fragment() {
 
         //Si ha guanyat la de mig any fa un update per a modifica el camp (Si el camp no hi és s'afegeix)
         if (diferencia.toInt() in 182..365) {
+
             medallaMigAnyVisible()
+
+            //Notificació
+            val notificationManager = context?.let {
+                ContextCompat.getSystemService(
+                    it,
+                    NotificationManager::class.java
+                )
+            } as NotificationManager
+            notificationManager.sendNotification(requireContext().getString(R.string.medalles_notification_channel_description),
+                requireContext()
+            )
             val actualitza = db.collection("despesaConsum").addSnapshotListener { snapshot, e ->
                 val doc = snapshot?.documents
                 doc?.forEach {
@@ -279,7 +291,20 @@ class MedallesFragment : Fragment() {
             }
             //Aquí es mira si s'ha guanyat la de un any estalviant i s'afageix a la BBDD
         } else if (diferencia >= 365) {
+
             medallaUnAnyVisible()
+
+            //Notificació
+            val notificationManager = context?.let {
+                ContextCompat.getSystemService(
+                    it,
+                    NotificationManager::class.java
+                )
+            } as NotificationManager
+            notificationManager.sendNotification(requireContext().getString(R.string.medalles_notification_channel_description),
+                requireContext()
+            )
+
             val actualitza = db.collection("despesaConsum").addSnapshotListener { snapshot, e ->
                 val doc = snapshot?.documents
                 doc?.forEach {
@@ -351,8 +376,39 @@ class MedallesFragment : Fragment() {
                     if (estalviatTotal > LIMIT_GRAN_ESTALVIADOR) {
                         medallaEstalviadorVisible()
                         medallaGranEstalviadorVisible()
+
+                        //Notificació
+/*
+                        val notificationManager = context?.let {
+                            ContextCompat.getSystemService(
+                                it,
+                                NotificationManager::class.java
+                            )
+                        } as NotificationManager
+                        notificationManager.sendNotification(requireContext().getString(R.string.medalles_notification_channel_description),
+                            requireContext()
+                        )
+
+ */
+
                     } else if (estalviatTotal > LIMIT_ESTALVIADOR) {
+
                         medallaEstalviadorVisible()
+
+                        //Notificació
+/*
+                        val notificationManager = context?.let {
+                            ContextCompat.getSystemService(
+                                it,
+                                NotificationManager::class.java
+                            )
+                        } as NotificationManager
+                        notificationManager.sendNotification(requireContext().getString(R.string.medalles_notification_channel_description),
+                            requireContext()
+                        )
+
+ */
+
                     }
                 }
             }

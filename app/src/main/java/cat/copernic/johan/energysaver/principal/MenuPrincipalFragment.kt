@@ -44,6 +44,8 @@ class MenuPrincipalFragment : Fragment() {
         binding.imgBtnEnergies.setOnClickListener { view:View ->
             view.findNavController().navigate(R.id.action_menuPrincipalFragment_to_seleccionarEnergiaFragment)
         }
+
+
         return binding.root
     }
 }
