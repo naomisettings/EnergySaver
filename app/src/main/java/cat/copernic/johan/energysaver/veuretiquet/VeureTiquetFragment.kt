@@ -36,10 +36,10 @@ class VeureTiquetFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_veure, container, false)
 
         enterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, true).apply {
-            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+            duration = resources.getInteger(R.integer.reply_motion_duration_large_medalles).toLong()
         }
         returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
-            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+            duration = resources.getInteger(R.integer.reply_motion_duration_large_medalles).toLong()
         }
         setHasOptionsMenu(true)
 
