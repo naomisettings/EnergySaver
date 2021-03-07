@@ -280,8 +280,7 @@ class ObrirTiquetFragment : Fragment() {
                 print(e.message)
             })
     }
-
-    //Permisos per la camera
+     //Permisos per la galeria
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<String>, grantResults:
         IntArray

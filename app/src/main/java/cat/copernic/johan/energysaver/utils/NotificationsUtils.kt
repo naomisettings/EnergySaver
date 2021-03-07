@@ -23,11 +23,11 @@ private val REQUEST_CODE = 0
 private val FLAGS = 0
 
 fun NotificationManager.sendNotification(messageBody: String, applicationContext: Context) {
-    // Create the content intent for the notification, which launches
-    // this activity
-    // TODO: Step 1.11 create intent
+
+    // Crear un intent
     val contentIntent = Intent(applicationContext, MainActivity::class.java)
-    // TODO: Step 1.12 create PendingIntent
+
+    // Crear un pending Intent
     val contentPendingIntent = PendingIntent.getActivity(
         applicationContext,
         NOTIFICATION_ID,
@@ -35,7 +35,7 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         PendingIntent.FLAG_UPDATE_CURRENT
     )
 
-    // TODO: Step 2.0 add style
+    // Afegir estils
     val eggImage = BitmapFactory.decodeResource(
         applicationContext.resources,
         R.drawable.raigpetit
@@ -44,7 +44,7 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         .bigPicture(eggImage)
         .bigLargeIcon(null)
 
-    // TODO: Step 2.2 add snooze action
+
     val snoozeIntent = Intent(
         applicationContext,
         cat.copernic.johan.energysaver.reciver.MedallesReciver::class.java
@@ -56,16 +56,13 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         FLAGS
     )
 
-    // TODO: Step 1.2 get an instance of NotificationCompat.Builder
-    // Build the notification
+    // Construir la notificació
     val builder = NotificationCompat.Builder(
         applicationContext,
         applicationContext.getString(R.string.energy_notification_channel_id)
     )
 
-        // TODO: Step 1.8 use the new 'breakfast' notification channel
-
-        // TODO: Step 1.3 set title, text and icon to builder
+        //Canviar el títol i la icona
         .setSmallIcon(R.drawable.raigpetit)
         .setContentTitle(
             applicationContext
@@ -73,32 +70,27 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         )
         .setContentText(messageBody)
 
-        // TODO: Step 1.13 set content intent
         .setContentIntent(contentPendingIntent)
         .setAutoCancel(true)
 
-        // TODO: Step 2.1 add style to builder
+
         .setStyle(bigPicStyle)
         .setLargeIcon(eggImage)
 
-        // TODO: Step 2.3 add snooze action
+
         .addAction(
             R.drawable.medalla,
             applicationContext.getString(R.string.medalles),
             snoozePendingIntent
         )
 
-        // TODO: Step 2.5 set priority
+        //La prioritat
         .setPriority(NotificationCompat.PRIORITY_HIGH)
-    // TODO: Step 1.4 call notify
+    //Trucar a la notificacó
     notify(NOTIFICATION_ID, builder.build())
 }
 
-// TODO: Step 1.14 Cancel all notifications
-/**
- * Cancels all notifications.
- *
- */
+//Cancelar notificacions
 fun NotificationManager.cancelNotifications() {
     cancelAll()
 }
