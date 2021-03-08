@@ -562,14 +562,14 @@ class MedallesFragment : Fragment() {
     }
 
     private fun createChannel(channelId: String, channelName: String) {
-        // TODO: Step 1.6 START create a channel
+        //Crear un canal
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val notificationChannel = NotificationChannel(
                 channelId,
                 channelName,
-                // TODO: Step 2.4 change importance
+
                 NotificationManager.IMPORTANCE_HIGH
-            )// TODO: Step 2.6 disable badges for this channel
+            )
                 .apply {
                     setShowBadge(false)
                 }
@@ -585,7 +585,7 @@ class MedallesFragment : Fragment() {
             notificationManager.createNotificationChannel(notificationChannel)
 
         }
-        // TODO: Step 1.6 END create a channel
+
     }
 
     companion object {

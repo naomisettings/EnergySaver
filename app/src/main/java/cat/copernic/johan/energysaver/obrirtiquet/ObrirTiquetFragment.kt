@@ -39,7 +39,7 @@ class ObrirTiquetFragment : Fragment() {
     val db = FirebaseFirestore.getInstance()
     var titol: String = ""
     var descripcio: String = ""
-    private val GALLERY_REQUEST_CODE: Int = 101
+    private val GALLERY_REQUEST_CODE: Int = 1001
 
     init {
         Singleton.nameImg
@@ -76,7 +76,7 @@ class ObrirTiquetFragment : Fragment() {
                 )
             }
            // selectImageFromGallery()
-            Toast.makeText(context, R.string.imatgeCarrgada, Toast.LENGTH_SHORT).show()
+        //    Toast.makeText(context, R.string.imatgeCarrgada, Toast.LENGTH_SHORT).show()
         }
 
         binding.imgBttnCamera.setOnClickListener {
@@ -280,8 +280,7 @@ class ObrirTiquetFragment : Fragment() {
                 print(e.message)
             })
     }
-
-    //Permisos per la camera
+     //Permisos per la galeria
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<String>, grantResults:
         IntArray
@@ -309,7 +308,7 @@ class ObrirTiquetFragment : Fragment() {
 
     companion object {
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
-        private const val REQUEST_CODE_PERMISSIONS = 5
+        private const val REQUEST_CODE_PERMISSIONS = 100
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
     }
 }

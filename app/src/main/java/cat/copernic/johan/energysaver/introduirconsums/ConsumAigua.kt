@@ -1,6 +1,7 @@
 package cat.copernic.johan.energysaver.introduirconsums
 
 import android.app.DatePickerDialog
+import android.content.ContentValues
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -111,22 +112,25 @@ class ConsumAigua : Fragment() {
 
                     db.collection("despesaConsum").add(despesaConsum)
                         .addOnSuccessListener { documentReference ->
-                            view?.let {
+                            Log.d(ContentValues.TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+                            /*view?.let {
                                 Snackbar.make(
                                     it,
                                     "Registre creat correctament",
                                     Snackbar.LENGTH_LONG
                                 ).show()
                             }
+                             */
                         }.addOnFailureListener { e ->
-                            view?.let {
+                            Log.w(ContentValues.TAG, "Error adding document", e)
+                           /* view?.let {
                                 Snackbar.make(
                                     it,
                                     "Error al crear el registre",
                                     Snackbar.LENGTH_LONG
                                 ).show()
                             }
-
+                            */
                         }
 
                 } else {
