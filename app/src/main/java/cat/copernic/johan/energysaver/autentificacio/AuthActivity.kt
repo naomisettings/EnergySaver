@@ -113,7 +113,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun firebaseAuthWithGoogle(idToken: String) {
+     fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
@@ -134,7 +134,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     //metode d'acces
-    private fun signIn(email: String,password: String){
+     fun signIn(email: String,password: String){
         Log.d("EmailPassword", "Acces amb el:$email")
         if(!validateFormat()){
             return
@@ -168,7 +168,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
     //Inicia sessió amb google
-    private fun signInWithGoogle() {
+     fun signInWithGoogle() {
         //Configurem el google sign in
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -181,7 +181,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
     //metode per tanca sessió
-    private fun signOUt(){
+     fun signOUt(){
         auth.signOut()
         binding.editTextCorreu.setText("")
         binding.editTextContrasenya.setText("")
@@ -198,7 +198,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     //funcio per recarregar l'usuari
-    private fun reload() {
+     fun reload() {
         auth.currentUser!!.reload().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 Snackbar.make(findViewById(R.id.ConstraintLayout), "Recarrega correcte", Snackbar.LENGTH_SHORT).show()
@@ -209,7 +209,7 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
     //metode que valida que els camps no estiguin buits
-    private fun validateFormat(): Boolean{
+     fun validateFormat(): Boolean{
         var valid = true
         val email: String = binding.editTextCorreu.text.toString()
         if(TextUtils.isEmpty(email)){

@@ -22,7 +22,7 @@ class Registre : AppCompatActivity() {
     private lateinit var binding: ActivityRegistreBinding
 
     //instancia a firebase
-    val db = FirebaseFirestore.getInstance()
+//    val db = FirebaseFirestore.getInstance()
 
     var nom: String =""
     var cognoms: String =""
@@ -55,6 +55,7 @@ class Registre : AppCompatActivity() {
 
     //funcio per recollir les dades del formulari de registre
     fun recollirUsuari(view:View){
+        val db = FirebaseFirestore.getInstance()
         binding.apply {
             nom = editTextNom.text.toString()
             cognoms = editTextCognoms.text.toString()
@@ -95,7 +96,8 @@ class Registre : AppCompatActivity() {
         }
     }
     //funcio per crear el compte d'usuari al Authentification amb les dades del registre
-    private fun createAccount(email: String, password: String, view: View){
+     fun createAccount(email: String, password: String, view: View){
+        val db = FirebaseFirestore.getInstance()
         if(!validateFormat()){
             return
         }
