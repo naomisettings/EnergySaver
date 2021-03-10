@@ -85,8 +85,10 @@ class MainActivity : AppCompatActivity() {
                 duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
             }
             reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
-                duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+                duration = 1.toLong()
             }
+
+
         }
         findNavController(R.id.nav_host_fragment).navigate(directionsMedalles)
         findNavController(R.id.nav_host_fragment).navigate(directionsTiquetObert)

@@ -40,7 +40,7 @@ class ConsumAigua : Fragment() {
             duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
         }
         returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
-            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
+            duration = 0.01.toLong()
         }
 
         binding.btnConfirmarConsumAigua.setOnClickListener { view: View ->

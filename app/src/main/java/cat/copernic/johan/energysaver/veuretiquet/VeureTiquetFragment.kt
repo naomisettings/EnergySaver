@@ -39,7 +39,7 @@ class VeureTiquetFragment : Fragment() {
             duration = resources.getInteger(R.integer.reply_motion_duration_large_medalles).toLong()
         }
         returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
-            duration = resources.getInteger(R.integer.reply_motion_duration_large_medalles).toLong()
+            duration = 0.01.toLong()
         }
         setHasOptionsMenu(true)
 
