@@ -26,7 +26,7 @@
             android:layout_width="133dp"
             android:layout_height="131dp"
             android:layout_marginStart="35dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="35dp"
             android:layout_marginEnd="65dp"
             android:background="@drawable/botonsshadow"
             android:contentDescription="@string/defaultcd"
@@ -41,7 +41,7 @@
             android:layout_width="133dp"
             android:layout_height="131dp"
             android:layout_marginStart="45dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="35dp"
 
             android:background="@drawable/botonsshadow"
             android:contentDescription="@string/defaultcd"
@@ -55,26 +55,26 @@
             android:layout_width="133dp"
             android:layout_height="131dp"
             android:layout_marginStart="35dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="35dp"
 
+            android:background="@drawable/botonsshadow"
             android:contentDescription="@string/defaultcd"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imgbGoInformes"
-            app:srcCompat="@drawable/medalla_menu"
-            android:background="@drawable/botonsshadow"/>
+            app:srcCompat="@drawable/medalla_menu" />
 
         <ImageButton
             android:id="@+id/imgBttnSuport"
-            android:layout_width="131dp"
-            android:layout_height="127dp"
+            android:layout_width="133dp"
+            android:layout_height="131dp"
             android:layout_marginStart="45dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="35dp"
 
+            android:background="@drawable/botonsshadow"
             android:contentDescription="@string/defaultcd"
             app:layout_constraintStart_toEndOf="@+id/imgbMedalles"
             app:layout_constraintTop_toBottomOf="@+id/imgbGoInformes"
-            app:srcCompat="@drawable/suport"
-            android:background="@drawable/botonsshadow"/>
+            app:srcCompat="@drawable/suport" />
 
         <ImageButton
             android:id="@+id/imgBtnConsums"

@@ -46,6 +46,7 @@
             android:fontFamily="@font/asap_bold"
             android:text="@string/textAigua"
             android:textColor="@color/TitolColor"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txvSeleccionarEnergia" />
 
@@ -58,6 +59,7 @@
             android:fontFamily="@font/asap_bold"
             android:text="@string/textLlum"
             android:textColor="@color/TitolColor"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chbxAigua" />
 
@@ -70,6 +72,7 @@
             android:fontFamily="@font/asap_bold"
             android:text="@string/textGas"
             android:textColor="@color/TitolColor"
+            android:textSize="24sp"
             app:layout_constraintStart_toEndOf="@+id/chbxAigua"
             app:layout_constraintTop_toBottomOf="@+id/txvSeleccionarEnergia" />
 
@@ -82,6 +85,7 @@
             android:fontFamily="@font/asap_bold"
             android:text="@string/textGasoil"
             android:textColor="@color/TitolColor"
+            android:textSize="24sp"
             app:layout_constraintStart_toEndOf="@+id/chbxLlum"
             app:layout_constraintTop_toBottomOf="@+id/chbxGas" />
 
@@ -125,12 +129,12 @@
             android:id="@+id/txvAigua"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="25dp"
             android:layout_marginEnd="30dp"
             android:fontFamily="@font/asap_bold"
             android:text="@string/textAigua"
             android:textColor="@color/TitolColor"
-            android:textSize="18sp"
+            android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/spnAigua"
             app:layout_constraintTop_toBottomOf="@+id/txvPeriode" />
 
@@ -143,7 +147,7 @@
             android:fontFamily="@font/asap_bold"
             android:text="@string/textLlum"
             android:textColor="@color/TitolColor"
-            android:textSize="18sp"
+            android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/spnAigua"
             app:layout_constraintTop_toBottomOf="@+id/txvAigua" />
 
@@ -156,7 +160,7 @@
             android:fontFamily="@font/asap_bold"
             android:text="@string/textGas"
             android:textColor="@color/TitolColor"
-            android:textSize="18sp"
+            android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/spnGas"
             app:layout_constraintTop_toBottomOf="@+id/txvLlum" />
 
@@ -169,7 +173,7 @@
             android:fontFamily="@font/asap_bold"
             android:text="@string/textGasoil"
             android:textColor="@color/TitolColor"
-            android:textSize="18sp"
+            android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/spnCombustible"
             app:layout_constraintTop_toBottomOf="@+id/txvGas" />
 
