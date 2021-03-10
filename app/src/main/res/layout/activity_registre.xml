@@ -8,7 +8,6 @@
         android:id="@+id/txtRegistre"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/degradat"
         tools:context="cat.copernic.johan.energysaver.registre.Registre">
 
         <EditText
@@ -74,7 +73,7 @@
             android:layout_width="153dp"
             android:layout_height="43dp"
             android:layout_marginBottom="16dp"
-            android:background="@color/BtnColor"
+            android:background="@drawable/botonsshadow"
             android:gravity="center"
             android:text="@string/btnConfirmar"
             android:textAlignment="center"

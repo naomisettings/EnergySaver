@@ -14,6 +14,7 @@
             android:elevation="2dp"
             android:scaleType="fitCenter"
             android:text="@string/bttnCamera"
+            android:background="@drawable/botonsshadow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />

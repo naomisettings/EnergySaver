@@ -8,13 +8,12 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/degradat"
         tools:context=".medalles.Medalla2Fragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:transitionGroup="true"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:transitionGroup="true">
 
             <ImageView
                 android:id="@+id/imgViewLogo"

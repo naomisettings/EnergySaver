@@ -8,8 +8,7 @@
         android:id="@+id/modificarFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:transitionGroup="true"
-        android:background="@drawable/degradat">
+        android:transitionGroup="true">
 
         <Button
             android:id="@+id/btnTancarModificar"
@@ -18,7 +17,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="30dp"
-            android:background="@color/BtnColor"
+            android:background="@drawable/botonsshadow"
             android:gravity="center"
             android:text="@string/Sortir"
             android:textAlignment="center"
@@ -35,7 +34,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="30dp"
-            android:background="@color/BtnColor"
+            android:background="@drawable/botonsshadow"
             android:gravity="center"
             android:text="@string/Baixa"
             android:textAlignment="center"
@@ -50,7 +49,7 @@
             android:layout_width="153dp"
             android:layout_height="43dp"
             android:layout_marginStart="30dp"
-            android:background="@color/BtnColor"
+            android:background="@drawable/botonsshadow"
             android:gravity="center"
             android:text="@string/Energies"
             android:textAlignment="center"
@@ -65,7 +64,7 @@
             android:layout_width="153dp"
             android:layout_height="43dp"
             android:layout_marginStart="28dp"
-            android:background="@color/BtnColor"
+            android:background="@drawable/botonsshadow"
             android:gravity="center"
             android:text="@string/btnConfirmar"
             app:layout_constraintBaseline_toBaselineOf="@+id/btnBaixaModificar"

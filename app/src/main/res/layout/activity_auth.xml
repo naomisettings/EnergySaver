@@ -7,8 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ConstraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/degradat">
+        android:layout_height="match_parent">
 
 
         <Button
@@ -19,7 +18,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="70dp"
-            android:background="@color/BtnColor"
+            android:background="@drawable/botonsshadow"
             android:fontFamily="@font/asap_bold"
             android:gravity="center"
             android:text="@string/btnRegistre"
@@ -113,7 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="70dp"
-            android:background="@color/BtnColor"
+            android:background="@drawable/botonsshadow"
             android:fontFamily="@font/asap_bold"
             android:gravity="center"
             android:text="@string/btnAccedir"
@@ -142,7 +141,7 @@
             android:layout_width="125dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="64dp"
-            android:background="@color/BtnColor"
+            android:background="@drawable/botonsshadow"
             android:fontFamily="@font/asap_bold"
             android:gravity="center"
             android:text="@string/btnSortir"

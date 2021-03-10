@@ -6,13 +6,12 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/degradat"
         tools:context=".veuretiquet.VeureTiquetFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:transitionGroup="true"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:transitionGroup="true">
 
 
             <TextView
@@ -67,6 +66,7 @@
                 <Button
                     android:id="@+id/bttnNouTiquet"
                     style="@style/Bottons"
+                    android:background="@drawable/botonsshadow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="0dp"
@@ -76,6 +76,7 @@
                 <Button
                     android:id="@+id/bttnBorrarTIquet"
                     style="@style/Bottons"
+                    android:background="@drawable/botonsshadow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="0dp"
