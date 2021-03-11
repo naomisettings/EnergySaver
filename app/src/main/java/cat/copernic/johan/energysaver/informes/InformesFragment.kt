@@ -129,12 +129,12 @@ class InformesFragment : Fragment() {
                                      estalviadorTotalIndiv(gasDiners) +
                                      estalviadorTotalIndiv(gasoilDiners)
 
-                        binding.txvTotal.setText(estalviatTotal.toString())
-
                     val euro: String = " \u20ac"
                     val metreCubic = " m\u00b3"
                     val kilowatt = " kw"
                     val litres = " l"
+
+                        binding.txvTotal.setText(String.format("%.2f", estalviatTotal) + euro)
 
                     binding.btnTotal.setOnClickListener{view: View ->
                         resetFields(binding)
