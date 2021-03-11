@@ -131,19 +131,24 @@ class InformesFragment : Fragment() {
 
                         binding.txvTotal.setText(estalviatTotal.toString())
 
+                    val euro: String = " \u20ac"
+                    val metreCubic = " m\u00b3"
+                    val kilowatt = " kw"
+                    val litres = " l"
+
                     binding.btnTotal.setOnClickListener{view: View ->
                         resetFields(binding)
-                        binding.txvTotal.setText(estalviatTotal.toString())
+                        binding.txvTotal.setText(String.format("%.2f", estalviatTotal) + euro)
                     }
 
                     if(!aiguaDiners.isEmpty()){
                         binding.btnAigua.setOnClickListener{view: View ->
                             resetFields(binding)
-                            binding.txvTotal.setText(String.format("%.2f", estalviadorTotalIndiv(aiguaDiners)))
-                            binding.txvPeriodeInfo.setText(String.format("%.2f", estalviadorPeriode(aiguaDiners)))
+                            binding.txvTotal.setText(String.format("%.2f", estalviadorTotalIndiv(aiguaDiners)) + euro)
+                            binding.txvPeriodeInfo.setText(String.format("%.2f", estalviadorPeriode(aiguaDiners)) + euro)
                             binding.txvTemps.setText(tempsEstalviat(aiguaDiners).toString())
-                            binding.txvTotalConsum.setText(String.format("%.2f", estalviadorTotalIndiv(consumAigua)))
-                            binding.txvPeriodeConsum.setText(String.format("%.2f", estalviadorPeriode(consumAigua)))
+                            binding.txvTotalConsum.setText(String.format("%.2f", estalviadorTotalIndiv(consumAigua)) + metreCubic)
+                            binding.txvPeriodeConsum.setText(String.format("%.2f", estalviadorPeriode(consumAigua)) + metreCubic)
                             binding.txvTempsConsum.setText(tempsEstalviat(consumAigua).toString())
                         }
                     }
@@ -151,11 +156,11 @@ class InformesFragment : Fragment() {
                     if(!llumDiners.isEmpty()){
                         binding.btnLlum.setOnClickListener{view: View ->
                             resetFields(binding)
-                            binding.txvTotal.setText(String.format("%.2f", estalviadorTotalIndiv(llumDiners)))
-                            binding.txvPeriodeInfo.setText(String.format("%.2f", estalviadorPeriode(llumDiners)))
+                            binding.txvTotal.setText(String.format("%.2f", estalviadorTotalIndiv(llumDiners)) + euro)
+                            binding.txvPeriodeInfo.setText(String.format("%.2f", estalviadorPeriode(llumDiners)) + euro)
                             binding.txvTemps.setText(tempsEstalviat(llumDiners).toString())
-                            binding.txvTotalConsum.setText(String.format("%.2f", estalviadorTotalIndiv(consumLlum)))
-                            binding.txvPeriodeConsum.setText(String.format("%.2f", estalviadorPeriode(consumLlum)))
+                            binding.txvTotalConsum.setText(String.format("%.2f", estalviadorTotalIndiv(consumLlum)) + kilowatt)
+                            binding.txvPeriodeConsum.setText(String.format("%.2f", estalviadorPeriode(consumLlum)) + kilowatt)
                             binding.txvTempsConsum.setText(tempsEstalviat(consumLlum).toString())
                         }
                     }
@@ -163,11 +168,11 @@ class InformesFragment : Fragment() {
                     if(!gasDiners.isEmpty()){
                         binding.btnGas.setOnClickListener{view: View ->
                             resetFields(binding)
-                            binding.txvTotal.setText(String.format("%.2f", estalviadorTotalIndiv(gasDiners)))
-                            binding.txvPeriodeInfo.setText(String.format("%.2f", estalviadorPeriode(gasDiners)))
+                            binding.txvTotal.setText(String.format("%.2f", estalviadorTotalIndiv(gasDiners)) + euro)
+                            binding.txvPeriodeInfo.setText(String.format("%.2f", estalviadorPeriode(gasDiners)) + euro)
                             binding.txvTemps.setText(tempsEstalviat(gasDiners).toString())
-                            binding.txvTotalConsum.setText(String.format("%.2f", estalviadorTotalIndiv(consumGas)))
-                            binding.txvPeriodeConsum.setText(String.format("%.2f", estalviadorPeriode(consumGas)))
+                            binding.txvTotalConsum.setText(String.format("%.2f", estalviadorTotalIndiv(consumGas)) + metreCubic)
+                            binding.txvPeriodeConsum.setText(String.format("%.2f", estalviadorPeriode(consumGas)) + metreCubic)
                             binding.txvTempsConsum.setText(tempsEstalviat(consumGas).toString())
                         }
                     }
@@ -175,11 +180,11 @@ class InformesFragment : Fragment() {
                     if(!gasoilDiners.isEmpty()){
                         binding.btnGasoil.setOnClickListener{view: View ->
                             resetFields(binding)
-                            binding.txvTotal.setText(String.format("%.2f", estalviadorTotalIndiv(gasoilDiners)))
-                            binding.txvPeriodeInfo.setText(String.format("%.2f", estalviadorPeriode(gasoilDiners)))
+                            binding.txvTotal.setText(String.format("%.2f", estalviadorTotalIndiv(gasoilDiners)) + euro)
+                            binding.txvPeriodeInfo.setText(String.format("%.2f", estalviadorPeriode(gasoilDiners)) + euro)
                             binding.txvTemps.setText(tempsEstalviat(gasoilDiners).toString())
-                            binding.txvTotalConsum.setText(String.format("%.2f", estalviadorTotalIndiv(consumGasoil)))
-                            binding.txvPeriodeConsum.setText(String.format("%.2f", estalviadorPeriode(consumGasoil)))
+                            binding.txvTotalConsum.setText(String.format("%.2f", estalviadorTotalIndiv(consumGasoil)) + litres)
+                            binding.txvPeriodeConsum.setText(String.format("%.2f", estalviadorPeriode(consumGasoil)) + litres)
                             binding.txvTempsConsum.setText(tempsEstalviat(consumGasoil).toString())
                         }
                     }
