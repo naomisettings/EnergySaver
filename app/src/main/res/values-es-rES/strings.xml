@@ -131,4 +131,7 @@
     <string name="energies_activades">Energías activadas en tu perfil</string>
     <string name="estalviDiners">AHORRO DE DINERO</string>
     <string name="estalviEnergia">AHORRO DE ENERGIA</string>
+    <string name="Medalles">Medallas</string>
+    <string name="medalles">Medallas</string>
+    <string name="medalles_notification_channel_description">Enhorabuena! Has ganado una medalla!</string>
 </resources>

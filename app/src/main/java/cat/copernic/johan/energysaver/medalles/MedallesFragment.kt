@@ -2,8 +2,8 @@ package cat.copernic.johan.energysaver.medalles
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.Context
-import android.content.res.Resources
+import android.app.PendingIntent
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -14,11 +14,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import cat.copernic.johan.energysaver.R
-import cat.copernic.johan.energysaver.databinding.FragmentInformesBinding
 import cat.copernic.johan.energysaver.databinding.FragmentMedallesBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialSharedAxis
@@ -26,12 +24,14 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.ktx.Firebase
-import java.security.AccessController
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
+import androidx.lifecycle.ViewModelProvider
+import cat.copernic.johan.energysaver.utils.cancelNotifications
+import cat.copernic.johan.energysaver.utils.sendNotification
 
 class MedallesFragment : Fragment() {
 
@@ -63,9 +63,13 @@ class MedallesFragment : Fragment() {
             duration = resources.getInteger(R.integer.reply_motion_duration_large_medalles).toLong()
         }
         returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
-            duration = resources.getInteger(R.integer.reply_motion_duration_large_medalles).toLong()
+            duration = 0.01.toLong()
         }
 
+        createChannel(
+            getString(R.string.energy_notification_channel_id),
+            getString(R.string.medalles)
+        )
 
         //Inicalitzar totes les medalles en gris
         medallesEnGris()
@@ -95,29 +99,6 @@ class MedallesFragment : Fragment() {
         }
         return binding.root
     }
-
-/*
-    private fun createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = Resources.getSystem().getString(R.string.channel_name)
-            val descriptionText = Resources.getSystem().getString(R.string.channel_description)
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
-                description = descriptionText
-            }
-
-            val context = AccessController.getContext()
-            // Register the channel with the system
-            val notificationManager: NotificationManager =
-                ContextCompat.getSystemService().NOTIFICATION_SERVICE as NotificationManager
-            notificationManager.createNotificationChannel(channel)
-        }
-    }
-
- */
-
 
     fun medallesEnGris() {
         binding.apply {
@@ -277,7 +258,19 @@ class MedallesFragment : Fragment() {
 
         //Si ha guanyat la de mig any fa un update per a modifica el camp (Si el camp no hi és s'afegeix)
         if (diferencia.toInt() in 182..365) {
+
             medallaMigAnyVisible()
+
+            //Notificació
+            val notificationManager = context?.let {
+                ContextCompat.getSystemService(
+                    it,
+                    NotificationManager::class.java
+                )
+            } as NotificationManager
+            notificationManager.sendNotification(requireContext().getString(R.string.medalles_notification_channel_description),
+                requireContext()
+            )
             val actualitza = db.collection("despesaConsum").addSnapshotListener { snapshot, e ->
                 val doc = snapshot?.documents
                 doc?.forEach {
@@ -298,7 +291,20 @@ class MedallesFragment : Fragment() {
             }
             //Aquí es mira si s'ha guanyat la de un any estalviant i s'afageix a la BBDD
         } else if (diferencia >= 365) {
+
             medallaUnAnyVisible()
+
+            //Notificació
+            val notificationManager = context?.let {
+                ContextCompat.getSystemService(
+                    it,
+                    NotificationManager::class.java
+                )
+            } as NotificationManager
+            notificationManager.sendNotification(requireContext().getString(R.string.medalles_notification_channel_description),
+                requireContext()
+            )
+
             val actualitza = db.collection("despesaConsum").addSnapshotListener { snapshot, e ->
                 val doc = snapshot?.documents
                 doc?.forEach {
@@ -370,8 +376,39 @@ class MedallesFragment : Fragment() {
                     if (estalviatTotal > LIMIT_GRAN_ESTALVIADOR) {
                         medallaEstalviadorVisible()
                         medallaGranEstalviadorVisible()
+
+                        //Notificació
+/*
+                        val notificationManager = context?.let {
+                            ContextCompat.getSystemService(
+                                it,
+                                NotificationManager::class.java
+                            )
+                        } as NotificationManager
+                        notificationManager.sendNotification(requireContext().getString(R.string.medalles_notification_channel_description),
+                            requireContext()
+                        )
+
+ */
+
                     } else if (estalviatTotal > LIMIT_ESTALVIADOR) {
+
                         medallaEstalviadorVisible()
+
+                        //Notificació
+/*
+                        val notificationManager = context?.let {
+                            ContextCompat.getSystemService(
+                                it,
+                                NotificationManager::class.java
+                            )
+                        } as NotificationManager
+                        notificationManager.sendNotification(requireContext().getString(R.string.medalles_notification_channel_description),
+                            requireContext()
+                        )
+
+ */
+
                     }
                 }
             }
@@ -522,6 +559,37 @@ class MedallesFragment : Fragment() {
             llistaCorrecte.add(data)
         }
         return llistaCorrecte
+    }
+
+    private fun createChannel(channelId: String, channelName: String) {
+        //Crear un canal
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val notificationChannel = NotificationChannel(
+                channelId,
+                channelName,
+
+                NotificationManager.IMPORTANCE_HIGH
+            )
+                .apply {
+                    setShowBadge(false)
+                }
+
+            notificationChannel.enableLights(true)
+            notificationChannel.lightColor = Color.RED
+            notificationChannel.enableVibration(true)
+            notificationChannel.description = getString(R.string.medalles_notification_channel_description)
+
+            val notificationManager = requireActivity().getSystemService(
+                NotificationManager::class.java
+            )
+            notificationManager.createNotificationChannel(notificationChannel)
+
+        }
+
+    }
+
+    companion object {
+        fun newInstance() = MedallesFragment()
     }
 
 

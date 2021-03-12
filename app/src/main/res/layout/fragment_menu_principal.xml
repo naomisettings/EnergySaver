@@ -7,8 +7,8 @@
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/degradat"
-        tools:context=".principal.MenuPrincipalFragment">
+        tools:context=".principal.MenuPrincipalFragment"
+        android:transitionGroup="true">
 
         <ImageView
             android:id="@+id/imgvTitolMenu"
@@ -16,7 +16,6 @@
             android:layout_height="64dp"
             android:layout_marginTop="30dp"
             android:contentDescription="@string/titol"
-
             android:scrollbarSize="60dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -25,41 +24,41 @@
 
         <ImageButton
             android:id="@+id/imgbModificar"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="75dp"
-            android:layout_marginTop="50dp"
+            android:layout_width="133dp"
+            android:layout_height="131dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="35dp"
             android:layout_marginEnd="65dp"
-            android:backgroundTint="@color/BtnColor"
+            android:background="@drawable/botonsshadow"
             android:contentDescription="@string/defaultcd"
-            android:scaleX="3"
-            android:scaleY="3"
+
             app:layout_constraintEnd_toStartOf="@+id/imgbGoInformes"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imgvTitolMenu"
-            app:srcCompat="@android:drawable/ic_menu_preferences" />
+            app:srcCompat="@drawable/profile" />
 
         <ImageButton
             android:id="@+id/imgbGoInformes"
-            android:layout_width="50dp"
-            android:layout_height="51dp"
-            android:layout_marginStart="130dp"
-            android:layout_marginTop="50dp"
-            android:backgroundTint="@color/BtnColor"
+            android:layout_width="133dp"
+            android:layout_height="131dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="35dp"
+
+            android:background="@drawable/botonsshadow"
             android:contentDescription="@string/defaultcd"
-            android:scaleX="3"
-            android:scaleY="3"
+
             app:layout_constraintStart_toEndOf="@+id/imgbModificar"
             app:layout_constraintTop_toBottomOf="@+id/imgvTitolMenu"
-            app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
+            app:srcCompat="@drawable/report" />
 
         <ImageButton
             android:id="@+id/imgbMedalles"
             android:layout_width="133dp"
             android:layout_height="131dp"
             android:layout_marginStart="35dp"
-            android:layout_marginTop="70dp"
-            android:backgroundTint="@color/BtnColor"
+            android:layout_marginTop="35dp"
+
+            android:background="@drawable/botonsshadow"
             android:contentDescription="@string/defaultcd"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imgbGoInformes"
@@ -67,11 +66,12 @@
 
         <ImageButton
             android:id="@+id/imgBttnSuport"
-            android:layout_width="131dp"
-            android:layout_height="127dp"
+            android:layout_width="133dp"
+            android:layout_height="131dp"
             android:layout_marginStart="45dp"
-            android:layout_marginTop="70dp"
-            android:backgroundTint="@color/BtnColor"
+            android:layout_marginTop="35dp"
+
+            android:background="@drawable/botonsshadow"
             android:contentDescription="@string/defaultcd"
             app:layout_constraintStart_toEndOf="@+id/imgbMedalles"
             app:layout_constraintTop_toBottomOf="@+id/imgbGoInformes"
@@ -83,11 +83,12 @@
             android:layout_height="131dp"
             android:layout_marginStart="35dp"
             android:layout_marginTop="35dp"
-            android:backgroundTint="@color/BtnColor"
+
             android:contentDescription="@string/defaultcd"
             android:src="@drawable/greenenergy"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgBttnSuport" />
+            app:layout_constraintTop_toBottomOf="@+id/imgBttnSuport"
+            android:background="@drawable/botonsshadow"/>
 
         <ImageButton
             android:id="@+id/imgBtnEnergies"
@@ -95,11 +96,12 @@
             android:layout_height="131dp"
             android:layout_marginStart="212dp"
             android:layout_marginTop="32dp"
-            android:backgroundTint="@color/BtnColor"
+
             android:contentDescription="@string/defaultcd"
             android:src="@drawable/energiaseleccio"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgBttnSuport" />
+            app:layout_constraintTop_toBottomOf="@+id/imgBttnSuport"
+            android:background="@drawable/botonsshadow"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

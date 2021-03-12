@@ -131,4 +131,7 @@
     <string name="bttnBorrarTiquet">Löschen</string>
     <string name="estalviDiners">GELD SPAREN</string>
     <string name="estalviEnergia">ENERGIE SPAREN</string>
+    <string name="Medalles">Medaillen</string>
+    <string name="medalles">Medaillen</string>
+    <string name="medalles_notification_channel_description">Herzlichen Glückwunsch, Sie haben eine Medaille gewonnen</string>
 </resources>

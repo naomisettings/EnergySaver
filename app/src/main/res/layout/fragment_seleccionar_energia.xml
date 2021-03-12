@@ -5,8 +5,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/degradat">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/txvSeleccionarEnergia"
@@ -20,6 +19,7 @@
             android:paddingEnd="0dp"
             android:text="@string/txtSeleccionarEnergia"
             android:textColor="@color/textBtnColor"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,6 +35,7 @@
             android:paddingEnd="0dp"
             android:text="@string/txtPeriode"
             android:textColor="@color/textBtnColor"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,6 +48,7 @@
             android:fontFamily="@font/asap_bold"
             android:text="@string/textAigua"
             android:textColor="@color/TitolColor"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txvSeleccionarEnergia" />
 
@@ -59,6 +61,7 @@
             android:fontFamily="@font/asap_bold"
             android:text="@string/textLlum"
             android:textColor="@color/TitolColor"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chbxAigua" />
 
@@ -66,24 +69,26 @@
             android:id="@+id/chbxGas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="115dp"
             android:fontFamily="@font/asap_bold"
             android:text="@string/textGas"
             android:textColor="@color/TitolColor"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@+id/chbxAigua"
             app:layout_constraintTop_toBottomOf="@+id/txvSeleccionarEnergia" />
 
         <CheckBox
             android:id="@+id/chbxGasoil"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="3dp"
-            android:layout_marginEnd="100dp"
             android:fontFamily="@font/asap_bold"
             android:text="@string/textGasoil"
             android:textColor="@color/TitolColor"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@+id/chbxLlum"
             app:layout_constraintTop_toBottomOf="@+id/chbxGas" />
 
         <Spinner
@@ -126,12 +131,12 @@
             android:id="@+id/txvAigua"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="25dp"
             android:layout_marginEnd="30dp"
             android:fontFamily="@font/asap_bold"
             android:text="@string/textAigua"
             android:textColor="@color/TitolColor"
-            android:textSize="18sp"
+            android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/spnAigua"
             app:layout_constraintTop_toBottomOf="@+id/txvPeriode" />
 
@@ -144,7 +149,7 @@
             android:fontFamily="@font/asap_bold"
             android:text="@string/textLlum"
             android:textColor="@color/TitolColor"
-            android:textSize="18sp"
+            android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/spnAigua"
             app:layout_constraintTop_toBottomOf="@+id/txvAigua" />
 
@@ -157,7 +162,7 @@
             android:fontFamily="@font/asap_bold"
             android:text="@string/textGas"
             android:textColor="@color/TitolColor"
-            android:textSize="18sp"
+            android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/spnGas"
             app:layout_constraintTop_toBottomOf="@+id/txvLlum" />
 
@@ -170,7 +175,7 @@
             android:fontFamily="@font/asap_bold"
             android:text="@string/textGasoil"
             android:textColor="@color/TitolColor"
-            android:textSize="18sp"
+            android:textSize="24sp"
             app:layout_constraintEnd_toStartOf="@+id/spnCombustible"
             app:layout_constraintTop_toBottomOf="@+id/txvGas" />
 
@@ -180,6 +185,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="@string/btnConfirmar"
+            android:background="@drawable/botonsshadow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spnCombustible" />

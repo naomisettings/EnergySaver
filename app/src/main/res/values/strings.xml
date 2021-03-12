@@ -133,6 +133,11 @@
     <string name="energies_activades">Energies activades al teu perfil</string>
     <string name="estalviDiners">ESTALVI DINERS</string>
     <string name="estalviEnergia">ESTALVI ENERGIA</string>
+    <string name="energy_notification_channel_id" translatable="false">Energy Saver</string>
+    <string name="notification_title" translatable="false">Energy Saver</string>
+    <string name="medalles">Medalles</string>
+    <string name="medalles_notification_channel_description">Enhorabona! Has guanyat una medalla</string>
+    <string name="Medalles">Medalles</string>
 
 
 </resources>
