@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity() {
                 duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()
             }
             reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
-                duration = 1.toLong()
+                duration = 0.5.toLong()
             }
 
 

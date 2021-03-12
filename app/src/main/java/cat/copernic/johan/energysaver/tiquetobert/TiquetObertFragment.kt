@@ -39,7 +39,7 @@ class TiquetObertFragment : Fragment() { //
             duration = resources.getInteger(R.integer.reply_motion_duration_large_img).toLong()
         }
         returnTransition = MaterialSharedAxis(MaterialSharedAxis.Z, false).apply {
-            duration = resources.getInteger(R.integer.reply_motion_duration_large_img).toLong()
+            duration = 0.01.toLong()
         }
 
         //Rebre dades d'altres fragments
