@@ -75,10 +75,10 @@ class AuthActivity : AppCompatActivity(), View.OnClickListener {
         //  comprovem si l'usuari esta loginat
         val currentUser = auth.currentUser
 
-        if(currentUser!=null){
+       /* if(currentUser!=null){
             reload()
 
-        }
+        }*/
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
