@@ -21,8 +21,8 @@ class DatePickerFragment : DialogFragment() {
         val year = c.get(Calendar.YEAR)
         val currentDate = Calendar.getInstance().time
         // Valor seleccionat inicial, posem que el calendari mostri 1 any enrera de l'actual
-        if (initialYear == -1)
-            initialYear = year - 1
+       // if (initialYear == -0)
+            initialYear = c.get(Calendar.YEAR)
 
         if (initialMonth == -1)
             initialMonth = c.get(Calendar.MONTH)
