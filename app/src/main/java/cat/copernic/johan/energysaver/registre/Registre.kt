@@ -45,13 +45,30 @@ class Registre : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_registre)
 
         binding.btnConfirmarRegistre.setOnClickListener {
+            binding.apply {
+                nom = editTextNom.text.toString()
+                cognoms = editTextCognoms.text.toString()
+                mail = editTextTextEmailAddress.text.toString()
+                nickname = editTextNickName.text.toString()
+                adreca = editTextAdreca.text.toString()
+                poblacio = editTextPoblacio.text.toString()
+                telefon = editTextTelefon.text.toString()
+                contrasenya = editTextContrasenyaRegistre.text.toString()
+            }
 
-            //guardar usuari al autentification
-            createAccount(
-                binding.editTextTextEmailAddress.text.toString(),
-                binding.editTextContrasenyaRegistre.text.toString(), it
-            )
+            //validar camps
+            if (nom.isEmpty() || cognoms.isEmpty() || mail.isEmpty() || nickname.isEmpty() || adreca.isEmpty()
+                || poblacio.isEmpty() || telefon.isEmpty() || contrasenya.isEmpty()
+            ) {
+                Snackbar.make(it, "Has d'omplir tots els camps", Snackbar.LENGTH_LONG).show()
 
+            }else {
+                //guardar usuari al autentification
+                createAccount(
+                    binding.editTextTextEmailAddress.text.toString(),
+                    binding.editTextContrasenyaRegistre.text.toString(), it
+                )
+            }
 
         }
 
@@ -127,6 +144,8 @@ class Registre : AppCompatActivity() {
                 }
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+
+
         }
 
     }
