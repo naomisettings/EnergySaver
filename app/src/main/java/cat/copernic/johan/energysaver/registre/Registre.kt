@@ -76,24 +76,7 @@ class Registre : AppCompatActivity() {
 
     //funcio per recollir les dades del formulari de registre
     fun recollirUsuari(view: View) {
-        binding.apply {
-            nom = editTextNom.text.toString()
-            cognoms = editTextCognoms.text.toString()
-            mail = editTextTextEmailAddress.text.toString()
-            nickname = editTextNickName.text.toString()
-            adreca = editTextAdreca.text.toString()
-            poblacio = editTextPoblacio.text.toString()
-            telefon = editTextTelefon.text.toString()
-            contrasenya = editTextContrasenyaRegistre.text.toString()
-        }
 
-        //validar camps
-        if (nom.isEmpty() || cognoms.isEmpty() || mail.isEmpty() || nickname.isEmpty() || adreca.isEmpty()
-            || poblacio.isEmpty() || telefon.isEmpty() || contrasenya.isEmpty()
-        ) {
-            Snackbar.make(view, "Has d'omplir tots els camps", Snackbar.LENGTH_LONG).show()
-
-        } else { //guardem a un hashMap
             val usuari = hashMapOf(
                 "nom" to nom,
                 "cognoms" to cognoms,
@@ -117,37 +100,31 @@ class Registre : AppCompatActivity() {
 
             }
 
-        }
+      //  }
     }
 
     //funcio per crear el compte d'usuari al Authentification amb les dades del registre
     private fun createAccount(email: String, password: String, view: View) {
         if (validateFormat()) {
-
+            recollirUsuari(view)
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         //si accedeix correctament
                         val user = auth.currentUser
                         //guardem les dades de la pantalla registre
-                        recollirUsuari(view)
-                        Snackbar.make(view, "Registre creat correctament", Snackbar.LENGTH_LONG)
-                            .show()
 
+                        /*Snackbar.make(view, "Registre creat correctament", Snackbar.LENGTH_LONG)
+                            .show()*/
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
                     } else {
                         //si falla la validacio
                         Snackbar.make(view, "Usuari incorrecte o ja existeix", Snackbar.LENGTH_LONG)
                             .show()
-
                     }
-
                 }
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-
-
         }
-
     }
 
     //metode que valida que els camps no estiguin buits
